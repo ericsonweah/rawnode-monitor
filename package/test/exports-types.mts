@@ -1,0 +1,80 @@
+// Compile with --resolveJsonModule in addition to the baseline strict NodeNext options.
+// Each of the manifest's 29 entries is resolved from an installed/self-reference package specifier.
+import MonitorRuntime, { type TelemetryEnvelope } from '@rawnode/monitor';
+import * as metrics from '@rawnode/monitor/metrics';
+import * as pipeline from '@rawnode/monitor/pipeline';
+import * as studio from '@rawnode/monitor/studio';
+import * as tracing from '@rawnode/monitor/tracing';
+import * as cluster from '@rawnode/monitor/cluster';
+import * as core from '@rawnode/monitor/core';
+import * as analysis from '@rawnode/monitor/analysis';
+import * as security from '@rawnode/monitor/security';
+import * as plugins from '@rawnode/monitor/plugins';
+import * as synthetics from '@rawnode/monitor/synthetics';
+import * as exporters from '@rawnode/monitor/exporters';
+import * as health from '@rawnode/monitor/health';
+import * as resources from '@rawnode/monitor/resources';
+import * as storage from '@rawnode/monitor/storage';
+import * as alerts from '@rawnode/monitor/alerts';
+import * as integrations from '@rawnode/monitor/integrations';
+import * as testing from '@rawnode/monitor/testing';
+import * as system from '@rawnode/monitor/system';
+import * as diagnostics from '@rawnode/monitor/diagnostics';
+import * as slo from '@rawnode/monitor/slo';
+import * as query from '@rawnode/monitor/query';
+import * as incidents from '@rawnode/monitor/incidents';
+import * as deployments from '@rawnode/monitor/deployments';
+import * as commands from '@rawnode/monitor/console';
+import { MonitorServiceProvider } from '@rawnode/monitor/provider';
+import config from '@rawnode/monitor/config';
+import { mountMonitorStudio } from '@rawnode/monitor/studio/client';
+import metadata from '@rawnode/monitor/package.json' with { type: 'json' };
+
+const monitor = new MonitorRuntime({ config });
+const registry = new metrics.MetricRegistry({ maxSeries: 8 });
+registry.timer('duration_seconds').labels({ route: '/orders/:id' }).start()();
+const sink = new storage.MemoryTelemetryStore({ maxItems: 4 });
+new pipeline.SignalPipeline().addSink('memory', sink, { required: true });
+const context = new core.MonitorContextManager();
+const envelope: TelemetryEnvelope<{ name: string }> = new core.TelemetryEnvelope('event', { name: 'typed' });
+const monitorVersion: string = envelope.monitorVersion;
+const service: string | null = envelope.service;
+const factoryEnvelope = core.createTelemetryEnvelope('event', { value: 1 });
+const value: number = factoryEnvelope.payload.value;
+const tracer = new tracing.Tracer({ sampleRate: 1, contextManager: context });
+tracer.startSpan('work').end({ endTimeUnixNano: 1_700_000_000_000_000_000n });
+const activeResult: number = tracer.startActiveSpan('work', span => { span.end(); return 42; });
+tracer.startSpan('status').setStatus({ code: 'ok' }).updateName('updated').end();
+new cluster.FleetRegistry().heartbeat({ instanceId: 'typed' });
+new analysis.StreamingBaseline().observe(1);
+new security.SafeTelemetrySerializer().sanitize({ password: 'synthetic' });
+new plugins.MonitorPluginManager().hook('typed', () => undefined);
+new synthetics.SyntheticMonitor().register({ id: 'typed', type: 'custom', run: () => true });
+new exporters.CallbackExporter(() => undefined);
+new health.HealthRegistry().register('typed', ({ signal }) => ({ ok: !signal.aborted }));
+new resources.ResourceRegistry().register('typed', { metrics: () => ({ count: 1 }) });
+new alerts.AlertRule({ name: 'typed', evaluate: () => false });
+new integrations.PMMonitorBridge({ registerResource() { return () => {}; } }, monitor).start();
+new testing.MonitorRecorder({ monitor });
+new system.ProcessMetricsCollector({ metrics: registry });
+new diagnostics.DiagnosticBundleBuilder({ monitor });
+new slo.SloDefinition({ name: 'typed', objective: 0.99, indicator: { measure: () => ({ good: 99, total: 100 }) } });
+new query.MonitorQueryEngine({ monitor });
+new incidents.RunbookRegistry();
+new deployments.DeploymentRegistry();
+const commandClasses: unknown = commands.RAWNODE_MONITOR_COMMANDS;
+const manager = new studio.MonitorStudioManager({ monitor });
+new MonitorServiceProvider({}, { allowsBackgroundAutoStart: () => false });
+declare const root: HTMLElement;
+const client = mountMonitorStudio(root);
+const navigation: Promise<void> = client.navigate('traces');
+const snapshot: boolean = client.snapshot().destroyed;
+const name: string = metadata.name;
+
+// @ts-expect-error runtime end() takes an options object, not a bare timestamp
+tracer.startSpan('invalid').end(1n);
+// @ts-expect-error envelope signal kinds are closed
+new core.TelemetryEnvelope('arbitrary', {});
+// @ts-expect-error metadata does not invent an npm executable
+metadata.bin;
+void [monitorVersion, service, value, activeResult, commandClasses, manager, navigation, snapshot, name];

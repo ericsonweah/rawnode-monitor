@@ -1,0 +1,50 @@
+{
+  "scope": "Review leads C/D and adjacent JSONL admission/drain; source working tree before final packaging",
+  "runtime": "Node.js v24.21.0",
+  "command": "node --test test/readiness-lifecycle.test.mjs",
+  "cwd": "package/",
+  "initialSandboxRun": {
+    "exit": 1,
+    "tests": 11,
+    "passed": 1,
+    "failed": 10,
+    "cancelled": 0,
+    "notes": "Health cache and JSONL lifecycle failures reproduced. Six HTTP cases could not bind task-owned 127.0.0.1 listeners: EPERM. This was not counted as HTTP behavior evidence."
+  },
+  "preRepairLoopbackRun": {
+    "exit": 1,
+    "tests": 11,
+    "passed": 3,
+    "failed": 7,
+    "cancelled": 1,
+    "skipped": 0,
+    "durationMs": 2714.72741,
+    "notes": "Escalated local run loaded pre-repair modules before source edits. Confirmed stale health cache/readiness; exporter resumed retry, split chunks and gzip continuation after close; JSONL close/flush settled before initialization-delayed admitted writes. Active request case reached its 2-second test bound. Existing late health identity guard, normal exporter retry and runtime cancellation controls passed."
+  },
+  "postRepairLoopbackRun": {
+    "exit": 0,
+    "tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "durationMs": 306.187002,
+    "notes": "Task-owned loopback server requests only; no outbound exporter, service, dependency installation, sibling edits or publication. All owned listeners, sockets and temporary files cleaned up."
+  },
+  "changes": {
+    "health": "Registration invalidates the name cache, and a registration disposer only removes its own record. Existing late-callback cache identity guard remains. Explicit unregister(name) keeps its meaning.",
+    "httpExporter": "Tracks admissions before user formatting, owns close cancellation, checks terminal state before chunks/requests and after compression, cancels retries and active requests, destroys its agent, drains admitted exports and coalesces repeated close.",
+    "jsonl": "Tracks complete admitted write operations before initialization; flush includes those operations and close synchronously closes admission before draining all previously admitted writes across kinds."
+  },
+  "compatibility": {
+    "publicSignatures": "Unchanged",
+    "httpClose": "Already admitted but interrupted exports reject with MONITOR_EXPORTER_CLOSED. Calls entering after close retain false. Successfully HTTP-acknowledged earlier split chunks remain counted.",
+    "fileClose": "Post-close writes retain {written:0,closed:true}; accepted pre-close writes are drained, not discarded. Flush waits for operations admitted before that flush snapshot."
+  },
+  "limits": [
+    "An HTTP acknowledgement is not a durability guarantee. Closing cannot undo telemetry already received remotely; an aborted active request has uncertain remote delivery and no successful acknowledgement counter.",
+    "The formatter remains synchronous trusted code. JavaScript cannot cancel synchronous blocking code, and native gzip must complete its already admitted work before the export promise settles.",
+    "JSONL drain waits for filesystem/initialization promises. A host-overridden non-cooperative initializer or stuck filesystem can remain active; runtime cleanup bounds do not forcibly cancel such work.",
+    "This receipt describes the source regression run. Final source and exact-tarball consumer runs are recorded separately by the coordinating agent."
+  ]
+}

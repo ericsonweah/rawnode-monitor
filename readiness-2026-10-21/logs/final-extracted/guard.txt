@@ -1,0 +1,5 @@
+
+> @rawnode/monitor@1.0.0 prepublishOnly
+> node scripts/reject-publication.mjs
+
+Publication blocked: candidate requires explicit owner release, version and license decisions.

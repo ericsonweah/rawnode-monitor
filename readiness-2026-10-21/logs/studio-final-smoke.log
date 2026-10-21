@@ -1,0 +1,12 @@
+Command: node readiness-2026-10-21/scripts/studio-final-smoke.mjs
+Initial sandbox exit: 1 (listen EPERM: operation not permitted 127.0.0.1)
+Retry: explicit require_escalated approval for task-owned loopback HTTP/SSE
+Retry exit: 0
+Runtime: v24.21.0
+Started: 2026-10-21T22:22:50.316Z
+Finished: 2026-10-21T22:22:51.019Z
+Status: passed
+Checks: 33
+Installed package: /private/tmp/rawnode-monitor-readiness-siwG8b/installed/node_modules/@rawnode/monitor
+Evidence: readiness-2026-10-21/studio-final-smoke.json
+Scope: actual HTTP/SSE protocol; browser and native EventSource execution unverified.

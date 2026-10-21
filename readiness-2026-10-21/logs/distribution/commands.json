@@ -1,0 +1,165 @@
+[
+  {
+    "name": "pack",
+    "command": [
+      "npm",
+      "pack",
+      "--offline",
+      "--json",
+      "--pack-destination",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/artifacts"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 9792
+  },
+  {
+    "name": "extract",
+    "command": [
+      "tar",
+      "-xzf",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/artifacts/rawnode-monitor-1.0.0.tgz",
+      "--strip-components=1",
+      "-C",
+      "/private/tmp/rawnode-monitor-readiness-siwG8b/extracted/node_modules/@rawnode/monitor"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 70
+  },
+  {
+    "name": "install",
+    "command": [
+      "npm",
+      "install",
+      "--offline",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "--package-lock=false",
+      "--save-exact",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/artifacts/rawnode-monitor-1.0.0.tgz"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 693
+  },
+  {
+    "name": "extracted-imports",
+    "command": [
+      "node",
+      "imports.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/extracted",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 205
+  },
+  {
+    "name": "extracted-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/extracted",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 1217
+  },
+  {
+    "name": "extracted-exports-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "exports-types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/extracted",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 1170
+  },
+  {
+    "name": "installed-imports",
+    "command": [
+      "node",
+      "imports.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 232
+  },
+  {
+    "name": "installed-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 1234
+  },
+  {
+    "name": "installed-exports-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "exports-types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 1368
+  },
+  {
+    "name": "overhead",
+    "command": [
+      "node",
+      "--expose-gc",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/scripts/overhead.mjs",
+      "/private/tmp/rawnode-monitor-readiness-siwG8b/installed"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b",
+    "exit": 1,
+    "expected": 0,
+    "milliseconds": 119
+  }
+]

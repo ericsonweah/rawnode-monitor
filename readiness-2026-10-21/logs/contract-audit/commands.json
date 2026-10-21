@@ -1,0 +1,67 @@
+{
+  "node": "v24.21.0",
+  "platform": "darwin",
+  "arch": "x64",
+  "typescript": "Version 5.9.3",
+  "results": [
+    {
+      "leg": "focused",
+      "command": [
+        "node",
+        "--test",
+        "--test-timeout=20000",
+        "test/alert-lifecycle.test.mjs",
+        "test/contracts-hardening.test.mjs"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+      "started": "2026-10-21T22:15:18.082Z",
+      "milliseconds": 412,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "leg": "types",
+      "command": [
+        "tsc",
+        "--noEmit",
+        "--strict",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "test/types.mts"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+      "started": "2026-10-21T22:15:18.494Z",
+      "milliseconds": 2391,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "leg": "exports-types",
+      "command": [
+        "tsc",
+        "--noEmit",
+        "--strict",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "--resolveJsonModule",
+        "test/exports-types.mts"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+      "started": "2026-10-21T22:15:20.885Z",
+      "milliseconds": 2265,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    }
+  ]
+}

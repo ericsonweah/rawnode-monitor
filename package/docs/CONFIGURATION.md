@@ -216,6 +216,8 @@ The table enumerates every source default; effective profiles can override these
 - `pipeline.sinkTimeoutMs`: default sink call deadline, 5000 ms (1–300000); `addSink(...,{timeoutMs})` overrides it. Each sink retains at most maxInFlightBatches unresolved writes.
 - `synthetics.maxWaiters`: maximum queued invocations, default maxChecks. Invocations support `queueTimeoutMs`/`signal`.
 - `plugins.callbackTimeoutMs`: bounded plugin lifecycle/hook wait, 5000 ms by default.
+- `alerts.callbackTimeoutMs`: context/leader/rule/notification/incident callback wait, 5000 ms by default (1–300000). Direct `AlertEngine` options also support this control. `evaluate({timeoutMs,signal})` bounds context/rule waits; transition callbacks retain the engine default.
+- Direct `NotificationRouter` options `callbackTimeoutMs` (5000 ms, 1–300000) and `maxPendingCallbacks` (1000, 1–100000) bound channel waits and unresolved physical sends. `notify({…}, {timeoutMs,signal})` can override a send deadline. Close timeout bounds owned cleanup; caller cancellation does not skip its attempt.
 - `studio.maxClients`: at most 100 SSE clients unless explicitly set. `assetsRoot` is a route-registration option, not the service root.
 - Metric label names longer than 128 bytes are discarded. Label values, count, series and instruments use their configured limits.
 

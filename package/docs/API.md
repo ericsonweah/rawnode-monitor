@@ -187,7 +187,7 @@ freeze()
 start()
 async evaluate(options = {})
 acknowledge(ruleId, actor = null)
-async close()
+async close(options = {})
 current(options = {})
 historySnapshot(options = {})
 snapshot()
@@ -211,7 +211,7 @@ constructor(options = {})
 register(name, channel, options = {})
 route(match = {}, channels = [])
 async notify(notification, options = {})
-async close()
+async close(options = {})
 snapshot()
 constructor(logger)
 async send(notification)
@@ -1218,6 +1218,7 @@ async close()
 
 Errors derive from MonitorError where defined and carry `code`, `status`, `retryable`, `details`, optional `cause`, and `toJSON()`. Type/definition validation may throw TypeError or Error. Admission commonly returns `{accepted:false,reason}` rather than throwing; strict rejection may throw a capacity error. Registry health failures become structured unhealthy reports. Required delivery/close failures can produce AggregateError with a MONITOR_* code. The list below is derived from source and includes failure, timeout, closed and authentication codes.
 
+- `MONITOR_ALERT_CALLBACK_BUSY`
 - `MONITOR_ALERT_RULE_ERROR`
 - `MONITOR_ASSET_NOT_FOUND`
 - `MONITOR_BODY_TOO_LARGE`
@@ -1229,6 +1230,7 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
 - `MONITOR_CONFIGURATION_ERROR`
 - `MONITOR_DURABLE_STORAGE_UNAVAILABLE`
 - `MONITOR_ERROR`
+- `MONITOR_EXPORTER_CLOSED`
 - `MONITOR_EXPORT_PAYLOAD_TOO_LARGE`
 - `MONITOR_EXPORT_RESPONSE_ABORTED`
 - `MONITOR_EXPORT_RESPONSE_TOO_LARGE`
@@ -1240,6 +1242,9 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
 - `MONITOR_INGEST_SIGNATURE_INVALID`
 - `MONITOR_INVALID_BUNDLE_ID`
 - `MONITOR_METRIC_DEFINITION_ERROR`
+- `MONITOR_NOTIFICATION_BUSY`
+- `MONITOR_NOTIFICATION_CLOSED`
+- `MONITOR_NOTIFICATION_LIMIT`
 - `MONITOR_PIPELINE_CLOSED`
 - `MONITOR_PIPELINE_CLOSE_FAILED`
 - `MONITOR_PIPELINE_FLUSH_FAILED`
@@ -1287,3 +1292,7 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
 - `MONITOR_SYNTHETIC_WAITER_LIMIT`
 - `MONITOR_TIMEOUT`
 - `MONITOR_TRACE_CONTEXT_ERROR`
+
+## Readiness behavior corrections
+
+Trace ratio sampling compares a 52-bit trace-ID suffix to a matching 52-bit bound; a configured 0.5 no longer admits every suffix. Async context `bind(callback, context)` preserves the requested context across awaits. Malformed percent-encoded baggage keys are ignored. HTTP middleware uses `route: unmatched` when no template/resolver is available, avoiding request-specific series. Health/resource registration replacement, alert/notification callbacks, direct exporter shutdown and admitted file writes follow the ownership rules in LIFECYCLE.md. Concrete `TelemetryEnvelope`, `Tracer` and `Span.end({endTimeUnixNano})` declarations match runtime behavior. Broad advanced extension types remain available.

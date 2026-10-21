@@ -62,7 +62,8 @@ export function parseBaggage(value, options = {}) {
   for (const part of input.split(',').slice(0, maxItems)) {
     const [rawKey, ...rest] = part.trim().split('=');
     if (!rawKey || !rest.length) continue;
-    const key = decodeURIComponent(rawKey.trim());
+    let key;
+    try { key = decodeURIComponent(rawKey.trim()); } catch { continue; }
     if (!/^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/.test(key)) continue;
     const rawValue = rest.join('=').split(';')[0].trim();
     try { output[key] = decodeURIComponent(rawValue); } catch { output[key] = rawValue; }

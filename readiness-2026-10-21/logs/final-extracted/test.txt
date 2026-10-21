@@ -1,0 +1,112 @@
+
+> @rawnode/monitor@1.0.0 test
+> node --test --test-timeout=20000 test/*.test.mjs
+
+✔ metric reset/remove releases ownership without corrupting replacements (7.568433ms)
+✔ aggregate policy reserves an overflow slot and respects both series bounds (2.096373ms)
+✔ observable callback deadline does not launch overlapping stuck collectors or accept late observations (21.703455ms)
+✖ stalled sink writes are bounded and a following sink remains usable (301.305404ms)
+✔ pipeline close is idempotent and finalizes despite required stalled lifecycle callback (15.783187ms)
+✔ flush cancellation reaches cooperative sinks and shutdown clears queued references (17.392705ms)
+✔ required sinks cannot acknowledge incomplete delivery as a success (2.381381ms)
+✔ pre-cancelled admission never retains a queue value (0.461993ms)
+✔ repeated flushes cannot accumulate unresolved sink lifecycle calls (11.334669ms)
+✔ close invalidates a pending setup and cannot resurrect plugin start (10.707574ms)
+✔ close invalidates a pending start and startup calls are idempotent (1.444878ms)
+✔ plugin callback deadlines isolate failures and repeated hooks cannot accumulate stuck work (231.721724ms)
+✔ once hooks run once across concurrent invoke calls and hook admission is bounded (6.846519ms)
+✔ failed required close still finalizes manager and drops pending notifications (12.099052ms)
+✔ configured span cap controls actual retained spans (4.642778ms)
+✔ pruning removes expired records from every index and reuses ring capacity (0.59454ms)
+✔ read paths enforce elapsed span retention without a timer (0.399917ms)
+✔ durability requires a full acknowledged write and optional partial stores report failure (386.627115ms)
+✔ unregister aborts the current check and late completion cannot restore state or scheduling (143.260957ms)
+✔ replacement preserves its new timer when an older scheduled run settles (4.648283ms)
+✔ non-cooperative checks retain their concurrency slot and waiting runs are bounded (21.266139ms)
+✔ real loopback cross-origin redirects strip sensitive headers and 303 removes body headers (276.002179ms)
+✔ real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding (81.063964ms)
+✔ modeled HTTPS response rejects downgrade before a second request (1.492691ms)
+✔ optional notification failures remain isolated without an error listener and required failures reject (77.121166ms)
+✔ notification deadlines retain stuck callback ownership and close bounds channel cleanup (105.357194ms)
+✔ closing an active notification aborts its signal and settles the caller before a late result (13.572861ms)
+✔ caller cancellation cannot skip owned notification or alert cleanup (2.856218ms)
+✔ a failed alert context does not strand evaluation ownership (4.582426ms)
+✔ alert deadlines avoid overlapping a stalled rule while healthy rules remain usable (14.954442ms)
+✔ retired or closed alert evaluations cannot notify or open incidents (1.467775ms)
+✔ close during a pending notification does not start a later incident or accept notification accounting (2.003691ms)
+✔ injected event/protocol bridges detach explicit subscriptions (226.970898ms)
+✔ readiness lifecycle and manager replacement ownership (182.407523ms)
+✔ alerts and SLO definition calculations preserve capability (0.935202ms)
+✔ HMAC accepts exact bytes and rejects changed/expired signatures (0.957816ms)
+✔ late injected Redis lease acquisition cannot restart timers after close (0.935429ms)
+✔ stuck health and resource callbacks are not relaunched (14.495843ms)
+✔ queue overflow, cancellation and close release memory (1.202646ms)
+✔ task-local file storage persists/query and diagnostics reject traversal (350.729351ms)
+✔ ratio sampling uses the full 52-bit suffix range at deterministic boundaries (4.268726ms)
+✔ bound context overrides its creation scope and preserves receiver, arguments and async propagation (1.8767ms)
+✔ remote context parsing ignores malformed baggage keys and preserves valid propagation and parent sampling (2.107114ms)
+✔ HTTP middleware uses route templates and a single unmatched label for request-specific paths (325.519401ms)
+✔ timer and span elapsed duration stay monotonic when the wall clock moves backwards (1.450167ms)
+✔ resource replacement invalidates cached state and suppresses retired collection events (3.029729ms)
+✔ late Redis subscribe and ready completion cannot resurrect a closed bridge (1.06163ms)
+✔ cluster envelopes reject invalid, expired, wrong-namespace and tampered authentication fields (4.859147ms)
+✔ replaced health checks discard old cached results and retain registration identity (126.083184ms)
+✔ a critical unhealthy replacement controls ordinary readiness immediately (2.150111ms)
+✔ late old health callback cannot populate a replacement cache (2.094649ms)
+✔ HTTP exporter close cancels retry backoff without admitting another request (143.47672ms)
+✔ HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks (5.394909ms)
+✔ HTTP exporter close during compression prevents the continuation from opening a request (3.36277ms)
+✔ HTTP exporter close aborts an active request and releases owned sockets (3.719454ms)
+✔ HTTP exporter still retries and acknowledges ordinary requests before close (5.245625ms)
+✔ runtime-owned HTTP exporter remains terminal when runtime closes during a request (300.371823ms)
+✔ JSONL close closes admission synchronously and drains writes deferred in initialization (11.457957ms)
+✔ JSONL flush includes writes admitted before initialization starts (4.845843ms)
+✔ concurrent starts and closes settle once and terminal restart is explicit (337.89838ms)
+✔ closing idle runtime releases an already used pipeline (65.000367ms)
+✔ close wins race with blocked startup without later resurrection (79.872225ms)
+✔ pre-abort avoids callback and active abort settles ignoring callbacks (0.6467ms)
+✔ slow collection is coalesced and close cancels it (156.167211ms)
+✔ health distinguishes readiness, liveness, degraded and timeout (11.333813ms)
+✔ resource replace/unregister cleans health checks (1.050382ms)
+✔ public telemetry redacts payload context metadata span and diagnostics (88.958652ms)
+✔ untrusted signal kind and fake byte sizes cannot bypass bounds (9.096178ms)
+✔ serializer bounds serialized bytes, cycles, hostile getters, prototype input (0.894913ms)
+✔ PM bridge disposes direct, runtime and adapter owners idempotently (0.440098ms)
+✔ Studio authorizer uses socket, denies cross origin even with custom auth (2.015567ms)
+✔ Studio closes listeners and slow clients and rejects streams after close (64.009366ms)
+✔ Studio assets are packaged and reject unknown/prototype paths (4.527098ms)
+✔ preparsed and raw bodies obey request limits (8.836576ms)
+✔ synthetic custom callbacks support timeout and reject after close (102.317524ms)
+✔ memory store retention stays bounded (1.102136ms)
+✔ modeled actions: cancelling each silence prompt or incident resolution sends no mutation (972.620837ms)
+✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (12.369955ms)
+✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (9.185012ms)
+✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1102.736641ms)
+✔ actual loopback HTTP serves packaged Studio and all read views safely (1351.722003ms)
+✔ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (215.366054ms)
+✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1654.833479ms)
+✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (5.514782ms)
+✔ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (326.152415ms)
+✔ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (75.783776ms)
+ℹ tests 86
+ℹ suites 0
+ℹ pass 85
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3622.07809
+
+✖ failing tests:
+
+test at test/adversarial-pipeline-metrics.test.mjs:60:1
+✖ stalled sink writes are bounded and a following sink remains usable (301.305404ms)
+  Error [MonitorTimeoutError]: Monitor pipeline flush exceeded 300ms.
+      at Timeout.<anonymous> (file:///private/tmp/rawnode-monitor-readiness-siwG8b/extracted/node_modules/@rawnode/monitor/src/support.js:239:21)
+      at listOnTimeout (node:internal/timers:685:17)
+      at process.processTimers (node:internal/timers:618:7) {
+    code: 'MONITOR_TIMEOUT',
+    status: 504,
+    retryable: true,
+    details: { timeoutMs: 300 }
+  }

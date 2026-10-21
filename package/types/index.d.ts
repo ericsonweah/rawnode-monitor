@@ -46,25 +46,33 @@ export interface MonitorConfigurationInput {
   cluster?: Record<string, unknown>;
 }
 
-export interface TelemetryEnvelope<T = unknown> {
-  id: string;
-  schemaVersion: number;
-  kind: SignalKind;
-  timestamp: number;
-  observedAt: number;
-  service: string;
-  environment: string;
-  version: string | null;
-  instanceId: string | null;
-  region: string | null;
-  zone: string | null;
-  tenantId?: string | null;
-  traceId?: string | null;
-  spanId?: string | null;
-  priority: number;
-  context: Record<string, unknown>;
-  payload: T;
+export class TelemetryEnvelope<T = unknown> {
+  constructor(kind: SignalKind, payload: T, options?: Record<string, unknown>);
+  readonly id: string;
+  readonly schemaVersion: number;
+  readonly monitorVersion: string;
+  readonly kind: SignalKind;
+  readonly timestamp: number;
+  readonly observedAt: number;
+  readonly service: string | null;
+  readonly environment: string | null;
+  readonly instanceId: string | null;
+  readonly region: string | null;
+  readonly zone: string | null;
+  readonly tenantId: string | null;
+  readonly traceId: string | null;
+  readonly spanId: string | null;
+  readonly correlationId: string | null;
+  readonly priority: number;
+  readonly sequence: number | null;
+  readonly context: Readonly<Record<string, unknown>> | null;
+  readonly resource: Readonly<Record<string, unknown>> | null;
+  readonly attributes: Readonly<Record<string, unknown>> | null;
+  readonly payload: T;
+  toJSON(): Record<string, unknown>;
 }
+export function createTelemetryEnvelope<T>(kind: SignalKind, payload: TelemetryEnvelope<T>, options?: Record<string, unknown>): TelemetryEnvelope<T>;
+export function createTelemetryEnvelope<T>(kind: SignalKind, payload: T, options?: Record<string, unknown>): TelemetryEnvelope<T>;
 
 export interface MetricInstrument {
   readonly name: string;
@@ -100,22 +108,33 @@ export class MetricRegistry {
 
 export interface SpanContext { traceId: string; spanId: string; traceFlags: number; traceState?: string | null; sampled: boolean; }
 export class Span {
+  constructor(tracer: Tracer, name: string, context: SpanContext, options?: Record<string, unknown>);
   readonly traceId: string;
   readonly spanId: string;
   readonly parentSpanId: string | null;
   setAttribute(name: string, value: unknown): this;
   setAttributes(values: Record<string, unknown>): this;
   addEvent(name: string, attributes?: Record<string, unknown>, timestamp?: number): this;
-  recordException(error: unknown): this;
-  setStatus(code: string, message?: string | null): this;
+  addLink(context: SpanContext, attributes?: Record<string, unknown>): this;
+  recordException(error: unknown, attributes?: Record<string, unknown>): this;
+  setStatus(code: string | {code?: string; message?: string | null}, message?: string | null): this;
+  updateName(name: string): this;
+  isRecording(): boolean;
   spanContext(): SpanContext;
-  end(endTime?: number | bigint): this;
+  end(options?: {endTimeUnixNano?: number | bigint | string}): this;
+  toJSON(): Record<string, unknown>;
 }
 export class Tracer {
+  constructor(options?: Record<string, unknown>);
+  activeSpan(): Span | null;
+  activeContext(): SpanContext | null;
   startSpan(name: string, options?: Record<string, unknown>): Span;
+  startActiveSpan<T>(name: string, callback: (span: Span) => T): T;
+  startActiveSpan<T>(name: string, options: Record<string, unknown>, callback: (span: Span) => T): T;
   trace<T>(name: string, options: Record<string, unknown> | ((span: Span) => T | Promise<T>), callback?: (span: Span) => T | Promise<T>): Promise<T>;
   query(options?: Record<string, unknown>): unknown;
   traceById(traceId: string): unknown;
+  snapshot(options?: Record<string, unknown>): unknown;
   forceFlush(): Promise<unknown>;
   close(): Promise<void>;
 }
@@ -442,7 +461,6 @@ export const cloneValue: any;
 export const cooperativeYield: any;
 export const createMonitorClusterEnvelope: any;
 export const createMonitorFetch: any;
-export const createTelemetryEnvelope: any;
 export const createTelemetryStore: any;
 export const deepFreeze: any;
 export const dispatchEvent: any;

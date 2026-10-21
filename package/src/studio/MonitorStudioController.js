@@ -40,13 +40,21 @@ export class MonitorStudioController {
   stream = async (req, res) => { const auth = await this._authorize(req, res); if (!auth) return; return this.studio.stream(req, res); };
   ingest = async (req, res) => {
     if (!this.studio.monitor.configuration.get('security.allowRemoteIngest')) return json(res, 404, { ok: false, error: { code: 'MONITOR_INGEST_DISABLED', message: 'Remote ingestion is disabled.' } });
-    try { const raw = await rawBody(req, this.maxBodyBytes); this.studio.monitor.authenticator.assert(raw, req.headers || {}); const parsed = JSON.parse(raw.toString('utf8')); return json(res, 202, { ok: true, ...(await this.studio.monitor.ingest(parsed, { remote: true })) }); }
-    catch (error) { return failure(res, error); }
+    try { const raw = await rawBody(req, this.maxBodyBytes); this.studio.monitor.authenticator.assert(raw, req.headers || {}); const parsed = JSON.parse(raw.toString('utf8')); return json(res, 202, { ok: true, ...this.studio.monitor.sanitizeTelemetry(await this.studio.monitor.ingest(parsed, { remote: true })) }); }
+    catch (error) { return this._failure(res, error); }
   };
 
-  _get(handler) { return async (req, res) => { const auth = await this._authorize(req, res); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return failure(res, error); } }; }
-  _mutate(handler) { return async (req, res) => { const auth = await this._authorize(req, res, { mutate: true }); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return failure(res, error); } }; }
-  async _authorize(req, res, options = {}) { const result = await this.studio.authorize(req, options); if (result.ok) { secure(res); return result; } for (const [key, value] of Object.entries(result.headers || {})) setHeader(res, key, value); json(res, result.status || 403, { ok: false, error: { code: result.code, message: result.message } }); return null; }
+  _get(handler) { return async (req, res) => { const auth = await this._authorize(req, res); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return this._failure(res, error); } }; }
+  _mutate(handler) { return async (req, res) => { const auth = await this._authorize(req, res, { mutate: true }); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return this._failure(res, error); } }; }
+  _failure(res, error) {
+    const monitor = this.studio.monitor;
+    const record = monitor.sanitizeTelemetry(errorRecord(error, { stack: false }));
+    // The serializer may replace a large record with its bounded truncation
+    // marker. Keep a separately sanitized protocol code useful to callers.
+    if (record?.truncated === true) Object.assign(record, monitor.sanitizeTelemetry({ code: error?.code || null, message: 'Monitor request failed; error details exceeded serialization limits.' }));
+    return json(res, errorStatus(error?.status), { ok: false, error: record });
+  }
+  async _authorize(req, res, options = {}) { try { const result = await this.studio.authorize(req, options); if (result.ok) { secure(res); return result; } for (const [key, value] of Object.entries(result.headers || {})) setHeader(res, key, value); json(res, errorStatus(result.status, 403), { ok: false, error: this.studio.monitor.sanitizeTelemetry({ code: result.code, message: result.message }) }); return null; } catch (error) { this._failure(res, error); return null; } }
 }
 
 function param(req, name) { return req.params?.[name] ?? req.param?.(name) ?? null; }
@@ -56,7 +64,7 @@ function number(value, fallback) { const n = Number(value); return Number.isFini
 async function body(req, maxBytes) { if (req.body && typeof req.body === 'object') { if (Buffer.byteLength(JSON.stringify(req.body)) > maxBytes) throw tooLarge(); return req.body; } const raw = await rawBody(req, maxBytes); if (!raw.length) return {}; return JSON.parse(raw.toString('utf8')); }
 async function rawBody(req, maxBytes) { if (Buffer.isBuffer(req.rawBody)) { if (req.rawBody.length > maxBytes) throw tooLarge(); return req.rawBody; } const raw = req.raw || req; if (!raw?.[Symbol.asyncIterator]) return Buffer.alloc(0); const chunks = []; let bytes = 0; for await (const chunk of raw) { const value = Buffer.from(chunk); bytes += value.length; if (bytes > maxBytes) throw Object.assign(new Error('Monitor request body is too large.'), { code: 'MONITOR_BODY_TOO_LARGE', status: 413 }); chunks.push(value); } return Buffer.concat(chunks); }
 function tooLarge() { return Object.assign(new Error('Monitor request body is too large.'), { code: 'MONITOR_BODY_TOO_LARGE', status: 413 }); }
-function failure(res, error) { return json(res, Number(error?.status) || 500, { ok: false, error: errorRecord(error, { stack: false }) }); }
+function errorStatus(value, fallback = 500) { const status = Number(value); return Number.isInteger(status) && status >= 400 && status <= 599 ? status : fallback; }
 function secure(res) { for (const [key, value] of Object.entries({ 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'referrer-policy': 'no-referrer', 'permissions-policy': 'camera=(), microphone=(), geolocation=()', 'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'", 'cache-control': 'no-store' })) setHeader(res, key, value); }
 function setHeader(res, name, value) { try { (res.setHeader || res.raw?.setHeader)?.call(res.setHeader ? res : res.raw, name, value); } catch {} }
 function json(res, status, value) { secure(res); if (typeof res.status === 'function') { const target = res.status(status); if (typeof target.json === 'function') return target.json(value); if (typeof target.send === 'function') return target.send(JSON.stringify(value)); } const raw = res.raw || res; raw.statusCode = status; raw.setHeader?.('content-type', 'application/json; charset=utf-8'); return raw.end?.(JSON.stringify(value)); }

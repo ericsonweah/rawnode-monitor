@@ -26,6 +26,8 @@ await monitor.close();
 
 Use fixed route templates and bounded labels. `start()` coalesces concurrent calls. `close()` is idempotent and terminal: create a fresh runtime for a restart. Callbacks receive cancellation where supported and must cooperate to release their own resources. Monitor bounds its waiting; it cannot forcibly stop arbitrary JavaScript.
 
+HTTP middleware labels unmatched requests as `route: 'unmatched'`; supply a route template or resolver for useful route-specific series. Replacing a health check invalidates its cached result, and its old disposer cannot remove the replacement. Direct HTTP exporter close cancels pending delivery attempts; file-store close drains writes admitted before close, including deferred initialization. Studio Cancel dismisses operator prompts without submitting a mutation; submitting an empty silence rule ID intentionally selects all rules.
+
 Capabilities include counters/gauges/histograms/timers, tracing and sampling, health/readiness/liveness, resource collection, bounded signal queues, memory/file/injected RawMongo/composite storage, retention, callback/event/HTTP/OTLP-JSON/StatsD exporters, alerts/silences/notifications, SLOs, incidents/runbooks, anomaly/leak/correlation analysis, synthetic checks, plugins, fleet/Redis adapters, deployment markers, diagnostic bundles, console command classes and testing helpers. Existing source capabilities are retained.
 
 Optional entrypoints: `/studio`, `/studio/client`, `/provider`, `/config`, plus all capability groups listed in [API](docs/API.md). Studio ships the preserved frontend and CSS, with mount/destroy cleanup. The backend can register routes on an injected router; the package never opens a port automatically.

@@ -46,7 +46,7 @@ export function createMonitorHttpMiddleware(monitor, options = {}) {
     if (options.exposeTraceId === true) setResponseHeader(res, 'x-trace-id', span.traceId);
     if (options.propagateResponseTrace === true) injectTraceContext(span.spanContext(), res, { set: (target, key, value) => setResponseHeader(target, key, value) });
 
-    const labels = { method, route: route || path || 'unmatched' };
+    const labels = { method, route: route || 'unmatched' };
     active.add(1, labels);
     let settled = false;
     const finish = (error = null, event = 'finish') => {

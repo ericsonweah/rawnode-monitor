@@ -1,29 +1,46 @@
 'use strict';
 
 import { EventEmitter } from 'node:events';
+import { boundedInteger, withTimeout } from '../support.js';
 
 export class NotificationRouter extends EventEmitter {
-  constructor(options = {}) { super(); this.channels = new Map(); this.routes = []; this.errorPolicy = options.errorPolicy || 'isolate'; this.stats = { sent: 0, errors: 0, skipped: 0 }; }
+  constructor(options = {}) {
+    super(); this.channels = new Map(); this.routes = []; this.errorPolicy = options.errorPolicy || 'isolate'; this.stats = { sent: 0, errors: 0, skipped: 0 };
+    this.callbackTimeoutMs = boundedInteger(options.callbackTimeoutMs, 5_000, 1, 300_000);
+    this.maxPendingCallbacks = boundedInteger(options.maxPendingCallbacks, 1_000, 1, 100_000);
+    this.pending = new Map(); this.controller = new AbortController(); this.closed = false; this.closePromise = null;
+  }
   register(name, channel, options = {}) { if (!name || !channel) throw new TypeError('Notification channel name and implementation are required.'); this.channels.set(String(name), { name: String(name), channel, required: options.required === true }); return channel; }
   route(match = {}, channels = []) { this.routes.push(Object.freeze({ match: { ...match }, channels: Object.freeze([...channels]) })); return this; }
   async notify(notification, options = {}) {
+    if (this.closed) return Object.freeze([]);
     const selected = options.channels?.length ? options.channels : this._channels(notification);
     const results = [];
     for (const name of selected) {
+      if (this.closed) break;
       const entry = this.channels.get(String(name));
       if (!entry) { this.stats.skipped++; results.push({ channel: name, skipped: true, reason: 'missing' }); continue; }
       try {
         const channel = entry.channel;
-        const value = typeof channel.send === 'function'
-          ? await channel.send(notification, options)
-          : typeof channel.notify === 'function'
-            ? await channel.notify(notification, options)
-            : typeof channel === 'function'
-              ? await channel(notification, options)
-              : false;
+        if (this.pending.has(channel)) throw Object.assign(new Error('Notification channel callback is still pending.'), { code: 'MONITOR_NOTIFICATION_BUSY' });
+        if (this.pending.size >= this.maxPendingCallbacks) throw Object.assign(new Error('Notification callback capacity exceeded.'), { code: 'MONITOR_NOTIFICATION_LIMIT' });
+        const signal = options.signal ? AbortSignal.any([options.signal, this.controller.signal]) : this.controller.signal;
+        const value = await withTimeout(signal => {
+          const operation = Promise.resolve().then(() => {
+            signal.throwIfAborted();
+            const input = { ...options, signal };
+            return typeof channel.send === 'function' ? channel.send(notification, input)
+              : typeof channel.notify === 'function' ? channel.notify(notification, input)
+                : typeof channel === 'function' ? channel(notification, input) : false;
+          });
+          const tracked = operation.finally(() => { if (this.pending.get(channel) === tracked) this.pending.delete(channel); });
+          this.pending.set(channel, tracked);
+          return tracked;
+        }, boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000), { signal });
         this.stats.sent++; results.push({ channel: name, ok: value !== false, result: value });
       } catch (error) {
-        this.stats.errors++; results.push({ channel: name, ok: false, error: error?.message || String(error) }); this.emit('error', error, name, notification);
+        this.stats.errors++; results.push({ channel: name, ok: false, error: error?.message || String(error) });
+        this.emit(this.listenerCount('error') ? 'error' : 'notificationError', error, name, notification);
         if (entry.required || this.errorPolicy === 'propagate') throw error;
       }
     }
@@ -35,8 +52,14 @@ export class NotificationRouter extends EventEmitter {
     if (!output.size) for (const name of this.channels.keys()) output.add(name);
     return [...output];
   }
-  async close() { await Promise.allSettled(Array.from(this.channels.values()).map((entry) => entry.channel.close?.())); }
-  snapshot() { return Object.freeze({ channels: Object.freeze(Array.from(this.channels.keys())), routes: Object.freeze(this.routes.slice()), stats: Object.freeze({ ...this.stats }) }); }
+  async close(options = {}) {
+    if (this.closePromise) return this.closePromise;
+    this.closed = true;
+    this.controller.abort(Object.assign(new Error('Notification router is closed.'), { code: 'MONITOR_NOTIFICATION_CLOSED' }));
+    this.closePromise = Promise.allSettled(Array.from(this.channels.values()).map(entry => withTimeout(() => entry.channel.close?.(), boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000))));
+    return this.closePromise;
+  }
+  snapshot() { return Object.freeze({ closed: this.closed, pendingCallbacks: this.pending.size, channels: Object.freeze(Array.from(this.channels.keys())), routes: Object.freeze(this.routes.slice()), stats: Object.freeze({ ...this.stats }) }); }
 }
 function matches(match, value) { return Object.entries(match || {}).every(([key, expected]) => Array.isArray(expected) ? expected.includes(value?.[key]) : value?.[key] === expected); }
 

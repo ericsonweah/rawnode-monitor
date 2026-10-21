@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "sha256": "e32c999d758434c58e5abea0a1fa055c5d0b3450e4e1e34e7d6ad76fb6be74d7",
+  "commands": "logs/distribution/commands.json",
+  "finalChecks": "final-verification.json",
+  "overhead": "overhead.json",
+  "initialOverheadHarnessFailureRetained": "logs/distribution/overhead-initial.stderr.txt",
+  "interpretation": "The initial overhead command failed in the harness; final-consumers.mjs records the corrected command exit 0. The initial concurrent extracted suite timeout is retained and resolved by the isolated full rerun."
+}

@@ -6,12 +6,12 @@ export class AlwaysOnSampler { shouldSample() { return { decision: SamplingDecis
 export class AlwaysOffSampler { shouldSample() { return { decision: SamplingDecision.DROP, attributes: null }; } description() { return 'AlwaysOffSampler'; } }
 
 export class TraceIdRatioSampler {
-  constructor(ratio = 1) { this.ratio = Math.max(0, Math.min(1, Number(ratio) || 0)); this.upperBound = BigInt(Math.floor(this.ratio * Number.MAX_SAFE_INTEGER)); }
+  constructor(ratio = 1) { this.ratio = Math.max(0, Math.min(1, Number(ratio) || 0)); this.upperBound = BigInt(Math.floor(this.ratio * 0x10000000000000)); }
   shouldSample(context) {
     if (this.ratio >= 1) return { decision: SamplingDecision.RECORD_AND_SAMPLE, attributes: null };
     if (this.ratio <= 0) return { decision: SamplingDecision.DROP, attributes: null };
     const lower = BigInt(`0x${String(context.traceId).slice(-13)}`);
-    return { decision: lower <= this.upperBound ? SamplingDecision.RECORD_AND_SAMPLE : SamplingDecision.DROP, attributes: null };
+    return { decision: lower < this.upperBound ? SamplingDecision.RECORD_AND_SAMPLE : SamplingDecision.DROP, attributes: null };
   }
   description() { return `TraceIdRatioSampler{${this.ratio}}`; }
 }

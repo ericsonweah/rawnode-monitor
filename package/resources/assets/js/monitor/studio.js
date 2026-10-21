@@ -10,9 +10,10 @@ const document = { querySelector: (selector) => app.querySelector(selector), que
 const events = new AbortController();
 let destroyed = false;
 let renderAbort = new AbortController();
-let pendingRender = null;
+let pendingActions = 0;
 let toastTimer = null;
 const request = options.fetch || window.fetch.bind(window);
+const prompt = (...args) => window.prompt(...args);
 const config = Object.freeze({
   prefix: app?.dataset?.prefix || '/__rawnode/monitor',
   pollIntervalMs: Number(app?.dataset?.pollIntervalMs) || 3_000,
@@ -32,6 +33,8 @@ async function api(path, options = {}) {
   if (destroyed) throw new DOMException('Studio unmounted', 'AbortError');
   const activeSignal = options.signal || renderAbort.signal;
   const response = await request(`${prefix}${path}`, { ...options, signal: options.signal || renderAbort.signal, headers: headers(options.headers || {}) });
+  activeSignal.throwIfAborted();
+  if (destroyed) throw new DOMException('Studio unmounted', 'AbortError');
   if (response.status === 401) { showAuth(); throw new Error('Operator authorization required.'); }
   const type = response.headers.get('content-type') || '';
   const payload = type.includes('json') ? await response.json() : await response.text();
@@ -53,6 +56,35 @@ function table(columns, rows, empty = 'No data available.') { if (!rows.length) 
 function read(value, path) { return String(path).split('.').reduce((current, part) => current?.[part], value); }
 function json(value) { return `<pre class="rn-json">${escape(JSON.stringify(value, null, 2))}</pre>`; }
 function heading(title, subtitle = '') { return `<div class="rn-heading"><div><h1>${escape(title)}</h1>${subtitle ? `<p>${escape(subtitle)}</p>` : ''}</div><span class="rn-updated">Updated ${new Date().toLocaleTimeString()}</span></div>`; }
+
+// Each action belongs to the view that installed it. Navigation or unmount
+// cancels its request and suppresses stale feedback; it cannot undo a mutation
+// the server already accepted.
+function bindAction(button, task, refresh = true) {
+  const active = renderAbort;
+  button?.addEventListener('click', async () => {
+    if (destroyed || active.signal.aborted || button.disabled) return;
+    button.disabled = true; pendingActions++;
+    let pending = true;
+    const release = () => {
+      if (!pending) return;
+      pending = false; pendingActions--;
+      active.signal.removeEventListener('abort', release);
+    };
+    active.signal.addEventListener('abort', release, { once: true });
+    try {
+      const message = await task(active.signal);
+      active.signal.throwIfAborted();
+      if (destroyed) return;
+      if (message) { toast(message, 'success'); if (refresh) await render(state.view); }
+    } catch (error) {
+      if (!destroyed && !active.signal.aborted) toast(error.message || 'Operator action failed.', 'error');
+    } finally {
+      release();
+      if (!destroyed && !active.signal.aborted) button.disabled = false;
+    }
+  }, { signal: active.signal });
+}
 
 async function loadOverview() { const data = await api('/api/overview'); state.data.set('overview', data); return data; }
 async function renderOverview() {
@@ -87,36 +119,70 @@ async function renderHealth() { const d = await api('/api/health?fresh=1'); main
 
 async function renderMetrics() {
   const d = await api('/api/metrics'); const metrics = Object.values(d.metrics || {});
-  main.innerHTML = `${heading('Metrics', `${metrics.length} instruments · ${d.series || 0} active series`)}<div class="rn-toolbar"><input id="rn-metric-filter" type="search" placeholder="Filter metrics"><button id="rn-copy-prom">Copy Prometheus</button></div><div id="rn-metric-list">${metricCards(metrics)}</div>`;
+  main.innerHTML = `${heading('Metrics', `${metrics.length} instruments · ${d.series || 0} active series`)}<div class="rn-toolbar"><input id="rn-metric-filter" aria-label="Filter metrics" type="search" placeholder="Filter metrics"><button id="rn-copy-prom">Copy Prometheus</button></div><div id="rn-metric-list">${metricCards(metrics)}</div>`;
   document.querySelector('#rn-metric-filter').addEventListener('input', (event) => { const term = event.target.value.toLowerCase(); document.querySelector('#rn-metric-list').innerHTML = metricCards(metrics.filter((metric) => metric.name.toLowerCase().includes(term))); });
-  document.querySelector('#rn-copy-prom').addEventListener('click', async () => { const response = await request(`${prefix}/api/prometheus`, { signal: renderAbort.signal, headers: headers() }); await navigator.clipboard.writeText(await response.text()); toast('Prometheus exposition copied.','success'); });
+  bindAction(document.querySelector('#rn-copy-prom'), async (signal) => { const text = await api('/api/prometheus', { signal }); await window.navigator.clipboard.writeText(text); return 'Prometheus exposition copied.'; }, false);
 }
 function metricCards(metrics) { if (!metrics.length) return '<div class="rn-empty">No metrics match.</div>'; return metrics.map((metric) => `<details class="rn-metric"><summary><span><strong>${escape(metric.name)}</strong><small>${escape(metric.description || metric.type)}</small></span>${badge(`${metric.cardinality || 0} series`,'neutral')}</summary>${table([{label:'Labels',render:r=>Object.entries(r.labels||{}).map(([k,v])=>`<code>${escape(k)}=${escape(v)}</code>`).join(' ')||'—'},{label:'Value',render:r=>formatNumber(r.value??r.mean??r.sum??r.count,6)},{label:'Count',render:r=>formatNumber(r.count,0)},{label:'Min / Max',render:r=>r.min==null?'—':`${formatNumber(r.min,4)} / ${formatNumber(r.max,4)}`}],metric.series||[])}</details>`).join(''); }
 
 async function renderTraces() {
   const traces = await api('/api/traces?limit=250');
-  main.innerHTML = `${heading('Traces', 'Sampled distributed operations and latency waterfalls.')}<div class="rn-toolbar"><input id="rn-trace-filter" type="search" placeholder="Filter span names"><select id="rn-trace-status"><option value="">All outcomes</option><option value="error">Errors</option><option value="ok">OK</option></select></div><div id="rn-traces">${traceTable(traces)}</div><div id="rn-trace-detail"></div>`;
+  main.innerHTML = `${heading('Traces', 'Sampled distributed operations and latency waterfalls.')}<div class="rn-toolbar"><input id="rn-trace-filter" aria-label="Filter span names" type="search" placeholder="Filter span names"><select id="rn-trace-status" aria-label="Filter trace outcomes"><option value="">All outcomes</option><option value="error">Errors</option><option value="ok">OK</option></select></div><div id="rn-traces">${traceTable(traces)}</div><div id="rn-trace-detail"></div>`;
   const apply = () => { const term=document.querySelector('#rn-trace-filter').value.toLowerCase(); const status=document.querySelector('#rn-trace-status').value; document.querySelector('#rn-traces').innerHTML=traceTable(traces.filter(s=>(!term||s.name.toLowerCase().includes(term))&&(!status||s.status?.code===status))); bindTraceRows(); };
   document.querySelector('#rn-trace-filter').addEventListener('input',apply); document.querySelector('#rn-trace-status').addEventListener('change',apply); bindTraceRows();
 }
 function traceTable(rows) { return table([{label:'Operation',render:r=>`<button class="rn-link rn-trace-open" data-trace="${escape(r.traceId)}"><strong>${escape(r.name)}</strong></button><small>${escape(r.traceId.slice(0,16))}…</small>`},{label:'Kind',render:r=>badge(r.kind,'neutral')},{label:'Status',render:r=>badge(r.status?.code||'unset',r.status?.code==='error'?'critical':'healthy')},{label:'Duration',render:r=>duration(r.durationMs)},{label:'Started',render:r=>age(Number(BigInt(r.startTimeUnixNano)/1000000n))}],rows,'No sampled spans found.'); }
-function bindTraceRows() { document.querySelectorAll('.rn-trace-open').forEach((button)=>button.addEventListener('click',()=>showTrace(button.dataset.trace))); }
-async function showTrace(id) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`); const max=Math.max(...spans.map(s=>s.durationMs||0),1); document.querySelector('#rn-trace-detail').innerHTML=panel(`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><div class="rn-bar"><i style="width:${Math.max(1,(span.durationMs/max)*100)}%"></i></div>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
+function bindTraceRows() { document.querySelectorAll('.rn-trace-open').forEach(button => bindAction(button, (signal) => showTrace(button.dataset.trace, signal), false)); }
+async function showTrace(id, signal) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`, { signal }); const max=Math.max(...spans.map(s=>s.durationMs||0),1); document.querySelector('#rn-trace-detail').innerHTML=panel(`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><progress class="rn-bar" aria-label="Relative span duration" max="${max}" value="${Math.max(0,span.durationMs||0)}"></progress>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
 
 async function renderResources() { const d=await api('/api/resources'); const latest=d.latest||{}; main.innerHTML=`${heading('Resources','Health and native metrics from RawNode modules.')}${Object.keys(latest).length?Object.entries(latest).map(([name,value])=>panel(name,`<div class="rn-resource-head">${badge(value.error?'unhealthy':value.health?.ok===false?'unhealthy':'healthy',value.error||value.health?.ok===false?'critical':'healthy')}<span>${duration(value.durationMs)}</span></div>${json(value)}`)).join(''):'<div class="rn-empty">No resource snapshots yet.</div>'}`; }
 
 async function renderAlerts() { const d=await api('/api/alerts?limit=250'); main.innerHTML=`${heading('Alerts','Rule state, transitions, silences, and operator actions.')}<div class="rn-toolbar"><button id="rn-create-silence">Create silence</button></div>${panel('Current state',table([{label:'Rule',render:r=>`<strong>${escape(r.rule?.name||r.ruleId)}</strong><small>${escape(r.rule?.severity||'')}</small>`},{label:'State',render:r=>badge(r.state,r.state==='firing'?'critical':r.state==='pending'?'warning':r.state==='resolved'?'healthy':'neutral')},{label:'Value',render:r=>formatNumber(r.lastValue,4)},{label:'Last evaluation',render:r=>age(r.lastEvaluationAt)},{label:'Action',render:r=>r.state==='firing'?`<button class="rn-alert-ack" data-id="${escape(r.ruleId)}">Acknowledge</button>`:'—'}],d.current||[]))}${panel('Silences',table([{label:'Reason',render:r=>escape(r.reason||'—')},{label:'Rules',render:r=>(r.ruleIds||[]).map(x=>`<code>${escape(x)}</code>`).join(' ')||'All'},{label:'Expires',render:r=>age(r.endsAt)},{label:'Action',render:r=>`<button class="rn-silence-delete" data-id="${escape(r.id)}">Remove</button>`}],d.silences?.silences||[]))}${panel('Recent transitions',table([{label:'Rule',render:r=>escape(r.rule?.name||r.ruleId)},{label:'Transition',render:r=>`${escape(r.previous)} → ${badge(r.state,r.state==='firing'?'critical':'neutral')}`},{label:'Value',render:r=>formatNumber(r.value,4)},{label:'Time',render:r=>age(r.timestamp)}],d.history||[]))}`; bindAlertActions(); }
-function bindAlertActions(){document.querySelectorAll('.rn-alert-ack').forEach(b=>b.addEventListener('click',async()=>{await api(`/api/alerts/${encodeURIComponent(b.dataset.id)}/acknowledge`,{method:'POST'});toast('Alert acknowledged.','success');renderAlerts();}));document.querySelectorAll('.rn-silence-delete').forEach(b=>b.addEventListener('click',async()=>{await api(`/api/silences/${encodeURIComponent(b.dataset.id)}`,{method:'DELETE'});toast('Silence removed.','success');renderAlerts();}));document.querySelector('#rn-create-silence')?.addEventListener('click',async()=>{const ruleId=prompt('Rule ID to silence (empty means all rules):','');const minutes=Number(prompt('Silence duration in minutes:','60'))||60;const reason=prompt('Reason:','Operator maintenance')||'Operator maintenance';await api('/api/silences',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ruleIds:ruleId?[ruleId]:[],durationMs:minutes*60000,reason})});toast('Silence created.','success');renderAlerts();});}
+function bindAlertActions() {
+  document.querySelectorAll('.rn-alert-ack').forEach(button => bindAction(button, async (signal) => {
+    await api(`/api/alerts/${encodeURIComponent(button.dataset.id)}/acknowledge`, { method: 'POST', signal });
+    return 'Alert acknowledged.';
+  }));
+  document.querySelectorAll('.rn-silence-delete').forEach(button => bindAction(button, async (signal) => {
+    await api(`/api/silences/${encodeURIComponent(button.dataset.id)}`, { method: 'DELETE', signal });
+    return 'Silence removed.';
+  }));
+  bindAction(document.querySelector('#rn-create-silence'), async (signal) => {
+    const ruleId = prompt('Rule ID to silence (empty means all rules):', '');
+    if (ruleId === null) return;
+    const durationInput = prompt('Silence duration in minutes:', '60');
+    if (durationInput === null) return;
+    const minutes = Number(durationInput);
+    if (!Number.isFinite(minutes) || minutes <= 0 || !Number.isSafeInteger(minutes * 60_000)) throw new Error('Silence duration must be a positive number of minutes (whole milliseconds).');
+    const reason = prompt('Reason:', 'Operator maintenance');
+    if (reason === null) return;
+    await api('/api/silences', { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ruleIds: ruleId.trim() ? [ruleId.trim()] : [], durationMs: minutes * 60_000, reason: reason.trim() || 'Operator maintenance' }) });
+    return 'Silence created.';
+  });
+}
 
 async function renderSlos(){const d=await api('/api/slos');const latest=d.latest||{};main.innerHTML=`${heading('Service Level Objectives','Compliance, error budgets, and burn rates.')}${panel('Objectives',table([{label:'SLO',render:r=>`<strong>${escape(r.name)}</strong><small>${formatNumber(r.objective*100,3)}% target</small>`},{label:'Achieved',render:r=>badge(`${formatNumber(r.achieved*100,3)}%`,r.compliance?'healthy':'critical')},{label:'Error budget',render:r=>`${formatNumber(r.errorBudget?.remainingRatio*100,2)}% remaining`},{label:'Burn rate',render:r=>badge(`${formatNumber(r.burnRate,2)}×`,r.burnRate>6?'critical':r.burnRate>1?'warning':'healthy')},{label:'Window',render:r=>duration(r.windowMs)}],Object.values(latest),'No SLO definitions registered.'))}`;}
 
 async function renderIncidents(){const d=await api('/api/incidents?limit=250');main.innerHTML=`${heading('Incidents','Correlated operational timelines and runbooks.')}${panel('Incidents',table([{label:'Incident',render:r=>`<strong>${escape(r.title)}</strong><small>${escape(r.id)}</small>`},{label:'Severity',render:r=>badge(r.severity,r.severity==='critical'?'critical':'warning')},{label:'State',render:r=>badge(r.state,r.state==='resolved'||r.state==='closed'?'healthy':'critical')},{label:'Updated',render:r=>age(r.updatedAt)},{label:'Actions',render:r=>incidentActions(r)}],d.incidents||[],'No incidents recorded.'))}<div id="rn-incident-detail"></div>`;bindIncidentActions(d.incidents||[]);}
 function incidentActions(r){return `<button class="rn-incident-view" data-id="${escape(r.id)}">View</button> ${r.state==='open'?`<button class="rn-incident-ack" data-id="${escape(r.id)}">Acknowledge</button>`:''} ${!['resolved','closed'].includes(r.state)?`<button class="rn-incident-resolve" data-id="${escape(r.id)}">Resolve</button>`:''}`;}
-function bindIncidentActions(rows){const byId=new Map(rows.map(r=>[r.id,r]));document.querySelectorAll('.rn-incident-view').forEach(b=>b.addEventListener('click',()=>{const r=byId.get(b.dataset.id);document.querySelector('#rn-incident-detail').innerHTML=panel(r.title,`${r.runbookDefinition?`<div class="rn-runbook"><h3>${escape(r.runbookDefinition.title)}</h3><p>${escape(r.runbookDefinition.description)}</p><ol>${r.runbookDefinition.steps.map(s=>`<li>${escape(s)}</li>`).join('')}</ol></div>`:''}${json(r)}`);}));document.querySelectorAll('.rn-incident-ack').forEach(b=>b.addEventListener('click',async()=>{await api(`/api/incidents/${encodeURIComponent(b.dataset.id)}/acknowledge`,{method:'POST',headers:{'content-type':'application/json'},body:'{}'});toast('Incident acknowledged.','success');renderIncidents();}));document.querySelectorAll('.rn-incident-resolve').forEach(b=>b.addEventListener('click',async()=>{const message=prompt('Resolution note:','Issue mitigated')||'Resolved';await api(`/api/incidents/${encodeURIComponent(b.dataset.id)}/resolve`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message})});toast('Incident resolved.','success');renderIncidents();}));}
+function bindIncidentActions(rows) {
+  const byId = new Map(rows.map(row => [row.id, row]));
+  document.querySelectorAll('.rn-incident-view').forEach(button => button.addEventListener('click', () => { const row = byId.get(button.dataset.id); document.querySelector('#rn-incident-detail').innerHTML = panel(row.title, `${row.runbookDefinition ? `<div class="rn-runbook"><h3>${escape(row.runbookDefinition.title)}</h3><p>${escape(row.runbookDefinition.description)}</p><ol>${row.runbookDefinition.steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>` : ''}${json(row)}`); }, { signal: renderAbort.signal }));
+  document.querySelectorAll('.rn-incident-ack').forEach(button => bindAction(button, async (signal) => {
+    await api(`/api/incidents/${encodeURIComponent(button.dataset.id)}/acknowledge`, { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: '{}' });
+    return 'Incident acknowledged.';
+  }));
+  document.querySelectorAll('.rn-incident-resolve').forEach(button => bindAction(button, async (signal) => {
+    const message = prompt('Resolution note:', 'Issue mitigated');
+    if (message === null) return;
+    await api(`/api/incidents/${encodeURIComponent(button.dataset.id)}/resolve`, { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: message.trim() || 'Resolved' }) });
+    return 'Incident resolved.';
+  }));
+}
 
 async function renderFleet(){const d=await api('/api/fleet');main.innerHTML=`${heading('Fleet','Cross-process and cross-host runtime membership.')}${panel('Topology',renderTopology(d.topology))}${panel('Instances',table([{label:'Service',render:r=>`<strong>${escape(r.service||'unknown')}</strong><small>${escape(r.instanceId)}</small>`},{label:'State',render:r=>badge(r.state||'unknown',r.health?.ok===false?'critical':'healthy')},{label:'Host / PID',render:r=>`${escape(r.host||'—')} / ${escape(r.pid||'—')}`},{label:'Region',render:r=>escape(r.region||'—')},{label:'Version',render:r=>escape(r.version||'—')},{label:'Last seen',render:r=>age(r.lastSeenAt)}],d.instances||[]))}`;}
 async function renderDeployments(){const d=await api('/api/deployments?limit=250');main.innerHTML=`${heading('Deployments','Release markers correlated with operational changes.')}${panel('Timeline',table([{label:'Version',render:r=>`<strong>${escape(r.version||'—')}</strong><small>${escape(r.commit||r.buildId||r.id)}</small>`},{label:'Status',render:r=>badge(r.status,r.status==='failed'?'critical':r.status==='rolled_back'?'warning':'healthy')},{label:'Strategy',render:r=>escape(r.strategy||'—')},{label:'Actor',render:r=>escape(r.actor||'—')},{label:'Time',render:r=>age(r.deployedAt)}],d||[]))}`;}
-async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;document.querySelector('#rn-bundle').addEventListener('click',async()=>{const result=await api('/api/diagnostics/bundle',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});toast(`Bundle created: ${result.filename}`,'success');});document.querySelector('#rn-full-diag').addEventListener('click',async()=>{const d=await api('/api/diagnostics?signals=0');document.querySelector('#rn-diagnostics-full').innerHTML=panel('Runtime diagnostics',json(d));});}
+async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;bindAction(document.querySelector('#rn-bundle'),async(signal)=>{const result=await api('/api/diagnostics/bundle',{method:'POST',signal,headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});return `Bundle created: ${result.filename}`;},false);bindAction(document.querySelector('#rn-full-diag'),async(signal)=>{const d=await api('/api/diagnostics?signals=0',{signal});document.querySelector('#rn-diagnostics-full').innerHTML=panel('Runtime diagnostics',json(d));},false);}
 
 const renderers={overview:renderOverview,health:renderHealth,metrics:renderMetrics,traces:renderTraces,resources:renderResources,alerts:renderAlerts,slos:renderSlos,incidents:renderIncidents,fleet:renderFleet,deployments:renderDeployments,diagnostics:renderDiagnostics};
 async function render(view=state.view){
@@ -149,7 +215,7 @@ function connectStream(){
 }
 function setConnected(value){state.connected=value;document.querySelector('#rn-live-dot').classList.toggle('connected',value);if(!value)document.querySelector('#rn-state').textContent='Polling';}
 function scheduleRefresh(){clearTimeout(state._refresh);state._refresh=setTimeout(()=>render(state.view),500);}
-function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(document.visibilityState==='visible'&&app.getAttribute('aria-busy')!=='true')render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
+function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(document.visibilityState==='visible'&&app.getAttribute('aria-busy')!=='true'&&pendingActions===0)render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
 
 document.querySelector('#rn-nav').addEventListener('click',(event)=>{const button=event.target.closest('button[data-view]');if(button)render(button.dataset.view);},{signal:events.signal});
 document.querySelector('#rn-refresh').addEventListener('click',()=>render(state.view),{signal:events.signal});

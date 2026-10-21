@@ -30,9 +30,11 @@ export function verifyMonitorClusterEnvelope(envelope, options = {}) {
   if (!envelope || typeof envelope !== 'object') return { ok: false, reason: 'invalid-envelope' };
   if (Number(envelope.schemaVersion) !== MONITOR_SCHEMA_VERSION) return { ok: false, reason: 'schema-version' };
   if (options.namespace && String(envelope.namespace) !== String(options.namespace)) return { ok: false, reason: 'namespace' };
-  if (Number(envelope.expiresAt || 0) <= Date.now()) return { ok: false, reason: 'expired' };
+  const expiresAt = Number(envelope.expiresAt);
+  const timestamp = Number(envelope.timestamp);
+  if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) return { ok: false, reason: 'expired' };
   const maxClockSkewMs = Math.max(0, Number(options.maxClockSkewMs) || 60_000);
-  if (Math.abs(Date.now() - Number(envelope.timestamp || 0)) > Math.max(maxClockSkewMs, Number(options.maxAgeMs) || 5 * 60_000)) return { ok: false, reason: 'timestamp' };
+  if (!Number.isFinite(timestamp) || Math.abs(Date.now() - timestamp) > Math.max(maxClockSkewMs, Number(options.maxAgeMs) || 5 * 60_000)) return { ok: false, reason: 'timestamp' };
   if (options.secret) {
     if (!envelope.signature) return { ok: false, reason: 'signature-missing' };
     const expected = Buffer.from(signEnvelope(envelope, options.secret));

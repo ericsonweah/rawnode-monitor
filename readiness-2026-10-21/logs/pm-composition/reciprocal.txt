@@ -1,0 +1,13 @@
+✔ exact final Monitor and accepted PM archive pins (8.192958ms)
+✔ fresh installed Monitor bridge attach/query/redacted diagnostics/detach: direct (91.71382ms)
+✔ fresh installed Monitor bridge attach/query/redacted diagnostics/detach: runtime (51.379369ms)
+✔ fresh installed Monitor bridge attach/query/redacted diagnostics/detach: adapter (46.714467ms)
+✔ fresh installed Monitor health, metrics and redacted diagnostics traverse actual PM child IPC and shutdown (362.143905ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 866.806478

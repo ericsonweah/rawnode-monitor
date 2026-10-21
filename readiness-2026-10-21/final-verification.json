@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "sha256": "e32c999d758434c58e5abea0a1fa055c5d0b3450e4e1e34e7d6ad76fb6be74d7",
+  "bytes": 202587,
+  "packedFiles": 175,
+  "suites": {
+    "native": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "installed": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "extracted": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "buildJavaScript": 112,
+  "manifestEntries": 29,
+  "executableEntries": 28,
+  "rootExportNames": 189,
+  "originalFileHashesUnchanged": 866,
+  "historicalCandidateFileHashesMatched": 169,
+  "immutableFilesUnchanged": 933,
+  "packageCheckoutExtractionInstallationMatch": true,
+  "privateUnlicensedOwnershipAndGuardPreserved": true,
+  "pmReciprocal": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "realChildIpc": true
+  },
+  "studioHttpSseChecks": 33,
+  "ingestionAndTokenSecurityChecks": 19,
+  "concurrentExtractionTimeout": {
+    "receipt": "consumer-checks.json",
+    "failed": 1,
+    "passed": 85,
+    "resolution": "Full isolated extracted suite passed 86/86 without changing package bytes; logs/final-extracted-isolated"
+  },
+  "harnessCorrections": [
+    "Parse npm pack JSON after prepack check JSON",
+    "Exclude synthetic file:///tmp redirect fixture from machine-path matches",
+    "Resolve ESM-only benchmark target through installed metadata instead of CJS root condition",
+    "Serialize complete suites in reproduction harness to avoid coupling tight deadline tests to parallel verification"
+  ]
+}

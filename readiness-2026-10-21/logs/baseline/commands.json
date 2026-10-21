@@ -1,0 +1,77 @@
+[
+  {
+    "leg": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:09:56.589Z",
+    "milliseconds": 9719,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:10:06.311Z",
+    "milliseconds": 1878,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "basic",
+    "command": [
+      "node",
+      "examples/basic.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:10:08.190Z",
+    "milliseconds": 243,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "test/types.mts"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:10:08.433Z",
+    "milliseconds": 2805,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "guard",
+    "command": [
+      "npm",
+      "run",
+      "prepublishOnly"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:10:11.240Z",
+    "milliseconds": 287,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 1
+  }
+]

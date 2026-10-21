@@ -1,0 +1,121 @@
+{
+  "startedAt": "2026-10-21T22:37:03.174Z",
+  "node": "v24.21.0",
+  "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/artifacts/rawnode-monitor-1.0.0.tgz",
+  "sha256": "e32c999d758434c58e5abea0a1fa055c5d0b3450e4e1e34e7d6ad76fb6be74d7",
+  "bytes": 202587,
+  "installedPackage": "/private/tmp/rawnode-monitor-readiness-siwG8b/installed/node_modules/@rawnode/monitor",
+  "scope": "Actual task-owned loopback HTTP using the unchanged final installed package; synthetic HMAC and bearer credentials only; no browser execution or live production ingestion.",
+  "checks": [
+    {
+      "name": "Token-required shell rejects navigation without bearer",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "name": "Token-required shell accepts explicit synthetic Authorization header",
+      "passed": true,
+      "status": 200,
+      "credentialTransport": "HTTP header only; no URL or persistent storage."
+    },
+    {
+      "name": "Token-required assets require authorization",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "name": "Token-required assets accept explicit synthetic Authorization header",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Bearer authorization preserves origin enforcement",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "name": "Bearer mutation authorization preserves origin enforcement and incident state",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "name": "HMAC accepts the exact signed raw JSON bytes",
+      "passed": true,
+      "status": 202,
+      "accepted": 1,
+      "rejected": 0,
+      "rawBytes": 199
+    },
+    {
+      "name": "Accepted remote telemetry is redacted in the actual memory store",
+      "passed": true,
+      "tokenRedacted": true,
+      "bearerRedacted": true,
+      "contextPasswordRedacted": true,
+      "remote": true
+    },
+    {
+      "name": "Studio returns the accepted remote signal with redaction",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Exact-byte tamper",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Missing signature and timestamp",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Malformed signature",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Wrong same-length signature",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Missing timestamp",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Malformed timestamp",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Expired timestamp with valid HMAC",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Authenticated body above the 1 MiB cap returns a bounded serializable error",
+      "passed": true,
+      "status": 413,
+      "code": "MONITOR_BODY_TOO_LARGE",
+      "rawBytes": 1048617
+    }
+  ],
+  "status": "failed",
+  "error": {
+    "name": "AssertionError",
+    "code": "ERR_ASSERTION",
+    "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [Object: null prototype] {\n- {\n    alert: 2,\n    deployment: 1,\n    event: 2,\n    health: 1,\n    incident: 1,\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [Object: null prototype] {\n- {\n    alert: 2,\n    deployment: 1,\n    event: 2,\n    health: 1,\n    incident: 1,\n\n    at file:///Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/scripts/ingest-auth-final-smoke.mjs:53:464\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+  },
+  "finishedAt": "2026-10-21T22:37:03.328Z",
+  "checkCount": 17
+}

@@ -1,0 +1,9 @@
+Command: node readiness-2026-10-21/scripts/ingest-auth-final-smoke.mjs
+Runtime: v24.21.0
+Archive SHA-256: e32c999d758434c58e5abea0a1fa055c5d0b3450e4e1e34e7d6ad76fb6be74d7
+Started: 2026-10-21T22:39:07.067Z
+Finished: 2026-10-21T22:39:07.267Z
+Status: passed
+Checks: 19
+Error: none
+Scope: actual loopback HTTP; unchanged installed final package; no browser result.

@@ -21,6 +21,8 @@ export class JsonlTelemetryStore {
     this.serializer = options.serializer || JSON;
     this.files = new Map();
     this.chains = new Map();
+    this.pendingWrites = new Set();
+    this.closePromise = null;
     this.ready = false;
     this.closed = false;
     this.stats = {
@@ -49,6 +51,15 @@ export class JsonlTelemetryStore {
 
   async writeMany(signals = []) {
     if (this.closed) return { written: 0, closed: true };
+    // Track the whole admitted operation before initialization can yield. A
+    // chain alone does not cover initialization or subsequent signal kinds.
+    const operation = Promise.resolve().then(() => this._writeMany(signals));
+    this.pendingWrites.add(operation);
+    try { return await operation; }
+    finally { this.pendingWrites.delete(operation); }
+  }
+
+  async _writeMany(signals) {
     await this.initialize();
     const groups = new Map();
     for (const signal of signals) {
@@ -256,8 +267,13 @@ export class JsonlTelemetryStore {
     return removed;
   }
 
-  async flush() { await Promise.allSettled([...this.chains.values()]); return this.snapshot(); }
-  async close() { await this.flush(); this.closed = true; return this.snapshot(); }
+  async flush() { await Promise.allSettled([...this.pendingWrites]); return this.snapshot(); }
+  async close() {
+    if (this.closePromise) return await this.closePromise;
+    this.closed = true;
+    this.closePromise = this.flush();
+    return await this.closePromise;
+  }
   snapshot() {
     return Object.freeze({
       driver: 'file',

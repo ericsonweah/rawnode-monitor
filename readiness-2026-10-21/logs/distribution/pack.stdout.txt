@@ -1,0 +1,892 @@
+{"ok":true,"checkedJavaScript":112,"exports":29,"node":"v24.21.0"}
+[
+  {
+    "id": "@rawnode/monitor@1.0.0",
+    "name": "@rawnode/monitor",
+    "version": "1.0.0",
+    "size": 202587,
+    "unpackedSize": 809274,
+    "shasum": "ecbf8bb58ff4d99b8574f96450e762cdcd59259a",
+    "integrity": "sha512-pkP5kklvTeQL/ZiWo4I+7qv82w2p2uYRs9wHUJIA5S8fLjxgcJ/NZWJJtMfNcIs0ma1ANKbCIGSoNEqIihye0A==",
+    "filename": "rawnode-monitor-1.0.0.tgz",
+    "files": [
+      {
+        "path": "CHANGELOG.md",
+        "size": 1501,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 280,
+        "mode": 420
+      },
+      {
+        "path": "NOTICE.md",
+        "size": 647,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 4153,
+        "mode": 420
+      },
+      {
+        "path": "config/monitor.js",
+        "size": 15100,
+        "mode": 420
+      },
+      {
+        "path": "docs/api-manifest.json",
+        "size": 15473,
+        "mode": 420
+      },
+      {
+        "path": "docs/API.md",
+        "size": 33997,
+        "mode": 420
+      },
+      {
+        "path": "docs/CONFIGURATION.md",
+        "size": 11278,
+        "mode": 420
+      },
+      {
+        "path": "docs/LIFECYCLE.md",
+        "size": 5275,
+        "mode": 420
+      },
+      {
+        "path": "docs/MIGRATION.md",
+        "size": 4081,
+        "mode": 420
+      },
+      {
+        "path": "docs/PUBLICATION.md",
+        "size": 3075,
+        "mode": 420
+      },
+      {
+        "path": "docs/SECURITY.md",
+        "size": 4068,
+        "mode": 420
+      },
+      {
+        "path": "docs/STUDIO.md",
+        "size": 4307,
+        "mode": 420
+      },
+      {
+        "path": "docs/VALIDATION.md",
+        "size": 5109,
+        "mode": 420
+      },
+      {
+        "path": "examples/basic.mjs",
+        "size": 621,
+        "mode": 420
+      },
+      {
+        "path": "examples/studio-fixture.mjs",
+        "size": 7167,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 3844,
+        "mode": 420
+      },
+      {
+        "path": "resources/assets/css/monitor/studio.css",
+        "size": 10436,
+        "mode": 420
+      },
+      {
+        "path": "resources/assets/js/monitor/studio.js",
+        "size": 30080,
+        "mode": 420
+      },
+      {
+        "path": "scripts/check.mjs",
+        "size": 1839,
+        "mode": 420
+      },
+      {
+        "path": "scripts/generate-reference.mjs",
+        "size": 8522,
+        "mode": 420
+      },
+      {
+        "path": "scripts/reject-publication.mjs",
+        "size": 135,
+        "mode": 420
+      },
+      {
+        "path": "src/alerts/AlertEngine.js",
+        "size": 11917,
+        "mode": 420
+      },
+      {
+        "path": "src/alerts/AlertRule.js",
+        "size": 7039,
+        "mode": 420
+      },
+      {
+        "path": "src/alerts/index.js",
+        "size": 158,
+        "mode": 420
+      },
+      {
+        "path": "src/alerts/NotificationRouter.js",
+        "size": 5457,
+        "mode": 420
+      },
+      {
+        "path": "src/alerts/SilenceManager.js",
+        "size": 1993,
+        "mode": 420
+      },
+      {
+        "path": "src/analysis/AnomalyDetector.js",
+        "size": 11222,
+        "mode": 420
+      },
+      {
+        "path": "src/analysis/CorrelationEngine.js",
+        "size": 5621,
+        "mode": 420
+      },
+      {
+        "path": "src/analysis/index.js",
+        "size": 167,
+        "mode": 420
+      },
+      {
+        "path": "src/analysis/LeakDetector.js",
+        "size": 8115,
+        "mode": 420
+      },
+      {
+        "path": "src/analysis/StreamingBaseline.js",
+        "size": 5131,
+        "mode": 420
+      },
+      {
+        "path": "src/cluster/FleetRegistry.js",
+        "size": 4107,
+        "mode": 420
+      },
+      {
+        "path": "src/cluster/index.js",
+        "size": 170,
+        "mode": 420
+      },
+      {
+        "path": "src/cluster/LeaderLease.js",
+        "size": 4451,
+        "mode": 420
+      },
+      {
+        "path": "src/cluster/MonitorClusterEnvelope.js",
+        "size": 2724,
+        "mode": 420
+      },
+      {
+        "path": "src/cluster/RedisMonitorBridge.js",
+        "size": 4025,
+        "mode": 420
+      },
+      {
+        "path": "src/compatibility/CompatibilityProfile.js",
+        "size": 2761,
+        "mode": 420
+      },
+      {
+        "path": "src/config/MonitorConfiguration.js",
+        "size": 27208,
+        "mode": 420
+      },
+      {
+        "path": "src/console/index.js",
+        "size": 52,
+        "mode": 420
+      },
+      {
+        "path": "src/console/MonitorCommands.js",
+        "size": 12780,
+        "mode": 420
+      },
+      {
+        "path": "src/constants.js",
+        "size": 1855,
+        "mode": 420
+      },
+      {
+        "path": "src/core/index.js",
+        "size": 137,
+        "mode": 420
+      },
+      {
+        "path": "src/core/MonitorContextManager.js",
+        "size": 3237,
+        "mode": 420
+      },
+      {
+        "path": "src/core/MonitorLifecycle.js",
+        "size": 2277,
+        "mode": 420
+      },
+      {
+        "path": "src/core/TelemetryEnvelope.js",
+        "size": 1968,
+        "mode": 420
+      },
+      {
+        "path": "src/deployments/DeploymentRegistry.js",
+        "size": 2835,
+        "mode": 420
+      },
+      {
+        "path": "src/deployments/index.js",
+        "size": 55,
+        "mode": 420
+      },
+      {
+        "path": "src/diagnostics/DiagnosticBundleBuilder.js",
+        "size": 2555,
+        "mode": 420
+      },
+      {
+        "path": "src/diagnostics/index.js",
+        "size": 96,
+        "mode": 420
+      },
+      {
+        "path": "src/diagnostics/MonitorDoctor.js",
+        "size": 3750,
+        "mode": 420
+      },
+      {
+        "path": "src/errors.js",
+        "size": 2481,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/CallbackExporter.js",
+        "size": 786,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/EventExporter.js",
+        "size": 1010,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/ExporterRegistry.js",
+        "size": 3101,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/HttpJsonExporter.js",
+        "size": 10558,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/index.js",
+        "size": 243,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/OtlpJsonExporter.js",
+        "size": 4540,
+        "mode": 420
+      },
+      {
+        "path": "src/exporters/StatsdExporter.js",
+        "size": 2690,
+        "mode": 420
+      },
+      {
+        "path": "src/health/HealthRegistry.js",
+        "size": 7746,
+        "mode": 420
+      },
+      {
+        "path": "src/health/index.js",
+        "size": 51,
+        "mode": 420
+      },
+      {
+        "path": "src/incidents/IncidentManager.js",
+        "size": 7327,
+        "mode": 420
+      },
+      {
+        "path": "src/incidents/index.js",
+        "size": 90,
+        "mode": 420
+      },
+      {
+        "path": "src/incidents/RunbookRegistry.js",
+        "size": 1215,
+        "mode": 420
+      },
+      {
+        "path": "src/index.js",
+        "size": 1245,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/EventMonitorBridge.js",
+        "size": 3317,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/HttpMonitorMiddleware.js",
+        "size": 5997,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/index.js",
+        "size": 392,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/LoggerMonitorBridge.js",
+        "size": 1276,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/MonitorFetch.js",
+        "size": 2345,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/MonitorLogTransport.js",
+        "size": 1750,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/OperationInstrumentor.js",
+        "size": 3329,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/PMMonitorBridge.js",
+        "size": 1159,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/ProtocolMonitorBridge.js",
+        "size": 2223,
+        "mode": 420
+      },
+      {
+        "path": "src/integrations/RawNodeIntegrationManager.js",
+        "size": 3120,
+        "mode": 420
+      },
+      {
+        "path": "src/metrics/index.js",
+        "size": 163,
+        "mode": 420
+      },
+      {
+        "path": "src/metrics/Instruments.js",
+        "size": 15009,
+        "mode": 420
+      },
+      {
+        "path": "src/metrics/MetricHistory.js",
+        "size": 1359,
+        "mode": 420
+      },
+      {
+        "path": "src/metrics/MetricRegistry.js",
+        "size": 6257,
+        "mode": 420
+      },
+      {
+        "path": "src/metrics/PrometheusFormatter.js",
+        "size": 2410,
+        "mode": 420
+      },
+      {
+        "path": "src/MonitorManager.js",
+        "size": 2131,
+        "mode": 420
+      },
+      {
+        "path": "src/MonitorRuntime.js",
+        "size": 49241,
+        "mode": 420
+      },
+      {
+        "path": "src/pipeline/BoundedSignalQueue.js",
+        "size": 8033,
+        "mode": 420
+      },
+      {
+        "path": "src/pipeline/index.js",
+        "size": 92,
+        "mode": 420
+      },
+      {
+        "path": "src/pipeline/SignalPipeline.js",
+        "size": 15771,
+        "mode": 420
+      },
+      {
+        "path": "src/plugins/index.js",
+        "size": 57,
+        "mode": 420
+      },
+      {
+        "path": "src/plugins/MonitorPluginManager.js",
+        "size": 19225,
+        "mode": 420
+      },
+      {
+        "path": "src/provider/MonitorServiceProvider.js",
+        "size": 10648,
+        "mode": 420
+      },
+      {
+        "path": "src/query/index.js",
+        "size": 55,
+        "mode": 420
+      },
+      {
+        "path": "src/query/MonitorQueryEngine.js",
+        "size": 5739,
+        "mode": 420
+      },
+      {
+        "path": "src/resources/index.js",
+        "size": 98,
+        "mode": 420
+      },
+      {
+        "path": "src/resources/RawNodeResourceCatalog.js",
+        "size": 3614,
+        "mode": 420
+      },
+      {
+        "path": "src/resources/ResourceRegistry.js",
+        "size": 8264,
+        "mode": 420
+      },
+      {
+        "path": "src/security/index.js",
+        "size": 145,
+        "mode": 420
+      },
+      {
+        "path": "src/security/SafeTelemetrySerializer.js",
+        "size": 5799,
+        "mode": 420
+      },
+      {
+        "path": "src/security/TelemetryAuthenticator.js",
+        "size": 1936,
+        "mode": 420
+      },
+      {
+        "path": "src/security/TelemetryRedactor.js",
+        "size": 3480,
+        "mode": 420
+      },
+      {
+        "path": "src/slo/index.js",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "src/slo/SloDefinition.js",
+        "size": 3949,
+        "mode": 420
+      },
+      {
+        "path": "src/slo/SloRegistry.js",
+        "size": 5925,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/CompositeTelemetryStore.js",
+        "size": 7807,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/createTelemetryStore.js",
+        "size": 3199,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/index.js",
+        "size": 313,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/JsonlTelemetryStore.js",
+        "size": 11282,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/MemoryTelemetryStore.js",
+        "size": 4319,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/NoopTelemetryStore.js",
+        "size": 481,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/RawMongoTelemetryStore.js",
+        "size": 6830,
+        "mode": 420
+      },
+      {
+        "path": "src/storage/RetentionManager.js",
+        "size": 1131,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/index.js",
+        "size": 328,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/MonitorStudioAssets.js",
+        "size": 1346,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/MonitorStudioAuthorizer.js",
+        "size": 3990,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/MonitorStudioController.js",
+        "size": 10298,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/MonitorStudioManager.js",
+        "size": 11668,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/MonitorStudioPage.js",
+        "size": 2973,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/MonitorStudioRateLimiter.js",
+        "size": 2815,
+        "mode": 420
+      },
+      {
+        "path": "src/studio/registerMonitorStudioRoutes.js",
+        "size": 3446,
+        "mode": 420
+      },
+      {
+        "path": "src/support.js",
+        "size": 12748,
+        "mode": 420
+      },
+      {
+        "path": "src/synthetics/index.js",
+        "size": 90,
+        "mode": 420
+      },
+      {
+        "path": "src/synthetics/SyntheticCheck.js",
+        "size": 2711,
+        "mode": 420
+      },
+      {
+        "path": "src/synthetics/SyntheticMonitor.js",
+        "size": 22839,
+        "mode": 420
+      },
+      {
+        "path": "src/system/index.js",
+        "size": 105,
+        "mode": 420
+      },
+      {
+        "path": "src/system/ProcessMetricsCollector.js",
+        "size": 10098,
+        "mode": 420
+      },
+      {
+        "path": "src/system/SystemMetricsCollector.js",
+        "size": 646,
+        "mode": 420
+      },
+      {
+        "path": "src/testing/index.js",
+        "size": 52,
+        "mode": 420
+      },
+      {
+        "path": "src/testing/MonitorRecorder.js",
+        "size": 1799,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/index.js",
+        "size": 217,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/InMemorySpanStore.js",
+        "size": 4430,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/Sampler.js",
+        "size": 1947,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/SignalSpanProcessor.js",
+        "size": 760,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/Span.js",
+        "size": 5388,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/TraceContext.js",
+        "size": 5305,
+        "mode": 420
+      },
+      {
+        "path": "src/tracing/Tracer.js",
+        "size": 5639,
+        "mode": 420
+      },
+      {
+        "path": "test/adversarial-pipeline-metrics.test.mjs",
+        "size": 6596,
+        "mode": 420
+      },
+      {
+        "path": "test/adversarial-plugins.test.mjs",
+        "size": 4322,
+        "mode": 420
+      },
+      {
+        "path": "test/adversarial-retention-synthetics.test.mjs",
+        "size": 5986,
+        "mode": 420
+      },
+      {
+        "path": "test/adversarial-synthetic-http.test.mjs",
+        "size": 4282,
+        "mode": 420
+      },
+      {
+        "path": "test/alert-lifecycle.test.mjs",
+        "size": 6807,
+        "mode": 420
+      },
+      {
+        "path": "test/capabilities.test.mjs",
+        "size": 4522,
+        "mode": 420
+      },
+      {
+        "path": "test/contracts-hardening.test.mjs",
+        "size": 8327,
+        "mode": 420
+      },
+      {
+        "path": "test/exports-types.mts",
+        "size": 4831,
+        "mode": 420
+      },
+      {
+        "path": "test/readiness-lifecycle.test.mjs",
+        "size": 11946,
+        "mode": 420
+      },
+      {
+        "path": "test/runtime.test.mjs",
+        "size": 8673,
+        "mode": 420
+      },
+      {
+        "path": "test/studio-actions.test.mjs",
+        "size": 8930,
+        "mode": 420
+      },
+      {
+        "path": "test/studio-http.test.mjs",
+        "size": 3414,
+        "mode": 420
+      },
+      {
+        "path": "test/studio-modeled.test.mjs",
+        "size": 2849,
+        "mode": 420
+      },
+      {
+        "path": "test/studio-security-regression.test.mjs",
+        "size": 3860,
+        "mode": 420
+      },
+      {
+        "path": "test/types.mts",
+        "size": 1525,
+        "mode": 420
+      },
+      {
+        "path": "types/alerts.d.ts",
+        "size": 203,
+        "mode": 420
+      },
+      {
+        "path": "types/analysis.d.ts",
+        "size": 98,
+        "mode": 420
+      },
+      {
+        "path": "types/cluster.d.ts",
+        "size": 151,
+        "mode": 420
+      },
+      {
+        "path": "types/config.d.ts",
+        "size": 133,
+        "mode": 420
+      },
+      {
+        "path": "types/console.d.ts",
+        "size": 476,
+        "mode": 420
+      },
+      {
+        "path": "types/core.d.ts",
+        "size": 136,
+        "mode": 420
+      },
+      {
+        "path": "types/deployments.d.ts",
+        "size": 49,
+        "mode": 420
+      },
+      {
+        "path": "types/diagnostics.d.ts",
+        "size": 69,
+        "mode": 420
+      },
+      {
+        "path": "types/exporters.d.ts",
+        "size": 148,
+        "mode": 420
+      },
+      {
+        "path": "types/health.d.ts",
+        "size": 45,
+        "mode": 420
+      },
+      {
+        "path": "types/incidents.d.ts",
+        "size": 63,
+        "mode": 420
+      },
+      {
+        "path": "types/index.d.ts",
+        "size": 28858,
+        "mode": 420
+      },
+      {
+        "path": "types/integrations.d.ts",
+        "size": 281,
+        "mode": 420
+      },
+      {
+        "path": "types/metrics.d.ts",
+        "size": 160,
+        "mode": 420
+      },
+      {
+        "path": "types/pipeline.d.ts",
+        "size": 65,
+        "mode": 420
+      },
+      {
+        "path": "types/plugins.d.ts",
+        "size": 51,
+        "mode": 420
+      },
+      {
+        "path": "types/provider.d.ts",
+        "size": 518,
+        "mode": 420
+      },
+      {
+        "path": "types/query.d.ts",
+        "size": 49,
+        "mode": 420
+      },
+      {
+        "path": "types/resources.d.ts",
+        "size": 97,
+        "mode": 420
+      },
+      {
+        "path": "types/security.d.ts",
+        "size": 97,
+        "mode": 420
+      },
+      {
+        "path": "types/slo.d.ts",
+        "size": 57,
+        "mode": 420
+      },
+      {
+        "path": "types/storage.d.ts",
+        "size": 181,
+        "mode": 420
+      },
+      {
+        "path": "types/studio-client.d.ts",
+        "size": 381,
+        "mode": 420
+      },
+      {
+        "path": "types/studio.d.ts",
+        "size": 202,
+        "mode": 420
+      },
+      {
+        "path": "types/synthetics.d.ts",
+        "size": 63,
+        "mode": 420
+      },
+      {
+        "path": "types/system.d.ts",
+        "size": 78,
+        "mode": 420
+      },
+      {
+        "path": "types/testing.d.ts",
+        "size": 64,
+        "mode": 420
+      },
+      {
+        "path": "types/tracing.d.ts",
+        "size": 305,
+        "mode": 420
+      }
+    ],
+    "entryCount": 175,
+    "bundled": []
+  }
+]

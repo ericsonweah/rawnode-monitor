@@ -1,0 +1,24 @@
+✔ optional notification failures remain isolated without an error listener and required failures reject (5.116933ms)
+✔ notification deadlines retain stuck callback ownership and close bounds channel cleanup (22.724412ms)
+✔ closing an active notification aborts its signal and settles the caller before a late result (2.082768ms)
+✔ caller cancellation cannot skip owned notification or alert cleanup (1.156629ms)
+✔ a failed alert context does not strand evaluation ownership (2.451741ms)
+✔ alert deadlines avoid overlapping a stalled rule while healthy rules remain usable (13.310663ms)
+✔ retired or closed alert evaluations cannot notify or open incidents (1.322528ms)
+✔ close during a pending notification does not start a later incident or accept notification accounting (1.67929ms)
+✔ ratio sampling uses the full 52-bit suffix range at deterministic boundaries (2.032791ms)
+✔ bound context overrides its creation scope and preserves receiver, arguments and async propagation (1.738157ms)
+✔ remote context parsing ignores malformed baggage keys and preserves valid propagation and parent sampling (2.323396ms)
+✔ HTTP middleware uses route templates and a single unmatched label for request-specific paths (36.738511ms)
+✔ timer and span elapsed duration stay monotonic when the wall clock moves backwards (1.180845ms)
+✔ resource replacement invalidates cached state and suppresses retired collection events (1.541242ms)
+✔ late Redis subscribe and ready completion cannot resurrect a closed bridge (1.029126ms)
+✔ cluster envelopes reject invalid, expired, wrong-namespace and tampered authentication fields (1.224628ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 318.663165

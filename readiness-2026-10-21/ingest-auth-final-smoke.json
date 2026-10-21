@@ -1,0 +1,133 @@
+{
+  "startedAt": "2026-10-21T22:39:07.067Z",
+  "node": "v24.21.0",
+  "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-21/artifacts/rawnode-monitor-1.0.0.tgz",
+  "sha256": "e32c999d758434c58e5abea0a1fa055c5d0b3450e4e1e34e7d6ad76fb6be74d7",
+  "bytes": 202587,
+  "installedPackage": "/private/tmp/rawnode-monitor-readiness-siwG8b/installed/node_modules/@rawnode/monitor",
+  "scope": "Actual task-owned loopback HTTP using the unchanged final installed package; synthetic HMAC and bearer credentials only; no browser execution or live production ingestion.",
+  "checks": [
+    {
+      "name": "Token-required shell rejects navigation without bearer",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "name": "Token-required shell accepts explicit synthetic Authorization header",
+      "passed": true,
+      "status": 200,
+      "credentialTransport": "HTTP header only; no URL or persistent storage."
+    },
+    {
+      "name": "Token-required assets require authorization",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "name": "Token-required assets accept explicit synthetic Authorization header",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Bearer authorization preserves origin enforcement",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "name": "Bearer mutation authorization preserves origin enforcement and incident state",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "name": "HMAC accepts the exact signed raw JSON bytes",
+      "passed": true,
+      "status": 202,
+      "accepted": 1,
+      "rejected": 0,
+      "rawBytes": 199
+    },
+    {
+      "name": "Accepted remote telemetry is redacted in the actual memory store",
+      "passed": true,
+      "tokenRedacted": true,
+      "bearerRedacted": true,
+      "contextPasswordRedacted": true,
+      "remote": true
+    },
+    {
+      "name": "Studio returns the accepted remote signal with redaction",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Exact-byte tamper",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Missing signature and timestamp",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Malformed signature",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Wrong same-length signature",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Missing timestamp",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Malformed timestamp",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Expired timestamp with valid HMAC",
+      "passed": true,
+      "status": 401,
+      "code": "MONITOR_INGEST_SIGNATURE_INVALID"
+    },
+    {
+      "name": "Authenticated body above the 1 MiB cap returns a bounded serializable error",
+      "passed": true,
+      "status": 413,
+      "code": "MONITOR_BODY_TOO_LARGE",
+      "rawBytes": 1048617
+    },
+    {
+      "name": "Signed unknown kind is rejected without unknown-kind emission accounting",
+      "passed": true,
+      "status": 202,
+      "accepted": 0,
+      "rejected": 1,
+      "unknownStatsPresent": false
+    },
+    {
+      "name": "Fixture closes idempotently with no server, streams, signal listener or runtime timers",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Timestamp freshness plus HMAC authenticates bytes; nonce-based replay prevention is not provided.",
+    "Token-required shell success used an explicit Authorization header; a token entered after page load cannot authorize initial browser navigation.",
+    "No bearer tokens were put in URLs or persistent browser storage.",
+    "Only a task-owned loopback memory-store fixture was enabled; production ingestion remains disabled in the package defaults."
+  ],
+  "status": "passed",
+  "finishedAt": "2026-10-21T22:39:07.267Z",
+  "checkCount": 19
+}

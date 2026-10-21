@@ -35,9 +35,10 @@ export class HealthRegistry extends EventEmitter {
       cacheTtlMs: Math.max(0, Number(options.cacheTtlMs ?? this.cacheTtlMs) || 0),
       enabled: options.enabled !== false,
     });
+    this.cache.delete(key);
     this.checks.set(key, record);
     this.emit('registered', publicCheck(record));
-    return () => this.unregister(key);
+    return () => this.checks.get(key) === record ? this.unregister(key) : false;
   }
 
   unregister(name) { this.cache.delete(String(name)); return this.checks.delete(String(name)); }

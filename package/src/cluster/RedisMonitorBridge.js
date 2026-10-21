@@ -15,6 +15,8 @@ export class RedisMonitorBridge extends EventEmitter {
     this.source = options.source || `${process.pid}`;
     this.maxBytes = Math.max(1_024, Number(options.maxBytes) || 2 * 1024 * 1024);
     this.subscription = null;
+    this.startPromise = null;
+    this.disposedSubscriptions = new WeakSet();
     this.started = false;
     this.closed = false;
     this.stats = { published: 0, received: 0, rejected: 0, errors: 0 };
@@ -22,15 +24,34 @@ export class RedisMonitorBridge extends EventEmitter {
 
   async start() {
     if (this.started || this.closed) return this;
+    if (this.startPromise) return this.startPromise;
+    this.startPromise = this._start();
+    try { return await this.startPromise; }
+    finally { this.startPromise = null; }
+  }
+
+  async _start() {
     if (typeof this.redis.subscribe !== 'function') throw new TypeError('Redis client does not expose subscribe().');
     const handler = (message) => this._receive(message);
-    const subscription = await this.redis.subscribe(this.channel, handler, { serial: true });
-    this.subscription = subscription || { unsubscribe: () => this.redis.unsubscribe?.(this.channel, handler) };
-    await this.subscription?.ready?.();
+    const result = await this.redis.subscribe(this.channel, handler, { serial: true });
+    const subscription = result && typeof result === 'object' ? result : { unsubscribe: typeof result === 'function' ? result : () => this.redis.unsubscribe?.(this.channel, handler) };
+    if (this.closed) { await this._disposeSubscription(subscription); return this; }
+    this.subscription = subscription;
+    try { await subscription.ready?.(); }
+    catch (error) { await this._disposeSubscription(subscription); throw error; }
+    if (this.closed) { await this._disposeSubscription(subscription); return this; }
     this.started = true; this.emit('started', this.snapshot()); return this;
   }
 
+  async _disposeSubscription(subscription) {
+    if (this.subscription === subscription) this.subscription = null;
+    if (!subscription || this.disposedSubscriptions.has(subscription)) return;
+    this.disposedSubscriptions.add(subscription);
+    try { await subscription.unsubscribe?.(); } catch {}
+  }
+
   _receive(message) {
+    if (this.closed) return false;
     try {
       const text = Buffer.isBuffer(message) || message instanceof Uint8Array ? Buffer.from(message).toString('utf8') : String(message);
       if (Buffer.byteLength(text) > this.maxBytes) { this.stats.rejected++; return false; }
@@ -52,6 +73,6 @@ export class RedisMonitorBridge extends EventEmitter {
   }
 
   snapshot() { return Object.freeze({ started: this.started, closed: this.closed, channel: this.channel, namespace: this.namespace, stats: Object.freeze({ ...this.stats }) }); }
-  async close() { if (this.closed) return; this.closed = true; this.started = false; try { await this.subscription?.unsubscribe?.(); } catch {} this.subscription = null; this.removeAllListeners(); }
+  async close() { if (this.closed) return; this.closed = true; this.started = false; await this._disposeSubscription(this.subscription); this.removeAllListeners(); }
 }
 export default RedisMonitorBridge;

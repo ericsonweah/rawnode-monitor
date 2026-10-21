@@ -1,0 +1,4 @@
+
+> @rawnode/monitor@1.0.0 prepack
+> node scripts/check.mjs
+

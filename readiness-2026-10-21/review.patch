@@ -1,0 +1,1954 @@
+diff --git a/package/CHANGELOG.md b/package/CHANGELOG.md
+index 45da93b..830a8a6 100644
+--- a/package/CHANGELOG.md
++++ b/package/CHANGELOG.md
+@@ -2,4 +2,6 @@
+ 
+ ## 1.0.0 (private, provisional)
+ 
++Readiness hardening: sanitize Studio failures through the runtime serializer/redactor, cancel operator prompts without mutations, abort stale action ownership, and use CSP-compatible trace progress and labeled filters. Correct health/resource replacement identity, HTTP exporter terminal admission, JSONL initialization/drain accounting, trace ratio/context binding/baggage parsing, unmatched HTTP route labels, alert/notification callback lifecycle, delayed Redis subscription cleanup and finite fleet-envelope timestamps. Strengthen concrete envelope/span/tracer declarations and add an all-entrypoint strict type consumer. Preserve private metadata, unresolved license, ownership and publication rejection. Current archive verification and remaining acceptance gaps are recorded in the repository's readiness-2026-10-21 directory.
++
+ Extracted the authoritative Monitor source and actual Studio frontend without modifying the app or sibling candidates. Added standalone exports, package-relative assets, injected provider policy, release guards, examples, native/adversarial tests and API/configuration evidence. Corrected lifecycle races, cancellation, stale subscriptions/series, bounded collector/exporter behavior, retention, durability acknowledgements, synthetic cleanup, untrusted body/envelope handling, redaction, and Studio mount/destroy behavior. See migration and validation documents for behavioral compatibility and remaining gaps.
+diff --git a/package/README.md b/package/README.md
+index 11c0bdd..e143f44 100644
+--- a/package/README.md
++++ b/package/README.md
+@@ -26,6 +26,8 @@ await monitor.close();
+ 
+ Use fixed route templates and bounded labels. `start()` coalesces concurrent calls. `close()` is idempotent and terminal: create a fresh runtime for a restart. Callbacks receive cancellation where supported and must cooperate to release their own resources. Monitor bounds its waiting; it cannot forcibly stop arbitrary JavaScript.
+ 
++HTTP middleware labels unmatched requests as `route: 'unmatched'`; supply a route template or resolver for useful route-specific series. Replacing a health check invalidates its cached result, and its old disposer cannot remove the replacement. Direct HTTP exporter close cancels pending delivery attempts; file-store close drains writes admitted before close, including deferred initialization. Studio Cancel dismisses operator prompts without submitting a mutation; submitting an empty silence rule ID intentionally selects all rules.
++
+ Capabilities include counters/gauges/histograms/timers, tracing and sampling, health/readiness/liveness, resource collection, bounded signal queues, memory/file/injected RawMongo/composite storage, retention, callback/event/HTTP/OTLP-JSON/StatsD exporters, alerts/silences/notifications, SLOs, incidents/runbooks, anomaly/leak/correlation analysis, synthetic checks, plugins, fleet/Redis adapters, deployment markers, diagnostic bundles, console command classes and testing helpers. Existing source capabilities are retained.
+ 
+ Optional entrypoints: `/studio`, `/studio/client`, `/provider`, `/config`, plus all capability groups listed in [API](docs/API.md). Studio ships the preserved frontend and CSS, with mount/destroy cleanup. The backend can register routes on an injected router; the package never opens a port automatically.
+diff --git a/package/docs/API.md b/package/docs/API.md
+index 4bcebe4..76bebd5 100644
+--- a/package/docs/API.md
++++ b/package/docs/API.md
+@@ -187,7 +187,7 @@ freeze()
+ start()
+ async evaluate(options = {})
+ acknowledge(ruleId, actor = null)
+-async close()
++async close(options = {})
+ current(options = {})
+ historySnapshot(options = {})
+ snapshot()
+@@ -211,7 +211,7 @@ constructor(options = {})
+ register(name, channel, options = {})
+ route(match = {}, channels = [])
+ async notify(notification, options = {})
+-async close()
++async close(options = {})
+ snapshot()
+ constructor(logger)
+ async send(notification)
+@@ -1218,6 +1218,7 @@ async close()
+ 
+ Errors derive from MonitorError where defined and carry `code`, `status`, `retryable`, `details`, optional `cause`, and `toJSON()`. Type/definition validation may throw TypeError or Error. Admission commonly returns `{accepted:false,reason}` rather than throwing; strict rejection may throw a capacity error. Registry health failures become structured unhealthy reports. Required delivery/close failures can produce AggregateError with a MONITOR_* code. The list below is derived from source and includes failure, timeout, closed and authentication codes.
+ 
++- `MONITOR_ALERT_CALLBACK_BUSY`
+ - `MONITOR_ALERT_RULE_ERROR`
+ - `MONITOR_ASSET_NOT_FOUND`
+ - `MONITOR_BODY_TOO_LARGE`
+@@ -1229,6 +1230,7 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
+ - `MONITOR_CONFIGURATION_ERROR`
+ - `MONITOR_DURABLE_STORAGE_UNAVAILABLE`
+ - `MONITOR_ERROR`
++- `MONITOR_EXPORTER_CLOSED`
+ - `MONITOR_EXPORT_PAYLOAD_TOO_LARGE`
+ - `MONITOR_EXPORT_RESPONSE_ABORTED`
+ - `MONITOR_EXPORT_RESPONSE_TOO_LARGE`
+@@ -1240,6 +1242,9 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
+ - `MONITOR_INGEST_SIGNATURE_INVALID`
+ - `MONITOR_INVALID_BUNDLE_ID`
+ - `MONITOR_METRIC_DEFINITION_ERROR`
++- `MONITOR_NOTIFICATION_BUSY`
++- `MONITOR_NOTIFICATION_CLOSED`
++- `MONITOR_NOTIFICATION_LIMIT`
+ - `MONITOR_PIPELINE_CLOSED`
+ - `MONITOR_PIPELINE_CLOSE_FAILED`
+ - `MONITOR_PIPELINE_FLUSH_FAILED`
+@@ -1287,3 +1292,7 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
+ - `MONITOR_SYNTHETIC_WAITER_LIMIT`
+ - `MONITOR_TIMEOUT`
+ - `MONITOR_TRACE_CONTEXT_ERROR`
++
++## Readiness behavior corrections
++
++Trace ratio sampling compares a 52-bit trace-ID suffix to a matching 52-bit bound; a configured 0.5 no longer admits every suffix. Async context `bind(callback, context)` preserves the requested context across awaits. Malformed percent-encoded baggage keys are ignored. HTTP middleware uses `route: unmatched` when no template/resolver is available, avoiding request-specific series. Health/resource registration replacement, alert/notification callbacks, direct exporter shutdown and admitted file writes follow the ownership rules in LIFECYCLE.md. Concrete `TelemetryEnvelope`, `Tracer` and `Span.end({endTimeUnixNano})` declarations match runtime behavior. Broad advanced extension types remain available.
+diff --git a/package/docs/CONFIGURATION.md b/package/docs/CONFIGURATION.md
+index 4b510bd..82c65e3 100644
+--- a/package/docs/CONFIGURATION.md
++++ b/package/docs/CONFIGURATION.md
+@@ -216,6 +216,8 @@ The table enumerates every source default; effective profiles can override these
+ - `pipeline.sinkTimeoutMs`: default sink call deadline, 5000 ms (1–300000); `addSink(...,{timeoutMs})` overrides it. Each sink retains at most maxInFlightBatches unresolved writes.
+ - `synthetics.maxWaiters`: maximum queued invocations, default maxChecks. Invocations support `queueTimeoutMs`/`signal`.
+ - `plugins.callbackTimeoutMs`: bounded plugin lifecycle/hook wait, 5000 ms by default.
++- `alerts.callbackTimeoutMs`: context/leader/rule/notification/incident callback wait, 5000 ms by default (1–300000). Direct `AlertEngine` options also support this control. `evaluate({timeoutMs,signal})` bounds context/rule waits; transition callbacks retain the engine default.
++- Direct `NotificationRouter` options `callbackTimeoutMs` (5000 ms, 1–300000) and `maxPendingCallbacks` (1000, 1–100000) bound channel waits and unresolved physical sends. `notify({…}, {timeoutMs,signal})` can override a send deadline. Close timeout bounds owned cleanup; caller cancellation does not skip its attempt.
+ - `studio.maxClients`: at most 100 SSE clients unless explicitly set. `assetsRoot` is a route-registration option, not the service root.
+ - Metric label names longer than 128 bytes are discarded. Label values, count, series and instruments use their configured limits.
+ 
+diff --git a/package/docs/LIFECYCLE.md b/package/docs/LIFECYCLE.md
+index 6ac3da6..7fa4f70 100644
+--- a/package/docs/LIFECYCLE.md
++++ b/package/docs/LIFECYCLE.md
+@@ -11,3 +11,11 @@ Metric and resource collections coalesce at runtime level. Observable collectors
+ Studio and PM bridges are separately owned. Close Studio before the HTTP server, and close bridges before dropping their targets. Studio closes SSE clients, heartbeat timers and its signal listener. The browser `mountMonitorStudio(root)` returns `refresh`, `navigate`, `snapshot` and idempotent `destroy`. Remounting the same root destroys its preceding handle. Destroy aborts pending fetches, clears polling/debounce/toast timers, closes EventSource and removes global listeners.
+ 
+ Registry definitions and direct low-level objects are trusted application controls. A snapshot may intentionally retain bounded records after close for diagnosis. Dropped pipeline references and removed metric series no longer retain payloads. Shutdown never signals application processes or registers a daemon.
++
++Health replacement invalidates the name's TTL cache. Registration disposers are identity-bound; explicit `unregister(name)` still removes the current registration. An old pending check cannot cache a result for its replacement. Resource replacement clears its latest record and suppresses retired collection events as well as cache updates.
++
++Direct `HttpJsonExporter.close()` closes admission synchronously, aborts active HTTP requests and retry waits, checks compression/split continuations, destroys its owned agent, and waits for admitted exports to settle. A new export after close returns `false`; an interrupted admitted export rejects with `MONITOR_EXPORTER_CLOSED`. Its statistics count acknowledged 2xx chunks. A failed split export can have acknowledged earlier chunks, and an aborted request may already have reached its receiver; shutdown does not undo remote delivery. Runtime cancellation is additional to the exporter's own lifecycle.
++
++`JsonlTelemetryStore.writeMany()` registers the full operation before initialization yields. `flush()` waits for operations already admitted when called; it does not exclude later writes. `close()` stops admission immediately and drains all earlier operations across signal kinds. Repeated close shares that drain. Write errors remain observable to the write caller and in store statistics; filesystem operations cannot be forcibly cancelled by the store.
++
++Alert evaluation bounds context, leader, rule, notification and incident callback waits. A pending physical callback retains its slot after timeout so it cannot overlap another invocation of the same callback. Close or replacement suppresses stale transitions and subsequent side effects. Notification sends have per-channel physical concurrency and a pending-callback cap; optional channel errors are reported without requiring an EventEmitter `error` listener. Owned cleanup is attempted even when a caller supplies a cancelled signal. Injected operations can keep their own resources active if they ignore cancellation. Redis bridge startup coalesces, and a subscription arriving after close is disposed without restarting bridge state; this is an injected-client contract check, not live Redis verification.
+diff --git a/package/docs/MIGRATION.md b/package/docs/MIGRATION.md
+index af21be6..a434653 100644
+--- a/package/docs/MIGRATION.md
++++ b/package/docs/MIGRATION.md
+@@ -11,3 +11,7 @@ Behavior corrections: close cancels startup and is terminal; invalid signal kind
+ Preserved source declarations give named ESM exports complete visibility. Core runtime, health, resource, pipeline, PM and Studio contracts are strengthened. Some advanced extension declarations remain deliberately broad (`any`/`unknown`) as in the source; they are not a claim of exhaustive static validation. Runtime API manifests and the full source remain available for those extension points. No features were removed for missing type coverage.
+ 
+ Integration claims distinguish adapter contract tests from exact packed composition. PM's prepared `RawNodeRuntimeAdapter`/`RuntimeAgent` must expose `registerResource` and `unregisterResource`. `registerResource` can return a disposer or a fluent object. The bridge does not close PM-owned processes. Unified, Events, Logger and full Foundation live boot are unverified unless separately recorded in validation evidence.
++
++The readiness pass corrects ratio sampling and async context binding. Applications may observe fewer spans at fractional sampling rates because the ratio now matches its configured value. HTTP middleware without a route template/resolver reports `unmatched` instead of a request-specific path. Health/resource replacement drops retired cached metadata/results. Studio Cancel performs no operator mutation; an intentional empty silence rule ID still means all rules. Pending exporter delivery rejects on direct close and cannot start later chunks/retries. Accepted file writes drain before close reports completion. Alert/notification callbacks now have bounded waits with documented controls and late-result suppression; non-cooperative external work can remain active.
++
++Declarations now expose the existing runtime `TelemetryEnvelope` class (including `monitorVersion` and nullable metadata), `Tracer` construction/active APIs, and the actual options-object form of `Span.end`. This can reveal consumers that relied on inaccurate prior declarations; runtime symbol names and export-map entries remain unchanged.
+diff --git a/package/docs/PUBLICATION.md b/package/docs/PUBLICATION.md
+index 9d79c40..421b01a 100644
+--- a/package/docs/PUBLICATION.md
++++ b/package/docs/PUBLICATION.md
+@@ -1,6 +1,6 @@
+ # Publication procedure — blocked candidate
+ 
+-This preparation performs no publication, push, deployment, dependency installation, daemon registration or system configuration. `private:true`, `license:UNLICENSED`, and `prepublishOnly: node scripts/reject-publication.mjs` reject accidental publication. The guard always exits nonzero; there is no environment-variable bypass.
++This preparation performs no publication, push, tag, deployment, daemon registration or system configuration. The readiness pass uses controlled local offline npm installation of exact archives in fresh temporary consumers, with lifecycle scripts disabled; it adds no dependencies to this candidate. `private:true`, `license:UNLICENSED`, and `prepublishOnly: node scripts/reject-publication.mjs` reject accidental publication. The guard always exits nonzero; there is no environment-variable bypass.
+ 
+ Before a separately approved release, the owner must decide: license grant/provenance, ownership metadata, npm scope control, final version, supported Node majors, remaining real-browser acceptance, and optional integration coverage. Preserve the root ISC declaration and empty LICENSE evidence rather than inventing a license text. First Principle Lab LLC owns RawNode.
+ 
+@@ -13,8 +13,10 @@ node examples/basic.mjs
+ npm pack --offline
+ ```
+ 
+-No npm install is necessary. Use an existing `tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 test/types.mts` for optional declaration validation. Do not add TypeScript or `@types/node` dependencies just for validation. The distribution contains JavaScript and declarations directly; build is syntax/import/export/dependency validation rather than transpilation.
++Native checks need no npm install. Distribution review additionally installs the exact local archive offline with --ignore-scripts --no-audit --no-fund --package-lock=false and a task-owned cache. Use an existing `tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 test/types.mts` for optional declaration validation. Do not add TypeScript or `@types/node` dependencies just for validation. The distribution contains JavaScript and declarations directly; build is syntax/import/export/dependency validation rather than transpilation.
+ 
+ For exact offline consumer review, extract the tgz into a fresh temporary `node_modules/@rawnode/monitor` folder, verify its SHA-256 first, import every exported entry, run bundled examples and declarations, then compare the original preserved inventory. That materialization is local tar extraction, not package installation. Keep a fresh consumer tree per artifact version.
+ 
+ An approved release would require a new explicit task to remove the candidate barriers and run the owner's release process. Do not run `npm publish` from this candidate. Even `npm publish --dry-run` is unnecessary: test the rejecting guard directly with `npm run prepublishOnly`.
++
++Before any later approved release, record the owner decisions and chosen runtime/browser/integration matrix; complete missing acceptance; update license/version/namespace only under that new authorization; review the diff; repeat native and strict declaration checks; create a new archive outside the packed tree; record its hash and verify fresh extraction and offline installation, every installed export, browser assets/actions, composition and guard behavior; obtain explicit approval of those exact bytes. Any package edit invalidates earlier artifact verification. Only a separately authorized release task may change the publication barriers and execute the owner-approved publication process. Current readiness receipts and the release checklist live outside this package in readiness-2026-10-21/.
+diff --git a/package/docs/SECURITY.md b/package/docs/SECURITY.md
+index a4b08b8..c829b7f 100644
+--- a/package/docs/SECURITY.md
++++ b/package/docs/SECURITY.md
+@@ -4,7 +4,7 @@ Monitor observes application data. Treat its routes, metrics, traces and diagnos
+ 
+ Remote ingestion is disabled by default. When enabled, the controller requires a configured HMAC secret, signature and bounded timestamp skew. The MAC covers the raw body and timestamp. This is authentication, not replay prevention: maintain nonce/deduplication policy at your ingress if you need exactly-once admission. Request limits apply to streamed, raw-buffer and preparsed bodies. Unexpected signal kinds are rejected; input cannot override measured queue byte accounting. Always set your HTTP server's header/body/idle deadlines; the injected router and server remain responsible for HTTP transport limits and pre-routing authorization.
+ 
+-Runtime emission, ended-span storage, public runtime health/snapshot/diagnostics, Studio JSON and bundles sanitize and redact. Default redaction covers secret-like field names and known bearer/key patterns; it is not a universal detector of secrets embedded in arbitrary prose, URLs or unconventional field names. Add `security.secretKeys`, avoid collecting credentials, and review output before sharing. Low-level collectors/registries are application controls; direct raw objects may contain the values you supplied. Keep them private. Diagnostic argv capture is disabled unless explicitly requested. Bundle IDs reject traversal; the trusted configured output directory remains a filesystem authority. Protect it with appropriate ownership and avoid attacker-controlled symlinks.
++Runtime emission, ended-span storage, public runtime health/snapshot/diagnostics, Studio JSON (including read, mutation, authorizer and ingestion failures) and bundles sanitize and redact. Failure details use the existing bounded serializer/redactor, omit stacks, and keep a safe HTTP status and sanitized code where possible; oversized records retain a small truncation marker. Cyclic and BigInt details remain serializable. Default redaction covers secret-like field names and known bearer/key patterns; it is not a universal detector of secrets embedded in arbitrary prose, URLs or unconventional field names. Add `security.secretKeys`, avoid collecting credentials, and review output before sharing. Low-level collectors/registries are application controls; direct raw objects may contain the values you supplied. Keep them private. Diagnostic argv capture is disabled unless explicitly requested. Bundle IDs reject traversal; the trusted configured output directory remains a filesystem authority. Protect it with appropriate ownership and avoid attacker-controlled symlinks.
+ 
+ Label count/value bounds, a 128-byte label-name bound, per-instrument/global cardinality and bounded queues prevent routine cardinality growth. Unknown signal kinds cannot grow runtime statistics. The serializer caps depth, arrays, keys, strings and actual JSON size; an oversize result becomes a small truncation record. User-defined getters, functions, regex patterns, callback sinks, plugins, storage/Redis clients and configuration are trusted code, not sandboxed inputs. Do not use this package as an isolation boundary for hostile JavaScript.
+ 
+diff --git a/package/docs/STUDIO.md b/package/docs/STUDIO.md
+index 79691d1..35357da 100644
+--- a/package/docs/STUDIO.md
++++ b/package/docs/STUDIO.md
+@@ -17,4 +17,10 @@ Browser acceptance checklist:
+ 7. Navigate rapidly while requests are pending; old responses must not overwrite the latest view. Remove/unmount during a pending request; no later DOM update should occur.
+ 8. Check keyboard navigation, focus, narrow layout, stylesheet rendering, screen-reader labels, and console errors in a real browser.
+ 
+-Validation in this task: actual Node loopback HTTP passed. Modeled DOM tests cover repeated lifecycle, abort, empty/error/recovery and escaping. The Mac UI tool reported no available browser surfaces, so actual browser rendering, visual layout, native EventSource reconnection and accessibility are **unverified**, not represented as passed. A parent cloud-browser run against the exact transferred package can supplement this evidence.
++9. Alerts contains a seeded synthetic firing warning. Cancel the rule-ID, duration and reason prompts separately; compare `/fixture/status` before/after and require unchanged `mutationRequests`, `silences` and `alertState`. Deliberately submitting an empty rule ID means all rules; positive finite duration is required. Complete one intentional silence and inspect it.
++10. Incidents contains `fixture-incident`. Cancel resolution and require unchanged mutation count and open state, then deliberately resolve with an optional note. Simulate a failure before a mutation and verify visible escaped feedback. Cancellation cannot undo a mutation already accepted by the server.
++11. Use Delay requests 500 ms, then navigate rapidly or unmount while an action/read is pending. The current view must own polling; stale action completion must not change it. An injected non-cooperative operation must not retain the preceding view's polling ownership. Recover restores seeded responses.
++
++Trace timing uses styled native `progress` elements rather than inline width styles, matching the page's `style-src 'self'` CSP. Filters have explicit accessible labels and interactive elements have a visible focus outline; these source changes still require visual and assistive-technology acceptance.
++
++Validation in the current readiness pass: actual Node loopback HTTP and modeled DOM regressions are recorded separately in the repository's `readiness-2026-10-21/` directory against the final archive. The current computer-use inventory returned no apps or browsers. Actual browser rendering, visual layout, native EventSource reconnection, polling fallback, keyboard/focus and accessibility are **unverified**. Successful asset requests, SSE protocol checks and modeled DOM cannot replace that acceptance.
+diff --git a/package/docs/VALIDATION.md b/package/docs/VALIDATION.md
+index 0e412c3..a832bc1 100644
+--- a/package/docs/VALIDATION.md
++++ b/package/docs/VALIDATION.md
+@@ -1,17 +1,17 @@
+ # Validation and remaining decisions
+ 
+-Environment: macOS 15.7.9 Intel x86_64, Node v24.21.0, npm 11.19.0, preinstalled TypeScript 5.9.3. Node >=22 is the declared target; this task executed Node 24 only. No dependencies were installed. Original app and sibling candidates were not edited; SHA-256 verification covers 866 preserved files.
++The October 21 readiness pass runs on macOS 15.8.1 Intel x64, Node v24.21.0, npm 11.19.0 and preinstalled TypeScript 5.9.3. Node >=22 remains declared; no Node 22 binary was found in the available PATH, nvm or nodebrew/Homebrew locations. Other runtime/platform legs remain unexecuted. No third-party dependencies were added. The candidate remains private, UNLICENSED, owned by First Principle Lab LLC and protected by the rejecting publication guard.
+ 
+-Passed native suite: 52 tests, including 24 independently authored adversarial tests. Coverage includes concurrent start/close, close during blocked startup, cancellation before/during work, observable/health/resource callback deadlines and non-overlap, metric reset/cardinality, queue overflow, sink retries/deadlines/partial acknowledgements, plugin teardown races, span age/quantity retention, durable composite acknowledgements, synthetic unregister/replace/close races, HMAC tamper/expiry, resource/bridge listener cleanup, readiness, diagnostic path validation, file storage, redaction, serialization bounds and untrusted envelope/body input.
++The repository's `readiness-2026-10-21/` directory holds the current report, exact final archive/hash/byte inventory, command exits and counts, fresh extraction and controlled offline npm-install receipts, strict type consumers, loopback Studio evidence, composition results and bounded overhead measurements. These files are outside the packed tree so they cannot change the target being verified. Build/check/prepack run the same syntax, import, dependency and publication-safeguard validation; they do not transpile. There is no lint script. The reference generator was inspected; declarations and documentation were repaired directly rather than appending generated `any` fallbacks.
+ 
+-Passed real local integration: all Studio read API views and packaged JS/CSS via a task-owned ephemeral 127.0.0.1 Node HTTP server; cross-origin rejection and disabled ingest; synthetic redirect credential and body handling between task-owned loopback servers. Initial sandbox-only loopback attempts returned EPERM; the authorized test escalation succeeded. No external service, original admin application or production telemetry was used.
++The unchanged historical archive (`b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad`, 184659 bytes) was freshly extracted and passed all 52 original tests. The hardened native suite passes 86 tests, adding deterministic coverage for Studio failure sanitization and action cancellation, health/resource replacement identity, exporter close during retry/split/compression/request work, file initialization/drain, sampling/context, safe route labels, alert/notification bounds, deferred Redis subscription cleanup and finite fleet timestamps. Existing cases preserve metric cardinality/reset, bounded queues/waiters/sinks, partial durable acknowledgements, retention, plugin teardown, synthetic cancellation/redirects and independent runtime cleanup. Exact final consumer results and any failures are recorded separately against their archive hash.
+ 
+-Passed modeled checks: 20 repeated Studio mount cycles with pending requests, one active stream, unmount cleanup, empty/error/recovery and escaped rendering; synthetic HTTPS downgrade handling with a transport stub; retention with an advanced test clock. These are not actual browser/TLS/production coverage.
++Actual task-owned 127.0.0.1 HTTP checks exercise the packaged shell, JavaScript, CSS, all existing read views, authorized intentional operator actions, origin rejection, disabled ingestion, and bounded/redacted error responses including cyclic and BigInt details. Focused modeled DOM fixtures exercise every Cancel prompt, intentional all-rules silence, resolution, input validation, visible failures, stale action cancellation, repeated mount/destroy, single-stream ownership and escaped empty/error/recovery states. Modeled DOM results do not establish browser rendering, keyboard/focus, native EventSource reconnection, polling fallback or accessibility acceptance. Current computer-use inventory returned `apps: [], browsers: []`; real-browser acceptance remains unavailable. The portable fixture/checklist remains in `examples/studio-fixture.mjs` and `docs/STUDIO.md`.
+ 
+-Passed static checks: all package JavaScript syntax, actual ESM export imports, absence of non-native dependency imports, private/publication guard presence, and TypeScript core/subpath consumer. The guard was invoked directly and rejected as expected. Detailed commands, exact packed consumer results, pack hashes and inventories are stored in the full archive's `evidence/` directory. The extracted tgz consumer is tested without npm install or network access; the evidence identifies the exact tested hash.
++Strict declarations exercise the baseline consumer and all 29 manifest entries (28 executable exports plus metadata). Concrete envelope/span/tracer declarations now match runtime behavior; broad advanced extension types remain deliberate limits. Installed-consumer checks resolve package specifiers from fresh non-workspace trees, verify bytes against the archive, and reject unsupported private deep imports. Lifecycle scripts are disabled for the local offline install; build and the rejecting guard are then invoked explicitly.
+ 
+-Unverified: real browser rendering/reconnection/accessibility, Node 22/other OS runtime matrix, production load/soak, live Redis/RawMongo/OTLP/StatsD services, full Foundation boot, and prepared Unified/Logger package composition. Browser tooling returned `Browser is not available: iab`, then `apps: [], browsers: []`; the portable fixture and acceptance checklist support a later independent browser run. No browser was installed.
++Historical PM composition already passed for accepted `@rawnode/pm@0.1.0`, SHA-256 `0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f`, 94194 bytes. The exact archive is available read-only for a fresh final-Monitor composition rerun; see the current report for its outcome. Old `340b2fa87…` evidence is withdrawn and `f7e512c44…` is historical. The five reciprocal cases and real child IPC were originally PM-lane evidence; its 47 native/47 packed tests are not Monitor tests. Current reruns receive their own receipts. Original `evidence/`, archives and all 866 original-file hashes remain preserved, distinct from the 169 historical candidate hashes.
+ 
+-Exact prepared Events composition is blocked: Library resolved the authorized v3 archive, but the current materialization helper failed downloading it, including one supported retry. No readable bytes or verified hash were available, so no substitute transfer route or package import was used. PM composition is recorded separately in the archive when an exact prepared artifact becomes available. Modeled adapter tests are not labeled as exact package composition.
++The overhead fixture compares identical bounded synthetic application work with monitoring absent/present, fixed route templates, 10% trace sampling, a 512-item queue and delayed injected sink. It reports throughput, CPU, sampled allocation, RSS/heap trend, event-loop delay, drops, drain and cleanup. It is a microbenchmark on this machine, not a production soak or universal latency guarantee.
+ 
+-Release decisions: resolve source license ambiguity, approve final namespace/version, complete the real-browser checklist, choose the supported Node/OS matrix and integration scope. Advanced extension types retain some broad source declarations. Arbitrary callbacks that ignore AbortSignal cannot be forcibly stopped; bounded pending work and dropped results do not assert application-side cancellation. The package remains private with a rejecting publication guard.
++Unverified scopes remain actual browsers, Node 22/other OSs, production load/soak, prepared Events and Unified/Logger composition, live Redis/RawMongo/OTLP/StatsD interoperability/durability and full Foundation boot. Injected callbacks/clients can remain physically active if they ignore cancellation. Owner decisions remain license/provenance, final namespace/version, supported runtime/platform matrix, browser acceptance and optional integration scope. No publication, push, tag, deployment, daemon registration, production monitoring or sibling/application modification is authorized.
+diff --git a/package/examples/studio-fixture.mjs b/package/examples/studio-fixture.mjs
+index 34cc704..acdb33c 100644
+--- a/package/examples/studio-fixture.mjs
++++ b/package/examples/studio-fixture.mjs
+@@ -1,41 +1,46 @@
+ import http from 'node:http';
+ import { fileURLToPath } from 'node:url';
++import { setTimeout as delay } from 'node:timers/promises';
+ import { MonitorRuntime, MonitorStudioManager, registerMonitorStudioRoutes } from '@rawnode/monitor';
+ 
+ /** Isolated fixture: no application, database, exporter or production telemetry. */
+ export async function createStudioFixture() {
+- const monitor=new MonitorRuntime({profile:'test',config:{profile:'test',service:'Local fixture <img src=x onerror=alert(1)>',environment:'fixture',system:{enabled:false},resources:{autoDiscover:false},storage:{enabled:true,driver:'memory'},studio:{prefix:'/monitor',pollIntervalMs:1000}}});
++ const monitor=new MonitorRuntime({logger:{log(){},info(){},warn(){},error(){}},profile:'test',config:{profile:'test',service:'Local fixture <img src=x onerror=alert(1)>',environment:'fixture',system:{enabled:false},resources:{autoDiscover:false},storage:{enabled:true,driver:'memory'},incidents:{captureDiagnostics:false},alerts:{autoIncidentSeverities:[]},studio:{prefix:'/monitor',pollIntervalMs:1000}}});
+  const studio=new MonitorStudioManager({monitor});
+  const routes=[];
+  const router={};for(const method of ['get','post','delete'])router[method]=(path,handler)=>{const keys=[];const pattern=path.split('/').map(part=>part.startsWith(':')?(keys.push(part.slice(1)),'([^/]+)'):part.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('/');routes.push({method:method.toUpperCase(),regex:new RegExp('^'+pattern+'/?$'),keys,handler});};
+  registerMonitorStudioRoutes(router,{studio});
+- let mode='seeded';let requests=0;
++ let mode='seeded';let requests=0;let mutationRequests=0;const lifetime=new AbortController();
+  await monitor.start();
+  monitor.metrics.counter('fixture_requests_total').inc({route:'/fixture'});
+  const fixtureSpan=monitor.startSpan('fixture <img src=x onerror=alert(1)>',{attributes:{token:'fixture-secret'}});fixtureSpan.end();
++ monitor.alerts.register({id:'fixture-alert',name:'Synthetic capacity warning <img src=x onerror=alert(1)>',severity:'warning',evaluate:()=>({firing:true,value:95})});
++ await monitor.alerts.evaluate();
++ monitor.runbooks.register({id:'fixture-runbook',title:'Synthetic recovery',description:'Local validation only.',steps:['Inspect synthetic telemetry','Confirm intended operator action']});
++ await monitor.incidents.open({id:'fixture-incident',dedupeKey:'fixture-browser-incident',title:'Synthetic incident <img src=x onerror=alert(1)>',severity:'warning',runbook:'fixture-runbook',metadata:{token:'fixture-secret'}});
+  const server=http.createServer(async(req,res)=>{
+   try{
+    const url=new URL(req.url,'http://127.0.0.1');
+-   if(url.pathname==='/fixture/status'){res.setHeader('content-type','application/json');res.end(JSON.stringify({mode,requests,clients:studio.clients.size,signalListeners:monitor.listenerCount('signal')}));return;}
+-   if(url.pathname==='/fixture/mode'&&req.method==='POST'){mode=url.searchParams.get('mode')||'seeded';res.end('ok');return;}
++   if(url.pathname==='/fixture/status'){res.setHeader('content-type','application/json');res.end(JSON.stringify({mode,requests,mutationRequests,clients:studio.clients.size,signalListeners:monitor.listenerCount('signal'),silences:monitor.alerts.silences.snapshot().silences.length,alertState:monitor.alerts.current().find(row=>row.ruleId==='fixture-alert')?.state,incidentState:monitor.incidents.get('fixture-incident')?.state}));return;}
++   if(url.pathname==='/fixture/mode'&&req.method==='POST'){const next=url.searchParams.get('mode')||'seeded';if(!['seeded','error','empty','delayed'].includes(next)){res.writeHead(400);res.end('Unknown fixture mode');return;}mode=next;res.end('ok');return;}
+    if(url.pathname==='/fixture/disconnect'&&req.method==='POST'){for(const c of [...studio.clients])studio._removeClient(c);res.end('ok');return;}
+    if(url.pathname==='/fixture/client.js'){res.setHeader('content-type','application/javascript');res.end(harness);return;}
+    if(url.pathname==='/'){res.writeHead(302,{location:'/monitor'});res.end();return;}
+-   if(url.pathname.startsWith('/monitor/api/')){requests++;if(mode==='error'&&!url.pathname.endsWith('/stream')){res.writeHead(503,{'content-type':'application/json'});res.end(JSON.stringify({ok:false,error:{message:'Fixture unavailable <script>alert(1)</script>'}}));return;}if(mode==='empty'&&url.pathname.endsWith('/traces')){res.setHeader('content-type','application/json');res.end('{"ok":true,"data":[]}');return;}}
++   if(url.pathname.startsWith('/monitor/api/')){requests++;if(['POST','DELETE'].includes(req.method))mutationRequests++;if(mode==='delayed'&&!url.pathname.endsWith('/stream')){await delay(500,undefined,{signal:lifetime.signal});if(res.destroyed)return;}if(mode==='error'&&!url.pathname.endsWith('/stream')){res.writeHead(503,{'content-type':'application/json'});res.end(JSON.stringify({ok:false,error:{message:'Fixture unavailable <script>alert(1)</script>'}}));return;}if(mode==='empty'&&url.pathname.endsWith('/traces')){res.setHeader('content-type','application/json');res.end('{"ok":true,"data":[]}');return;}}
+    for(const route of routes){const match=route.regex.exec(url.pathname);if(match&&route.method===req.method){req.params=Object.fromEntries(route.keys.map((k,i)=>[k,decodeURIComponent(match[i+1])]));if(url.pathname==='/monitor'||url.pathname==='/monitor/'){const original=res.end;res.end=function(content,...args){return original.call(this,String(content).replace('</body>','<script type="module" src="/fixture/client.js"></script></body>'),...args)}}await route.handler(req,res);return;}}
+    res.writeHead(404);res.end('Not found');
+-  }catch(error){res.writeHead(error.status||500,{'content-type':'application/json'});res.end(JSON.stringify({ok:false,error:{message:error.message}}));}
++  }catch(error){if(!res.destroyed){res.writeHead(error.status||500,{'content-type':'application/json'});res.end(JSON.stringify({ok:false,error:{message:error.message}}));}}
+  });
+  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve)});
+- let closed=false;return {url:`http://127.0.0.1:${server.address().port}/monitor`,monitor,studio,server,async close(){if(closed)return;closed=true;await studio.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));await monitor.close();}};
++ let closed=false;return {url:`http://127.0.0.1:${server.address().port}/monitor`,monitor,studio,server,async close(){if(closed)return;closed=true;lifetime.abort();await studio.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));await monitor.close();}};
+ }
+ const harness=`import { mountMonitorStudio } from '/monitor/assets/studio.js';
+-const app=document.querySelector('#rn-monitor-studio');const panel=document.createElement('section');panel.id='fixture-controls';panel.className='rn-panel';app.querySelector('.rn-sidebar').append(panel);panel.innerHTML='<h2>Local fixture controls</h2><button id="fixture-unmount">Unmount</button><button id="fixture-mount">Mount</button><button id="fixture-cycle">Cycle mount 20 times</button><button id="fixture-empty">Empty traces</button><button id="fixture-error">Simulate failure</button><button id="fixture-recover">Recover</button><button id="fixture-disconnect">Disconnect stream</button><output id="fixture-status">Mounted</output>';
++const app=document.querySelector('#rn-monitor-studio');const panel=document.createElement('section');panel.id='fixture-controls';panel.className='rn-panel';app.querySelector('.rn-sidebar').append(panel);panel.innerHTML='<h2>Local fixture controls</h2><button id="fixture-unmount">Unmount</button><button id="fixture-mount">Mount</button><button id="fixture-cycle">Cycle mount 20 times</button><button id="fixture-empty">Empty traces</button><button id="fixture-error">Simulate failure</button><button id="fixture-delayed">Delay requests 500 ms</button><button id="fixture-recover">Recover</button><button id="fixture-disconnect">Disconnect stream</button><output id="fixture-status">Mounted</output>';
+ const output=panel.querySelector('output');
+ panel.querySelector('#fixture-unmount').onclick=()=>{app.__monitorStudio?.destroy();output.textContent='Unmounted';};
+ panel.querySelector('#fixture-mount').onclick=()=>{mountMonitorStudio(app);output.textContent='Mounted';};
+ panel.querySelector('#fixture-cycle').onclick=async()=>{for(let i=0;i<20;i++){app.__monitorStudio?.destroy();mountMonitorStudio(app);}output.textContent='20 mount cycles complete';};
+-for(const [id,mode]of [['empty','empty'],['error','error'],['recover','seeded']])panel.querySelector('#fixture-'+id).onclick=async()=>{await fetch('/fixture/mode?mode='+mode,{method:'POST'});await app.__monitorStudio.navigate(mode==='empty'?'traces':'overview');output.textContent='Mode: '+mode;};
++for(const [id,mode]of [['empty','empty'],['error','error'],['delayed','delayed'],['recover','seeded']])panel.querySelector('#fixture-'+id).onclick=async()=>{await fetch('/fixture/mode?mode='+mode,{method:'POST'});await app.__monitorStudio.navigate(mode==='empty'?'traces':'overview');output.textContent='Mode: '+mode;};
+ panel.querySelector('#fixture-disconnect').onclick=async()=>{await fetch('/fixture/disconnect',{method:'POST'});output.textContent='Stream interrupted; EventSource reconnects';};
+ `;
+ if(process.argv[1]===fileURLToPath(import.meta.url)){
+diff --git a/package/resources/assets/css/monitor/studio.css b/package/resources/assets/css/monitor/studio.css
+index f938e50..aea671d 100644
+--- a/package/resources/assets/css/monitor/studio.css
++++ b/package/resources/assets/css/monitor/studio.css
+@@ -1 +1 @@
+-:root{color-scheme:dark;--bg:#090d14;--panel:#101722;--panel2:#151f2e;--line:#233044;--text:#e8eef8;--muted:#8fa0b8;--accent:#62a8ff;--green:#3ddc97;--yellow:#f5c451;--red:#ff6577;--shadow:0 18px 48px rgba(0,0,0,.32);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-size:14px}.rn-app{display:grid;grid-template-columns:220px minmax(0,1fr);grid-template-rows:64px minmax(calc(100vh - 64px),auto);min-height:100vh}.rn-topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(9,13,20,.92);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10;padding:0 22px}.rn-brand,.rn-status{display:flex;align-items:center;gap:12px}.rn-brand>div{display:flex;flex-direction:column}.rn-brand small{color:var(--muted);margin-top:2px}.rn-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#2f77ff,#7d5cff);font-weight:800;box-shadow:0 8px 24px rgba(47,119,255,.35)}.rn-dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(245,196,81,.12)}.rn-dot.connected{background:var(--green);box-shadow:0 0 0 4px rgba(61,220,151,.12)}button,input,select{font:inherit}.rn-status button,.rn-toolbar button,.rn-panel button,.rn-error button,.rn-modal button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:8px;padding:8px 12px;cursor:pointer}.rn-status button:hover,.rn-toolbar button:hover,.rn-panel button:hover{border-color:var(--accent)}.rn-sidebar{grid-row:2;position:sticky;top:64px;height:calc(100vh - 64px);border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;justify-content:space-between;background:#0c111a}.rn-sidebar nav{display:grid;gap:4px}.rn-sidebar nav button{border:0;background:transparent;color:var(--muted);padding:10px 12px;border-radius:8px;text-align:left;cursor:pointer}.rn-sidebar nav button:hover{background:var(--panel);color:var(--text)}.rn-sidebar nav button.active{background:linear-gradient(90deg,rgba(98,168,255,.18),rgba(98,168,255,.04));color:#bcd9ff;border-left:2px solid var(--accent)}.rn-sidebar footer{display:grid;gap:4px;color:#5f718a;font-size:11px;padding:12px}.rn-main{grid-column:2;grid-row:2;padding:28px;min-width:0;max-width:1800px;width:100%;margin:0 auto}.rn-heading{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px}.rn-heading h1{font-size:25px;margin:0 0 6px}.rn-heading p{margin:0;color:var(--muted)}.rn-updated{color:var(--muted);font-size:12px}.rn-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.rn-cards.compact{grid-template-columns:repeat(4,minmax(0,1fr))}.rn-card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);min-height:102px;display:flex;flex-direction:column;justify-content:space-between}.rn-card span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}.rn-card strong{font-size:23px;margin-top:14px;word-break:break-word}.rn-card[data-kind=healthy]{border-color:rgba(61,220,151,.28)}.rn-card[data-kind=warning]{border-color:rgba(245,196,81,.32)}.rn-card[data-kind=critical]{border-color:rgba(255,101,119,.35)}.rn-grid{display:grid;gap:18px;margin-bottom:18px}.rn-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.rn-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden}.rn-panel>header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}.rn-panel h2{font-size:14px;margin:0}.rn-panel-body{padding:18px;min-width:0}.rn-details{display:grid;gap:10px;margin:0}.rn-details>div{display:flex;justify-content:space-between;gap:20px;border-bottom:1px dashed rgba(143,160,184,.15);padding-bottom:8px}.rn-details dt{color:var(--muted)}.rn-details dd{margin:0;text-align:right}.rn-badge{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:11px;white-space:nowrap;color:#c3cfdf;background:rgba(255,255,255,.03)}.rn-badge[data-kind=healthy],.rn-badge[data-kind=ok],.rn-badge[data-kind=resolved],.rn-badge[data-kind=pass]{color:var(--green);border-color:rgba(61,220,151,.3);background:rgba(61,220,151,.08)}.rn-badge[data-kind=warning],.rn-badge[data-kind=pending],.rn-badge[data-kind=degraded]{color:var(--yellow);border-color:rgba(245,196,81,.3);background:rgba(245,196,81,.08)}.rn-badge[data-kind=critical],.rn-badge[data-kind=error],.rn-badge[data-kind=firing],.rn-badge[data-kind=unhealthy]{color:var(--red);border-color:rgba(255,101,119,.3);background:rgba(255,101,119,.08)}.rn-table-wrap{overflow:auto}.rn-table-wrap table{width:100%;border-collapse:collapse;min-width:650px}.rn-table-wrap th{text-align:left;color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px;border-bottom:1px solid var(--line)}.rn-table-wrap td{padding:12px 10px;border-bottom:1px solid rgba(35,48,68,.65);vertical-align:top}.rn-table-wrap tr:last-child td{border-bottom:0}.rn-table-wrap small,.rn-resource-head small,td small{display:block;color:var(--muted);margin-top:4px}.rn-table-wrap code,.rn-metric code{display:inline-block;background:#0a1019;border:1px solid var(--line);border-radius:5px;padding:2px 5px;margin:1px;color:#acc8ed;font-size:11px}.rn-empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:9px}.rn-toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center}.rn-toolbar input,.rn-toolbar select{background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:9px 12px;min-width:240px;outline:0}.rn-toolbar input:focus,.rn-toolbar select:focus{border-color:var(--accent)}.rn-metric{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}.rn-metric summary{cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}.rn-metric summary span:first-child{display:flex;flex-direction:column}.rn-metric summary small{color:var(--muted);margin-top:4px}.rn-metric>.rn-table-wrap{padding:0 12px 12px}.rn-link{border:0!important;background:transparent!important;color:var(--accent)!important;padding:0!important;text-align:left}.rn-waterfall{display:grid;gap:10px;margin-bottom:18px}.rn-waterfall article{display:grid;grid-template-columns:minmax(180px,1fr) 2fr auto;gap:12px;align-items:center}.rn-waterfall article>div:first-child{display:flex;flex-direction:column}.rn-waterfall small,.rn-parent{color:var(--muted);font-size:11px}.rn-bar{height:10px;background:#08101a;border-radius:99px;overflow:hidden}.rn-bar i{display:block;height:100%;background:linear-gradient(90deg,#4e8dff,#936cff);border-radius:99px}.rn-json{max-height:500px;overflow:auto;background:#080c13;border:1px solid var(--line);border-radius:8px;padding:14px;color:#b9c7da;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word}.rn-topology{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.rn-topology article{border:1px solid var(--line);border-radius:9px;padding:14px;display:grid;gap:8px;background:var(--panel2)}.rn-topology article>span{color:var(--muted)}.rn-resource-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.rn-runbook{border-left:3px solid var(--accent);background:rgba(98,168,255,.06);padding:14px 18px;margin-bottom:16px}.rn-runbook h3{margin:0 0 8px}.rn-runbook p{color:var(--muted)}.rn-loading{min-height:55vh;display:grid;place-content:center;text-align:center;color:var(--muted)}.rn-spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:auto}.rn-error{max-width:620px;margin:70px auto;border:1px solid rgba(255,101,119,.3);background:rgba(255,101,119,.06);border-radius:12px;padding:24px}.rn-error strong{color:var(--red);font-size:18px}.rn-error p{color:var(--muted)}#rn-toast{position:fixed;right:22px;bottom:22px;background:var(--panel2);border:1px solid var(--line);box-shadow:var(--shadow);padding:12px 16px;border-radius:9px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.2s;z-index:100}#rn-toast.visible{transform:none;opacity:1}#rn-toast[data-kind=error]{border-color:var(--red)}#rn-toast[data-kind=success]{border-color:var(--green)}.rn-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:grid;place-items:center;z-index:200}.rn-modal[hidden]{display:none}.rn-modal form{width:min(420px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:24px;box-shadow:var(--shadow)}.rn-modal h2{margin-top:0}.rn-modal p{color:var(--muted)}.rn-modal input{width:100%;background:#080d14;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:11px;margin:10px 0 16px}.rn-modal form>div{text-align:right}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:1100px){.rn-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.rn-grid.two{grid-template-columns:1fr}}@media(max-width:760px){.rn-app{display:block}.rn-topbar{height:60px}.rn-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px;overflow:auto}.rn-sidebar nav{display:flex;gap:4px;min-width:max-content}.rn-sidebar footer{display:none}.rn-main{padding:18px}.rn-cards,.rn-cards.compact{grid-template-columns:1fr 1fr}.rn-heading{align-items:flex-start}.rn-updated{display:none}.rn-waterfall article{grid-template-columns:1fr}.rn-topbar{padding:0 12px}.rn-status #rn-state{display:none}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
++:root{color-scheme:dark;--bg:#090d14;--panel:#101722;--panel2:#151f2e;--line:#233044;--text:#e8eef8;--muted:#8fa0b8;--accent:#62a8ff;--green:#3ddc97;--yellow:#f5c451;--red:#ff6577;--shadow:0 18px 48px rgba(0,0,0,.32);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-size:14px}.rn-app{display:grid;grid-template-columns:220px minmax(0,1fr);grid-template-rows:64px minmax(calc(100vh - 64px),auto);min-height:100vh}.rn-topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(9,13,20,.92);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10;padding:0 22px}.rn-brand,.rn-status{display:flex;align-items:center;gap:12px}.rn-brand>div{display:flex;flex-direction:column}.rn-brand small{color:var(--muted);margin-top:2px}.rn-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#2f77ff,#7d5cff);font-weight:800;box-shadow:0 8px 24px rgba(47,119,255,.35)}.rn-dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(245,196,81,.12)}.rn-dot.connected{background:var(--green);box-shadow:0 0 0 4px rgba(61,220,151,.12)}button,input,select{font:inherit}.rn-status button,.rn-toolbar button,.rn-panel button,.rn-error button,.rn-modal button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:8px;padding:8px 12px;cursor:pointer}.rn-status button:hover,.rn-toolbar button:hover,.rn-panel button:hover{border-color:var(--accent)}.rn-sidebar{grid-row:2;position:sticky;top:64px;height:calc(100vh - 64px);border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;justify-content:space-between;background:#0c111a}.rn-sidebar nav{display:grid;gap:4px}.rn-sidebar nav button{border:0;background:transparent;color:var(--muted);padding:10px 12px;border-radius:8px;text-align:left;cursor:pointer}.rn-sidebar nav button:hover{background:var(--panel);color:var(--text)}.rn-sidebar nav button.active{background:linear-gradient(90deg,rgba(98,168,255,.18),rgba(98,168,255,.04));color:#bcd9ff;border-left:2px solid var(--accent)}.rn-sidebar footer{display:grid;gap:4px;color:#5f718a;font-size:11px;padding:12px}.rn-main{grid-column:2;grid-row:2;padding:28px;min-width:0;max-width:1800px;width:100%;margin:0 auto}.rn-heading{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px}.rn-heading h1{font-size:25px;margin:0 0 6px}.rn-heading p{margin:0;color:var(--muted)}.rn-updated{color:var(--muted);font-size:12px}.rn-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.rn-cards.compact{grid-template-columns:repeat(4,minmax(0,1fr))}.rn-card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);min-height:102px;display:flex;flex-direction:column;justify-content:space-between}.rn-card span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}.rn-card strong{font-size:23px;margin-top:14px;word-break:break-word}.rn-card[data-kind=healthy]{border-color:rgba(61,220,151,.28)}.rn-card[data-kind=warning]{border-color:rgba(245,196,81,.32)}.rn-card[data-kind=critical]{border-color:rgba(255,101,119,.35)}.rn-grid{display:grid;gap:18px;margin-bottom:18px}.rn-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.rn-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden}.rn-panel>header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}.rn-panel h2{font-size:14px;margin:0}.rn-panel-body{padding:18px;min-width:0}.rn-details{display:grid;gap:10px;margin:0}.rn-details>div{display:flex;justify-content:space-between;gap:20px;border-bottom:1px dashed rgba(143,160,184,.15);padding-bottom:8px}.rn-details dt{color:var(--muted)}.rn-details dd{margin:0;text-align:right}.rn-badge{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:11px;white-space:nowrap;color:#c3cfdf;background:rgba(255,255,255,.03)}.rn-badge[data-kind=healthy],.rn-badge[data-kind=ok],.rn-badge[data-kind=resolved],.rn-badge[data-kind=pass]{color:var(--green);border-color:rgba(61,220,151,.3);background:rgba(61,220,151,.08)}.rn-badge[data-kind=warning],.rn-badge[data-kind=pending],.rn-badge[data-kind=degraded]{color:var(--yellow);border-color:rgba(245,196,81,.3);background:rgba(245,196,81,.08)}.rn-badge[data-kind=critical],.rn-badge[data-kind=error],.rn-badge[data-kind=firing],.rn-badge[data-kind=unhealthy]{color:var(--red);border-color:rgba(255,101,119,.3);background:rgba(255,101,119,.08)}.rn-table-wrap{overflow:auto}.rn-table-wrap table{width:100%;border-collapse:collapse;min-width:650px}.rn-table-wrap th{text-align:left;color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px;border-bottom:1px solid var(--line)}.rn-table-wrap td{padding:12px 10px;border-bottom:1px solid rgba(35,48,68,.65);vertical-align:top}.rn-table-wrap tr:last-child td{border-bottom:0}.rn-table-wrap small,.rn-resource-head small,td small{display:block;color:var(--muted);margin-top:4px}.rn-table-wrap code,.rn-metric code{display:inline-block;background:#0a1019;border:1px solid var(--line);border-radius:5px;padding:2px 5px;margin:1px;color:#acc8ed;font-size:11px}.rn-empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:9px}.rn-toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center}.rn-toolbar input,.rn-toolbar select{background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:9px 12px;min-width:240px;outline:0}.rn-toolbar input:focus,.rn-toolbar select:focus{border-color:var(--accent)}.rn-metric{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}.rn-metric summary{cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}.rn-metric summary span:first-child{display:flex;flex-direction:column}.rn-metric summary small{color:var(--muted);margin-top:4px}.rn-metric>.rn-table-wrap{padding:0 12px 12px}.rn-link{border:0!important;background:transparent!important;color:var(--accent)!important;padding:0!important;text-align:left}.rn-waterfall{display:grid;gap:10px;margin-bottom:18px}.rn-waterfall article{display:grid;grid-template-columns:minmax(180px,1fr) 2fr auto;gap:12px;align-items:center}.rn-waterfall article>div:first-child{display:flex;flex-direction:column}.rn-waterfall small,.rn-parent{color:var(--muted);font-size:11px}.rn-bar{appearance:none;width:100%;height:10px;border:0;background:#08101a;border-radius:99px;overflow:hidden}.rn-bar::-webkit-progress-bar{background:#08101a}.rn-bar::-webkit-progress-value{background:linear-gradient(90deg,#4e8dff,#936cff);border-radius:99px}.rn-bar::-moz-progress-bar{background:linear-gradient(90deg,#4e8dff,#936cff);border-radius:99px}button:disabled{cursor:wait;opacity:.6}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.rn-json{max-height:500px;overflow:auto;background:#080c13;border:1px solid var(--line);border-radius:8px;padding:14px;color:#b9c7da;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word}.rn-topology{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.rn-topology article{border:1px solid var(--line);border-radius:9px;padding:14px;display:grid;gap:8px;background:var(--panel2)}.rn-topology article>span{color:var(--muted)}.rn-resource-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.rn-runbook{border-left:3px solid var(--accent);background:rgba(98,168,255,.06);padding:14px 18px;margin-bottom:16px}.rn-runbook h3{margin:0 0 8px}.rn-runbook p{color:var(--muted)}.rn-loading{min-height:55vh;display:grid;place-content:center;text-align:center;color:var(--muted)}.rn-spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:auto}.rn-error{max-width:620px;margin:70px auto;border:1px solid rgba(255,101,119,.3);background:rgba(255,101,119,.06);border-radius:12px;padding:24px}.rn-error strong{color:var(--red);font-size:18px}.rn-error p{color:var(--muted)}#rn-toast{position:fixed;right:22px;bottom:22px;background:var(--panel2);border:1px solid var(--line);box-shadow:var(--shadow);padding:12px 16px;border-radius:9px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.2s;z-index:100}#rn-toast.visible{transform:none;opacity:1}#rn-toast[data-kind=error]{border-color:var(--red)}#rn-toast[data-kind=success]{border-color:var(--green)}.rn-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:grid;place-items:center;z-index:200}.rn-modal[hidden]{display:none}.rn-modal form{width:min(420px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:24px;box-shadow:var(--shadow)}.rn-modal h2{margin-top:0}.rn-modal p{color:var(--muted)}.rn-modal input{width:100%;background:#080d14;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:11px;margin:10px 0 16px}.rn-modal form>div{text-align:right}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:1100px){.rn-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.rn-grid.two{grid-template-columns:1fr}}@media(max-width:760px){.rn-app{display:block}.rn-topbar{height:60px}.rn-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px;overflow:auto}.rn-sidebar nav{display:flex;gap:4px;min-width:max-content}.rn-sidebar footer{display:none}.rn-main{padding:18px}.rn-cards,.rn-cards.compact{grid-template-columns:1fr 1fr}.rn-heading{align-items:flex-start}.rn-updated{display:none}.rn-waterfall article{grid-template-columns:1fr}.rn-topbar{padding:0 12px}.rn-status #rn-state{display:none}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+diff --git a/package/resources/assets/js/monitor/studio.js b/package/resources/assets/js/monitor/studio.js
+index b8863bf..9805529 100644
+--- a/package/resources/assets/js/monitor/studio.js
++++ b/package/resources/assets/js/monitor/studio.js
+@@ -10,9 +10,10 @@ const document = { querySelector: (selector) => app.querySelector(selector), que
+ const events = new AbortController();
+ let destroyed = false;
+ let renderAbort = new AbortController();
+-let pendingRender = null;
++let pendingActions = 0;
+ let toastTimer = null;
+ const request = options.fetch || window.fetch.bind(window);
++const prompt = (...args) => window.prompt(...args);
+ const config = Object.freeze({
+   prefix: app?.dataset?.prefix || '/__rawnode/monitor',
+   pollIntervalMs: Number(app?.dataset?.pollIntervalMs) || 3_000,
+@@ -32,6 +33,8 @@ async function api(path, options = {}) {
+   if (destroyed) throw new DOMException('Studio unmounted', 'AbortError');
+   const activeSignal = options.signal || renderAbort.signal;
+   const response = await request(`${prefix}${path}`, { ...options, signal: options.signal || renderAbort.signal, headers: headers(options.headers || {}) });
++  activeSignal.throwIfAborted();
++  if (destroyed) throw new DOMException('Studio unmounted', 'AbortError');
+   if (response.status === 401) { showAuth(); throw new Error('Operator authorization required.'); }
+   const type = response.headers.get('content-type') || '';
+   const payload = type.includes('json') ? await response.json() : await response.text();
+@@ -54,6 +57,35 @@ function read(value, path) { return String(path).split('.').reduce((current, par
+ function json(value) { return `<pre class="rn-json">${escape(JSON.stringify(value, null, 2))}</pre>`; }
+ function heading(title, subtitle = '') { return `<div class="rn-heading"><div><h1>${escape(title)}</h1>${subtitle ? `<p>${escape(subtitle)}</p>` : ''}</div><span class="rn-updated">Updated ${new Date().toLocaleTimeString()}</span></div>`; }
+ 
++// Each action belongs to the view that installed it. Navigation or unmount
++// cancels its request and suppresses stale feedback; it cannot undo a mutation
++// the server already accepted.
++function bindAction(button, task, refresh = true) {
++  const active = renderAbort;
++  button?.addEventListener('click', async () => {
++    if (destroyed || active.signal.aborted || button.disabled) return;
++    button.disabled = true; pendingActions++;
++    let pending = true;
++    const release = () => {
++      if (!pending) return;
++      pending = false; pendingActions--;
++      active.signal.removeEventListener('abort', release);
++    };
++    active.signal.addEventListener('abort', release, { once: true });
++    try {
++      const message = await task(active.signal);
++      active.signal.throwIfAborted();
++      if (destroyed) return;
++      if (message) { toast(message, 'success'); if (refresh) await render(state.view); }
++    } catch (error) {
++      if (!destroyed && !active.signal.aborted) toast(error.message || 'Operator action failed.', 'error');
++    } finally {
++      release();
++      if (!destroyed && !active.signal.aborted) button.disabled = false;
++    }
++  }, { signal: active.signal });
++}
++
+ async function loadOverview() { const data = await api('/api/overview'); state.data.set('overview', data); return data; }
+ async function renderOverview() {
+   const d = await loadOverview();
+@@ -87,36 +119,70 @@ async function renderHealth() { const d = await api('/api/health?fresh=1'); main
+ 
+ async function renderMetrics() {
+   const d = await api('/api/metrics'); const metrics = Object.values(d.metrics || {});
+-  main.innerHTML = `${heading('Metrics', `${metrics.length} instruments · ${d.series || 0} active series`)}<div class="rn-toolbar"><input id="rn-metric-filter" type="search" placeholder="Filter metrics"><button id="rn-copy-prom">Copy Prometheus</button></div><div id="rn-metric-list">${metricCards(metrics)}</div>`;
++  main.innerHTML = `${heading('Metrics', `${metrics.length} instruments · ${d.series || 0} active series`)}<div class="rn-toolbar"><input id="rn-metric-filter" aria-label="Filter metrics" type="search" placeholder="Filter metrics"><button id="rn-copy-prom">Copy Prometheus</button></div><div id="rn-metric-list">${metricCards(metrics)}</div>`;
+   document.querySelector('#rn-metric-filter').addEventListener('input', (event) => { const term = event.target.value.toLowerCase(); document.querySelector('#rn-metric-list').innerHTML = metricCards(metrics.filter((metric) => metric.name.toLowerCase().includes(term))); });
+-  document.querySelector('#rn-copy-prom').addEventListener('click', async () => { const response = await request(`${prefix}/api/prometheus`, { signal: renderAbort.signal, headers: headers() }); await navigator.clipboard.writeText(await response.text()); toast('Prometheus exposition copied.','success'); });
++  bindAction(document.querySelector('#rn-copy-prom'), async (signal) => { const text = await api('/api/prometheus', { signal }); await window.navigator.clipboard.writeText(text); return 'Prometheus exposition copied.'; }, false);
+ }
+ function metricCards(metrics) { if (!metrics.length) return '<div class="rn-empty">No metrics match.</div>'; return metrics.map((metric) => `<details class="rn-metric"><summary><span><strong>${escape(metric.name)}</strong><small>${escape(metric.description || metric.type)}</small></span>${badge(`${metric.cardinality || 0} series`,'neutral')}</summary>${table([{label:'Labels',render:r=>Object.entries(r.labels||{}).map(([k,v])=>`<code>${escape(k)}=${escape(v)}</code>`).join(' ')||'—'},{label:'Value',render:r=>formatNumber(r.value??r.mean??r.sum??r.count,6)},{label:'Count',render:r=>formatNumber(r.count,0)},{label:'Min / Max',render:r=>r.min==null?'—':`${formatNumber(r.min,4)} / ${formatNumber(r.max,4)}`}],metric.series||[])}</details>`).join(''); }
+ 
+ async function renderTraces() {
+   const traces = await api('/api/traces?limit=250');
+-  main.innerHTML = `${heading('Traces', 'Sampled distributed operations and latency waterfalls.')}<div class="rn-toolbar"><input id="rn-trace-filter" type="search" placeholder="Filter span names"><select id="rn-trace-status"><option value="">All outcomes</option><option value="error">Errors</option><option value="ok">OK</option></select></div><div id="rn-traces">${traceTable(traces)}</div><div id="rn-trace-detail"></div>`;
++  main.innerHTML = `${heading('Traces', 'Sampled distributed operations and latency waterfalls.')}<div class="rn-toolbar"><input id="rn-trace-filter" aria-label="Filter span names" type="search" placeholder="Filter span names"><select id="rn-trace-status" aria-label="Filter trace outcomes"><option value="">All outcomes</option><option value="error">Errors</option><option value="ok">OK</option></select></div><div id="rn-traces">${traceTable(traces)}</div><div id="rn-trace-detail"></div>`;
+   const apply = () => { const term=document.querySelector('#rn-trace-filter').value.toLowerCase(); const status=document.querySelector('#rn-trace-status').value; document.querySelector('#rn-traces').innerHTML=traceTable(traces.filter(s=>(!term||s.name.toLowerCase().includes(term))&&(!status||s.status?.code===status))); bindTraceRows(); };
+   document.querySelector('#rn-trace-filter').addEventListener('input',apply); document.querySelector('#rn-trace-status').addEventListener('change',apply); bindTraceRows();
+ }
+ function traceTable(rows) { return table([{label:'Operation',render:r=>`<button class="rn-link rn-trace-open" data-trace="${escape(r.traceId)}"><strong>${escape(r.name)}</strong></button><small>${escape(r.traceId.slice(0,16))}…</small>`},{label:'Kind',render:r=>badge(r.kind,'neutral')},{label:'Status',render:r=>badge(r.status?.code||'unset',r.status?.code==='error'?'critical':'healthy')},{label:'Duration',render:r=>duration(r.durationMs)},{label:'Started',render:r=>age(Number(BigInt(r.startTimeUnixNano)/1000000n))}],rows,'No sampled spans found.'); }
+-function bindTraceRows() { document.querySelectorAll('.rn-trace-open').forEach((button)=>button.addEventListener('click',()=>showTrace(button.dataset.trace))); }
+-async function showTrace(id) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`); const max=Math.max(...spans.map(s=>s.durationMs||0),1); document.querySelector('#rn-trace-detail').innerHTML=panel(`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><div class="rn-bar"><i style="width:${Math.max(1,(span.durationMs/max)*100)}%"></i></div>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
++function bindTraceRows() { document.querySelectorAll('.rn-trace-open').forEach(button => bindAction(button, (signal) => showTrace(button.dataset.trace, signal), false)); }
++async function showTrace(id, signal) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`, { signal }); const max=Math.max(...spans.map(s=>s.durationMs||0),1); document.querySelector('#rn-trace-detail').innerHTML=panel(`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><progress class="rn-bar" aria-label="Relative span duration" max="${max}" value="${Math.max(0,span.durationMs||0)}"></progress>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
+ 
+ async function renderResources() { const d=await api('/api/resources'); const latest=d.latest||{}; main.innerHTML=`${heading('Resources','Health and native metrics from RawNode modules.')}${Object.keys(latest).length?Object.entries(latest).map(([name,value])=>panel(name,`<div class="rn-resource-head">${badge(value.error?'unhealthy':value.health?.ok===false?'unhealthy':'healthy',value.error||value.health?.ok===false?'critical':'healthy')}<span>${duration(value.durationMs)}</span></div>${json(value)}`)).join(''):'<div class="rn-empty">No resource snapshots yet.</div>'}`; }
+ 
+ async function renderAlerts() { const d=await api('/api/alerts?limit=250'); main.innerHTML=`${heading('Alerts','Rule state, transitions, silences, and operator actions.')}<div class="rn-toolbar"><button id="rn-create-silence">Create silence</button></div>${panel('Current state',table([{label:'Rule',render:r=>`<strong>${escape(r.rule?.name||r.ruleId)}</strong><small>${escape(r.rule?.severity||'')}</small>`},{label:'State',render:r=>badge(r.state,r.state==='firing'?'critical':r.state==='pending'?'warning':r.state==='resolved'?'healthy':'neutral')},{label:'Value',render:r=>formatNumber(r.lastValue,4)},{label:'Last evaluation',render:r=>age(r.lastEvaluationAt)},{label:'Action',render:r=>r.state==='firing'?`<button class="rn-alert-ack" data-id="${escape(r.ruleId)}">Acknowledge</button>`:'—'}],d.current||[]))}${panel('Silences',table([{label:'Reason',render:r=>escape(r.reason||'—')},{label:'Rules',render:r=>(r.ruleIds||[]).map(x=>`<code>${escape(x)}</code>`).join(' ')||'All'},{label:'Expires',render:r=>age(r.endsAt)},{label:'Action',render:r=>`<button class="rn-silence-delete" data-id="${escape(r.id)}">Remove</button>`}],d.silences?.silences||[]))}${panel('Recent transitions',table([{label:'Rule',render:r=>escape(r.rule?.name||r.ruleId)},{label:'Transition',render:r=>`${escape(r.previous)} → ${badge(r.state,r.state==='firing'?'critical':'neutral')}`},{label:'Value',render:r=>formatNumber(r.value,4)},{label:'Time',render:r=>age(r.timestamp)}],d.history||[]))}`; bindAlertActions(); }
+-function bindAlertActions(){document.querySelectorAll('.rn-alert-ack').forEach(b=>b.addEventListener('click',async()=>{await api(`/api/alerts/${encodeURIComponent(b.dataset.id)}/acknowledge`,{method:'POST'});toast('Alert acknowledged.','success');renderAlerts();}));document.querySelectorAll('.rn-silence-delete').forEach(b=>b.addEventListener('click',async()=>{await api(`/api/silences/${encodeURIComponent(b.dataset.id)}`,{method:'DELETE'});toast('Silence removed.','success');renderAlerts();}));document.querySelector('#rn-create-silence')?.addEventListener('click',async()=>{const ruleId=prompt('Rule ID to silence (empty means all rules):','');const minutes=Number(prompt('Silence duration in minutes:','60'))||60;const reason=prompt('Reason:','Operator maintenance')||'Operator maintenance';await api('/api/silences',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ruleIds:ruleId?[ruleId]:[],durationMs:minutes*60000,reason})});toast('Silence created.','success');renderAlerts();});}
++function bindAlertActions() {
++  document.querySelectorAll('.rn-alert-ack').forEach(button => bindAction(button, async (signal) => {
++    await api(`/api/alerts/${encodeURIComponent(button.dataset.id)}/acknowledge`, { method: 'POST', signal });
++    return 'Alert acknowledged.';
++  }));
++  document.querySelectorAll('.rn-silence-delete').forEach(button => bindAction(button, async (signal) => {
++    await api(`/api/silences/${encodeURIComponent(button.dataset.id)}`, { method: 'DELETE', signal });
++    return 'Silence removed.';
++  }));
++  bindAction(document.querySelector('#rn-create-silence'), async (signal) => {
++    const ruleId = prompt('Rule ID to silence (empty means all rules):', '');
++    if (ruleId === null) return;
++    const durationInput = prompt('Silence duration in minutes:', '60');
++    if (durationInput === null) return;
++    const minutes = Number(durationInput);
++    if (!Number.isFinite(minutes) || minutes <= 0 || !Number.isSafeInteger(minutes * 60_000)) throw new Error('Silence duration must be a positive number of minutes (whole milliseconds).');
++    const reason = prompt('Reason:', 'Operator maintenance');
++    if (reason === null) return;
++    await api('/api/silences', { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ruleIds: ruleId.trim() ? [ruleId.trim()] : [], durationMs: minutes * 60_000, reason: reason.trim() || 'Operator maintenance' }) });
++    return 'Silence created.';
++  });
++}
+ 
+ async function renderSlos(){const d=await api('/api/slos');const latest=d.latest||{};main.innerHTML=`${heading('Service Level Objectives','Compliance, error budgets, and burn rates.')}${panel('Objectives',table([{label:'SLO',render:r=>`<strong>${escape(r.name)}</strong><small>${formatNumber(r.objective*100,3)}% target</small>`},{label:'Achieved',render:r=>badge(`${formatNumber(r.achieved*100,3)}%`,r.compliance?'healthy':'critical')},{label:'Error budget',render:r=>`${formatNumber(r.errorBudget?.remainingRatio*100,2)}% remaining`},{label:'Burn rate',render:r=>badge(`${formatNumber(r.burnRate,2)}×`,r.burnRate>6?'critical':r.burnRate>1?'warning':'healthy')},{label:'Window',render:r=>duration(r.windowMs)}],Object.values(latest),'No SLO definitions registered.'))}`;}
+ 
+ async function renderIncidents(){const d=await api('/api/incidents?limit=250');main.innerHTML=`${heading('Incidents','Correlated operational timelines and runbooks.')}${panel('Incidents',table([{label:'Incident',render:r=>`<strong>${escape(r.title)}</strong><small>${escape(r.id)}</small>`},{label:'Severity',render:r=>badge(r.severity,r.severity==='critical'?'critical':'warning')},{label:'State',render:r=>badge(r.state,r.state==='resolved'||r.state==='closed'?'healthy':'critical')},{label:'Updated',render:r=>age(r.updatedAt)},{label:'Actions',render:r=>incidentActions(r)}],d.incidents||[],'No incidents recorded.'))}<div id="rn-incident-detail"></div>`;bindIncidentActions(d.incidents||[]);}
+ function incidentActions(r){return `<button class="rn-incident-view" data-id="${escape(r.id)}">View</button> ${r.state==='open'?`<button class="rn-incident-ack" data-id="${escape(r.id)}">Acknowledge</button>`:''} ${!['resolved','closed'].includes(r.state)?`<button class="rn-incident-resolve" data-id="${escape(r.id)}">Resolve</button>`:''}`;}
+-function bindIncidentActions(rows){const byId=new Map(rows.map(r=>[r.id,r]));document.querySelectorAll('.rn-incident-view').forEach(b=>b.addEventListener('click',()=>{const r=byId.get(b.dataset.id);document.querySelector('#rn-incident-detail').innerHTML=panel(r.title,`${r.runbookDefinition?`<div class="rn-runbook"><h3>${escape(r.runbookDefinition.title)}</h3><p>${escape(r.runbookDefinition.description)}</p><ol>${r.runbookDefinition.steps.map(s=>`<li>${escape(s)}</li>`).join('')}</ol></div>`:''}${json(r)}`);}));document.querySelectorAll('.rn-incident-ack').forEach(b=>b.addEventListener('click',async()=>{await api(`/api/incidents/${encodeURIComponent(b.dataset.id)}/acknowledge`,{method:'POST',headers:{'content-type':'application/json'},body:'{}'});toast('Incident acknowledged.','success');renderIncidents();}));document.querySelectorAll('.rn-incident-resolve').forEach(b=>b.addEventListener('click',async()=>{const message=prompt('Resolution note:','Issue mitigated')||'Resolved';await api(`/api/incidents/${encodeURIComponent(b.dataset.id)}/resolve`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message})});toast('Incident resolved.','success');renderIncidents();}));}
++function bindIncidentActions(rows) {
++  const byId = new Map(rows.map(row => [row.id, row]));
++  document.querySelectorAll('.rn-incident-view').forEach(button => button.addEventListener('click', () => { const row = byId.get(button.dataset.id); document.querySelector('#rn-incident-detail').innerHTML = panel(row.title, `${row.runbookDefinition ? `<div class="rn-runbook"><h3>${escape(row.runbookDefinition.title)}</h3><p>${escape(row.runbookDefinition.description)}</p><ol>${row.runbookDefinition.steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>` : ''}${json(row)}`); }, { signal: renderAbort.signal }));
++  document.querySelectorAll('.rn-incident-ack').forEach(button => bindAction(button, async (signal) => {
++    await api(`/api/incidents/${encodeURIComponent(button.dataset.id)}/acknowledge`, { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: '{}' });
++    return 'Incident acknowledged.';
++  }));
++  document.querySelectorAll('.rn-incident-resolve').forEach(button => bindAction(button, async (signal) => {
++    const message = prompt('Resolution note:', 'Issue mitigated');
++    if (message === null) return;
++    await api(`/api/incidents/${encodeURIComponent(button.dataset.id)}/resolve`, { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: message.trim() || 'Resolved' }) });
++    return 'Incident resolved.';
++  }));
++}
+ 
+ async function renderFleet(){const d=await api('/api/fleet');main.innerHTML=`${heading('Fleet','Cross-process and cross-host runtime membership.')}${panel('Topology',renderTopology(d.topology))}${panel('Instances',table([{label:'Service',render:r=>`<strong>${escape(r.service||'unknown')}</strong><small>${escape(r.instanceId)}</small>`},{label:'State',render:r=>badge(r.state||'unknown',r.health?.ok===false?'critical':'healthy')},{label:'Host / PID',render:r=>`${escape(r.host||'—')} / ${escape(r.pid||'—')}`},{label:'Region',render:r=>escape(r.region||'—')},{label:'Version',render:r=>escape(r.version||'—')},{label:'Last seen',render:r=>age(r.lastSeenAt)}],d.instances||[]))}`;}
+ async function renderDeployments(){const d=await api('/api/deployments?limit=250');main.innerHTML=`${heading('Deployments','Release markers correlated with operational changes.')}${panel('Timeline',table([{label:'Version',render:r=>`<strong>${escape(r.version||'—')}</strong><small>${escape(r.commit||r.buildId||r.id)}</small>`},{label:'Status',render:r=>badge(r.status,r.status==='failed'?'critical':r.status==='rolled_back'?'warning':'healthy')},{label:'Strategy',render:r=>escape(r.strategy||'—')},{label:'Actor',render:r=>escape(r.actor||'—')},{label:'Time',render:r=>age(r.deployedAt)}],d||[]))}`;}
+-async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;document.querySelector('#rn-bundle').addEventListener('click',async()=>{const result=await api('/api/diagnostics/bundle',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});toast(`Bundle created: ${result.filename}`,'success');});document.querySelector('#rn-full-diag').addEventListener('click',async()=>{const d=await api('/api/diagnostics?signals=0');document.querySelector('#rn-diagnostics-full').innerHTML=panel('Runtime diagnostics',json(d));});}
++async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;bindAction(document.querySelector('#rn-bundle'),async(signal)=>{const result=await api('/api/diagnostics/bundle',{method:'POST',signal,headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});return `Bundle created: ${result.filename}`;},false);bindAction(document.querySelector('#rn-full-diag'),async(signal)=>{const d=await api('/api/diagnostics?signals=0',{signal});document.querySelector('#rn-diagnostics-full').innerHTML=panel('Runtime diagnostics',json(d));},false);}
+ 
+ const renderers={overview:renderOverview,health:renderHealth,metrics:renderMetrics,traces:renderTraces,resources:renderResources,alerts:renderAlerts,slos:renderSlos,incidents:renderIncidents,fleet:renderFleet,deployments:renderDeployments,diagnostics:renderDiagnostics};
+ async function render(view=state.view){
+@@ -149,7 +215,7 @@ function connectStream(){
+ }
+ function setConnected(value){state.connected=value;document.querySelector('#rn-live-dot').classList.toggle('connected',value);if(!value)document.querySelector('#rn-state').textContent='Polling';}
+ function scheduleRefresh(){clearTimeout(state._refresh);state._refresh=setTimeout(()=>render(state.view),500);}
+-function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(document.visibilityState==='visible'&&app.getAttribute('aria-busy')!=='true')render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
++function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(document.visibilityState==='visible'&&app.getAttribute('aria-busy')!=='true'&&pendingActions===0)render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
+ 
+ document.querySelector('#rn-nav').addEventListener('click',(event)=>{const button=event.target.closest('button[data-view]');if(button)render(button.dataset.view);},{signal:events.signal});
+ document.querySelector('#rn-refresh').addEventListener('click',()=>render(state.view),{signal:events.signal});
+diff --git a/package/src/alerts/AlertEngine.js b/package/src/alerts/AlertEngine.js
+index cfcfaff..44a47d2 100644
+--- a/package/src/alerts/AlertEngine.js
++++ b/package/src/alerts/AlertEngine.js
+@@ -5,7 +5,7 @@ import { AlertState, SignalKind } from '../constants.js';
+ import AlertRule from './AlertRule.js';
+ import SilenceManager from './SilenceManager.js';
+ import NotificationRouter from './NotificationRouter.js';
+-import { deepFreeze, errorRecord, randomId } from '../support.js';
++import { boundedInteger, deepFreeze, errorRecord, randomId, withTimeout } from '../support.js';
+ 
+ export class AlertEngine extends EventEmitter {
+   constructor(options = {}) {
+@@ -30,32 +30,38 @@ export class AlertEngine extends EventEmitter {
+     this.running = false;
+     this.closed = false;
+     this.evaluating = false;
++    this.callbackTimeoutMs = boundedInteger(options.callbackTimeoutMs, 5_000, 1, 300_000);
++    this.pendingCallbacks = new Map();
++    this.controller = new AbortController();
++    this.closePromise = null;
+     this.frozen = false;
+     this.stats = { evaluations: 0, errors: 0, transitions: 0, notifications: 0, skippedNotLeader: 0 };
+   }
+ 
+   register(input, options = {}) {
++    if (this.closed) throw Object.assign(new Error('Alert engine is closed.'), { code: 'MONITOR_CLOSED' });
+     if (this.frozen) throw new Error('Alert engine is frozen.');
+     const rule = input instanceof AlertRule ? input : new AlertRule({ pendingForMs: this.defaultPendingForMs, resolveAfterMs: this.defaultResolveAfterMs, cooldownMs: this.defaultCooldownMs, ...input });
+     if (this.rules.has(rule.id) && options.replace !== true) throw new Error(`Alert rule '${rule.id}' is already registered.`);
+     this.rules.set(rule.id, rule);
+-    if (!this.states.has(rule.id)) this.states.set(rule.id, initialState(rule));
++    this.states.set(rule.id, initialState(rule));
+     this.emit('registered', rule.toJSON());
+     return rule;
+   }
+ 
+   unregister(id) { this.states.delete(String(id)); return this.rules.delete(String(id)); }
+   freeze() { this.frozen = true; return this; }
+-  start() { if (this.running || this.closed) return this; this.running = true; this.timer = setInterval(() => void this.evaluate().catch((error) => this.emit('error', error)), this.intervalMs); this.timer.unref?.(); return this; }
++  start() { if (this.running || this.closed) return this; this.running = true; this.timer = setInterval(() => void this.evaluate().catch((error) => this.emit(this.listenerCount('error') ? 'error' : 'evaluationError', error)), this.intervalMs); this.timer.unref?.(); return this; }
+ 
+   async evaluate(options = {}) {
+     if (this.evaluating || this.closed) return this.snapshot();
+-    if (this.leader && await this.leader.isLeader?.() === false) { this.stats.skippedNotLeader++; return this.snapshot(); }
+     this.evaluating = true;
+-    const context = await this.contextProvider(options);
+-    const rules = Array.from(this.rules.values()).filter((rule) => rule.enabled);
+-    let cursor = 0;
+     try {
++      if (this.leader && await this._callback(this.leader, () => this.leader.isLeader?.(), options) === false) { this.stats.skippedNotLeader++; return this.snapshot(); }
++      const context = await this._callback(this.contextProvider, signal => this.contextProvider({ ...options, signal }), options);
++      if (this.closed) return this.snapshot();
++      const rules = Array.from(this.rules.values()).filter((rule) => rule.enabled);
++      let cursor = 0;
+       await Promise.all(Array.from({ length: Math.min(this.concurrency, rules.length || 1) }, async () => {
+         while (cursor < rules.length) await this._evaluateRule(rules[cursor++], context, options);
+       }));
+@@ -68,7 +74,8 @@ export class AlertEngine extends EventEmitter {
+     const state = this.states.get(rule.id) || initialState(rule);
+     this.stats.evaluations++;
+     try {
+-      const evaluation = await rule.test({ ...context, now, state: { ...state } });
++      const evaluation = await this._callback(rule, signal => rule.test({ ...context, now, state: { ...state }, signal }), options);
++      if (!this._current(rule)) return;
+       state.lastEvaluationAt = now;
+       state.lastValue = evaluation.value ?? null;
+       state.lastEvaluation = evaluation;
+@@ -104,8 +111,9 @@ export class AlertEngine extends EventEmitter {
+           }
+         }
+       }
+-      this.states.set(rule.id, state);
++      if (this._current(rule)) this.states.set(rule.id, state);
+     } catch (error) {
++      if (!this._current(rule)) return;
+       this.stats.errors++;
+       state.error = errorRecord(error, { stack: options.includeStack === true });
+       await this._transition(rule, state, AlertState.ERROR, { firing: false, value: null, error: state.error }, null, now);
+@@ -113,6 +121,7 @@ export class AlertEngine extends EventEmitter {
+   }
+ 
+   async _transition(rule, state, next, evaluation, meta, now) {
++    if (!this._current(rule)) return;
+     if (state.state === next) return;
+     const previous = state.state;
+     state.state = next;
+@@ -130,14 +139,17 @@ export class AlertEngine extends EventEmitter {
+     this.signal?.(SignalKind.ALERT, event, { priority: next === AlertState.FIRING ? 20 : 10 });
+ 
+     const notify = next === AlertState.FIRING || next === AlertState.RESOLVED;
+-    if (notify && (!state.lastNotifiedAt || now - state.lastNotifiedAt >= rule.cooldownMs || next === AlertState.RESOLVED)) {
+-      await this.notifications.notify({ ...event, title: `${rule.name} ${next}`, channels: rule.channels }, { channels: rule.channels });
++    if (this._current(rule) && notify && (!state.lastNotifiedAt || now - state.lastNotifiedAt >= rule.cooldownMs || next === AlertState.RESOLVED)) {
++      await this._callback(rule, signal => this.notifications.notify({ ...event, title: `${rule.name} ${next}`, channels: rule.channels }, { channels: rule.channels, signal }));
++      if (!this._current(rule)) return;
+       state.lastNotifiedAt = now; this.stats.notifications++;
+     }
++    if (!this._current(rule)) return;
+     if (next === AlertState.FIRING && this.incidents && (rule.incident === true || this.autoIncidentSeverities.has(rule.severity))) {
+-      state.incidentId = (await this.incidents.openFromAlert(event))?.id || state.incidentId;
++      const incident = await this._callback(rule, signal => this.incidents.openFromAlert(event, { signal }));
++      if (this._current(rule)) state.incidentId = incident?.id || state.incidentId;
+     }
+-    if (next === AlertState.RESOLVED && state.incidentId) await this.incidents?.resolve?.(state.incidentId, { source: 'alert', alert: event }).catch(() => {});
++    if (this._current(rule) && next === AlertState.RESOLVED && state.incidentId) await this._callback(rule, signal => this.incidents?.resolve?.(state.incidentId, { source: 'alert', alert: event, signal })).catch(() => {});
+   }
+ 
+   acknowledge(ruleId, actor = null) {
+@@ -146,7 +158,25 @@ export class AlertEngine extends EventEmitter {
+     state.state = AlertState.ACKNOWLEDGED; state.acknowledgedAt = Date.now(); state.acknowledgedBy = actor; state.updatedAt = Date.now(); return true;
+   }
+ 
+-  async close() { clearInterval(this.timer); this.timer = null; this.running = false; this.closed = true; await this.notifications.close(); }
++  _current(rule) { return !this.closed && this.rules.get(rule.id) === rule; }
++  async _callback(key, callback, options = {}) {
++    if (this.pendingCallbacks.has(key)) throw Object.assign(new Error('Alert callback is still pending.'), { code: 'MONITOR_ALERT_CALLBACK_BUSY' });
++    const signal = options.signal ? AbortSignal.any([options.signal, this.controller.signal]) : this.controller.signal;
++    return withTimeout(signal => {
++      const operation = Promise.resolve().then(() => { signal.throwIfAborted(); return callback(signal); });
++      const tracked = operation.finally(() => { if (this.pendingCallbacks.get(key) === tracked) this.pendingCallbacks.delete(key); });
++      this.pendingCallbacks.set(key, tracked);
++      return tracked;
++    }, boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000), { signal });
++  }
++  async close(options = {}) {
++    if (this.closePromise) return this.closePromise;
++    clearInterval(this.timer); this.timer = null; this.running = false; this.closed = true;
++    this.controller.abort(Object.assign(new Error('Alert engine is closed.'), { code: 'MONITOR_CLOSED' }));
++    const cleanupOptions = { ...options }; delete cleanupOptions.signal;
++    this.closePromise = withTimeout(() => this.notifications.close(cleanupOptions), boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000));
++    return this.closePromise;
++  }
+   current(options = {}) { let rows = Array.from(this.states.values(), (state) => ({ ...state, rule: this.rules.get(state.ruleId)?.toJSON() || null })); if (options.state) rows = rows.filter((row) => row.state === options.state); if (options.severity) rows = rows.filter((row) => row.rule?.severity === options.severity); return deepFreeze(rows); }
+   historySnapshot(options = {}) { return deepFreeze(this.history.slice(-(Math.max(1, Number(options.limit) || 100)))); }
+   snapshot() { return deepFreeze({ running: this.running, closed: this.closed, frozen: this.frozen, rules: Array.from(this.rules.values(), (rule) => rule.toJSON()), states: this.current(), silences: this.silences.snapshot(), notifications: this.notifications.snapshot(), history: this.history.length, stats: { ...this.stats } }); }
+diff --git a/package/src/alerts/NotificationRouter.js b/package/src/alerts/NotificationRouter.js
+index b8a6074..8cab195 100644
+--- a/package/src/alerts/NotificationRouter.js
++++ b/package/src/alerts/NotificationRouter.js
+@@ -1,29 +1,46 @@
+ 'use strict';
+ 
+ import { EventEmitter } from 'node:events';
++import { boundedInteger, withTimeout } from '../support.js';
+ 
+ export class NotificationRouter extends EventEmitter {
+-  constructor(options = {}) { super(); this.channels = new Map(); this.routes = []; this.errorPolicy = options.errorPolicy || 'isolate'; this.stats = { sent: 0, errors: 0, skipped: 0 }; }
++  constructor(options = {}) {
++    super(); this.channels = new Map(); this.routes = []; this.errorPolicy = options.errorPolicy || 'isolate'; this.stats = { sent: 0, errors: 0, skipped: 0 };
++    this.callbackTimeoutMs = boundedInteger(options.callbackTimeoutMs, 5_000, 1, 300_000);
++    this.maxPendingCallbacks = boundedInteger(options.maxPendingCallbacks, 1_000, 1, 100_000);
++    this.pending = new Map(); this.controller = new AbortController(); this.closed = false; this.closePromise = null;
++  }
+   register(name, channel, options = {}) { if (!name || !channel) throw new TypeError('Notification channel name and implementation are required.'); this.channels.set(String(name), { name: String(name), channel, required: options.required === true }); return channel; }
+   route(match = {}, channels = []) { this.routes.push(Object.freeze({ match: { ...match }, channels: Object.freeze([...channels]) })); return this; }
+   async notify(notification, options = {}) {
++    if (this.closed) return Object.freeze([]);
+     const selected = options.channels?.length ? options.channels : this._channels(notification);
+     const results = [];
+     for (const name of selected) {
++      if (this.closed) break;
+       const entry = this.channels.get(String(name));
+       if (!entry) { this.stats.skipped++; results.push({ channel: name, skipped: true, reason: 'missing' }); continue; }
+       try {
+         const channel = entry.channel;
+-        const value = typeof channel.send === 'function'
+-          ? await channel.send(notification, options)
+-          : typeof channel.notify === 'function'
+-            ? await channel.notify(notification, options)
+-            : typeof channel === 'function'
+-              ? await channel(notification, options)
+-              : false;
++        if (this.pending.has(channel)) throw Object.assign(new Error('Notification channel callback is still pending.'), { code: 'MONITOR_NOTIFICATION_BUSY' });
++        if (this.pending.size >= this.maxPendingCallbacks) throw Object.assign(new Error('Notification callback capacity exceeded.'), { code: 'MONITOR_NOTIFICATION_LIMIT' });
++        const signal = options.signal ? AbortSignal.any([options.signal, this.controller.signal]) : this.controller.signal;
++        const value = await withTimeout(signal => {
++          const operation = Promise.resolve().then(() => {
++            signal.throwIfAborted();
++            const input = { ...options, signal };
++            return typeof channel.send === 'function' ? channel.send(notification, input)
++              : typeof channel.notify === 'function' ? channel.notify(notification, input)
++                : typeof channel === 'function' ? channel(notification, input) : false;
++          });
++          const tracked = operation.finally(() => { if (this.pending.get(channel) === tracked) this.pending.delete(channel); });
++          this.pending.set(channel, tracked);
++          return tracked;
++        }, boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000), { signal });
+         this.stats.sent++; results.push({ channel: name, ok: value !== false, result: value });
+       } catch (error) {
+-        this.stats.errors++; results.push({ channel: name, ok: false, error: error?.message || String(error) }); this.emit('error', error, name, notification);
++        this.stats.errors++; results.push({ channel: name, ok: false, error: error?.message || String(error) });
++        this.emit(this.listenerCount('error') ? 'error' : 'notificationError', error, name, notification);
+         if (entry.required || this.errorPolicy === 'propagate') throw error;
+       }
+     }
+@@ -35,8 +52,14 @@ export class NotificationRouter extends EventEmitter {
+     if (!output.size) for (const name of this.channels.keys()) output.add(name);
+     return [...output];
+   }
+-  async close() { await Promise.allSettled(Array.from(this.channels.values()).map((entry) => entry.channel.close?.())); }
+-  snapshot() { return Object.freeze({ channels: Object.freeze(Array.from(this.channels.keys())), routes: Object.freeze(this.routes.slice()), stats: Object.freeze({ ...this.stats }) }); }
++  async close(options = {}) {
++    if (this.closePromise) return this.closePromise;
++    this.closed = true;
++    this.controller.abort(Object.assign(new Error('Notification router is closed.'), { code: 'MONITOR_NOTIFICATION_CLOSED' }));
++    this.closePromise = Promise.allSettled(Array.from(this.channels.values()).map(entry => withTimeout(() => entry.channel.close?.(), boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000))));
++    return this.closePromise;
++  }
++  snapshot() { return Object.freeze({ closed: this.closed, pendingCallbacks: this.pending.size, channels: Object.freeze(Array.from(this.channels.keys())), routes: Object.freeze(this.routes.slice()), stats: Object.freeze({ ...this.stats }) }); }
+ }
+ function matches(match, value) { return Object.entries(match || {}).every(([key, expected]) => Array.isArray(expected) ? expected.includes(value?.[key]) : value?.[key] === expected); }
+ 
+diff --git a/package/src/cluster/MonitorClusterEnvelope.js b/package/src/cluster/MonitorClusterEnvelope.js
+index 35b4fd4..37d9bef 100644
+--- a/package/src/cluster/MonitorClusterEnvelope.js
++++ b/package/src/cluster/MonitorClusterEnvelope.js
+@@ -30,9 +30,11 @@ export function verifyMonitorClusterEnvelope(envelope, options = {}) {
+   if (!envelope || typeof envelope !== 'object') return { ok: false, reason: 'invalid-envelope' };
+   if (Number(envelope.schemaVersion) !== MONITOR_SCHEMA_VERSION) return { ok: false, reason: 'schema-version' };
+   if (options.namespace && String(envelope.namespace) !== String(options.namespace)) return { ok: false, reason: 'namespace' };
+-  if (Number(envelope.expiresAt || 0) <= Date.now()) return { ok: false, reason: 'expired' };
++  const expiresAt = Number(envelope.expiresAt);
++  const timestamp = Number(envelope.timestamp);
++  if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) return { ok: false, reason: 'expired' };
+   const maxClockSkewMs = Math.max(0, Number(options.maxClockSkewMs) || 60_000);
+-  if (Math.abs(Date.now() - Number(envelope.timestamp || 0)) > Math.max(maxClockSkewMs, Number(options.maxAgeMs) || 5 * 60_000)) return { ok: false, reason: 'timestamp' };
++  if (!Number.isFinite(timestamp) || Math.abs(Date.now() - timestamp) > Math.max(maxClockSkewMs, Number(options.maxAgeMs) || 5 * 60_000)) return { ok: false, reason: 'timestamp' };
+   if (options.secret) {
+     if (!envelope.signature) return { ok: false, reason: 'signature-missing' };
+     const expected = Buffer.from(signEnvelope(envelope, options.secret));
+diff --git a/package/src/cluster/RedisMonitorBridge.js b/package/src/cluster/RedisMonitorBridge.js
+index 959cb34..cc9cc2e 100644
+--- a/package/src/cluster/RedisMonitorBridge.js
++++ b/package/src/cluster/RedisMonitorBridge.js
+@@ -15,6 +15,8 @@ export class RedisMonitorBridge extends EventEmitter {
+     this.source = options.source || `${process.pid}`;
+     this.maxBytes = Math.max(1_024, Number(options.maxBytes) || 2 * 1024 * 1024);
+     this.subscription = null;
++    this.startPromise = null;
++    this.disposedSubscriptions = new WeakSet();
+     this.started = false;
+     this.closed = false;
+     this.stats = { published: 0, received: 0, rejected: 0, errors: 0 };
+@@ -22,15 +24,34 @@ export class RedisMonitorBridge extends EventEmitter {
+ 
+   async start() {
+     if (this.started || this.closed) return this;
++    if (this.startPromise) return this.startPromise;
++    this.startPromise = this._start();
++    try { return await this.startPromise; }
++    finally { this.startPromise = null; }
++  }
++
++  async _start() {
+     if (typeof this.redis.subscribe !== 'function') throw new TypeError('Redis client does not expose subscribe().');
+     const handler = (message) => this._receive(message);
+-    const subscription = await this.redis.subscribe(this.channel, handler, { serial: true });
+-    this.subscription = subscription || { unsubscribe: () => this.redis.unsubscribe?.(this.channel, handler) };
+-    await this.subscription?.ready?.();
++    const result = await this.redis.subscribe(this.channel, handler, { serial: true });
++    const subscription = result && typeof result === 'object' ? result : { unsubscribe: typeof result === 'function' ? result : () => this.redis.unsubscribe?.(this.channel, handler) };
++    if (this.closed) { await this._disposeSubscription(subscription); return this; }
++    this.subscription = subscription;
++    try { await subscription.ready?.(); }
++    catch (error) { await this._disposeSubscription(subscription); throw error; }
++    if (this.closed) { await this._disposeSubscription(subscription); return this; }
+     this.started = true; this.emit('started', this.snapshot()); return this;
+   }
+ 
++  async _disposeSubscription(subscription) {
++    if (this.subscription === subscription) this.subscription = null;
++    if (!subscription || this.disposedSubscriptions.has(subscription)) return;
++    this.disposedSubscriptions.add(subscription);
++    try { await subscription.unsubscribe?.(); } catch {}
++  }
++
+   _receive(message) {
++    if (this.closed) return false;
+     try {
+       const text = Buffer.isBuffer(message) || message instanceof Uint8Array ? Buffer.from(message).toString('utf8') : String(message);
+       if (Buffer.byteLength(text) > this.maxBytes) { this.stats.rejected++; return false; }
+@@ -52,6 +73,6 @@ export class RedisMonitorBridge extends EventEmitter {
+   }
+ 
+   snapshot() { return Object.freeze({ started: this.started, closed: this.closed, channel: this.channel, namespace: this.namespace, stats: Object.freeze({ ...this.stats }) }); }
+-  async close() { if (this.closed) return; this.closed = true; this.started = false; try { await this.subscription?.unsubscribe?.(); } catch {} this.subscription = null; this.removeAllListeners(); }
++  async close() { if (this.closed) return; this.closed = true; this.started = false; await this._disposeSubscription(this.subscription); this.removeAllListeners(); }
+ }
+ export default RedisMonitorBridge;
+diff --git a/package/src/core/MonitorContextManager.js b/package/src/core/MonitorContextManager.js
+index 08230e9..8909db6 100644
+--- a/package/src/core/MonitorContextManager.js
++++ b/package/src/core/MonitorContextManager.js
+@@ -34,7 +34,7 @@ export class MonitorContextManager {
+     const resource = new AsyncResource('RawNodeMonitorContext');
+     const manager = this;
+     return function boundMonitorContext(...args) {
+-      return manager.run(context, () => resource.runInAsyncScope(callback, this, ...args));
++      return resource.runInAsyncScope(() => manager.run(context, () => callback.apply(this, args)), this);
+     };
+   }
+ 
+diff --git a/package/src/exporters/HttpJsonExporter.js b/package/src/exporters/HttpJsonExporter.js
+index 88f179a..4099772 100644
+--- a/package/src/exporters/HttpJsonExporter.js
++++ b/package/src/exporters/HttpJsonExporter.js
+@@ -33,6 +33,9 @@ export class HttpJsonExporter {
+       ? new https.Agent({ keepAlive: true, maxSockets: Number(options.maxSockets) || 16, maxFreeSockets: Number(options.maxFreeSockets) || 8, rejectUnauthorized: this.rejectUnauthorized })
+       : new http.Agent({ keepAlive: true, maxSockets: Number(options.maxSockets) || 16, maxFreeSockets: Number(options.maxFreeSockets) || 8 });
+     this.closed = false;
++    this.closeController = new AbortController();
++    this.closePromise = null;
++    this.pending = new Set();
+     this.stats = {
+       batches: 0,
+       signals: 0,
+@@ -49,13 +52,28 @@ export class HttpJsonExporter {
+   async export(signals = [], options = {}) {
+     if (this.closed) return false;
+     if (!Array.isArray(signals) || !signals.length) return true;
+-    const chunks = partitionSignals(signals, this.maxBatchSignals, this.maxPayloadBytes);
+-    if (chunks.length > 1) this.stats.splitBatches += chunks.length - 1;
+-    for (const chunk of chunks) await this._exportChunk(chunk, options);
+-    return true;
++    const signal = options.signal ? AbortSignal.any([options.signal, this.closeController.signal]) : this.closeController.signal;
++    // Register admission before serialization or other user-controlled work can
++    // yield or request close. Close waits for all admitted continuations.
++    const operation = Promise.resolve().then(async () => {
++      this._assertOpen(signal);
++      const chunks = partitionSignals(signals, this.maxBatchSignals, this.maxPayloadBytes);
++      if (chunks.length > 1) this.stats.splitBatches += chunks.length - 1;
++      for (const chunk of chunks) await this._exportChunk(chunk, { ...options, signal });
++      return true;
++    });
++    this.pending.add(operation);
++    try { return await operation; }
++    finally { this.pending.delete(operation); }
++  }
++
++  _assertOpen(signal) {
++    if (this.closed) throw this.closeController.signal.reason;
++    signal?.throwIfAborted?.();
+   }
+ 
+   async _exportChunk(signals, options) {
++    this._assertOpen(options.signal);
+     let body;
+     try { body = Buffer.from(JSON.stringify(this.format(signals, options))); }
+     catch (cause) {
+@@ -64,6 +82,7 @@ export class HttpJsonExporter {
+       throw error;
+     }
+ 
++    this._assertOpen(options.signal);
+     if (body.length > this.maxPayloadBytes) {
+       if (signals.length > 1) {
+         const middle = Math.ceil(signals.length / 2);
+@@ -83,6 +102,7 @@ export class HttpJsonExporter {
+     }
+ 
+     const payload = this.compression && body.length >= this.compressionThresholdBytes ? await gzipAsync(body) : body;
++    this._assertOpen(options.signal);
+     const headers = { ...this.headers, 'content-length': String(payload.length) };
+     if (payload !== body) headers['content-encoding'] = 'gzip';
+     if (this.secret) {
+@@ -93,6 +113,7 @@ export class HttpJsonExporter {
+ 
+     try {
+       await retry(async (attempt) => {
++        this._assertOpen(options.signal);
+         if (attempt > 1) this.stats.retries++;
+         const response = await this._request(payload, headers, options.signal);
+         if (response.statusCode < 200 || response.statusCode >= 300) {
+@@ -111,6 +132,7 @@ export class HttpJsonExporter {
+       });
+     } catch (error) {
+       this.stats.errors++;
++      if (this.closed) throw this.closeController.signal.reason;
+       throw error;
+     }
+ 
+@@ -121,6 +143,7 @@ export class HttpJsonExporter {
+   }
+ 
+   _request(payload, headers, signal) {
++    this._assertOpen(signal);
+     const transport = this.url.protocol === 'https:' ? https : http;
+     return new Promise((resolve, reject) => {
+       let settled = false;
+@@ -180,7 +203,14 @@ export class HttpJsonExporter {
+   }
+ 
+   async flush() {}
+-  async close() { this.closed = true; this.agent.destroy(); }
++  async close() {
++    if (this.closePromise) return await this.closePromise;
++    this.closed = true;
++    this.closeController.abort(Object.assign(new Error('Monitor HTTP exporter closed.'), { code: 'MONITOR_EXPORTER_CLOSED', retryable: false }));
++    this.agent.destroy();
++    this.closePromise = Promise.allSettled([...this.pending]).then(() => {});
++    await this.closePromise;
++  }
+   snapshot() {
+     return Object.freeze({
+       url: `${this.url.origin}${this.url.pathname}`,
+diff --git a/package/src/health/HealthRegistry.js b/package/src/health/HealthRegistry.js
+index bba6a54..8c88d81 100644
+--- a/package/src/health/HealthRegistry.js
++++ b/package/src/health/HealthRegistry.js
+@@ -35,9 +35,10 @@ export class HealthRegistry extends EventEmitter {
+       cacheTtlMs: Math.max(0, Number(options.cacheTtlMs ?? this.cacheTtlMs) || 0),
+       enabled: options.enabled !== false,
+     });
++    this.cache.delete(key);
+     this.checks.set(key, record);
+     this.emit('registered', publicCheck(record));
+-    return () => this.unregister(key);
++    return () => this.checks.get(key) === record ? this.unregister(key) : false;
+   }
+ 
+   unregister(name) { this.cache.delete(String(name)); return this.checks.delete(String(name)); }
+diff --git a/package/src/integrations/HttpMonitorMiddleware.js b/package/src/integrations/HttpMonitorMiddleware.js
+index ed28ff4..cd1577e 100644
+--- a/package/src/integrations/HttpMonitorMiddleware.js
++++ b/package/src/integrations/HttpMonitorMiddleware.js
+@@ -46,7 +46,7 @@ export function createMonitorHttpMiddleware(monitor, options = {}) {
+     if (options.exposeTraceId === true) setResponseHeader(res, 'x-trace-id', span.traceId);
+     if (options.propagateResponseTrace === true) injectTraceContext(span.spanContext(), res, { set: (target, key, value) => setResponseHeader(target, key, value) });
+ 
+-    const labels = { method, route: route || path || 'unmatched' };
++    const labels = { method, route: route || 'unmatched' };
+     active.add(1, labels);
+     let settled = false;
+     const finish = (error = null, event = 'finish') => {
+diff --git a/package/src/resources/ResourceRegistry.js b/package/src/resources/ResourceRegistry.js
+index f1ebcd3..938abe1 100644
+--- a/package/src/resources/ResourceRegistry.js
++++ b/package/src/resources/ResourceRegistry.js
+@@ -36,7 +36,7 @@ export class ResourceRegistry extends EventEmitter {
+       tags: Object.freeze(Array.from(new Set(options.tags || []))),
+       sourceBinding: options.sourceBinding || null,
+     };
+-    if (this.resources.has(key)) this.healthRegistry?.unregister(`resource.${key}`);
++    if (this.resources.has(key)) { this.healthRegistry?.unregister(`resource.${key}`); this.latest.delete(key); }
+     this.resources.set(key, record);
+     this.stats.registered++;
+     if (this.healthRegistry && (record.health || hasMethod(resource, ['health', 'readiness', 'liveness', 'ping']))) {
+@@ -115,8 +115,7 @@ export class ResourceRegistry extends EventEmitter {
+     }
+     snapshot.durationMs = Number(process.hrtime.bigint() - started) / 1e6;
+     const sanitized = this.serializer?.sanitize ? this.serializer.sanitize(snapshot, { maxPayloadBytes: this.maxPayloadBytes }) : snapshot;
+-    if (this.resources.get(key) === record) this.latest.set(key, sanitized);
+-    this.emit('snapshot', sanitized);
++    if (this.resources.get(key) === record) { this.latest.set(key, sanitized); this.emit('snapshot', sanitized); }
+     return sanitized;
+   }
+ 
+diff --git a/package/src/storage/JsonlTelemetryStore.js b/package/src/storage/JsonlTelemetryStore.js
+index 6cb9729..b88edb5 100644
+--- a/package/src/storage/JsonlTelemetryStore.js
++++ b/package/src/storage/JsonlTelemetryStore.js
+@@ -21,6 +21,8 @@ export class JsonlTelemetryStore {
+     this.serializer = options.serializer || JSON;
+     this.files = new Map();
+     this.chains = new Map();
++    this.pendingWrites = new Set();
++    this.closePromise = null;
+     this.ready = false;
+     this.closed = false;
+     this.stats = {
+@@ -49,6 +51,15 @@ export class JsonlTelemetryStore {
+ 
+   async writeMany(signals = []) {
+     if (this.closed) return { written: 0, closed: true };
++    // Track the whole admitted operation before initialization can yield. A
++    // chain alone does not cover initialization or subsequent signal kinds.
++    const operation = Promise.resolve().then(() => this._writeMany(signals));
++    this.pendingWrites.add(operation);
++    try { return await operation; }
++    finally { this.pendingWrites.delete(operation); }
++  }
++
++  async _writeMany(signals) {
+     await this.initialize();
+     const groups = new Map();
+     for (const signal of signals) {
+@@ -256,8 +267,13 @@ export class JsonlTelemetryStore {
+     return removed;
+   }
+ 
+-  async flush() { await Promise.allSettled([...this.chains.values()]); return this.snapshot(); }
+-  async close() { await this.flush(); this.closed = true; return this.snapshot(); }
++  async flush() { await Promise.allSettled([...this.pendingWrites]); return this.snapshot(); }
++  async close() {
++    if (this.closePromise) return await this.closePromise;
++    this.closed = true;
++    this.closePromise = this.flush();
++    return await this.closePromise;
++  }
+   snapshot() {
+     return Object.freeze({
+       driver: 'file',
+diff --git a/package/src/studio/MonitorStudioController.js b/package/src/studio/MonitorStudioController.js
+index 45b8178..3c52a61 100644
+--- a/package/src/studio/MonitorStudioController.js
++++ b/package/src/studio/MonitorStudioController.js
+@@ -40,13 +40,21 @@ export class MonitorStudioController {
+   stream = async (req, res) => { const auth = await this._authorize(req, res); if (!auth) return; return this.studio.stream(req, res); };
+   ingest = async (req, res) => {
+     if (!this.studio.monitor.configuration.get('security.allowRemoteIngest')) return json(res, 404, { ok: false, error: { code: 'MONITOR_INGEST_DISABLED', message: 'Remote ingestion is disabled.' } });
+-    try { const raw = await rawBody(req, this.maxBodyBytes); this.studio.monitor.authenticator.assert(raw, req.headers || {}); const parsed = JSON.parse(raw.toString('utf8')); return json(res, 202, { ok: true, ...(await this.studio.monitor.ingest(parsed, { remote: true })) }); }
+-    catch (error) { return failure(res, error); }
++    try { const raw = await rawBody(req, this.maxBodyBytes); this.studio.monitor.authenticator.assert(raw, req.headers || {}); const parsed = JSON.parse(raw.toString('utf8')); return json(res, 202, { ok: true, ...this.studio.monitor.sanitizeTelemetry(await this.studio.monitor.ingest(parsed, { remote: true })) }); }
++    catch (error) { return this._failure(res, error); }
+   };
+ 
+-  _get(handler) { return async (req, res) => { const auth = await this._authorize(req, res); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return failure(res, error); } }; }
+-  _mutate(handler) { return async (req, res) => { const auth = await this._authorize(req, res, { mutate: true }); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return failure(res, error); } }; }
+-  async _authorize(req, res, options = {}) { const result = await this.studio.authorize(req, options); if (result.ok) { secure(res); return result; } for (const [key, value] of Object.entries(result.headers || {})) setHeader(res, key, value); json(res, result.status || 403, { ok: false, error: { code: result.code, message: result.message } }); return null; }
++  _get(handler) { return async (req, res) => { const auth = await this._authorize(req, res); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return this._failure(res, error); } }; }
++  _mutate(handler) { return async (req, res) => { const auth = await this._authorize(req, res, { mutate: true }); if (!auth) return; try { return json(res, 200, { ok: true, data: this.studio.monitor.sanitizeTelemetry(await handler(req, auth)) }); } catch (error) { return this._failure(res, error); } }; }
++  _failure(res, error) {
++    const monitor = this.studio.monitor;
++    const record = monitor.sanitizeTelemetry(errorRecord(error, { stack: false }));
++    // The serializer may replace a large record with its bounded truncation
++    // marker. Keep a separately sanitized protocol code useful to callers.
++    if (record?.truncated === true) Object.assign(record, monitor.sanitizeTelemetry({ code: error?.code || null, message: 'Monitor request failed; error details exceeded serialization limits.' }));
++    return json(res, errorStatus(error?.status), { ok: false, error: record });
++  }
++  async _authorize(req, res, options = {}) { try { const result = await this.studio.authorize(req, options); if (result.ok) { secure(res); return result; } for (const [key, value] of Object.entries(result.headers || {})) setHeader(res, key, value); json(res, errorStatus(result.status, 403), { ok: false, error: this.studio.monitor.sanitizeTelemetry({ code: result.code, message: result.message }) }); return null; } catch (error) { this._failure(res, error); return null; } }
+ }
+ 
+ function param(req, name) { return req.params?.[name] ?? req.param?.(name) ?? null; }
+@@ -56,7 +64,7 @@ function number(value, fallback) { const n = Number(value); return Number.isFini
+ async function body(req, maxBytes) { if (req.body && typeof req.body === 'object') { if (Buffer.byteLength(JSON.stringify(req.body)) > maxBytes) throw tooLarge(); return req.body; } const raw = await rawBody(req, maxBytes); if (!raw.length) return {}; return JSON.parse(raw.toString('utf8')); }
+ async function rawBody(req, maxBytes) { if (Buffer.isBuffer(req.rawBody)) { if (req.rawBody.length > maxBytes) throw tooLarge(); return req.rawBody; } const raw = req.raw || req; if (!raw?.[Symbol.asyncIterator]) return Buffer.alloc(0); const chunks = []; let bytes = 0; for await (const chunk of raw) { const value = Buffer.from(chunk); bytes += value.length; if (bytes > maxBytes) throw Object.assign(new Error('Monitor request body is too large.'), { code: 'MONITOR_BODY_TOO_LARGE', status: 413 }); chunks.push(value); } return Buffer.concat(chunks); }
+ function tooLarge() { return Object.assign(new Error('Monitor request body is too large.'), { code: 'MONITOR_BODY_TOO_LARGE', status: 413 }); }
+-function failure(res, error) { return json(res, Number(error?.status) || 500, { ok: false, error: errorRecord(error, { stack: false }) }); }
++function errorStatus(value, fallback = 500) { const status = Number(value); return Number.isInteger(status) && status >= 400 && status <= 599 ? status : fallback; }
+ function secure(res) { for (const [key, value] of Object.entries({ 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'referrer-policy': 'no-referrer', 'permissions-policy': 'camera=(), microphone=(), geolocation=()', 'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'", 'cache-control': 'no-store' })) setHeader(res, key, value); }
+ function setHeader(res, name, value) { try { (res.setHeader || res.raw?.setHeader)?.call(res.setHeader ? res : res.raw, name, value); } catch {} }
+ function json(res, status, value) { secure(res); if (typeof res.status === 'function') { const target = res.status(status); if (typeof target.json === 'function') return target.json(value); if (typeof target.send === 'function') return target.send(JSON.stringify(value)); } const raw = res.raw || res; raw.statusCode = status; raw.setHeader?.('content-type', 'application/json; charset=utf-8'); return raw.end?.(JSON.stringify(value)); }
+diff --git a/package/src/tracing/Sampler.js b/package/src/tracing/Sampler.js
+index 45064bf..58a2234 100644
+--- a/package/src/tracing/Sampler.js
++++ b/package/src/tracing/Sampler.js
+@@ -6,12 +6,12 @@ export class AlwaysOnSampler { shouldSample() { return { decision: SamplingDecis
+ export class AlwaysOffSampler { shouldSample() { return { decision: SamplingDecision.DROP, attributes: null }; } description() { return 'AlwaysOffSampler'; } }
+ 
+ export class TraceIdRatioSampler {
+-  constructor(ratio = 1) { this.ratio = Math.max(0, Math.min(1, Number(ratio) || 0)); this.upperBound = BigInt(Math.floor(this.ratio * Number.MAX_SAFE_INTEGER)); }
++  constructor(ratio = 1) { this.ratio = Math.max(0, Math.min(1, Number(ratio) || 0)); this.upperBound = BigInt(Math.floor(this.ratio * 0x10000000000000)); }
+   shouldSample(context) {
+     if (this.ratio >= 1) return { decision: SamplingDecision.RECORD_AND_SAMPLE, attributes: null };
+     if (this.ratio <= 0) return { decision: SamplingDecision.DROP, attributes: null };
+     const lower = BigInt(`0x${String(context.traceId).slice(-13)}`);
+-    return { decision: lower <= this.upperBound ? SamplingDecision.RECORD_AND_SAMPLE : SamplingDecision.DROP, attributes: null };
++    return { decision: lower < this.upperBound ? SamplingDecision.RECORD_AND_SAMPLE : SamplingDecision.DROP, attributes: null };
+   }
+   description() { return `TraceIdRatioSampler{${this.ratio}}`; }
+ }
+diff --git a/package/src/tracing/TraceContext.js b/package/src/tracing/TraceContext.js
+index a9abc71..f73e6af 100644
+--- a/package/src/tracing/TraceContext.js
++++ b/package/src/tracing/TraceContext.js
+@@ -62,7 +62,8 @@ export function parseBaggage(value, options = {}) {
+   for (const part of input.split(',').slice(0, maxItems)) {
+     const [rawKey, ...rest] = part.trim().split('=');
+     if (!rawKey || !rest.length) continue;
+-    const key = decodeURIComponent(rawKey.trim());
++    let key;
++    try { key = decodeURIComponent(rawKey.trim()); } catch { continue; }
+     if (!/^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/.test(key)) continue;
+     const rawValue = rest.join('=').split(';')[0].trim();
+     try { output[key] = decodeURIComponent(rawValue); } catch { output[key] = rawValue; }
+diff --git a/package/test/studio-http.test.mjs b/package/test/studio-http.test.mjs
+index 70e4d3f..af93e98 100644
+--- a/package/test/studio-http.test.mjs
++++ b/package/test/studio-http.test.mjs
+@@ -12,3 +12,21 @@ test('actual loopback HTTP serves packaged Studio and all read views safely',asy
+  const denied=await fetch(fixture.url+'/api/overview',{headers:{origin:'https://evil.invalid'}});assert.equal(denied.status,403);
+  const disabled=await fetch(fixture.url+'/api/ingest',{method:'POST',body:'{}'});assert.equal(disabled.status,404);
+ });
++
++test('actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization', async t => {
++ const fixture = await createStudioFixture(); t.after(() => fixture.close());
++ const origin = new URL(fixture.url).origin;
++ const state = async () => (await fetch(`${origin}/fixture/status`)).json();
++ const initial = await state(); assert.equal(initial.silences, 0); assert.equal(initial.mutationRequests, 0); assert.equal(initial.alertState, 'firing'); assert.equal(initial.incidentState, 'open');
++ const denied = await fetch(`${fixture.url}/api/incidents/fixture-incident/resolve`, { method: 'POST', headers: { origin: 'https://evil.invalid', 'content-type': 'application/json' }, body: '{"message":"Must be rejected"}' });
++ assert.equal(denied.status, 403); assert.equal((await state()).incidentState, 'open');
++ const silence = await fetch(`${fixture.url}/api/silences`, { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: '{"ruleIds":[],"durationMs":60000,"reason":"Synthetic all-rules maintenance"}' });
++ assert.equal(silence.status, 200); assert.deepEqual((await silence.json()).data.ruleIds, []); assert.equal((await state()).silences, 1);
++ await fetch(`${origin}/fixture/mode?mode=error`, { method: 'POST' });
++ const rejected = await fetch(`${fixture.url}/api/incidents/fixture-incident/resolve`, { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: '{}' });
++ assert.equal(rejected.status, 503); assert.equal((await state()).incidentState, 'open');
++ await fetch(`${origin}/fixture/mode?mode=seeded`, { method: 'POST' });
++ const resolved = await fetch(`${fixture.url}/api/incidents/fixture-incident/resolve`, { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: '{"message":"Intentional synthetic resolution"}' });
++ assert.equal(resolved.status, 200); assert.equal((await state()).incidentState, 'resolved');
++ const invalid = await fetch(`${origin}/fixture/mode?mode=unknown`, { method: 'POST' }); assert.equal(invalid.status, 400);
++});
+diff --git a/package/types/index.d.ts b/package/types/index.d.ts
+index 810f730..fcda442 100644
+--- a/package/types/index.d.ts
++++ b/package/types/index.d.ts
+@@ -46,25 +46,33 @@ export interface MonitorConfigurationInput {
+   cluster?: Record<string, unknown>;
+ }
+ 
+-export interface TelemetryEnvelope<T = unknown> {
+-  id: string;
+-  schemaVersion: number;
+-  kind: SignalKind;
+-  timestamp: number;
+-  observedAt: number;
+-  service: string;
+-  environment: string;
+-  version: string | null;
+-  instanceId: string | null;
+-  region: string | null;
+-  zone: string | null;
+-  tenantId?: string | null;
+-  traceId?: string | null;
+-  spanId?: string | null;
+-  priority: number;
+-  context: Record<string, unknown>;
+-  payload: T;
++export class TelemetryEnvelope<T = unknown> {
++  constructor(kind: SignalKind, payload: T, options?: Record<string, unknown>);
++  readonly id: string;
++  readonly schemaVersion: number;
++  readonly monitorVersion: string;
++  readonly kind: SignalKind;
++  readonly timestamp: number;
++  readonly observedAt: number;
++  readonly service: string | null;
++  readonly environment: string | null;
++  readonly instanceId: string | null;
++  readonly region: string | null;
++  readonly zone: string | null;
++  readonly tenantId: string | null;
++  readonly traceId: string | null;
++  readonly spanId: string | null;
++  readonly correlationId: string | null;
++  readonly priority: number;
++  readonly sequence: number | null;
++  readonly context: Readonly<Record<string, unknown>> | null;
++  readonly resource: Readonly<Record<string, unknown>> | null;
++  readonly attributes: Readonly<Record<string, unknown>> | null;
++  readonly payload: T;
++  toJSON(): Record<string, unknown>;
+ }
++export function createTelemetryEnvelope<T>(kind: SignalKind, payload: TelemetryEnvelope<T>, options?: Record<string, unknown>): TelemetryEnvelope<T>;
++export function createTelemetryEnvelope<T>(kind: SignalKind, payload: T, options?: Record<string, unknown>): TelemetryEnvelope<T>;
+ 
+ export interface MetricInstrument {
+   readonly name: string;
+@@ -100,22 +108,33 @@ export class MetricRegistry {
+ 
+ export interface SpanContext { traceId: string; spanId: string; traceFlags: number; traceState?: string | null; sampled: boolean; }
+ export class Span {
++  constructor(tracer: Tracer, name: string, context: SpanContext, options?: Record<string, unknown>);
+   readonly traceId: string;
+   readonly spanId: string;
+   readonly parentSpanId: string | null;
+   setAttribute(name: string, value: unknown): this;
+   setAttributes(values: Record<string, unknown>): this;
+   addEvent(name: string, attributes?: Record<string, unknown>, timestamp?: number): this;
+-  recordException(error: unknown): this;
+-  setStatus(code: string, message?: string | null): this;
++  addLink(context: SpanContext, attributes?: Record<string, unknown>): this;
++  recordException(error: unknown, attributes?: Record<string, unknown>): this;
++  setStatus(code: string | {code?: string; message?: string | null}, message?: string | null): this;
++  updateName(name: string): this;
++  isRecording(): boolean;
+   spanContext(): SpanContext;
+-  end(endTime?: number | bigint): this;
++  end(options?: {endTimeUnixNano?: number | bigint | string}): this;
++  toJSON(): Record<string, unknown>;
+ }
+ export class Tracer {
++  constructor(options?: Record<string, unknown>);
++  activeSpan(): Span | null;
++  activeContext(): SpanContext | null;
+   startSpan(name: string, options?: Record<string, unknown>): Span;
++  startActiveSpan<T>(name: string, callback: (span: Span) => T): T;
++  startActiveSpan<T>(name: string, options: Record<string, unknown>, callback: (span: Span) => T): T;
+   trace<T>(name: string, options: Record<string, unknown> | ((span: Span) => T | Promise<T>), callback?: (span: Span) => T | Promise<T>): Promise<T>;
+   query(options?: Record<string, unknown>): unknown;
+   traceById(traceId: string): unknown;
++  snapshot(options?: Record<string, unknown>): unknown;
+   forceFlush(): Promise<unknown>;
+   close(): Promise<void>;
+ }
+@@ -442,7 +461,6 @@ export const cloneValue: any;
+ export const cooperativeYield: any;
+ export const createMonitorClusterEnvelope: any;
+ export const createMonitorFetch: any;
+-export const createTelemetryEnvelope: any;
+ export const createTelemetryStore: any;
+ export const deepFreeze: any;
+ export const dispatchEvent: any;
+diff --git a/package/test/alert-lifecycle.test.mjs b/package/test/alert-lifecycle.test.mjs
+new file mode 100644
+index 0000000..9690891
+--- /dev/null
++++ b/package/test/alert-lifecycle.test.mjs
+@@ -0,0 +1,149 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { setTimeout as delay } from 'node:timers/promises';
++import { AlertEngine, NotificationRouter } from '../src/index.js';
++
++test('optional notification failures remain isolated without an error listener and required failures reject', async () => {
++  const router = new NotificationRouter();
++  router.register('failed', () => { throw new Error('controlled failure'); });
++  router.register('healthy', () => true);
++  const results = await router.notify({ title: 'synthetic' });
++  assert.deepEqual(results.map(result => result.ok), [false, true]);
++  router.register('required', () => { throw new Error('required failure'); }, { required: true });
++  await assert.rejects(router.notify({}, { channels: ['required'] }), /required failure/);
++  await router.close();
++});
++
++test('notification deadlines retain stuck callback ownership and close bounds channel cleanup', async () => {
++  const router = new NotificationRouter({ callbackTimeoutMs: 10 });
++  let calls = 0;
++  let closes = 0;
++  let signal;
++  let release;
++  router.register('stalled', {
++    send(_notification, options) { calls++; signal = options.signal; return new Promise(resolve => { release = resolve; }); },
++    close() { closes++; return new Promise(() => {}); },
++  });
++  router.register('healthy', () => true);
++  assert.deepEqual((await router.notify({})).map(result => result.ok), [false, true]);
++  assert.equal(signal.aborted, true);
++  assert.equal(router.pending.size, 1);
++  assert.deepEqual((await router.notify({})).map(result => result.ok), [false, true]);
++  assert.equal(calls, 1);
++  await Promise.all([router.close(), router.close()]);
++  assert.equal(closes, 1);
++  assert.deepEqual(await router.notify({}), []);
++  release(true);
++  await delay(0);
++  assert.equal(router.pending.size, 0);
++});
++
++test('closing an active notification aborts its signal and settles the caller before a late result', async () => {
++  const router = new NotificationRouter();
++  let entered;
++  let release;
++  let signal;
++  const began = new Promise(resolve => { entered = resolve; });
++  router.register('active', (_notification, options) => { signal = options.signal; entered(); return new Promise(resolve => { release = resolve; }); });
++  const notifying = router.notify({});
++  await began;
++  await router.close();
++  assert.equal(signal.aborted, true);
++  assert.equal((await notifying)[0].ok, false);
++  release(true);
++  await delay(0);
++  assert.equal(router.stats.sent, 0);
++});
++
++test('caller cancellation cannot skip owned notification or alert cleanup', async () => {
++  const cancelled = new AbortController();
++  cancelled.abort(new Error('caller cancelled'));
++  let channelsClosed = 0;
++  const router = new NotificationRouter();
++  router.register('owned', { send() {}, close() { channelsClosed++; } });
++  await router.close({ signal: cancelled.signal });
++  await router.close();
++  assert.equal(channelsClosed, 1);
++  let notificationsClosed = 0;
++  const engine = new AlertEngine({ notifications: { close(options) { assert.equal(options.signal, undefined); notificationsClosed++; } } });
++  await engine.close({ signal: cancelled.signal });
++  await engine.close();
++  assert.equal(notificationsClosed, 1);
++});
++
++test('a failed alert context does not strand evaluation ownership', async () => {
++  let calls = 0;
++  const engine = new AlertEngine({ contextProvider: () => { if (++calls === 1) throw new Error('controlled context'); return {}; } });
++  engine.register({ id: 'healthy', evaluate: () => false });
++  await assert.rejects(engine.evaluate(), /controlled context/);
++  assert.equal(engine.evaluating, false);
++  await engine.evaluate();
++  assert.equal(engine.stats.evaluations, 1);
++  await engine.close();
++});
++
++test('alert deadlines avoid overlapping a stalled rule while healthy rules remain usable', async () => {
++  const engine = new AlertEngine({ callbackTimeoutMs: 10 });
++  let calls = 0;
++  let signal;
++  let release;
++  engine.register({ id: 'stalled', evaluate: context => { calls++; signal = context.signal; return new Promise(resolve => { release = resolve; }); } });
++  engine.register({ id: 'healthy', evaluate: () => false });
++  await engine.evaluate();
++  assert.equal(engine.current().find(row => row.ruleId === 'stalled').error.code, 'MONITOR_TIMEOUT');
++  assert.equal(signal.aborted, true);
++  await engine.evaluate();
++  assert.equal(calls, 1);
++  assert.equal(engine.current().find(row => row.ruleId === 'stalled').error.code, 'MONITOR_ALERT_CALLBACK_BUSY');
++  assert.equal(engine.current().find(row => row.ruleId === 'healthy').error, null);
++  await engine.close();
++  release(true);
++  await delay(0);
++  assert.equal(engine.history.some(event => event.state === 'firing'), false);
++});
++
++test('retired or closed alert evaluations cannot notify or open incidents', async () => {
++  for (const action of ['replace', 'close']) {
++    let entered;
++    let release;
++    let notices = 0;
++    let incidents = 0;
++    const began = new Promise(resolve => { entered = resolve; });
++    const engine = new AlertEngine({ notifications: { notify() { notices++; }, close() {}, snapshot() { return {}; } }, incidents: { openFromAlert() { incidents++; } } });
++    engine.register({ id: 'same', severity: 'critical', evaluate: () => { entered(); return new Promise(resolve => { release = resolve; }); } });
++    const evaluating = engine.evaluate();
++    await began;
++    if (action === 'replace') engine.register({ id: 'same', evaluate: () => false }, { replace: true });
++    else await engine.close();
++    release(true);
++    await evaluating;
++    assert.equal(notices, 0);
++    assert.equal(incidents, 0);
++    assert.equal(engine.history.length, 0);
++    if (action === 'replace') {
++      await engine.evaluate();
++      assert.equal(engine.current()[0].state, 'inactive');
++      assert.equal(engine.current()[0].consecutiveFiring, 0);
++      await engine.close();
++    }
++  }
++});
++
++test('close during a pending notification does not start a later incident or accept notification accounting', async () => {
++  let entered;
++  let release;
++  let incidents = 0;
++  const began = new Promise(resolve => { entered = resolve; });
++  const engine = new AlertEngine({ notifications: { notify() { entered(); return new Promise(resolve => { release = resolve; }); }, close() {}, snapshot() { return {}; } }, incidents: { openFromAlert() { incidents++; } } });
++  engine.register({ id: 'critical', severity: 'critical', evaluate: () => true });
++  const evaluating = engine.evaluate();
++  await began;
++  await engine.close();
++  await evaluating;
++  release(true);
++  await delay(0);
++  assert.equal(incidents, 0);
++  assert.equal(engine.stats.notifications, 0);
++  assert.equal(engine.current()[0].lastNotifiedAt, null);
++  assert.throws(() => engine.register({ id: 'late', evaluate: () => true }), { code: 'MONITOR_CLOSED' });
++});
+diff --git a/package/test/contracts-hardening.test.mjs b/package/test/contracts-hardening.test.mjs
+new file mode 100644
+index 0000000..40ef98b
+--- /dev/null
++++ b/package/test/contracts-hardening.test.mjs
+@@ -0,0 +1,159 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { EventEmitter } from 'node:events';
++import {
++  MetricRegistry, MonitorContextManager, MonitorRuntime, RedisMonitorBridge,
++  ResourceRegistry, SamplingDecision, TraceContext, TraceIdRatioSampler, Tracer,
++  createMonitorClusterEnvelope, createMonitorHttpMiddleware, extractTraceContext,
++  injectTraceContext, parseBaggage, verifyMonitorClusterEnvelope,
++} from '../src/index.js';
++
++test('ratio sampling uses the full 52-bit suffix range at deterministic boundaries', () => {
++  const context = suffix => ({ traceId: suffix.padStart(32, '0') });
++  for (const [ratio, below, at] of [[0.25, '3ffffffffffff', '4000000000000'], [0.5, '7ffffffffffff', '8000000000000'], [0.75, 'bffffffffffff', 'c000000000000']]) {
++    const sampler = new TraceIdRatioSampler(ratio);
++    assert.equal(sampler.shouldSample(context(below)).decision, SamplingDecision.RECORD_AND_SAMPLE);
++    assert.equal(sampler.shouldSample(context(at)).decision, SamplingDecision.DROP);
++    assert.equal(sampler.shouldSample(context('fffffffffffff')).decision, SamplingDecision.DROP);
++  }
++  assert.equal(new TraceIdRatioSampler(0).shouldSample(context('1')).decision, SamplingDecision.DROP);
++  assert.equal(new TraceIdRatioSampler(1).shouldSample(context('fffffffffffff')).decision, SamplingDecision.RECORD_AND_SAMPLE);
++});
++
++test('bound context overrides its creation scope and preserves receiver, arguments and async propagation', async () => {
++  const manager = new MonitorContextManager();
++  const owner = { fixture: true };
++  const callback = manager.run({ requestId: 'creation' }, () => manager.bind(async function (value) {
++    await Promise.resolve();
++    return { receiver: this, value, active: manager.active().requestId };
++  }, { requestId: 'bound' }));
++  const result = await manager.run({ requestId: 'caller' }, () => callback.call(owner, 7));
++  assert.deepEqual(result, { receiver: owner, value: 7, active: 'bound' });
++  assert.equal(manager.active().requestId, undefined);
++  manager.disable();
++});
++
++test('remote context parsing ignores malformed baggage keys and preserves valid propagation and parent sampling', async () => {
++  assert.deepEqual({ ...parseBaggage('%E0%A4%A=bad,valid=works') }, { valid: 'works' });
++  const original = new TraceContext({ sampled: false, baggage: { valid: 'works' } });
++  const carrier = injectTraceContext(original, {});
++  carrier.baggage = '%E0%A4%A=bad,' + carrier.baggage;
++  const remote = extractTraceContext(carrier);
++  assert.equal(remote.traceId, original.traceId);
++  assert.equal(remote.sampled, false);
++  assert.equal(remote.baggage.valid, 'works');
++  const manager = new MonitorContextManager();
++  const tracer = new Tracer({ sampleRate: 1, contextManager: manager });
++  const child = manager.run({ traceContext: remote }, () => tracer.startSpan('child'));
++  assert.equal(child.traceId, remote.traceId);
++  assert.equal(child.isRecording(), false);
++  await tracer.close();
++  manager.disable();
++});
++
++test('HTTP middleware uses route templates and a single unmatched label for request-specific paths', async () => {
++  const monitor = new MonitorRuntime({ profile: 'test' });
++  try {
++    const middleware = createMonitorHttpMiddleware(monitor);
++    for (const [url, route] of [['/users/1', null], ['/users/2', null], ['/users/3', { path: '/users/:id' }]]) {
++      const res = new EventEmitter();
++      res.statusCode = 200;
++      res.setHeader = () => {};
++      await middleware({ url, method: 'GET', headers: {}, route }, res, () => {});
++      res.emit('finish');
++      res.emit('close');
++    }
++    const series = monitor.metrics.get('http_server_requests_total').snapshot().series;
++    assert.deepEqual(series.map(row => [row.labels.route, row.value]), [['unmatched', 2], ['/users/:id', 1]]);
++    assert.equal(monitor.metrics.get('http_server_active_requests').snapshot().series.every(row => row.value === 0), true);
++    assert.equal(monitor.metrics.get('http_server_request_duration_seconds').snapshot().unit, 'seconds');
++  } finally { await monitor.close(); }
++});
++
++test('timer and span elapsed duration stay monotonic when the wall clock moves backwards', async () => {
++  const metrics = new MetricRegistry();
++  const timer = metrics.timer('operation');
++  const stop = timer.start();
++  const tracer = new Tracer({ sampleRate: 1 });
++  const span = tracer.startSpan('operation');
++  span.startHrtime -= 2_000_000n;
++  const wallClock = Date.now;
++  try {
++    Date.now = () => wallClock() - 60_000;
++    assert.ok(stop() >= 0);
++    assert.equal(stop(), 0);
++    span.end();
++    assert.ok(span.toJSON().durationMs >= 2);
++    assert.ok(BigInt(span.toJSON().endTimeUnixNano) < BigInt(span.toJSON().startTimeUnixNano));
++  } finally { Date.now = wallClock; await tracer.close(); }
++  assert.equal(timer.snapshot().unit, 'seconds');
++  assert.equal(timer.snapshot().series[0].count, 1);
++});
++
++test('resource replacement invalidates cached state and suppresses retired collection events', async () => {
++  const registry = new ResourceRegistry();
++  registry.register('db', { metrics: () => ({ generation: 'old' }) });
++  await registry.collectOne('db');
++  let release;
++  let entered;
++  const began = new Promise(resolve => { entered = resolve; });
++  registry.register('db', { metrics: async () => { entered(); return new Promise(resolve => { release = resolve; }); } }, { replace: true });
++  assert.equal(registry.latestSnapshot('db'), null);
++  const events = [];
++  registry.on('snapshot', snapshot => events.push(snapshot));
++  const pending = registry.collectOne('db');
++  await began;
++  registry.register('db', { metrics: () => ({ generation: 'current' }) }, { replace: true });
++  await registry.collectOne('db');
++  release({ generation: 'retired' });
++  await pending;
++  assert.equal(registry.latestSnapshot('db').metrics.generation, 'current');
++  assert.deepEqual(events.map(snapshot => snapshot.metrics.generation), ['current']);
++  registry.unregister('db');
++});
++
++test('late Redis subscribe and ready completion cannot resurrect a closed bridge', async () => {
++  for (const barrier of ['subscribe', 'ready']) {
++    let release;
++    let entered;
++    let subscriptions = 0;
++    let disposals = 0;
++    let handler;
++    const gate = new Promise(resolve => { release = resolve; });
++    const began = new Promise(resolve => { entered = resolve; });
++    const subscription = { ready: async () => { if (barrier === 'ready') { entered(); await gate; } }, unsubscribe: () => { disposals++; } };
++    const redis = { async subscribe(_channel, listener) { subscriptions++; handler = listener; if (barrier === 'subscribe') { entered(); await gate; } return subscription; } };
++    const bridge = new RedisMonitorBridge(redis, { source: 'local' });
++    let started = 0;
++    let messages = 0;
++    bridge.on('started', () => { started++; });
++    bridge.on('message', () => { messages++; });
++    const starts = [bridge.start(), bridge.start()];
++    await began;
++    await bridge.close();
++    handler(JSON.stringify(createMonitorClusterEnvelope('signal', {}, { source: 'remote' })));
++    release();
++    await Promise.all(starts);
++    await bridge.close();
++    assert.equal(subscriptions, 1);
++    assert.equal(disposals, 1);
++    assert.equal(started, 0);
++    assert.equal(messages, 0);
++    assert.equal(bridge.started, false);
++    assert.equal(bridge.closed, true);
++    assert.equal(bridge.subscription, null);
++  }
++});
++
++test('cluster envelopes reject invalid, expired, wrong-namespace and tampered authentication fields', () => {
++  const envelope = createMonitorClusterEnvelope('signal', { fixture: true }, { source: 'remote', namespace: 'typed', secret: 'synthetic-only' });
++  assert.equal(verifyMonitorClusterEnvelope(envelope, { namespace: 'typed', secret: 'synthetic-only' }).ok, true);
++  for (const field of ['timestamp', 'expiresAt']) {
++    for (const value of ['invalid', null, undefined, Infinity]) {
++      assert.equal(verifyMonitorClusterEnvelope({ ...envelope, [field]: value }).ok, false);
++    }
++  }
++  assert.equal(verifyMonitorClusterEnvelope({ ...envelope, expiresAt: Date.now() - 1 }).reason, 'expired');
++  assert.equal(verifyMonitorClusterEnvelope(envelope, { namespace: 'other' }).reason, 'namespace');
++  assert.equal(verifyMonitorClusterEnvelope({ ...envelope, payload: { fixture: false } }, { secret: 'synthetic-only' }).reason, 'signature-invalid');
++});
+diff --git a/package/test/exports-types.mts b/package/test/exports-types.mts
+new file mode 100644
+index 0000000..20766e8
+--- /dev/null
++++ b/package/test/exports-types.mts
+@@ -0,0 +1,80 @@
++// Compile with --resolveJsonModule in addition to the baseline strict NodeNext options.
++// Each of the manifest's 29 entries is resolved from an installed/self-reference package specifier.
++import MonitorRuntime, { type TelemetryEnvelope } from '@rawnode/monitor';
++import * as metrics from '@rawnode/monitor/metrics';
++import * as pipeline from '@rawnode/monitor/pipeline';
++import * as studio from '@rawnode/monitor/studio';
++import * as tracing from '@rawnode/monitor/tracing';
++import * as cluster from '@rawnode/monitor/cluster';
++import * as core from '@rawnode/monitor/core';
++import * as analysis from '@rawnode/monitor/analysis';
++import * as security from '@rawnode/monitor/security';
++import * as plugins from '@rawnode/monitor/plugins';
++import * as synthetics from '@rawnode/monitor/synthetics';
++import * as exporters from '@rawnode/monitor/exporters';
++import * as health from '@rawnode/monitor/health';
++import * as resources from '@rawnode/monitor/resources';
++import * as storage from '@rawnode/monitor/storage';
++import * as alerts from '@rawnode/monitor/alerts';
++import * as integrations from '@rawnode/monitor/integrations';
++import * as testing from '@rawnode/monitor/testing';
++import * as system from '@rawnode/monitor/system';
++import * as diagnostics from '@rawnode/monitor/diagnostics';
++import * as slo from '@rawnode/monitor/slo';
++import * as query from '@rawnode/monitor/query';
++import * as incidents from '@rawnode/monitor/incidents';
++import * as deployments from '@rawnode/monitor/deployments';
++import * as commands from '@rawnode/monitor/console';
++import { MonitorServiceProvider } from '@rawnode/monitor/provider';
++import config from '@rawnode/monitor/config';
++import { mountMonitorStudio } from '@rawnode/monitor/studio/client';
++import metadata from '@rawnode/monitor/package.json' with { type: 'json' };
++
++const monitor = new MonitorRuntime({ config });
++const registry = new metrics.MetricRegistry({ maxSeries: 8 });
++registry.timer('duration_seconds').labels({ route: '/orders/:id' }).start()();
++const sink = new storage.MemoryTelemetryStore({ maxItems: 4 });
++new pipeline.SignalPipeline().addSink('memory', sink, { required: true });
++const context = new core.MonitorContextManager();
++const envelope: TelemetryEnvelope<{ name: string }> = new core.TelemetryEnvelope('event', { name: 'typed' });
++const monitorVersion: string = envelope.monitorVersion;
++const service: string | null = envelope.service;
++const factoryEnvelope = core.createTelemetryEnvelope('event', { value: 1 });
++const value: number = factoryEnvelope.payload.value;
++const tracer = new tracing.Tracer({ sampleRate: 1, contextManager: context });
++tracer.startSpan('work').end({ endTimeUnixNano: 1_700_000_000_000_000_000n });
++const activeResult: number = tracer.startActiveSpan('work', span => { span.end(); return 42; });
++tracer.startSpan('status').setStatus({ code: 'ok' }).updateName('updated').end();
++new cluster.FleetRegistry().heartbeat({ instanceId: 'typed' });
++new analysis.StreamingBaseline().observe(1);
++new security.SafeTelemetrySerializer().sanitize({ password: 'synthetic' });
++new plugins.MonitorPluginManager().hook('typed', () => undefined);
++new synthetics.SyntheticMonitor().register({ id: 'typed', type: 'custom', run: () => true });
++new exporters.CallbackExporter(() => undefined);
++new health.HealthRegistry().register('typed', ({ signal }) => ({ ok: !signal.aborted }));
++new resources.ResourceRegistry().register('typed', { metrics: () => ({ count: 1 }) });
++new alerts.AlertRule({ name: 'typed', evaluate: () => false });
++new integrations.PMMonitorBridge({ registerResource() { return () => {}; } }, monitor).start();
++new testing.MonitorRecorder({ monitor });
++new system.ProcessMetricsCollector({ metrics: registry });
++new diagnostics.DiagnosticBundleBuilder({ monitor });
++new slo.SloDefinition({ name: 'typed', objective: 0.99, indicator: { measure: () => ({ good: 99, total: 100 }) } });
++new query.MonitorQueryEngine({ monitor });
++new incidents.RunbookRegistry();
++new deployments.DeploymentRegistry();
++const commandClasses: unknown = commands.RAWNODE_MONITOR_COMMANDS;
++const manager = new studio.MonitorStudioManager({ monitor });
++new MonitorServiceProvider({}, { allowsBackgroundAutoStart: () => false });
++declare const root: HTMLElement;
++const client = mountMonitorStudio(root);
++const navigation: Promise<void> = client.navigate('traces');
++const snapshot: boolean = client.snapshot().destroyed;
++const name: string = metadata.name;
++
++// @ts-expect-error runtime end() takes an options object, not a bare timestamp
++tracer.startSpan('invalid').end(1n);
++// @ts-expect-error envelope signal kinds are closed
++new core.TelemetryEnvelope('arbitrary', {});
++// @ts-expect-error metadata does not invent an npm executable
++metadata.bin;
++void [monitorVersion, service, value, activeResult, commandClasses, manager, navigation, snapshot, name];
+diff --git a/package/test/readiness-lifecycle.test.mjs b/package/test/readiness-lifecycle.test.mjs
+new file mode 100644
+index 0000000..82b678a
+--- /dev/null
++++ b/package/test/readiness-lifecycle.test.mjs
+@@ -0,0 +1,255 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import http from 'node:http';
++import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
++import os from 'node:os';
++import path from 'node:path';
++import { once } from 'node:events';
++import { setImmediate as nextTurn } from 'node:timers/promises';
++import { HealthRegistry, HttpJsonExporter, JsonlTelemetryStore, MonitorRuntime } from '../src/index.js';
++
++const deferred = () => {
++  let resolve;
++  const promise = new Promise(done => { resolve = done; });
++  return { promise, resolve };
++};
++
++async function endpoint(handler) {
++  const server = http.createServer(handler);
++  server.listen(0, '127.0.0.1');
++  await once(server, 'listening');
++  return {
++    url: `http://127.0.0.1:${server.address().port}/telemetry`,
++    close: async () => {
++      server.closeAllConnections();
++      await new Promise(resolve => server.close(resolve));
++    },
++  };
++}
++
++test('replaced health checks discard old cached results and retain registration identity', async () => {
++  const health = new HealthRegistry();
++  const oldDispose = health.register('database', () => ({ ok: true, details: { version: 'old' } }), {
++    cacheTtlMs: 60_000, critical: true, tags: ['old'],
++  });
++  assert.equal((await health.ready()).ok, true);
++  let replacementCalls = 0;
++  const dispose = health.register('database', () => {
++    replacementCalls++;
++    return { ok: false, details: { version: 'replacement' } };
++  }, { replace: true, cacheTtlMs: 0, critical: false, tags: ['new'] });
++  const report = await health.ready();
++  assert.equal(replacementCalls, 1);
++  assert.equal(report.status, 'degraded');
++  assert.equal(report.checks[0].critical, false);
++  assert.deepEqual(report.checks[0].tags, ['new']);
++  assert.deepEqual(report.checks[0].details, { version: 'replacement' });
++  assert.equal(oldDispose(), false);
++  assert.equal((await health.ready()).checks.length, 1);
++  assert.equal(dispose(), true);
++  assert.equal(dispose(), false);
++  assert.equal((await health.ready()).checks.length, 0);
++  health.register('explicit', () => true);
++  assert.equal(health.unregister('explicit'), true);
++});
++
++test('a critical unhealthy replacement controls ordinary readiness immediately', async () => {
++  const health = new HealthRegistry();
++  health.register('database', () => true, { cacheTtlMs: 60_000 });
++  await health.ready();
++  health.register('database', () => false, { replace: true, cacheTtlMs: 0 });
++  assert.equal((await health.ready()).ready, false);
++});
++
++test('late old health callback cannot populate a replacement cache', { timeout: 2_000 }, async () => {
++  const health = new HealthRegistry();
++  const began = deferred();
++  const release = deferred();
++  health.register('database', async () => { began.resolve(); await release.promise; return true; }, { cacheTtlMs: 60_000 });
++  const oldReport = health.ready();
++  await began.promise;
++  let calls = 0;
++  health.register('database', () => { calls++; return false; }, { replace: true, cacheTtlMs: 0 });
++  release.resolve();
++  await oldReport;
++  assert.equal((await health.ready()).ready, false);
++  assert.equal((await health.ready()).ready, false);
++  assert.equal(calls, 2);
++});
++
++test('HTTP exporter close cancels retry backoff without admitting another request', { timeout: 2_000 }, async () => {
++  let requests = 0;
++  const target = await endpoint((_request, response) => {
++    requests++;
++    response.writeHead(requests === 1 ? 503 : 200).end();
++  });
++  const exporter = new HttpJsonExporter({ url: target.url, compression: false, retryBaseMs: 60, retryMaxMs: 60 });
++  const firstResponse = deferred();
++  const request = exporter._request.bind(exporter);
++  exporter._request = async (...args) => { const result = await request(...args); firstResponse.resolve(); return result; };
++  const exporting = exporter.export([{ kind: 'event', id: 'backoff' }]);
++  const outcome = exporting.then(value => ({ value }), error => ({ error }));
++  try {
++    await firstResponse.promise;
++    await nextTurn();
++    await Promise.all([exporter.close(), exporter.close()]);
++    assert.equal((await outcome).error?.code, 'MONITOR_EXPORTER_CLOSED');
++    assert.equal(requests, 1);
++    assert.equal(exporter.stats.retries, 0);
++    assert.equal(exporter.stats.signals, 0);
++    assert.equal(await exporter.export([{ kind: 'event' }]), false);
++  } finally { await exporter.close(); await target.close(); }
++});
++
++test('HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks', { timeout: 2_000 }, async () => {
++  let requests = 0;
++  const target = await endpoint((_request, response) => { requests++; response.writeHead(200).end(); });
++  const exporter = new HttpJsonExporter({ url: target.url, compression: false, maxBatchSignals: 1 });
++  const acknowledged = deferred();
++  const release = deferred();
++  const request = exporter._request.bind(exporter);
++  exporter._request = async (...args) => {
++    const result = await request(...args);
++    if (requests === 1) { acknowledged.resolve(); await release.promise; }
++    return result;
++  };
++  const exporting = exporter.export([{ kind: 'event', id: 'first' }, { kind: 'event', id: 'second' }]);
++  const outcome = exporting.then(value => ({ value }), error => ({ error }));
++  try {
++    await acknowledged.promise;
++    const closed = exporter.close();
++    release.resolve();
++    await closed;
++    assert.equal((await outcome).error?.code, 'MONITOR_EXPORTER_CLOSED');
++    assert.equal(requests, 1);
++    assert.equal(exporter.stats.batches, 1);
++    assert.equal(exporter.stats.signals, 1);
++  } finally { release.resolve(); await exporter.close(); await target.close(); }
++});
++
++test('HTTP exporter close during compression prevents the continuation from opening a request', { timeout: 2_000 }, async () => {
++  let requests = 0;
++  const target = await endpoint((_request, response) => { requests++; response.writeHead(200).end(); });
++  const formatting = deferred();
++  const exporter = new HttpJsonExporter({
++    url: target.url, compressionThresholdBytes: 256,
++    format(signals) { formatting.resolve(); return { signals, padding: 'x'.repeat(64 * 1024) }; },
++  });
++  const exporting = exporter.export([{ kind: 'event' }]);
++  const outcome = exporting.then(value => ({ value }), error => ({ error }));
++  try {
++    await formatting.promise;
++    await exporter.close();
++    assert.equal((await outcome).error?.code, 'MONITOR_EXPORTER_CLOSED');
++    assert.equal(requests, 0);
++  } finally { await exporter.close(); await target.close(); }
++});
++
++test('HTTP exporter close aborts an active request and releases owned sockets', { timeout: 2_000 }, async () => {
++  let requests = 0;
++  const received = deferred();
++  const disconnected = deferred();
++  const target = await endpoint((request) => {
++    requests++;
++    request.socket.once('close', disconnected.resolve);
++    request.resume();
++    received.resolve();
++  });
++  const exporter = new HttpJsonExporter({ url: target.url, timeoutMs: 1_000, compression: false });
++  const exporting = exporter.export([{ kind: 'event' }]);
++  const outcome = exporting.then(value => ({ value }), error => ({ error }));
++  try {
++    await received.promise;
++    await exporter.close();
++    await disconnected.promise;
++    await nextTurn();
++    assert.equal((await outcome).error?.code, 'MONITOR_EXPORTER_CLOSED');
++    assert.equal(requests, 1);
++    assert.equal(Object.values(exporter.agent.sockets).flat().length, 0);
++    assert.equal(Object.values(exporter.agent.freeSockets).flat().length, 0);
++    assert.equal(exporter.stats.signals, 0);
++  } finally { await exporter.close(); await target.close(); }
++});
++
++test('HTTP exporter still retries and acknowledges ordinary requests before close', { timeout: 2_000 }, async () => {
++  let requests = 0;
++  const target = await endpoint((_request, response) => { requests++; response.writeHead(requests === 1 ? 503 : 200).end(); });
++  const exporter = new HttpJsonExporter({ url: target.url, compression: false, retryBaseMs: 1, retryMaxMs: 1 });
++  try {
++    assert.equal(await exporter.export([{ kind: 'event' }]), true);
++    assert.equal(requests, 2);
++    assert.equal(exporter.stats.retries, 1);
++    assert.equal(exporter.stats.signals, 1);
++    assert.equal(exporter.stats.errors, 0);
++  } finally { await exporter.close(); await target.close(); }
++});
++
++test('runtime-owned HTTP exporter remains terminal when runtime closes during a request', { timeout: 2_000 }, async () => {
++  const received = deferred();
++  let requests = 0;
++  const target = await endpoint(request => { requests++; request.resume(); received.resolve(); });
++  const monitor = new MonitorRuntime({ profile: 'test', logger: { warn() {}, error() {} } });
++  const exporter = new HttpJsonExporter({ url: target.url, compression: false, retryBaseMs: 60 });
++  monitor.registerExporter('controlled', exporter, { maxAttempts: 1, timeoutMs: 1_000 });
++  try {
++    monitor.emitEvent('shutdown');
++    const flushing = monitor.flush({ timeoutMs: 1_000 });
++    const outcome = flushing.then(value => ({ value }), error => ({ error }));
++    await received.promise;
++    await monitor.close({ flush: false, timeoutMs: 500 });
++    await outcome;
++    assert.equal(exporter.closed, true);
++    assert.equal(requests, 1);
++    assert.equal(monitor.pipeline.inFlight.size, 0);
++    assert.equal(await exporter.export([{ kind: 'event' }]), false);
++  } finally { await monitor.close({ flush: false, timeoutMs: 500 }); await target.close(); }
++});
++
++test('JSONL close closes admission synchronously and drains writes deferred in initialization', { timeout: 2_000 }, async () => {
++  const root = await mkdtemp(path.join(os.tmpdir(), 'monitor-jsonl-drain-'));
++  const store = new JsonlTelemetryStore({ path: root });
++  const began = deferred();
++  const release = deferred();
++  const initialize = store.initialize.bind(store);
++  store.initialize = async () => { began.resolve(); await release.promise; return await initialize(); };
++  const writing = store.writeMany([{ kind: 'event', id: 'accepted' }, { kind: 'health', id: 'also-accepted' }]);
++  try {
++    await began.promise;
++    let settled = false;
++    const closed = store.close().then(value => { settled = true; return value; });
++    const repeated = store.close();
++    await nextTurn();
++    const wasSettledBeforeRelease = settled;
++    const late = await store.writeMany([{ kind: 'event', id: 'late' }]);
++    release.resolve();
++    assert.deepEqual(await writing, { written: 2 });
++    await Promise.all([closed, repeated]);
++    assert.equal(wasSettledBeforeRelease, false);
++    assert.deepEqual(late, { written: 0, closed: true });
++    const files = await readdir(root);
++    const rows = (await Promise.all(files.map(file => readFile(path.join(root, file), 'utf8')))).join('');
++    assert.match(rows, /accepted/);
++    assert.match(rows, /also-accepted/);
++    assert.doesNotMatch(rows, /"late"/);
++    assert.equal(store.chains.size, 0);
++  } finally { release.resolve(); await writing.catch(() => {}); await store.close(); await rm(root, { recursive: true, force: true }); }
++});
++
++test('JSONL flush includes writes admitted before initialization starts', { timeout: 2_000 }, async () => {
++  const root = await mkdtemp(path.join(os.tmpdir(), 'monitor-jsonl-flush-'));
++  const store = new JsonlTelemetryStore({ path: root });
++  const release = deferred();
++  const initialize = store.initialize.bind(store);
++  store.initialize = async () => { await release.promise; return await initialize(); };
++  const writing = store.write({ kind: 'event', id: 'accepted' });
++  let flushed = false;
++  const flushing = store.flush().then(value => { flushed = true; return value; });
++  try {
++    await nextTurn();
++    const flushedBeforeRelease = flushed;
++    release.resolve();
++    await Promise.all([writing, flushing]);
++    assert.equal(flushedBeforeRelease, false);
++    assert.equal(store.stats.written, 1);
++  } finally { release.resolve(); await writing.catch(() => {}); await store.close(); await rm(root, { recursive: true, force: true }); }
++});
+diff --git a/package/test/studio-actions.test.mjs b/package/test/studio-actions.test.mjs
+new file mode 100644
+index 0000000..0cf7533
+--- /dev/null
++++ b/package/test/studio-actions.test.mjs
+@@ -0,0 +1,101 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { setTimeout as sleep } from 'node:timers/promises';
++import { mountMonitorStudio } from '../resources/assets/js/monitor/studio.js';
++
++// A deliberately small DOM model; real-browser acceptance is a separate gate.
++class Element extends EventTarget {
++  constructor() { super(); this.dataset = {}; this.attrs = {}; this.elements = new Map(); this.hidden = true; this.disabled = false; this.textContent = ''; this.classList = { add() {}, remove() {}, toggle() {} }; }
++  set innerHTML(value) { this.html = value; this.elements.clear(); }
++  get innerHTML() { return this.html || ''; }
++  querySelector(selector) { if (!this.elements.has(selector)) this.elements.set(selector, new Element()); return this.elements.get(selector); }
++  querySelectorAll(selector) {
++    const className = /^\.([\w-]+)$/.exec(selector)?.[1];
++    if (!className) return [];
++    const matches = [...this.innerHTML.matchAll(/<button\b([^>]*)>/g)].filter(match => new RegExp(`class="[^"]*\\b${className}\\b`).test(match[1]));
++    return matches.map((match, index) => { const button = this.querySelector(`${selector}:${index}`); button.dataset.id = /data-id="([^"]*)"/.exec(match[1])?.[1]; button.dataset.trace = /data-trace="([^"]*)"/.exec(match[1])?.[1]; return button; });
++  }
++  setAttribute(key, value) { this.attrs[key] = value; }
++  getAttribute(key) { return this.attrs[key]; }
++  focus() {}
++}
++class Stream extends EventTarget { close() {} }
++const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json' } });
++async function waitFor(check) { for (let i = 0; i < 200; i++) { if (check()) return; await sleep(1); } assert.fail('Bounded fixture condition was not reached.'); }
++function fixture(view = 'alerts') {
++  const doc = new Element(); doc.visibilityState = 'visible';
++  const win = new EventTarget(); win.location = { hash: `#${view}`, href: 'http://127.0.0.1/monitor' }; doc.defaultView = win;
++  const root = new Element(); root.ownerDocument = doc; root.dataset = { prefix: '/monitor', pollIntervalMs: 60_000 };
++  const main = new Element(); const chrome = new Map();
++  root.querySelector = selector => selector === '#rn-main' ? main : ['#rn-toast', '#rn-auth', '#rn-token', '#rn-state', '#rn-identity', '#rn-live-dot', '#rn-nav', '#rn-refresh', '#rn-auth-form'].includes(selector) ? (chrome.has(selector) ? chrome.get(selector) : (chrome.set(selector, new Element()), chrome.get(selector))) : main.querySelector(selector);
++  root.querySelectorAll = selector => main.querySelectorAll(selector);
++  const answers = []; let prompts = 0; const mutations = []; const silences = []; const incident = { id: 'fixture-incident', title: '<script>synthetic</script>', severity: 'critical', state: 'open' };
++  win.prompt = () => { prompts++; assert.ok(answers.length, 'Every prompt has an explicit fixture answer.'); return answers.shift(); };
++  const fetch = async (url, options) => {
++    if (options.method && options.method !== 'GET') {
++      const body = options.body ? JSON.parse(options.body) : {}; mutations.push({ url, options, body });
++      if (options.method === 'POST' && url.endsWith('/api/silences')) silences.push({ ...body, id: 'fixture-silence' });
++      if (url.endsWith('/resolve')) incident.state = 'resolved';
++      return json({ ok: true, data: body });
++    }
++    if (url.includes('/api/alerts')) return json({ data: { current: [], history: [], silences: { silences } } });
++    if (url.includes('/api/incidents')) return json({ data: { incidents: [incident] } });
++    if (url.includes('/api/health')) return json({ data: { ok: true, status: 'healthy', checks: [] } });
++    throw new Error(`Unexpected fixture request ${url}`);
++  };
++  return { root, win, answers, mutations, silences, incident, fetch, prompts: () => prompts };
++}
++async function mount(t, f, fetch = f.fetch) { const handle = mountMonitorStudio(f.root, { fetch, EventSource: Stream }); t.after(() => handle.destroy()); await handle.navigate(f.win.location.hash.replace(/^#/, '')); return handle; }
++const click = element => element.dispatchEvent(new Event('click'));
++
++test('modeled actions: cancelling each silence prompt or incident resolution sends no mutation', async t => {
++  const f = fixture(); const handle = await mount(t, f);
++  for (const [answers, count] of [[[null], 1], [['rule', null], 2], [['rule', '60', null], 3]]) {
++    const before = f.prompts(); f.answers.push(...answers); const button = f.root.querySelector('#rn-create-silence'); click(button); await waitFor(() => !button.disabled);
++    assert.equal(f.prompts() - before, count); assert.equal(f.mutations.length, 0); assert.deepEqual(f.silences, []);
++  }
++  await handle.navigate('incidents'); f.answers.push(null); const button = f.root.querySelectorAll('.rn-incident-resolve')[0]; click(button); await waitFor(() => !button.disabled);
++  assert.equal(f.mutations.length, 0); assert.equal(f.incident.state, 'open');
++});
++
++test('modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible', async t => {
++  const f = fixture(); const handle = await mount(t, f);
++  for (const duration of ['', '0', '-1', 'no', 'Infinity', '1e100']) {
++    f.answers.push('rule', duration); const button = f.root.querySelector('#rn-create-silence'); click(button); await waitFor(() => !button.disabled);
++    assert.match(f.root.querySelector('#rn-toast').textContent, /positive number/); assert.equal(f.mutations.length, 0);
++  }
++  f.answers.push('', '2.5', 'Planned maintenance'); click(f.root.querySelector('#rn-create-silence')); await waitFor(() => f.silences.length === 1 && f.root.getAttribute('aria-busy') === 'false');
++  assert.deepEqual(f.silences[0].ruleIds, []); assert.equal(f.silences[0].durationMs, 150_000); assert.equal(f.silences[0].reason, 'Planned maintenance');
++  await handle.navigate('incidents'); f.answers.push('Issue mitigated intentionally'); click(f.root.querySelectorAll('.rn-incident-resolve')[0]); await waitFor(() => f.incident.state === 'resolved');
++  assert.equal(f.mutations.at(-1).body.message, 'Issue mitigated intentionally');
++});
++
++test('modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback', async t => {
++  const f = fixture('incidents'); let mode = 'failure'; let release; let active; let admitted = 0;
++  const fetch = async (url, options) => {
++    if (options.method === 'POST') {
++      admitted++; active = options.signal;
++      if (mode === 'failure') return json({ ok: false, error: { message: 'Synthetic mutation rejected' } }, 503);
++      await new Promise(resolve => { release = resolve; }); // Deliberately ignore abort to exercise the client continuation guard.
++      return json({ ok: true, data: {} });
++    }
++    return f.fetch(url, options);
++  };
++  const handle = await mount(t, f, fetch); f.answers.push('Failure test'); let button = f.root.querySelectorAll('.rn-incident-resolve')[0]; click(button); await waitFor(() => !button.disabled);
++  assert.equal(f.root.querySelector('#rn-toast').textContent, 'Synthetic mutation rejected'); assert.equal(f.incident.state, 'open');
++  mode = 'delayed'; f.answers.push('Delayed test'); click(button); click(button); await waitFor(() => !!release); assert.equal(admitted, 2, 'A pending action cannot be submitted twice.');
++  await handle.navigate('health'); assert.equal(active.aborted, true); const health = f.root.querySelector('#rn-main').innerHTML; release(); await sleep(2); assert.equal(f.root.querySelector('#rn-main').innerHTML, health); assert.equal(handle.snapshot().view, 'health');
++  await handle.navigate('incidents'); release = null; f.answers.push('Unmount test'); button = f.root.querySelectorAll('.rn-incident-resolve')[0]; click(button); await waitFor(() => !!release); handle.destroy(); assert.equal(active.aborted, true); const before = f.root.querySelector('#rn-toast').textContent; release(); await sleep(2); assert.equal(f.root.querySelector('#rn-toast').textContent, before); assert.equal(f.root.getAttribute('aria-busy'), 'false');
++});
++
++test('modeled actions: navigation releases polling ownership even when an injected mutation never settles', async t => {
++  const f = fixture('incidents'); f.root.dataset.pollIntervalMs = 1000; let admitted = false; let healthReads = 0; let active;
++  const fetch = async (url, options) => {
++    if (options.method === 'POST') { admitted = true; active = options.signal; return new Promise(() => {}); }
++    if (url.includes('/api/health')) healthReads++;
++    return f.fetch(url, options);
++  };
++  const handle = await mount(t, f, fetch); click(f.root.querySelectorAll('.rn-incident-ack')[0]); await waitFor(() => admitted);
++  await handle.navigate('health'); assert.equal(active.aborted, true); assert.equal(healthReads, 1);
++  await sleep(1100); assert.ok(healthReads >= 2, 'The new view continues polling after the old action is cancelled.');
++});
+diff --git a/package/test/studio-security-regression.test.mjs b/package/test/studio-security-regression.test.mjs
+new file mode 100644
+index 0000000..59b6619
+--- /dev/null
++++ b/package/test/studio-security-regression.test.mjs
+@@ -0,0 +1,51 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { createStudioFixture } from '../examples/studio-fixture.mjs';
++
++function controlledError(details, status = 422) {
++  return Object.assign(new Error('Synthetic capability rejected Bearer fixture-secret-token'), { code: 'MONITOR_SYNTHETIC_FAILURE', status, details });
++}
++async function safeFailure(response, { status = 422, maxBytes = 20_000 } = {}) {
++  assert.equal(response.status, status);
++  assert.match(response.headers.get('content-type'), /application\/json/);
++  assert.match(response.headers.get('content-security-policy'), /script-src 'self'/);
++  const text = await response.text(); assert.ok(Buffer.byteLength(text) <= maxBytes, 'The configured serializer bounds error output plus the JSON envelope.');
++  assert.equal(text.includes('fixture-secret'), false); assert.equal(text.includes('studio-security-regression'), false);
++  const payload = JSON.parse(text); assert.equal(payload.ok, false); assert.equal(payload.error.code, 'MONITOR_SYNTHETIC_FAILURE'); assert.equal(Object.hasOwn(payload.error, 'stack'), false);
++  return payload.error;
++}
++
++test('actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details', async t => {
++  const fixture = await createStudioFixture(); t.after(() => fixture.close());
++  fixture.monitor.serializer.maxStringBytes = 128; fixture.monitor.serializer.maxPayloadBytes = 4096;
++  const cyclic = { password: 'fixture-secret-password' }; cyclic.self = cyclic;
++  const variants = [
++    { token: 'fixture-secret-token', nested: { clientSecret: 'fixture-secret-client' } },
++    cyclic,
++    { secret: 'fixture-secret-bigint', count: 42n },
++    { password: 'fixture-secret-large', oversized: 'x'.repeat(100_000) },
++    Object.fromEntries(Array.from({ length: 500 }, (_, index) => [`entry${index}`, 'x'.repeat(500)])),
++  ];
++  for (const details of variants) {
++    const error = controlledError(details); fixture.studio.overview = () => { throw error; }; fixture.studio.silence = () => { throw error; };
++    const read = await safeFailure(await fetch(`${fixture.url}/api/overview`), { maxBytes: 4608 });
++    const mutation = await safeFailure(await fetch(`${fixture.url}/api/silences`, { method: 'POST', headers: { origin: new URL(fixture.url).origin, 'content-type': 'application/json' }, body: '{}' }), { maxBytes: 4608 });
++    if (!read.truncated) assert.match(read.message, /\[REDACTED\]/);
++    if (details === cyclic) assert.equal(mutation.details.self, '[Circular]');
++    if (details.count === 42n) assert.equal(mutation.details.count, '42');
++    if (details.oversized) assert.ok(mutation.details.oversized.length < 200);
++  }
++  fixture.studio.overview = () => { throw controlledError({}, 999); };
++  await safeFailure(await fetch(`${fixture.url}/api/overview`), { status: 500 });
++});
++
++test('actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary', async t => {
++  const fixture = await createStudioFixture(); t.after(() => fixture.close());
++  const get = fixture.monitor.configuration.get.bind(fixture.monitor.configuration);
++  fixture.monitor.configuration.get = (key, fallback) => key === 'security.allowRemoteIngest' ? true : get(key, fallback);
++  fixture.monitor.authenticator.assert = () => { throw controlledError({ authorization: 'fixture-secret-ingest', count: 7n }); };
++  const ingestion = await safeFailure(await fetch(`${fixture.url}/api/ingest`, { method: 'POST', body: '{}' }));
++  assert.equal(ingestion.details.authorization, '[REDACTED]'); assert.equal(ingestion.details.count, '7');
++  fixture.studio.authorizer.authorize = () => { throw controlledError({ password: 'fixture-secret-authorizer' }); };
++  const auth = await safeFailure(await fetch(`${fixture.url}/api/overview`)); assert.equal(auth.details.password, '[REDACTED]');
++});

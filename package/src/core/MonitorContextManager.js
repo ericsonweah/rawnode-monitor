@@ -34,7 +34,7 @@ export class MonitorContextManager {
     const resource = new AsyncResource('RawNodeMonitorContext');
     const manager = this;
     return function boundMonitorContext(...args) {
-      return manager.run(context, () => resource.runInAsyncScope(callback, this, ...args));
+      return resource.runInAsyncScope(() => manager.run(context, () => callback.apply(this, args)), this);
     };
   }
 

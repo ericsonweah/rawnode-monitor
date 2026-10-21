@@ -1,0 +1,6 @@
+{
+  "observedBy": "root agent using initialized cua inventory",
+  "observedInventory": { "apps": [], "browsers": [] },
+  "browserAcceptance": "unverified",
+  "note": "Parent reported the current inventory during this assignment. This receipt does not convert HTTP/SSE protocol or modeled DOM checks into real browser execution. No browser version, screenshots, native EventSource reconnection, keyboard/focus, narrow-layout, or browser console/network acceptance is claimed."
+}

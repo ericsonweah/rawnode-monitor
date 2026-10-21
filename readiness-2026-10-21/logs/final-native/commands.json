@@ -1,0 +1,99 @@
+[
+  {
+    "leg": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:22:55.492Z",
+    "milliseconds": 13979,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:23:09.474Z",
+    "milliseconds": 4374,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "basic",
+    "command": [
+      "node",
+      "examples/basic.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:23:13.851Z",
+    "milliseconds": 310,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "test/types.mts"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:23:14.162Z",
+    "milliseconds": 4137,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types-all",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "test/exports-types.mts"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:23:18.299Z",
+    "milliseconds": 3192,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "guard",
+    "command": [
+      "npm",
+      "run",
+      "prepublishOnly"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-21T22:23:21.491Z",
+    "milliseconds": 416,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 1
+  }
+]

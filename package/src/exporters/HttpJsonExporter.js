@@ -33,6 +33,9 @@ export class HttpJsonExporter {
       ? new https.Agent({ keepAlive: true, maxSockets: Number(options.maxSockets) || 16, maxFreeSockets: Number(options.maxFreeSockets) || 8, rejectUnauthorized: this.rejectUnauthorized })
       : new http.Agent({ keepAlive: true, maxSockets: Number(options.maxSockets) || 16, maxFreeSockets: Number(options.maxFreeSockets) || 8 });
     this.closed = false;
+    this.closeController = new AbortController();
+    this.closePromise = null;
+    this.pending = new Set();
     this.stats = {
       batches: 0,
       signals: 0,
@@ -49,13 +52,28 @@ export class HttpJsonExporter {
   async export(signals = [], options = {}) {
     if (this.closed) return false;
     if (!Array.isArray(signals) || !signals.length) return true;
-    const chunks = partitionSignals(signals, this.maxBatchSignals, this.maxPayloadBytes);
-    if (chunks.length > 1) this.stats.splitBatches += chunks.length - 1;
-    for (const chunk of chunks) await this._exportChunk(chunk, options);
-    return true;
+    const signal = options.signal ? AbortSignal.any([options.signal, this.closeController.signal]) : this.closeController.signal;
+    // Register admission before serialization or other user-controlled work can
+    // yield or request close. Close waits for all admitted continuations.
+    const operation = Promise.resolve().then(async () => {
+      this._assertOpen(signal);
+      const chunks = partitionSignals(signals, this.maxBatchSignals, this.maxPayloadBytes);
+      if (chunks.length > 1) this.stats.splitBatches += chunks.length - 1;
+      for (const chunk of chunks) await this._exportChunk(chunk, { ...options, signal });
+      return true;
+    });
+    this.pending.add(operation);
+    try { return await operation; }
+    finally { this.pending.delete(operation); }
+  }
+
+  _assertOpen(signal) {
+    if (this.closed) throw this.closeController.signal.reason;
+    signal?.throwIfAborted?.();
   }
 
   async _exportChunk(signals, options) {
+    this._assertOpen(options.signal);
     let body;
     try { body = Buffer.from(JSON.stringify(this.format(signals, options))); }
     catch (cause) {
@@ -64,6 +82,7 @@ export class HttpJsonExporter {
       throw error;
     }
 
+    this._assertOpen(options.signal);
     if (body.length > this.maxPayloadBytes) {
       if (signals.length > 1) {
         const middle = Math.ceil(signals.length / 2);
@@ -83,6 +102,7 @@ export class HttpJsonExporter {
     }
 
     const payload = this.compression && body.length >= this.compressionThresholdBytes ? await gzipAsync(body) : body;
+    this._assertOpen(options.signal);
     const headers = { ...this.headers, 'content-length': String(payload.length) };
     if (payload !== body) headers['content-encoding'] = 'gzip';
     if (this.secret) {
@@ -93,6 +113,7 @@ export class HttpJsonExporter {
 
     try {
       await retry(async (attempt) => {
+        this._assertOpen(options.signal);
         if (attempt > 1) this.stats.retries++;
         const response = await this._request(payload, headers, options.signal);
         if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -111,6 +132,7 @@ export class HttpJsonExporter {
       });
     } catch (error) {
       this.stats.errors++;
+      if (this.closed) throw this.closeController.signal.reason;
       throw error;
     }
 
@@ -121,6 +143,7 @@ export class HttpJsonExporter {
   }
 
   _request(payload, headers, signal) {
+    this._assertOpen(signal);
     const transport = this.url.protocol === 'https:' ? https : http;
     return new Promise((resolve, reject) => {
       let settled = false;
@@ -180,7 +203,14 @@ export class HttpJsonExporter {
   }
 
   async flush() {}
-  async close() { this.closed = true; this.agent.destroy(); }
+  async close() {
+    if (this.closePromise) return await this.closePromise;
+    this.closed = true;
+    this.closeController.abort(Object.assign(new Error('Monitor HTTP exporter closed.'), { code: 'MONITOR_EXPORTER_CLOSED', retryable: false }));
+    this.agent.destroy();
+    this.closePromise = Promise.allSettled([...this.pending]).then(() => {});
+    await this.closePromise;
+  }
   snapshot() {
     return Object.freeze({
       url: `${this.url.origin}${this.url.pathname}`,

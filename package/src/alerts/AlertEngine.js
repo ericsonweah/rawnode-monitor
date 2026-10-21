@@ -5,7 +5,7 @@ import { AlertState, SignalKind } from '../constants.js';
 import AlertRule from './AlertRule.js';
 import SilenceManager from './SilenceManager.js';
 import NotificationRouter from './NotificationRouter.js';
-import { deepFreeze, errorRecord, randomId } from '../support.js';
+import { boundedInteger, deepFreeze, errorRecord, randomId, withTimeout } from '../support.js';
 
 export class AlertEngine extends EventEmitter {
   constructor(options = {}) {
@@ -30,32 +30,38 @@ export class AlertEngine extends EventEmitter {
     this.running = false;
     this.closed = false;
     this.evaluating = false;
+    this.callbackTimeoutMs = boundedInteger(options.callbackTimeoutMs, 5_000, 1, 300_000);
+    this.pendingCallbacks = new Map();
+    this.controller = new AbortController();
+    this.closePromise = null;
     this.frozen = false;
     this.stats = { evaluations: 0, errors: 0, transitions: 0, notifications: 0, skippedNotLeader: 0 };
   }
 
   register(input, options = {}) {
+    if (this.closed) throw Object.assign(new Error('Alert engine is closed.'), { code: 'MONITOR_CLOSED' });
     if (this.frozen) throw new Error('Alert engine is frozen.');
     const rule = input instanceof AlertRule ? input : new AlertRule({ pendingForMs: this.defaultPendingForMs, resolveAfterMs: this.defaultResolveAfterMs, cooldownMs: this.defaultCooldownMs, ...input });
     if (this.rules.has(rule.id) && options.replace !== true) throw new Error(`Alert rule '${rule.id}' is already registered.`);
     this.rules.set(rule.id, rule);
-    if (!this.states.has(rule.id)) this.states.set(rule.id, initialState(rule));
+    this.states.set(rule.id, initialState(rule));
     this.emit('registered', rule.toJSON());
     return rule;
   }
 
   unregister(id) { this.states.delete(String(id)); return this.rules.delete(String(id)); }
   freeze() { this.frozen = true; return this; }
-  start() { if (this.running || this.closed) return this; this.running = true; this.timer = setInterval(() => void this.evaluate().catch((error) => this.emit('error', error)), this.intervalMs); this.timer.unref?.(); return this; }
+  start() { if (this.running || this.closed) return this; this.running = true; this.timer = setInterval(() => void this.evaluate().catch((error) => this.emit(this.listenerCount('error') ? 'error' : 'evaluationError', error)), this.intervalMs); this.timer.unref?.(); return this; }
 
   async evaluate(options = {}) {
     if (this.evaluating || this.closed) return this.snapshot();
-    if (this.leader && await this.leader.isLeader?.() === false) { this.stats.skippedNotLeader++; return this.snapshot(); }
     this.evaluating = true;
-    const context = await this.contextProvider(options);
-    const rules = Array.from(this.rules.values()).filter((rule) => rule.enabled);
-    let cursor = 0;
     try {
+      if (this.leader && await this._callback(this.leader, () => this.leader.isLeader?.(), options) === false) { this.stats.skippedNotLeader++; return this.snapshot(); }
+      const context = await this._callback(this.contextProvider, signal => this.contextProvider({ ...options, signal }), options);
+      if (this.closed) return this.snapshot();
+      const rules = Array.from(this.rules.values()).filter((rule) => rule.enabled);
+      let cursor = 0;
       await Promise.all(Array.from({ length: Math.min(this.concurrency, rules.length || 1) }, async () => {
         while (cursor < rules.length) await this._evaluateRule(rules[cursor++], context, options);
       }));
@@ -68,7 +74,8 @@ export class AlertEngine extends EventEmitter {
     const state = this.states.get(rule.id) || initialState(rule);
     this.stats.evaluations++;
     try {
-      const evaluation = await rule.test({ ...context, now, state: { ...state } });
+      const evaluation = await this._callback(rule, signal => rule.test({ ...context, now, state: { ...state }, signal }), options);
+      if (!this._current(rule)) return;
       state.lastEvaluationAt = now;
       state.lastValue = evaluation.value ?? null;
       state.lastEvaluation = evaluation;
@@ -104,8 +111,9 @@ export class AlertEngine extends EventEmitter {
           }
         }
       }
-      this.states.set(rule.id, state);
+      if (this._current(rule)) this.states.set(rule.id, state);
     } catch (error) {
+      if (!this._current(rule)) return;
       this.stats.errors++;
       state.error = errorRecord(error, { stack: options.includeStack === true });
       await this._transition(rule, state, AlertState.ERROR, { firing: false, value: null, error: state.error }, null, now);
@@ -113,6 +121,7 @@ export class AlertEngine extends EventEmitter {
   }
 
   async _transition(rule, state, next, evaluation, meta, now) {
+    if (!this._current(rule)) return;
     if (state.state === next) return;
     const previous = state.state;
     state.state = next;
@@ -130,14 +139,17 @@ export class AlertEngine extends EventEmitter {
     this.signal?.(SignalKind.ALERT, event, { priority: next === AlertState.FIRING ? 20 : 10 });
 
     const notify = next === AlertState.FIRING || next === AlertState.RESOLVED;
-    if (notify && (!state.lastNotifiedAt || now - state.lastNotifiedAt >= rule.cooldownMs || next === AlertState.RESOLVED)) {
-      await this.notifications.notify({ ...event, title: `${rule.name} ${next}`, channels: rule.channels }, { channels: rule.channels });
+    if (this._current(rule) && notify && (!state.lastNotifiedAt || now - state.lastNotifiedAt >= rule.cooldownMs || next === AlertState.RESOLVED)) {
+      await this._callback(rule, signal => this.notifications.notify({ ...event, title: `${rule.name} ${next}`, channels: rule.channels }, { channels: rule.channels, signal }));
+      if (!this._current(rule)) return;
       state.lastNotifiedAt = now; this.stats.notifications++;
     }
+    if (!this._current(rule)) return;
     if (next === AlertState.FIRING && this.incidents && (rule.incident === true || this.autoIncidentSeverities.has(rule.severity))) {
-      state.incidentId = (await this.incidents.openFromAlert(event))?.id || state.incidentId;
+      const incident = await this._callback(rule, signal => this.incidents.openFromAlert(event, { signal }));
+      if (this._current(rule)) state.incidentId = incident?.id || state.incidentId;
     }
-    if (next === AlertState.RESOLVED && state.incidentId) await this.incidents?.resolve?.(state.incidentId, { source: 'alert', alert: event }).catch(() => {});
+    if (this._current(rule) && next === AlertState.RESOLVED && state.incidentId) await this._callback(rule, signal => this.incidents?.resolve?.(state.incidentId, { source: 'alert', alert: event, signal })).catch(() => {});
   }
 
   acknowledge(ruleId, actor = null) {
@@ -146,7 +158,25 @@ export class AlertEngine extends EventEmitter {
     state.state = AlertState.ACKNOWLEDGED; state.acknowledgedAt = Date.now(); state.acknowledgedBy = actor; state.updatedAt = Date.now(); return true;
   }
 
-  async close() { clearInterval(this.timer); this.timer = null; this.running = false; this.closed = true; await this.notifications.close(); }
+  _current(rule) { return !this.closed && this.rules.get(rule.id) === rule; }
+  async _callback(key, callback, options = {}) {
+    if (this.pendingCallbacks.has(key)) throw Object.assign(new Error('Alert callback is still pending.'), { code: 'MONITOR_ALERT_CALLBACK_BUSY' });
+    const signal = options.signal ? AbortSignal.any([options.signal, this.controller.signal]) : this.controller.signal;
+    return withTimeout(signal => {
+      const operation = Promise.resolve().then(() => { signal.throwIfAborted(); return callback(signal); });
+      const tracked = operation.finally(() => { if (this.pendingCallbacks.get(key) === tracked) this.pendingCallbacks.delete(key); });
+      this.pendingCallbacks.set(key, tracked);
+      return tracked;
+    }, boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000), { signal });
+  }
+  async close(options = {}) {
+    if (this.closePromise) return this.closePromise;
+    clearInterval(this.timer); this.timer = null; this.running = false; this.closed = true;
+    this.controller.abort(Object.assign(new Error('Alert engine is closed.'), { code: 'MONITOR_CLOSED' }));
+    const cleanupOptions = { ...options }; delete cleanupOptions.signal;
+    this.closePromise = withTimeout(() => this.notifications.close(cleanupOptions), boundedInteger(options.timeoutMs, this.callbackTimeoutMs, 1, 300_000));
+    return this.closePromise;
+  }
   current(options = {}) { let rows = Array.from(this.states.values(), (state) => ({ ...state, rule: this.rules.get(state.ruleId)?.toJSON() || null })); if (options.state) rows = rows.filter((row) => row.state === options.state); if (options.severity) rows = rows.filter((row) => row.rule?.severity === options.severity); return deepFreeze(rows); }
   historySnapshot(options = {}) { return deepFreeze(this.history.slice(-(Math.max(1, Number(options.limit) || 100)))); }
   snapshot() { return deepFreeze({ running: this.running, closed: this.closed, frozen: this.frozen, rules: Array.from(this.rules.values(), (rule) => rule.toJSON()), states: this.current(), silences: this.silences.snapshot(), notifications: this.notifications.snapshot(), history: this.history.length, stats: { ...this.stats } }); }

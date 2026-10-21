@@ -1,0 +1,3749 @@
+{
+  "base": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+  "preservedOriginalFiles": 866,
+  "originalMismatches": [],
+  "historical": {
+    "bytes": 184659,
+    "sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad"
+  },
+  "historicalCandidateFiles": 169,
+  "pm": {
+    "path": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz",
+    "bytes": 94194,
+    "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f"
+  },
+  "immutable": {
+    "provenance/SHA256SUMS.original": {
+      "bytes": 93434,
+      "sha256": "76d9056489c6e6cf4f6c993e30573521febc45faa550687cebc2e258bb9a84fe"
+    },
+    "provenance/original/LICENSE": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "provenance/original/config/monitor.js": {
+      "bytes": 15100,
+      "sha256": "e21f02ae7cad0d16cac35478bf11970a7d036e20acb7b908232d38aee19dd136"
+    },
+    "provenance/original/database/migrations/20260804000000_create_monitor_collections.js": {
+      "bytes": 7314,
+      "sha256": "ccead4a234f5e56656e9f73e542d16c20b8ae9011904877f0a0a238810347b0d"
+    },
+    "provenance/original/package.json": {
+      "bytes": 25308,
+      "sha256": "64d7d66b97e00bddd7fae886189685a4266cffa67a292ca193fd2dce09fe3228"
+    },
+    "provenance/original/resources/assets/css/monitor/studio.css": {
+      "bytes": 10154,
+      "sha256": "63996762ff516c04a42075a1bd4c73120c1c6d83bbb7046fdb66469c3754f336"
+    },
+    "provenance/original/resources/assets/js/monitor/studio.js": {
+      "bytes": 25535,
+      "sha256": "97de918195a6d52ef75e4f08efffcf1e478fefdac2923a728f9f1adf62d02908"
+    },
+    "provenance/original/src/events/.DS_Store": {
+      "bytes": 8196,
+      "sha256": "bb080fb6bdbb0ebc22848d99835993e996b7a574c927e2b8d15030ba83f9b443"
+    },
+    "provenance/original/src/events/ARCHITECTURE.md": {
+      "bytes": 5195,
+      "sha256": "e1d91e33faeb5be6b263234b020c81eaa547b11d4bd7081e70c8f1d35d3b0334"
+    },
+    "provenance/original/src/events/AdvancedEventDispatcher-original.js": {
+      "bytes": 60645,
+      "sha256": "98211d7c6c410b2113719c21b5e0e5ed966b51471e9061ce1461499fcd12806d"
+    },
+    "provenance/original/src/events/AdvancedEventDispatcher.js": {
+      "bytes": 62719,
+      "sha256": "af7598e218722bae453c8b745c5d85aba1b0f17212e27ab47bc2d5fa121875a5"
+    },
+    "provenance/original/src/events/Broadcastable.js": {
+      "bytes": 777,
+      "sha256": "56a1f5b112a8b23035c792edf7987a4ae0769edf9bbbaa6519809c208e0570e7"
+    },
+    "provenance/original/src/events/CHANGELOG.md": {
+      "bytes": 1549,
+      "sha256": "9e335dac3e207b1c2bbf7bd29032bf3912ea840226cca71ee0929c412505037c"
+    },
+    "provenance/original/src/events/COMPATIBILITY.md": {
+      "bytes": 2461,
+      "sha256": "9b0ed79481cee5cde0d915bb35aa51a230009f58f114d5c08bed2491cabcc758"
+    },
+    "provenance/original/src/events/Event.js": {
+      "bytes": 1372,
+      "sha256": "1374c9dea827695187738fecb4d6335a8b4dec81d4ac9b136b9bf63046c879f2"
+    },
+    "provenance/original/src/events/EventDispatcher.js": {
+      "bytes": 1358,
+      "sha256": "e915a166bb6a34ff8635ab9aee6acbc35dac0d960347a80d397f61b68e3c86d8"
+    },
+    "provenance/original/src/events/EventMetrics.js": {
+      "bytes": 1749,
+      "sha256": "0711af6f7db739be00ef478e27fd4566fc2977f3818544275da1456aba8ff87f"
+    },
+    "provenance/original/src/events/EventName.js": {
+      "bytes": 1830,
+      "sha256": "af18354844296596664418136cc6430b98304de8e5d0d1fdea4ecda8db921c44"
+    },
+    "provenance/original/src/events/EventRegistry.js": {
+      "bytes": 4923,
+      "sha256": "d8283a5a2324fda66afae7628fcf0264b2754305d76c35fd10888c4b187edc9b"
+    },
+    "provenance/original/src/events/LICENSE": {
+      "bytes": 1064,
+      "sha256": "8cd194c1cc94ff3e70aa337679cb750b86da1d7b6a3af4fb0da099919e97884a"
+    },
+    "provenance/original/src/events/MANIFEST.json": {
+      "bytes": 30529,
+      "sha256": "8a93a28aad00e99628af3ce6611fa80aa7712604e1a5e1b56683972676b33629"
+    },
+    "provenance/original/src/events/ProtocolEvent.js": {
+      "bytes": 1140,
+      "sha256": "d49b5c22df7b08b1a129abcc8359bbed91f4c4ae341ce44a4177b06774a29007"
+    },
+    "provenance/original/src/events/README.md": {
+      "bytes": 6110,
+      "sha256": "84d91b8fab764286df74df39f7a030ed90a09248f9af627fdaae4c4191ca0944"
+    },
+    "provenance/original/src/events/RedisEventBridge.js": {
+      "bytes": 34694,
+      "sha256": "5693962a251b7def2d00c0cd7e26eda18a03a10e37455e8995f517e3cfd691a8"
+    },
+    "provenance/original/src/events/SECURITY.md": {
+      "bytes": 1814,
+      "sha256": "a7e60492214e4c078ae398c916f13d35bc13c2a2ffc0ddaddf82a640850ad4b5"
+    },
+    "provenance/original/src/events/UPGRADE.md": {
+      "bytes": 2420,
+      "sha256": "020adb041094fbc2123b91179e90346eaab8c2a0a1277b95a7feadbcacc4e84d"
+    },
+    "provenance/original/src/events/benchmark-baseline-report.json": {
+      "bytes": 5283,
+      "sha256": "e686f10e80d6cdd78ea5d79cc09701243b60e9e1dda9390b5af90f40b52de010"
+    },
+    "provenance/original/src/events/benchmark-enterprise-report.json": {
+      "bytes": 1963,
+      "sha256": "fbcaa49f8d84254d2f1ae0c656354eac318aa0905cb9c7bb4d8848198e07291c"
+    },
+    "provenance/original/src/events/benchmarks/compare-baseline.mjs": {
+      "bytes": 4384,
+      "sha256": "e2907247c475246f76f2baff442f9a5ae1e33fee3609ec109738fb26c1c46244"
+    },
+    "provenance/original/src/events/benchmarks/run.mjs": {
+      "bytes": 5269,
+      "sha256": "8e9d9924e4507ff56200a98964bf7877a206ba4401f953a9874281b8844d3bb9"
+    },
+    "provenance/original/src/events/bin/rawnode-events.js": {
+      "bytes": 365,
+      "sha256": "d253fec759772de02ba3ad166ab0a862339ad7609ddea933d2a0f2e0a52b39ab"
+    },
+    "provenance/original/src/events/bridge/BridgeStateMachine.js": {
+      "bytes": 1219,
+      "sha256": "f83f891ab0eee375cb95793e66782f67018697119c01222fc5ae3e89c4804818"
+    },
+    "provenance/original/src/events/bridge/PublishQueue.js": {
+      "bytes": 3301,
+      "sha256": "9ec195fcad9345be63dea4bbb4e0120ddbb6bfbb32ea9b1b8f2da7ab170780e0"
+    },
+    "provenance/original/src/events/bridge/RedisStreamTransport.js": {
+      "bytes": 12717,
+      "sha256": "ee55cdf3ce3aeb126aa134071b0c88e1c05e7e9c7308c8b9defd9537315fc442"
+    },
+    "provenance/original/src/events/bridge/SeenMessageWindow.js": {
+      "bytes": 1995,
+      "sha256": "4d0eb78c24fcb4a3868aa8e0193737dbf4b0fc13a17b522221ef8a9bde45a032"
+    },
+    "provenance/original/src/events/bridge/index.js": {
+      "bytes": 232,
+      "sha256": "42fc9ee1568f1f99880d69967ce25c6dca7aed8c2d0907506a384ae035d099d2"
+    },
+    "provenance/original/src/events/broadcasting/BroadcastManager.js": {
+      "bytes": 7427,
+      "sha256": "4ad436415fa31b167b7ec5832e56bd7d0b60ad71c08ef2ee5775d3d35b17d316"
+    },
+    "provenance/original/src/events/broadcasting/index.js": {
+      "bytes": 53,
+      "sha256": "2e90730da8bf57fa6d6d2fccfba5c950cab78c3043c2fd9420a336378275449c"
+    },
+    "provenance/original/src/events/browser/BrowserEventDispatcher.js": {
+      "bytes": 15044,
+      "sha256": "8fb3e5c505f2acb5562f9fbcbfc75fffaf66b2f30ca0deb8411280269059555d"
+    },
+    "provenance/original/src/events/browser/BrowserEventFabric.js": {
+      "bytes": 7794,
+      "sha256": "389ef8842a853a248cc316473bcbab2767a93993f238655dc8ad4842e75f567e"
+    },
+    "provenance/original/src/events/browser/BrowserLifecycleAdapter.js": {
+      "bytes": 2833,
+      "sha256": "97c3d7f7397e09e0c0fa4b46d7dc30b2f099b4b68e33fcb36b073177a7bf4c06"
+    },
+    "provenance/original/src/events/browser/DomEventTargetAdapter.js": {
+      "bytes": 6433,
+      "sha256": "5cf14ae9ad77b4d600ad61cf176f52653bd74847da6a8f908bf83e283d258a31"
+    },
+    "provenance/original/src/events/browser/boot.js": {
+      "bytes": 768,
+      "sha256": "52545ac163060c6d548dddd924a5e458f376d8f6bdf92e354a361deb2a0f3edd"
+    },
+    "provenance/original/src/events/browser/crypto/WebEventCrypto.js": {
+      "bytes": 2116,
+      "sha256": "2ac86f6ce18a4aa5360594ddd01aa3686a665216450a145ef7142eaf76909a80"
+    },
+    "provenance/original/src/events/browser/index.js": {
+      "bytes": 439,
+      "sha256": "de061d14db01d0180adc747bdd76dae1034e5c9cffc28307e91bfa9c3075d786"
+    },
+    "provenance/original/src/events/browser/integrations/BrowserIntegrationManager.js": {
+      "bytes": 2741,
+      "sha256": "70739b4e6c490042a9bcd932ef24d76263faffb58f2329cfbc09c76bbcbc2077"
+    },
+    "provenance/original/src/events/browser/integrations/LiveEventsBridge.js": {
+      "bytes": 3821,
+      "sha256": "c375a71b6d1de248600c1db6614c83810abcaf334ca422ba543c337d166f6ebb"
+    },
+    "provenance/original/src/events/browser/integrations/ReactiveEventsBridge.js": {
+      "bytes": 3339,
+      "sha256": "17a7a00bd913fddc9c599fd728696e55451c26a5f326202b54f93e73158a2d1e"
+    },
+    "provenance/original/src/events/browser/integrations/SdspaEventsBridge.js": {
+      "bytes": 2851,
+      "sha256": "bb0f596f1b333481e4c398d4631af7314884f6c6d29f3040ef9962bd14bc19ed"
+    },
+    "provenance/original/src/events/browser/integrations/ViewEventsBridge.js": {
+      "bytes": 2081,
+      "sha256": "00dcad5ddad24a6d71053c91549acf91588787375f58350834efb354228ec275"
+    },
+    "provenance/original/src/events/browser/integrations/index.js": {
+      "bytes": 223,
+      "sha256": "a13ec1c9e2899068aa864743d2f4a4d517f9d9b4106859cd007e61551a12d9c3"
+    },
+    "provenance/original/src/events/browser/runtime/BrowserRuntimeAdapter.js": {
+      "bytes": 969,
+      "sha256": "786e48cd5ba3880bb27a15ff56dc625d08295ecdce2bf1a05a2d1ed792d2deb2"
+    },
+    "provenance/original/src/events/browser/transports/BroadcastChannelEventTransport.js": {
+      "bytes": 3510,
+      "sha256": "729f9cf6896ce58a5e05d9188c4a7b6c261136797240de95c0225e6caaa5f535"
+    },
+    "provenance/original/src/events/browser/transports/DomCustomEventTransport.js": {
+      "bytes": 2743,
+      "sha256": "eb82a59be87fa35c36afce40d068d5ef6c61b1895faefe3fa2a1b048e386d015"
+    },
+    "provenance/original/src/events/browser/transports/LiveEventTransport.js": {
+      "bytes": 3717,
+      "sha256": "f883a064f809eb62664bdabcba0c6ea4af8ed345ad4b4c6f64cfb7edec04576d"
+    },
+    "provenance/original/src/events/browser/transports/MessagePortEventTransport.js": {
+      "bytes": 3040,
+      "sha256": "dcaa938e41911434016190bbdb8109ed9edd7156e802ff5321c5aa14046c678c"
+    },
+    "provenance/original/src/events/browser/transports/ServiceWorkerEventTransport.js": {
+      "bytes": 3089,
+      "sha256": "5af1ed51702977015b9c82a10e8733e47f4305894e2c464859b37eb50c99731d"
+    },
+    "provenance/original/src/events/browser/transports/WebSocketEventTransport.js": {
+      "bytes": 5501,
+      "sha256": "c8198604180fdce5c9c96aabc8f6d2709128288b16332fef97c01b2f7daa9a70"
+    },
+    "provenance/original/src/events/browser/transports/index.js": {
+      "bytes": 404,
+      "sha256": "0422a016e880443d82334427cde04832a875977f3836ff910c9829e2cbfd2952"
+    },
+    "provenance/original/src/events/compatibility/CompatibilityProfile.js": {
+      "bytes": 6227,
+      "sha256": "43dcb13bc08d8d4a8556a98494a838665344e974d92b8aff093a921e84ba92dc"
+    },
+    "provenance/original/src/events/compatibility/index.js": {
+      "bytes": 57,
+      "sha256": "c082e0e4277f325bc12d85e5617697f1c620a62a4d3de09c3f84d8dd42184111"
+    },
+    "provenance/original/src/events/config/EventConfiguration.js": {
+      "bytes": 8894,
+      "sha256": "3f1182c204b5c1fa0eddb2122270bbae3d1805f268f760f6ae6ca89a9e90d2f3"
+    },
+    "provenance/original/src/events/config/events.js": {
+      "bytes": 7822,
+      "sha256": "0b04104a2ac34fd0cbf1ac58f9994d58fbf5df188c947658fcbbd382d3b257c1"
+    },
+    "provenance/original/src/events/config/index.js": {
+      "bytes": 55,
+      "sha256": "2f15c8035545f88de4436b29196b1d56691b7ad502380e19409e12a74a4ed3f9"
+    },
+    "provenance/original/src/events/console/EventCommands.js": {
+      "bytes": 15230,
+      "sha256": "40de1715ed3b2d49c83efe68f874d5a43de39d941a7956e2fd0a03154f9ddc68"
+    },
+    "provenance/original/src/events/console/EventsBenchCommand.js": {
+      "bytes": 1179,
+      "sha256": "0ea2667484b47e16afeba2f58b644ba1da40bbc582b929414a9dafc82246b0bd"
+    },
+    "provenance/original/src/events/console/EventsDoctorCommand.js": {
+      "bytes": 1600,
+      "sha256": "7c54337038bd48eb7c78234e59bdff8d5e5113de0d8c7f4a9cc7c50fd9b1eef1"
+    },
+    "provenance/original/src/events/console/EventsInspectCommand.js": {
+      "bytes": 599,
+      "sha256": "8d81d60834b5d96db5862c40269016c22882674d57240ad6c79c7a2cc28127cc"
+    },
+    "provenance/original/src/events/console/EventsListCommand.js": {
+      "bytes": 625,
+      "sha256": "50fa9ac1561a585257f20435add2122ae6634af71a688ef4d9a1ce650c5f2f4c"
+    },
+    "provenance/original/src/events/console/EventsStatsCommand.js": {
+      "bytes": 541,
+      "sha256": "c9c9d3470963e2858e8827005ca1a84c16c45808cbc857dcf8d1784bc5f02aa9"
+    },
+    "provenance/original/src/events/console/index.js": {
+      "bytes": 76,
+      "sha256": "13de83f9778ecaa64247161c993231e3e9e1861cc8037b2646d4f7b24269267b"
+    },
+    "provenance/original/src/events/console/run.js": {
+      "bytes": 6400,
+      "sha256": "de75734eeabcfd9a3663201284637831f9fb3d26c4a2aca3948e94ebe3c580f0"
+    },
+    "provenance/original/src/events/context/EventContext.js": {
+      "bytes": 2071,
+      "sha256": "b607b9e4ec605260e8d9ca3a356517c8a998c6b0e93e6dcf638ab028949b067e"
+    },
+    "provenance/original/src/events/context/EventContextManager.js": {
+      "bytes": 1826,
+      "sha256": "808ac70071e4342bbb07183f680757b038307d576c683d1b5fbe14a30b2f7a30"
+    },
+    "provenance/original/src/events/context/index.js": {
+      "bytes": 91,
+      "sha256": "bf7c959f184c52ada515fb10323d4f83be3861f0958574654f27254bd79249db"
+    },
+    "provenance/original/src/events/contracts/EventSchemaRegistry.js": {
+      "bytes": 9994,
+      "sha256": "5f8bca1c07d4f89e6950d6c77f4d172d4e1cc931f154589451a9cbe82344dba4"
+    },
+    "provenance/original/src/events/contracts/index.js": {
+      "bytes": 56,
+      "sha256": "e95779cb3b36a36b52b21b33f2292792df6148bbbc5c0c7c89e62332a37b04de"
+    },
+    "provenance/original/src/events/core/AsyncEventIterator.js": {
+      "bytes": 2517,
+      "sha256": "b308c6533c72c96e657d6cfdf524b210e0fe72b3ce194cc36f670ca510b3ad7c"
+    },
+    "provenance/original/src/events/core/DispatchReport.js": {
+      "bytes": 1411,
+      "sha256": "ddfb175d68d9abd2c50f6d771fa2ba713e17c26898899f3abcf8b8b8968ac0db"
+    },
+    "provenance/original/src/events/core/ListenerBuilder.js": {
+      "bytes": 540,
+      "sha256": "62cc4e3330d9fd7f81cfab2d3f01178d1af85e68e9aa4c2ac621772f285e6d5a"
+    },
+    "provenance/original/src/events/core/ListenerHandle.js": {
+      "bytes": 2017,
+      "sha256": "aaa442c266304abb8e246270c03d5616610dc7fab4bca2d04460846601557f18"
+    },
+    "provenance/original/src/events/core/ListenerRegistry.js": {
+      "bytes": 12514,
+      "sha256": "4b175e68efe353886fe6e68d54f3fc51fd47e1a82dd2fd5e37ed3eeb5daa3708"
+    },
+    "provenance/original/src/events/core/ListenerScope.js": {
+      "bytes": 1712,
+      "sha256": "0e224d42c04a4774febd33cf2b7efb10f0391dc72ab90ece0167f8531ea29cc5"
+    },
+    "provenance/original/src/events/core/SubscriptionBuilder.js": {
+      "bytes": 1898,
+      "sha256": "1cbdb4323fe2e5fa1089ad2218476ad5e62533455cd587186f28e180ef230d2e"
+    },
+    "provenance/original/src/events/core/index.js": {
+      "bytes": 284,
+      "sha256": "c055af93756ca48a1fc87b2b9d4118d3dc6044826d493be0d50abfc4c3349332"
+    },
+    "provenance/original/src/events/docs/configuration.md": {
+      "bytes": 1583,
+      "sha256": "ddad965bdaf50c4db7df8bdef4440240cfd72fe7de8a7dd8a882ddae89fed08e"
+    },
+    "provenance/original/src/events/docs/delivery-semantics.md": {
+      "bytes": 1159,
+      "sha256": "443402daf8b7ef0e8bcfa622e3323d15b007ba5cb80d10db41903e1e4df19c71"
+    },
+    "provenance/original/src/events/docs/operations.md": {
+      "bytes": 1554,
+      "sha256": "29a68e14c90f1acfda7544178289e4c6613bfa483a2172fde51225e54dd9095d"
+    },
+    "provenance/original/src/events/durability/EventOutbox.js": {
+      "bytes": 110,
+      "sha256": "4597a5b6897ad909f7ce3c96d0884871cd0230094592264430ea0bf7691457e6"
+    },
+    "provenance/original/src/events/durability/MemoryOutboxStore.js": {
+      "bytes": 122,
+      "sha256": "9f4d1f416f94d8e1d600e544b74d284cd6873d59ae78ddd4cac35c5f327addfa"
+    },
+    "provenance/original/src/events/durability/OutboxPublisher.js": {
+      "bytes": 118,
+      "sha256": "7bff073bc77e60b5c48eff9e780f624d55e8405a16c1ce5c780fa9319d6c8b0a"
+    },
+    "provenance/original/src/events/durability/index.js": {
+      "bytes": 123,
+      "sha256": "c8ff6160d662f8099162ace3b996ef02f7cadc26dd6bb431a50be710068f8475"
+    },
+    "provenance/original/src/events/durable/EventOutbox.js": {
+      "bytes": 2476,
+      "sha256": "c68e2b086a4cc6620d085e6cb1d04a6f7e73d0b74ed300e2a6e3d273e272b169"
+    },
+    "provenance/original/src/events/durable/MemoryEventInbox.js": {
+      "bytes": 2363,
+      "sha256": "1bb5942554baac497802ed9c4c02db81aba8c71c1e0dff95fbf43e3ddb5b6b21"
+    },
+    "provenance/original/src/events/durable/MemoryOutboxStore.js": {
+      "bytes": 8592,
+      "sha256": "22450cb8348e6f1d4da57f2c17658901e795f2512ef51cdd842c62be977aab66"
+    },
+    "provenance/original/src/events/durable/OutboxPublisher.js": {
+      "bytes": 6728,
+      "sha256": "a7166f63f369e3522743236e80742eb5975d73336ec0f4ec111bd11c317a7667"
+    },
+    "provenance/original/src/events/durable/index.js": {
+      "bytes": 165,
+      "sha256": "d43d8f5e4c2e4f513bbc5bcb32c474b26cd376483495ac8e19e1274240a7af5c"
+    },
+    "provenance/original/src/events/errors/EventError.js": {
+      "bytes": 2319,
+      "sha256": "bbfbe30f8acc567e0bd33ecd557dd43ce17cf8f2f1876c6b49dc963d35d54366"
+    },
+    "provenance/original/src/events/errors/index.js": {
+      "bytes": 47,
+      "sha256": "9f50ecaed09b4fa73bbb259a83e26b45fa143a7500e1909e45ec3390ec7d31fe"
+    },
+    "provenance/original/src/events/examples/0.md": {
+      "bytes": 72058,
+      "sha256": "5139cdcaf98a0646b0eaae716eff2839cafa3325747c63e043a0a6f5a9182945"
+    },
+    "provenance/original/src/events/foundation/EventConfiguration.js": {
+      "bytes": 115,
+      "sha256": "6b41248ef5f85c818f573edb5a00c551c3f6d9b879db42b50a7eb5bd343545a9"
+    },
+    "provenance/original/src/events/framework/.DS_Store": {
+      "bytes": 6148,
+      "sha256": "1cb71465cfc794509ad06b012f1ed411a3be0267ac6708117b0d3aac4c73c3c0"
+    },
+    "provenance/original/src/events/framework/README.md": {
+      "bytes": 996,
+      "sha256": "586301aa822678c4d2c59f6a3df02aec50992b3da45b3e29ceb5907f77d0f647"
+    },
+    "provenance/original/src/events/framework/config/events.js": {
+      "bytes": 7822,
+      "sha256": "0b04104a2ac34fd0cbf1ac58f9994d58fbf5df188c947658fcbbd382d3b257c1"
+    },
+    "provenance/original/src/events/framework/src/.DS_Store": {
+      "bytes": 6148,
+      "sha256": "b1ddb474ce8f1c253904bfa25cb7286c87451498b5d67b4627326e599953036c"
+    },
+    "provenance/original/src/events/framework/src/foundation/providers/EventServiceProvider.js": {
+      "bytes": 186,
+      "sha256": "355281696346f148250eaa98836e533236d9e9bbc46ac902d1e9d739dcf35d09"
+    },
+    "provenance/original/src/events/history/EventJournal.js": {
+      "bytes": 10457,
+      "sha256": "23cba1285b6fca479ee1c899922d3a807eed4d1cdf7aae25d718f01de0763271"
+    },
+    "provenance/original/src/events/history/RingBuffer.js": {
+      "bytes": 2312,
+      "sha256": "9cfd278210eceb9ada4adc99d0ddc040f38fface992911c74695e32358a94c9a"
+    },
+    "provenance/original/src/events/history/index.js": {
+      "bytes": 82,
+      "sha256": "2d9bc946e9e098e5d8a31270cdfcd2f0ee5c4ebb8dd6929811ef119abf430b95"
+    },
+    "provenance/original/src/events/index.js": {
+      "bytes": 8568,
+      "sha256": "e3d29ad1261d1ea0a668b11fac4610434f798daaef458e909a8fe3fd4f6a63ff"
+    },
+    "provenance/original/src/events/integrations/EventServiceProvider.js": {
+      "bytes": 120673,
+      "sha256": "cef16b79943aace515fefbf847fa0f242568f8e0c66e8bdee50fa56c0a6cc506"
+    },
+    "provenance/original/src/events/integrations/index.js": {
+      "bytes": 57,
+      "sha256": "622b7b99ac8872105bccca12afe8e3500ade4079db1d0bcbccd8dd3ecd630849"
+    },
+    "provenance/original/src/events/node/NodeEventFabric.js": {
+      "bytes": 4154,
+      "sha256": "3fbde81649185fc5c73d16b6c7b2f3825abf337647c80400baa95df71f067210"
+    },
+    "provenance/original/src/events/node/crypto/NodeEventCrypto.js": {
+      "bytes": 2560,
+      "sha256": "4dda33bf71dde099acb65ca65659aec22527edcedadaa70a4eeb68f6bcbb73c9"
+    },
+    "provenance/original/src/events/node/index.js": {
+      "bytes": 252,
+      "sha256": "f23e2474ad109db2dfff1181c726490a4032d8088b42aae75f6f5c854d6e4460"
+    },
+    "provenance/original/src/events/node/runtime/NodeRuntimeAdapter.js": {
+      "bytes": 1103,
+      "sha256": "5ddd17b6c874288df5e36a55e9da2aa1645b9fafa6d848315a6e690605a9d3aa"
+    },
+    "provenance/original/src/events/node/transports/IpcEventTransport.js": {
+      "bytes": 2836,
+      "sha256": "de65792a0cc877e99a0839944e4192ae62041b2f2c303666533d7baac08ad095"
+    },
+    "provenance/original/src/events/node/transports/RawNodeTcpEventTransport.js": {
+      "bytes": 4485,
+      "sha256": "2eb1295e63dafeb4ddef94cbb886a357f371eb8d32d5498f1fe94d55d1a43d9f"
+    },
+    "provenance/original/src/events/node/transports/RawNodeUdpEventTransport.js": {
+      "bytes": 5055,
+      "sha256": "588c809141974b1c3ff725ed20d9f6793e12607a353916ab6fb3c732b2038650"
+    },
+    "provenance/original/src/events/node/transports/RawNodeWebSocketEventTransport.js": {
+      "bytes": 5124,
+      "sha256": "a063cf18593d5ae722dd2c7b3fdf5fe0a5718bca13104f3f65deb136b484d982"
+    },
+    "provenance/original/src/events/node/transports/RedisPubSubEventTransport.js": {
+      "bytes": 3503,
+      "sha256": "67d2ec0571bb45fc04e8031b4f133a8d51dd0416c68f87bafe107da17ced334c"
+    },
+    "provenance/original/src/events/node/transports/RedisStreamsEventTransport.js": {
+      "bytes": 7793,
+      "sha256": "d61f05929c0e6c0903b2de2381100953c54ec8361619627866d349ded1d1b2f2"
+    },
+    "provenance/original/src/events/node/transports/index.js": {
+      "bytes": 298,
+      "sha256": "a80836aeafb308462e7a36fef4ab990ab850d1296e451676c3050151e5224614"
+    },
+    "provenance/original/src/events/npm-pack-dry-run.json": {
+      "bytes": 15059,
+      "sha256": "e165018594f9b0fbe5a45769fabe91b0aa0e4ea1532d6930c07f1de6a6385071"
+    },
+    "provenance/original/src/events/observability/EventDiagnostics.js": {
+      "bytes": 4432,
+      "sha256": "dac92f2b196320268a6e61f4b1c6882a1f9a477f4d7b83f5b34a55f8c9ebb74b"
+    },
+    "provenance/original/src/events/observability/EventHealth.js": {
+      "bytes": 3630,
+      "sha256": "0a2a567c45a0f078bbbd65f76394647b238de8225b13a8f0fabb0afafef128c7"
+    },
+    "provenance/original/src/events/observability/EventMetricsStore.js": {
+      "bytes": 3865,
+      "sha256": "240ed4b621615bc7f738d0cf1e2d4ad5529c621b850d861f889e94e699fc1459"
+    },
+    "provenance/original/src/events/observability/EventRedactor.js": {
+      "bytes": 4649,
+      "sha256": "7f21ddc52ccf3f05ce3806b22d30382ab15ff5cb25edfc008369c05ec4644f04"
+    },
+    "provenance/original/src/events/observability/PrometheusFormatter.js": {
+      "bytes": 1475,
+      "sha256": "c7bb5e9b9981527c404e3e3eea59b080de7436f3f3d89d8585849183f0376c6c"
+    },
+    "provenance/original/src/events/observability/index.js": {
+      "bytes": 205,
+      "sha256": "15e824daf906254babfdf69cc388bdc3c14181fea9e2ff9abdb37622f677490a"
+    },
+    "provenance/original/src/events/package.json": {
+      "bytes": 5707,
+      "sha256": "7cd7e23af3864c0d663e57637897a214d49561d55d0031d1665b33f8c766c917"
+    },
+    "provenance/original/src/events/persistence/index.js": {
+      "bytes": 51,
+      "sha256": "bed1fb8e5508e5b2da5285e9d002505dd4083e361055030fa073c6da69b57c15"
+    },
+    "provenance/original/src/events/persistence/rawmongo/DurableEventWorker.js": {
+      "bytes": 3023,
+      "sha256": "f9835c73d667f793fe90964ca5cd4e4bb04e281dcc21c35fd29c35780ac3c034"
+    },
+    "provenance/original/src/events/persistence/rawmongo/RawMongoEventInbox.js": {
+      "bytes": 5476,
+      "sha256": "9f99406a06df3fedc220fce2c1dab287648b107a937fcf11295a83323edf877f"
+    },
+    "provenance/original/src/events/persistence/rawmongo/RawMongoEventStore.js": {
+      "bytes": 10378,
+      "sha256": "4edf10c8168ad43674210558c873fbbd579168b5768a269b4135b5fded4aad91"
+    },
+    "provenance/original/src/events/persistence/rawmongo/RawMongoJobStore.js": {
+      "bytes": 6360,
+      "sha256": "8c62121cea589280d4b4aadf114052afa188fa82a17cf18ec7989053258d6a13"
+    },
+    "provenance/original/src/events/persistence/rawmongo/RawMongoOutboxStore.js": {
+      "bytes": 7916,
+      "sha256": "c36012ff14cae48c9926335302f399b9eeee705281d0d3e5a36bb967a47afa3d"
+    },
+    "provenance/original/src/events/persistence/rawmongo/RawMongoProjectionCheckpointStore.js": {
+      "bytes": 1751,
+      "sha256": "baaaaf74a252600da3d2fb7e98834277641535727297016881d6b2e9b7f663eb"
+    },
+    "provenance/original/src/events/persistence/rawmongo/RawMongoWorkflowStore.js": {
+      "bytes": 3293,
+      "sha256": "798e2011bf092b413f42dc9647d4b316c4f466b2cb59126a58d52602b17a9e2d"
+    },
+    "provenance/original/src/events/persistence/rawmongo/index.js": {
+      "bytes": 318,
+      "sha256": "a5c0f3d1f433ee1a1e5ee5f857e5ff95e41105b551f90632ca092a7588bb4efd"
+    },
+    "provenance/original/src/events/persistence/rawmongo/support.js": {
+      "bytes": 3863,
+      "sha256": "da7c2e32105212b69ef2e62c524600adb57f2245b6778fdff5276ef64d5d8835"
+    },
+    "provenance/original/src/events/queue/EventJobQueue.js": {
+      "bytes": 14815,
+      "sha256": "87f3b225cccdab045f6176581041360b842bfcc854c00816ef11a7448049213b"
+    },
+    "provenance/original/src/events/queue/EventScheduler.js": {
+      "bytes": 6965,
+      "sha256": "a06c228c51ea456ef1a368c965aa6ba905f478c7c6e3d31aa4b53411efdc794f"
+    },
+    "provenance/original/src/events/queue/index.js": {
+      "bytes": 87,
+      "sha256": "4fc01c876928394175f9f2ca4114cda5a6b03cce649dd26b5b8535773d36053b"
+    },
+    "provenance/original/src/events/rawnode-src-events-full-code.txt": {
+      "bytes": 1524712,
+      "sha256": "b05b5bbfe3bf08287e937487bb5bf3a7597af8c092e5d837886e90b704e499bd"
+    },
+    "provenance/original/src/events/scheduling/DeferredEventScheduler.js": {
+      "bytes": 9266,
+      "sha256": "8ac4e7f9fd838400fa35ee9c2408ded4aa53419022a8e3feeb8fd0fedade5917"
+    },
+    "provenance/original/src/events/scheduling/index.js": {
+      "bytes": 59,
+      "sha256": "65c5ceb39291907b9900033e6b51c84468b31a30028fb6ad9c179bb3cd3daea8"
+    },
+    "provenance/original/src/events/security/EventSecurityPolicy.js": {
+      "bytes": 4577,
+      "sha256": "9e540eb7957f3c21ea304bad3402fa59d5184e0481db08af394ef2d00215edbf"
+    },
+    "provenance/original/src/events/security/index.js": {
+      "bytes": 56,
+      "sha256": "6baec4638116d4a76ea8b84d071d3be8af094a0c1a093ef3107deaf51384451d"
+    },
+    "provenance/original/src/events/serialization/EventCodecRegistry.js": {
+      "bytes": 2862,
+      "sha256": "8281e7c5857f03ce1ef272612bfcc71b2f0eda2b184674fedb753871c52cdbb3"
+    },
+    "provenance/original/src/events/serialization/EventEnvelope.js": {
+      "bytes": 11745,
+      "sha256": "58efe781633eea119282b4ce570200aa4606100fa2f644521b97bf994842d4f8"
+    },
+    "provenance/original/src/events/serialization/SafeJsonCodec.js": {
+      "bytes": 9286,
+      "sha256": "f8048bb9a5b2277a32a62d15aa1fe54af412ca128338090cbce66267cba7e262"
+    },
+    "provenance/original/src/events/serialization/index.js": {
+      "bytes": 127,
+      "sha256": "9590daff85b3899d137a73c454c63dea2956c79332505adcf4cc41aee4f433b0"
+    },
+    "provenance/original/src/events/sourcing/AggregateRoot.js": {
+      "bytes": 2684,
+      "sha256": "2b2b0c67a751c06646267ce3920c7963c1c619b4f49d54869c20c2e1d554a646"
+    },
+    "provenance/original/src/events/sourcing/MemoryEventStore.js": {
+      "bytes": 9897,
+      "sha256": "a3dd0e28c5c20f40d65ec4af7b6e82585c8e0776770573f98857a11bc49fdeef"
+    },
+    "provenance/original/src/events/sourcing/ProjectionManager.js": {
+      "bytes": 4867,
+      "sha256": "e15e7678515d961e29b196f8946761ccbd13201cf65ab1945eff031f1e80dcf4"
+    },
+    "provenance/original/src/events/sourcing/index.js": {
+      "bytes": 129,
+      "sha256": "13845431b6a101abf40ff1ab9b561b25e6c0a4da9327ad98e367f86a444cf58e"
+    },
+    "provenance/original/src/events/src/.DS_Store": {
+      "bytes": 8196,
+      "sha256": "da0fbd2d0f981e077b97f6074b9204b9c64482d7a2c5b40438b88b4f0c638d34"
+    },
+    "provenance/original/src/events/src/events/.DS_Store": {
+      "bytes": 10244,
+      "sha256": "2a638bb873e8df7ac1bfd46a478bb4b24c29498003c1d389650a61ae44571ac9"
+    },
+    "provenance/original/src/events/src/events/AdvancedEventDispatcher-original.js": {
+      "bytes": 60645,
+      "sha256": "98211d7c6c410b2113719c21b5e0e5ed966b51471e9061ce1461499fcd12806d"
+    },
+    "provenance/original/src/events/src/events/AdvancedEventDispatcher.js": {
+      "bytes": 62719,
+      "sha256": "af7598e218722bae453c8b745c5d85aba1b0f17212e27ab47bc2d5fa121875a5"
+    },
+    "provenance/original/src/events/src/events/Broadcastable.js": {
+      "bytes": 777,
+      "sha256": "56a1f5b112a8b23035c792edf7987a4ae0769edf9bbbaa6519809c208e0570e7"
+    },
+    "provenance/original/src/events/src/events/Event.js": {
+      "bytes": 1372,
+      "sha256": "1374c9dea827695187738fecb4d6335a8b4dec81d4ac9b136b9bf63046c879f2"
+    },
+    "provenance/original/src/events/src/events/EventDispatcher.js": {
+      "bytes": 1358,
+      "sha256": "e915a166bb6a34ff8635ab9aee6acbc35dac0d960347a80d397f61b68e3c86d8"
+    },
+    "provenance/original/src/events/src/events/EventMetrics.js": {
+      "bytes": 1749,
+      "sha256": "0711af6f7db739be00ef478e27fd4566fc2977f3818544275da1456aba8ff87f"
+    },
+    "provenance/original/src/events/src/events/EventName.js": {
+      "bytes": 1830,
+      "sha256": "af18354844296596664418136cc6430b98304de8e5d0d1fdea4ecda8db921c44"
+    },
+    "provenance/original/src/events/src/events/EventRegistry.js": {
+      "bytes": 4923,
+      "sha256": "d8283a5a2324fda66afae7628fcf0264b2754305d76c35fd10888c4b187edc9b"
+    },
+    "provenance/original/src/events/src/events/ProtocolEvent.js": {
+      "bytes": 1140,
+      "sha256": "d49b5c22df7b08b1a129abcc8359bbed91f4c4ae341ce44a4177b06774a29007"
+    },
+    "provenance/original/src/events/src/events/RedisEventBridge.js": {
+      "bytes": 34585,
+      "sha256": "308330850839f41f5241d75254165f5275a5d1d389311b6cd0f8778eefa06d29"
+    },
+    "provenance/original/src/events/src/events/bridge/BridgeStateMachine.js": {
+      "bytes": 1219,
+      "sha256": "f83f891ab0eee375cb95793e66782f67018697119c01222fc5ae3e89c4804818"
+    },
+    "provenance/original/src/events/src/events/bridge/PublishQueue.js": {
+      "bytes": 3301,
+      "sha256": "9ec195fcad9345be63dea4bbb4e0120ddbb6bfbb32ea9b1b8f2da7ab170780e0"
+    },
+    "provenance/original/src/events/src/events/bridge/RedisStreamTransport.js": {
+      "bytes": 12717,
+      "sha256": "ee55cdf3ce3aeb126aa134071b0c88e1c05e7e9c7308c8b9defd9537315fc442"
+    },
+    "provenance/original/src/events/src/events/bridge/SeenMessageWindow.js": {
+      "bytes": 1995,
+      "sha256": "4d0eb78c24fcb4a3868aa8e0193737dbf4b0fc13a17b522221ef8a9bde45a032"
+    },
+    "provenance/original/src/events/src/events/bridge/index.js": {
+      "bytes": 232,
+      "sha256": "42fc9ee1568f1f99880d69967ce25c6dca7aed8c2d0907506a384ae035d099d2"
+    },
+    "provenance/original/src/events/src/events/broadcasting/BroadcastManager.js": {
+      "bytes": 7427,
+      "sha256": "4ad436415fa31b167b7ec5832e56bd7d0b60ad71c08ef2ee5775d3d35b17d316"
+    },
+    "provenance/original/src/events/src/events/broadcasting/index.js": {
+      "bytes": 53,
+      "sha256": "2e90730da8bf57fa6d6d2fccfba5c950cab78c3043c2fd9420a336378275449c"
+    },
+    "provenance/original/src/events/src/events/config/EventConfiguration.js": {
+      "bytes": 8894,
+      "sha256": "3f1182c204b5c1fa0eddb2122270bbae3d1805f268f760f6ae6ca89a9e90d2f3"
+    },
+    "provenance/original/src/events/src/events/config/index.js": {
+      "bytes": 55,
+      "sha256": "2f15c8035545f88de4436b29196b1d56691b7ad502380e19409e12a74a4ed3f9"
+    },
+    "provenance/original/src/events/src/events/console/EventCommands.js": {
+      "bytes": 7664,
+      "sha256": "c9bac9c787353b0ca7c90966f6e52298b670509d5131405d730a7b169436d98a"
+    },
+    "provenance/original/src/events/src/events/console/EventsBenchCommand.js": {
+      "bytes": 1179,
+      "sha256": "0ea2667484b47e16afeba2f58b644ba1da40bbc582b929414a9dafc82246b0bd"
+    },
+    "provenance/original/src/events/src/events/console/EventsDoctorCommand.js": {
+      "bytes": 1600,
+      "sha256": "7c54337038bd48eb7c78234e59bdff8d5e5113de0d8c7f4a9cc7c50fd9b1eef1"
+    },
+    "provenance/original/src/events/src/events/console/EventsInspectCommand.js": {
+      "bytes": 599,
+      "sha256": "8d81d60834b5d96db5862c40269016c22882674d57240ad6c79c7a2cc28127cc"
+    },
+    "provenance/original/src/events/src/events/console/EventsListCommand.js": {
+      "bytes": 625,
+      "sha256": "50fa9ac1561a585257f20435add2122ae6634af71a688ef4d9a1ce650c5f2f4c"
+    },
+    "provenance/original/src/events/src/events/console/EventsStatsCommand.js": {
+      "bytes": 541,
+      "sha256": "c9c9d3470963e2858e8827005ca1a84c16c45808cbc857dcf8d1784bc5f02aa9"
+    },
+    "provenance/original/src/events/src/events/console/index.js": {
+      "bytes": 76,
+      "sha256": "13de83f9778ecaa64247161c993231e3e9e1861cc8037b2646d4f7b24269267b"
+    },
+    "provenance/original/src/events/src/events/console/run.js": {
+      "bytes": 6400,
+      "sha256": "de75734eeabcfd9a3663201284637831f9fb3d26c4a2aca3948e94ebe3c580f0"
+    },
+    "provenance/original/src/events/src/events/context/EventContext.js": {
+      "bytes": 2071,
+      "sha256": "b607b9e4ec605260e8d9ca3a356517c8a998c6b0e93e6dcf638ab028949b067e"
+    },
+    "provenance/original/src/events/src/events/context/EventContextManager.js": {
+      "bytes": 1826,
+      "sha256": "808ac70071e4342bbb07183f680757b038307d576c683d1b5fbe14a30b2f7a30"
+    },
+    "provenance/original/src/events/src/events/context/index.js": {
+      "bytes": 91,
+      "sha256": "bf7c959f184c52ada515fb10323d4f83be3861f0958574654f27254bd79249db"
+    },
+    "provenance/original/src/events/src/events/contracts/EventSchemaRegistry.js": {
+      "bytes": 9994,
+      "sha256": "5f8bca1c07d4f89e6950d6c77f4d172d4e1cc931f154589451a9cbe82344dba4"
+    },
+    "provenance/original/src/events/src/events/contracts/index.js": {
+      "bytes": 56,
+      "sha256": "e95779cb3b36a36b52b21b33f2292792df6148bbbc5c0c7c89e62332a37b04de"
+    },
+    "provenance/original/src/events/src/events/core/AsyncEventIterator.js": {
+      "bytes": 2517,
+      "sha256": "b308c6533c72c96e657d6cfdf524b210e0fe72b3ce194cc36f670ca510b3ad7c"
+    },
+    "provenance/original/src/events/src/events/core/DispatchReport.js": {
+      "bytes": 1411,
+      "sha256": "ddfb175d68d9abd2c50f6d771fa2ba713e17c26898899f3abcf8b8b8968ac0db"
+    },
+    "provenance/original/src/events/src/events/core/ListenerBuilder.js": {
+      "bytes": 540,
+      "sha256": "62cc4e3330d9fd7f81cfab2d3f01178d1af85e68e9aa4c2ac621772f285e6d5a"
+    },
+    "provenance/original/src/events/src/events/core/ListenerHandle.js": {
+      "bytes": 2017,
+      "sha256": "aaa442c266304abb8e246270c03d5616610dc7fab4bca2d04460846601557f18"
+    },
+    "provenance/original/src/events/src/events/core/ListenerRegistry.js": {
+      "bytes": 12514,
+      "sha256": "4b175e68efe353886fe6e68d54f3fc51fd47e1a82dd2fd5e37ed3eeb5daa3708"
+    },
+    "provenance/original/src/events/src/events/core/ListenerScope.js": {
+      "bytes": 1712,
+      "sha256": "0e224d42c04a4774febd33cf2b7efb10f0391dc72ab90ece0167f8531ea29cc5"
+    },
+    "provenance/original/src/events/src/events/core/SubscriptionBuilder.js": {
+      "bytes": 1898,
+      "sha256": "1cbdb4323fe2e5fa1089ad2218476ad5e62533455cd587186f28e180ef230d2e"
+    },
+    "provenance/original/src/events/src/events/core/index.js": {
+      "bytes": 284,
+      "sha256": "c055af93756ca48a1fc87b2b9d4118d3dc6044826d493be0d50abfc4c3349332"
+    },
+    "provenance/original/src/events/src/events/durability/EventOutbox.js": {
+      "bytes": 110,
+      "sha256": "4597a5b6897ad909f7ce3c96d0884871cd0230094592264430ea0bf7691457e6"
+    },
+    "provenance/original/src/events/src/events/durability/MemoryOutboxStore.js": {
+      "bytes": 122,
+      "sha256": "9f4d1f416f94d8e1d600e544b74d284cd6873d59ae78ddd4cac35c5f327addfa"
+    },
+    "provenance/original/src/events/src/events/durability/OutboxPublisher.js": {
+      "bytes": 118,
+      "sha256": "7bff073bc77e60b5c48eff9e780f624d55e8405a16c1ce5c780fa9319d6c8b0a"
+    },
+    "provenance/original/src/events/src/events/durability/index.js": {
+      "bytes": 123,
+      "sha256": "c8ff6160d662f8099162ace3b996ef02f7cadc26dd6bb431a50be710068f8475"
+    },
+    "provenance/original/src/events/src/events/durable/EventOutbox.js": {
+      "bytes": 2476,
+      "sha256": "c68e2b086a4cc6620d085e6cb1d04a6f7e73d0b74ed300e2a6e3d273e272b169"
+    },
+    "provenance/original/src/events/src/events/durable/MemoryEventInbox.js": {
+      "bytes": 2363,
+      "sha256": "1bb5942554baac497802ed9c4c02db81aba8c71c1e0dff95fbf43e3ddb5b6b21"
+    },
+    "provenance/original/src/events/src/events/durable/MemoryOutboxStore.js": {
+      "bytes": 8592,
+      "sha256": "22450cb8348e6f1d4da57f2c17658901e795f2512ef51cdd842c62be977aab66"
+    },
+    "provenance/original/src/events/src/events/durable/OutboxPublisher.js": {
+      "bytes": 6576,
+      "sha256": "c3045ca2619be8c38e88f4e8cb3a5c1ddf0285edeb1364d0c65f906db0ff715e"
+    },
+    "provenance/original/src/events/src/events/durable/index.js": {
+      "bytes": 165,
+      "sha256": "d43d8f5e4c2e4f513bbc5bcb32c474b26cd376483495ac8e19e1274240a7af5c"
+    },
+    "provenance/original/src/events/src/events/errors/EventError.js": {
+      "bytes": 2319,
+      "sha256": "bbfbe30f8acc567e0bd33ecd557dd43ce17cf8f2f1876c6b49dc963d35d54366"
+    },
+    "provenance/original/src/events/src/events/errors/index.js": {
+      "bytes": 47,
+      "sha256": "9f50ecaed09b4fa73bbb259a83e26b45fa143a7500e1909e45ec3390ec7d31fe"
+    },
+    "provenance/original/src/events/src/events/foundation/EventConfiguration.js": {
+      "bytes": 115,
+      "sha256": "6b41248ef5f85c818f573edb5a00c551c3f6d9b879db42b50a7eb5bd343545a9"
+    },
+    "provenance/original/src/events/src/events/history/EventJournal.js": {
+      "bytes": 10457,
+      "sha256": "23cba1285b6fca479ee1c899922d3a807eed4d1cdf7aae25d718f01de0763271"
+    },
+    "provenance/original/src/events/src/events/history/RingBuffer.js": {
+      "bytes": 2312,
+      "sha256": "9cfd278210eceb9ada4adc99d0ddc040f38fface992911c74695e32358a94c9a"
+    },
+    "provenance/original/src/events/src/events/history/index.js": {
+      "bytes": 82,
+      "sha256": "2d9bc946e9e098e5d8a31270cdfcd2f0ee5c4ebb8dd6929811ef119abf430b95"
+    },
+    "provenance/original/src/events/src/events/index.js": {
+      "bytes": 5504,
+      "sha256": "9078022dd898d4c2c554cee901049e1a80c95d7426133fcc6e93e0f912e5429f"
+    },
+    "provenance/original/src/events/src/events/integrations/EventServiceProvider.js": {
+      "bytes": 20991,
+      "sha256": "08cb95334acaeadb7e0c02e889b475bc4f0fc66d67fb22a4f51badf7359e362e"
+    },
+    "provenance/original/src/events/src/events/integrations/index.js": {
+      "bytes": 57,
+      "sha256": "622b7b99ac8872105bccca12afe8e3500ade4079db1d0bcbccd8dd3ecd630849"
+    },
+    "provenance/original/src/events/src/events/observability/EventDiagnostics.js": {
+      "bytes": 4432,
+      "sha256": "dac92f2b196320268a6e61f4b1c6882a1f9a477f4d7b83f5b34a55f8c9ebb74b"
+    },
+    "provenance/original/src/events/src/events/observability/EventHealth.js": {
+      "bytes": 3630,
+      "sha256": "0a2a567c45a0f078bbbd65f76394647b238de8225b13a8f0fabb0afafef128c7"
+    },
+    "provenance/original/src/events/src/events/observability/EventMetricsStore.js": {
+      "bytes": 3865,
+      "sha256": "240ed4b621615bc7f738d0cf1e2d4ad5529c621b850d861f889e94e699fc1459"
+    },
+    "provenance/original/src/events/src/events/observability/EventRedactor.js": {
+      "bytes": 4649,
+      "sha256": "7f21ddc52ccf3f05ce3806b22d30382ab15ff5cb25edfc008369c05ec4644f04"
+    },
+    "provenance/original/src/events/src/events/observability/PrometheusFormatter.js": {
+      "bytes": 1475,
+      "sha256": "c7bb5e9b9981527c404e3e3eea59b080de7436f3f3d89d8585849183f0376c6c"
+    },
+    "provenance/original/src/events/src/events/observability/index.js": {
+      "bytes": 205,
+      "sha256": "15e824daf906254babfdf69cc388bdc3c14181fea9e2ff9abdb37622f677490a"
+    },
+    "provenance/original/src/events/src/events/queue/EventJobQueue.js": {
+      "bytes": 14815,
+      "sha256": "87f3b225cccdab045f6176581041360b842bfcc854c00816ef11a7448049213b"
+    },
+    "provenance/original/src/events/src/events/queue/EventScheduler.js": {
+      "bytes": 6965,
+      "sha256": "a06c228c51ea456ef1a368c965aa6ba905f478c7c6e3d31aa4b53411efdc794f"
+    },
+    "provenance/original/src/events/src/events/queue/index.js": {
+      "bytes": 87,
+      "sha256": "4fc01c876928394175f9f2ca4114cda5a6b03cce649dd26b5b8535773d36053b"
+    },
+    "provenance/original/src/events/src/events/scheduling/DeferredEventScheduler.js": {
+      "bytes": 9266,
+      "sha256": "8ac4e7f9fd838400fa35ee9c2408ded4aa53419022a8e3feeb8fd0fedade5917"
+    },
+    "provenance/original/src/events/src/events/scheduling/index.js": {
+      "bytes": 59,
+      "sha256": "65c5ceb39291907b9900033e6b51c84468b31a30028fb6ad9c179bb3cd3daea8"
+    },
+    "provenance/original/src/events/src/events/security/EventSecurityPolicy.js": {
+      "bytes": 4577,
+      "sha256": "9e540eb7957f3c21ea304bad3402fa59d5184e0481db08af394ef2d00215edbf"
+    },
+    "provenance/original/src/events/src/events/security/index.js": {
+      "bytes": 56,
+      "sha256": "6baec4638116d4a76ea8b84d071d3be8af094a0c1a093ef3107deaf51384451d"
+    },
+    "provenance/original/src/events/src/events/serialization/EventCodecRegistry.js": {
+      "bytes": 2862,
+      "sha256": "8281e7c5857f03ce1ef272612bfcc71b2f0eda2b184674fedb753871c52cdbb3"
+    },
+    "provenance/original/src/events/src/events/serialization/EventEnvelope.js": {
+      "bytes": 11745,
+      "sha256": "58efe781633eea119282b4ce570200aa4606100fa2f644521b97bf994842d4f8"
+    },
+    "provenance/original/src/events/src/events/serialization/SafeJsonCodec.js": {
+      "bytes": 9286,
+      "sha256": "f8048bb9a5b2277a32a62d15aa1fe54af412ca128338090cbce66267cba7e262"
+    },
+    "provenance/original/src/events/src/events/serialization/index.js": {
+      "bytes": 127,
+      "sha256": "9590daff85b3899d137a73c454c63dea2956c79332505adcf4cc41aee4f433b0"
+    },
+    "provenance/original/src/events/src/events/sourcing/AggregateRoot.js": {
+      "bytes": 2684,
+      "sha256": "2b2b0c67a751c06646267ce3920c7963c1c619b4f49d54869c20c2e1d554a646"
+    },
+    "provenance/original/src/events/src/events/sourcing/MemoryEventStore.js": {
+      "bytes": 9897,
+      "sha256": "a3dd0e28c5c20f40d65ec4af7b6e82585c8e0776770573f98857a11bc49fdeef"
+    },
+    "provenance/original/src/events/src/events/sourcing/ProjectionManager.js": {
+      "bytes": 4705,
+      "sha256": "f463fc91394fd9c34985a32f86683ce59643f78804d9515dd0746bde39c7b1b3"
+    },
+    "provenance/original/src/events/src/events/sourcing/index.js": {
+      "bytes": 129,
+      "sha256": "13845431b6a101abf40ff1ab9b561b25e6c0a4da9327ad98e367f86a444cf58e"
+    },
+    "provenance/original/src/events/src/events/support/.DS_Store": {
+      "bytes": 6148,
+      "sha256": "fb8ed9ab650bc50c18d8ffb3b1a46f955de9f4f2e88f076452385603342e488d"
+    },
+    "provenance/original/src/events/src/events/support/async.js": {
+      "bytes": 1637,
+      "sha256": "146e4da216f69c753c355705c77887735a5434c9c79d42b04b856070dcdcaa1d"
+    },
+    "provenance/original/src/events/src/events/support/glob.js": {
+      "bytes": 2798,
+      "sha256": "0a51fe1faaa1f779d34c76c92f63f0ee85405b11b7f89671d9f70a4fcee112ce"
+    },
+    "provenance/original/src/events/src/events/support/logger.js": {
+      "bytes": 528,
+      "sha256": "c5475276b40d089a672c3aed07dea9ef25534ff06654d41161a3908f96b0ef13"
+    },
+    "provenance/original/src/events/src/events/support/size.js": {
+      "bytes": 6284,
+      "sha256": "a7a6cf55d8879156ae19ece7cd3a3693a8057729fd9ac26993c3a40380279bae"
+    },
+    "provenance/original/src/events/src/events/testing/EventAssertions.js": {
+      "bytes": 2347,
+      "sha256": "4fda4579f2272144050c107126128df5424209d8bb95f67173cdabb90e1f0748"
+    },
+    "provenance/original/src/events/src/events/testing/EventRecorder.js": {
+      "bytes": 2648,
+      "sha256": "7e644b7f0e904f077dd5f8a9e5bb17172dfeb15447cef0d9e13b32b771296218"
+    },
+    "provenance/original/src/events/src/events/testing/FakeEventBus.js": {
+      "bytes": 2522,
+      "sha256": "3a702b223d9332903bb75f16a703f3b651d8a6502a86d05e17ed34bbb66b3b9b"
+    },
+    "provenance/original/src/events/src/events/testing/ManualClock.js": {
+      "bytes": 351,
+      "sha256": "50c9bd91b5909dc7343969784f9443f88ef616f04eeb6da78562c15a274f0785"
+    },
+    "provenance/original/src/events/src/events/testing/MemoryEventTransport.js": {
+      "bytes": 2201,
+      "sha256": "1e40dda4dc59f7906081827ba80018e954e182ab3137b24d13c352100d2f4cbb"
+    },
+    "provenance/original/src/events/src/events/testing/index.js": {
+      "bytes": 200,
+      "sha256": "68c972b97746451fcc540a7e54b11cc3e5c24d7c532e5b33ff861d16a8001267"
+    },
+    "provenance/original/src/events/src/events/workflows/MemoryWorkflowStore.js": {
+      "bytes": 1819,
+      "sha256": "66181b0b0114f663ffbf238b4b6e39f405f755f80d9c8cdb521dc89e49ac0a02"
+    },
+    "provenance/original/src/events/src/events/workflows/WorkflowEngine.js": {
+      "bytes": 8805,
+      "sha256": "8d5dc838fc73bbb2f0561a00f488c8831c488cdbe72f03bf5402c051549b4964"
+    },
+    "provenance/original/src/events/src/events/workflows/index.js": {
+      "bytes": 93,
+      "sha256": "855aea8190539c4ad60f8aec5e15d1bbc178cd7eed5d5e96980b56f01fbfa9a7"
+    },
+    "provenance/original/src/events/src/foundation/.DS_Store": {
+      "bytes": 6148,
+      "sha256": "5aa0d4796943748fa914358a27c084a10472ad07412827acacaee7d307cb1df0"
+    },
+    "provenance/original/src/events/src/foundation/providers/EventServiceProvider.js": {
+      "bytes": 187,
+      "sha256": "2fee1d2c3665ad0253610bafe4a3ef23e7e1bdba10e665d3b6ac40c25d98870e"
+    },
+    "provenance/original/src/events/studio/EventStudioManager.js": {
+      "bytes": 8827,
+      "sha256": "310c356e799f4130a9713834a6ea5d36ae9d8cf0fb00cb6c67cd1ca13dc18955"
+    },
+    "provenance/original/src/events/studio/EventStudioServer.js": {
+      "bytes": 4419,
+      "sha256": "f294b0f5ce715bd5dd1ca47aed6cbed5e45ecd05003e9cfa685691abd670fca2"
+    },
+    "provenance/original/src/events/studio/analysis/EventStudioAnalyzer.js": {
+      "bytes": 3788,
+      "sha256": "e1741fae6f6fcae445d887fd9937882ae830078e2e766fb4489ebe49c42bdcf5"
+    },
+    "provenance/original/src/events/studio/browser/EventStudioRuntime.js": {
+      "bytes": 1898,
+      "sha256": "b4f0e8093fcf43016906ea8c0df56ca340ffa0056f0259f9f9c96c1f427e1b1c"
+    },
+    "provenance/original/src/events/studio/index.js": {
+      "bytes": 195,
+      "sha256": "61231056983b2c411f6f91fbffc531f247dbe2b78d8a955e6d0257d53b368df6"
+    },
+    "provenance/original/src/events/studio/support/safe.js": {
+      "bytes": 1882,
+      "sha256": "df2e533c0dab1d0e443c80b3c6b739355697f1400d6450e5c3c010caec6a2ca4"
+    },
+    "provenance/original/src/events/support/ApplicationModuleResolver.js": {
+      "bytes": 5062,
+      "sha256": "10efa52ff114e18bedfd0bcc46e0c336e25832bffe0a0fde4508da350504afd2"
+    },
+    "provenance/original/src/events/support/async.js": {
+      "bytes": 1637,
+      "sha256": "146e4da216f69c753c355705c77887735a5434c9c79d42b04b856070dcdcaa1d"
+    },
+    "provenance/original/src/events/support/glob.js": {
+      "bytes": 2798,
+      "sha256": "0a51fe1faaa1f779d34c76c92f63f0ee85405b11b7f89671d9f70a4fcee112ce"
+    },
+    "provenance/original/src/events/support/logger.js": {
+      "bytes": 528,
+      "sha256": "c5475276b40d089a672c3aed07dea9ef25534ff06654d41161a3908f96b0ef13"
+    },
+    "provenance/original/src/events/support/size.js": {
+      "bytes": 6284,
+      "sha256": "a7a6cf55d8879156ae19ece7cd3a3693a8057729fd9ac26993c3a40380279bae"
+    },
+    "provenance/original/src/events/testing/EventAssertions.js": {
+      "bytes": 2347,
+      "sha256": "4fda4579f2272144050c107126128df5424209d8bb95f67173cdabb90e1f0748"
+    },
+    "provenance/original/src/events/testing/EventRecorder.js": {
+      "bytes": 2648,
+      "sha256": "7e644b7f0e904f077dd5f8a9e5bb17172dfeb15447cef0d9e13b32b771296218"
+    },
+    "provenance/original/src/events/testing/FakeEventBus.js": {
+      "bytes": 2522,
+      "sha256": "3a702b223d9332903bb75f16a703f3b651d8a6502a86d05e17ed34bbb66b3b9b"
+    },
+    "provenance/original/src/events/testing/ManualClock.js": {
+      "bytes": 351,
+      "sha256": "50c9bd91b5909dc7343969784f9443f88ef616f04eeb6da78562c15a274f0785"
+    },
+    "provenance/original/src/events/testing/MemoryEventTransport.js": {
+      "bytes": 2201,
+      "sha256": "1e40dda4dc59f7906081827ba80018e954e182ab3137b24d13c352100d2f4cbb"
+    },
+    "provenance/original/src/events/testing/index.js": {
+      "bytes": 200,
+      "sha256": "68c972b97746451fcc540a7e54b11cc3e5c24d7c532e5b33ff861d16a8001267"
+    },
+    "provenance/original/src/events/tests/contract/outbox-admission.test.js": {
+      "bytes": 1481,
+      "sha256": "ad1616d7d0f0eff5999ff1edc29a76b3e9750050e76b9db5814a5017c3596064"
+    },
+    "provenance/original/src/events/tests/contract/package-exports.test.js": {
+      "bytes": 2453,
+      "sha256": "1db8425163729a4fde866b88f4393ab2141ea5f88a5636187a3d233db6107b72"
+    },
+    "provenance/original/src/events/tests/contract/public-surface.test.js": {
+      "bytes": 949,
+      "sha256": "6fa81118069bd556a6d3f487898bdae14dd4a9c71bfbcf223bc0f3f98bb5fa4d"
+    },
+    "provenance/original/src/events/tests/events/bounds-observability.test.js": {
+      "bytes": 3719,
+      "sha256": "32a5ceaa6e262ad5d054814045ca0e24ce6b4930cb64e38022e264d7b045a5ca"
+    },
+    "provenance/original/src/events/tests/events/bridge.test.js": {
+      "bytes": 8767,
+      "sha256": "e961507fa0139d816e81cd6ba7a28830780fcace925dbbd9f894181cdc46bad7"
+    },
+    "provenance/original/src/events/tests/events/compatibility.test.js": {
+      "bytes": 4077,
+      "sha256": "01a7bd39f0ca02f35fd580c604a846e95ccd146149eed74ac493bdab1778bebf"
+    },
+    "provenance/original/src/events/tests/events/contracts-durable.test.js": {
+      "bytes": 5104,
+      "sha256": "95b9fe75ed5d16b075512eb3d7f48bc347a4a2145c9f565afdb4d16c56d7b28d"
+    },
+    "provenance/original/src/events/tests/events/enterprise-dispatch.test.js": {
+      "bytes": 7136,
+      "sha256": "1931f67ab2866dc0a04eb701886f23fcdca048aa26f92f2278b0fd92ca0465f2"
+    },
+    "provenance/original/src/events/tests/events/hardening-sourcing.test.js": {
+      "bytes": 5737,
+      "sha256": "aa45d33eb8e667ac34d3f2d1f4a99bbe28c7c7e5d6335a7ff8dc1da46d48c93e"
+    },
+    "provenance/original/src/events/tests/events/once-replay.test.js": {
+      "bytes": 2558,
+      "sha256": "aa736244cd221be72bd19c31c9b20665b80195d83241106368036138077590af"
+    },
+    "provenance/original/src/events/tests/events/queue-workflow-provider.test.js": {
+      "bytes": 7657,
+      "sha256": "71c64d7f68aae206e2f823cd413c50cbcae49e5b04c7a7c3b6190696b7a81502"
+    },
+    "provenance/original/src/events/tests/fixtures/redis-stub.js": {
+      "bytes": 2537,
+      "sha256": "a20f758eb28886ea461190c5b127e5f2c157b9f04db57a3ee3c1b7caac2d44e6"
+    },
+    "provenance/original/src/events/tests/fixtures/v1-public-manifest.json": {
+      "bytes": 895,
+      "sha256": "66ba19c1ba7ec7ada34edc7f66ffa312b51aa5802304d939ac86def310411980"
+    },
+    "provenance/original/src/events/tests/types/consumer.ts": {
+      "bytes": 2786,
+      "sha256": "5b22498c78322b079d813a36c6633db45e96720579751a79dfb71ae55ea344e9"
+    },
+    "provenance/original/src/events/tools/build-manifest.js": {
+      "bytes": 1645,
+      "sha256": "482a3a7118a7ead99d87abf76113e3d40216d9c19679ee3f847b3001e6514552"
+    },
+    "provenance/original/src/events/tools/check-compatibility.js": {
+      "bytes": 1627,
+      "sha256": "40682ed03c23bb6864fa46492ee2d8d6a908b81389731678ad7ef5e7297da2bc"
+    },
+    "provenance/original/src/events/tools/check-exports.js": {
+      "bytes": 1824,
+      "sha256": "501fa091bc822efe685fa5cebaeebecc0765b9ddbfb153a9f907e4d974e63e5c"
+    },
+    "provenance/original/src/events/tools/check-package-consumer.js": {
+      "bytes": 2802,
+      "sha256": "41dcda4297e922b90bff918df6c7a54eac9e38d035bf5e95cbf62b9f28827e0f"
+    },
+    "provenance/original/src/events/tools/check-source.js": {
+      "bytes": 2684,
+      "sha256": "ab345b2d6fe89806608786e50d7ed840d449ed3038c4064b948664355c18663a"
+    },
+    "provenance/original/src/events/tools/check-types.js": {
+      "bytes": 384,
+      "sha256": "1c741eb0b939073e41ea979223834b4549aac8476a5dc337da670c3897e1f12f"
+    },
+    "provenance/original/src/events/tools/check-zero-deps.js": {
+      "bytes": 548,
+      "sha256": "c2330dbad1761728f367f2d7d17c580c15e022b33e0bcb713ed9886f5c60f588"
+    },
+    "provenance/original/src/events/tools/run-tests.js": {
+      "bytes": 961,
+      "sha256": "e5a915cd998b6983b3c7c52508a93f0744627be9687f700b88ba4a28787eb52d"
+    },
+    "provenance/original/src/events/tsconfig.types.json": {
+      "bytes": 2383,
+      "sha256": "ed2631057fefc08c600ec8b46b2afc2a7c95f1a2181c843c885ccd23d58c14a4"
+    },
+    "provenance/original/src/events/types/bridge.d.ts": {
+      "bytes": 147,
+      "sha256": "672192837ae12e1fe30c55f555d6eb7c682d2ac847a9a88e0b51af861cf211e2"
+    },
+    "provenance/original/src/events/types/broadcastable.d.ts": {
+      "bytes": 127,
+      "sha256": "f473227fd6868b5d85a76189d7cafde616270b1c6021f30afd25bfe1f7c66f41"
+    },
+    "provenance/original/src/events/types/broadcasting.d.ts": {
+      "bytes": 62,
+      "sha256": "805a54da88829fab1db97be1d81385b9cb95780e0441799efe2566f7540aa230"
+    },
+    "provenance/original/src/events/types/config.d.ts": {
+      "bytes": 1046,
+      "sha256": "d6b480271df084a091d93680cbba100b8990c7f87f53b2b578563e7c7c0f214c"
+    },
+    "provenance/original/src/events/types/console.d.ts": {
+      "bytes": 242,
+      "sha256": "be4121c41fe7c07f5fca65c33b7c326e49686175be36eb83d253f1938e24af6f"
+    },
+    "provenance/original/src/events/types/context.d.ts": {
+      "bytes": 48,
+      "sha256": "ef1af3f4ba342bf2521111d94ceada60c5bae3304261d6bcbbe4e7afde3554d9"
+    },
+    "provenance/original/src/events/types/contracts.d.ts": {
+      "bytes": 50,
+      "sha256": "bb3702ccdb1f72c984d5895528b352994dae7cc4d5f3f21655c7efdd65437715"
+    },
+    "provenance/original/src/events/types/core.d.ts": {
+      "bytes": 250,
+      "sha256": "c78abc6aebd8192c23404a1058331422f71c4b074a6884b53bf35bfa65a298e3"
+    },
+    "provenance/original/src/events/types/dispatcher.d.ts": {
+      "bytes": 267,
+      "sha256": "ecf2acc29bf57253540a665d6f89a0159e8a35b27f65ca46035b45b3e15bf010"
+    },
+    "provenance/original/src/events/types/durable.d.ts": {
+      "bytes": 96,
+      "sha256": "ce29f9c46a6a80eb75385dcb63d782104b9bb042f43d3a48747ba08b995b0c12"
+    },
+    "provenance/original/src/events/types/errors.d.ts": {
+      "bytes": 202,
+      "sha256": "c7ce6bd0da9262a766c7c30f4b52fb3357c3dc24134e6a1be122104921e95ea4"
+    },
+    "provenance/original/src/events/types/event-metrics.d.ts": {
+      "bytes": 68,
+      "sha256": "6f59c033cdff44e4c0025de884af2f40db5cb2526bbf368b7a6b788ab2e03ce2"
+    },
+    "provenance/original/src/events/types/event-name.d.ts": {
+      "bytes": 182,
+      "sha256": "9c9ecf8394b6fc800d17118485678953478ca0f8e04d4256fa7674182ca6dcf4"
+    },
+    "provenance/original/src/events/types/event-registry.d.ts": {
+      "bytes": 70,
+      "sha256": "e50513f82d01f9c5bdf7c7bea8da63e7e79a7101d073a898f8394d56f6ca5270"
+    },
+    "provenance/original/src/events/types/event.d.ts": {
+      "bytes": 54,
+      "sha256": "6755573ed810e968a4ab14170367f994af0e68ffffa85e25491199c03b7427d3"
+    },
+    "provenance/original/src/events/types/history.d.ts": {
+      "bytes": 43,
+      "sha256": "e8ec12fad09373b4a06b3dce7f8b88fdbb2cd2a1c3f513e12dbd9c58d38e6457"
+    },
+    "provenance/original/src/events/types/index.d.ts": {
+      "bytes": 40452,
+      "sha256": "8438e07e4be8d59f55538887f47c2b0bfaf39244725d91585beee5d2e547f668"
+    },
+    "provenance/original/src/events/types/legacy.d.ts": {
+      "bytes": 74,
+      "sha256": "daaf60f475bf7c573e22e7e7011774387aebdbced15128db5ca140a28563a0f0"
+    },
+    "provenance/original/src/events/types/observability.d.ts": {
+      "bytes": 153,
+      "sha256": "6ee510c12d48ac17c6e97d8132eaf621009760aa98bb7746a0abc2c41936f149"
+    },
+    "provenance/original/src/events/types/protocol-event.d.ts": {
+      "bytes": 70,
+      "sha256": "0e1b997ca109d4b81c1abf6b926338d0adfa06b87449c6259cf42ef50601514d"
+    },
+    "provenance/original/src/events/types/provider.d.ts": {
+      "bytes": 84,
+      "sha256": "63a03191826b0364c10005bd3bc2d3048fc20780dd1aad701c33b1600897179b"
+    },
+    "provenance/original/src/events/types/queue.d.ts": {
+      "bytes": 84,
+      "sha256": "42ab8828273b34c6ddc96d29aff6dcbb423c363774bcd583e85e82bf1ad20613"
+    },
+    "provenance/original/src/events/types/redis-event-bridge.d.ts": {
+      "bytes": 76,
+      "sha256": "49984c9ce757483c07265bd72d8faebf43e07d245917ffd3449a83828f16f522"
+    },
+    "provenance/original/src/events/types/scheduling.d.ts": {
+      "bytes": 53,
+      "sha256": "ea58d17a927b7c1ab7b73d4039b5d14a9f6deca390b851223c96d3e64fd5235d"
+    },
+    "provenance/original/src/events/types/security.d.ts": {
+      "bytes": 50,
+      "sha256": "302019a2b3cf8061b9e7f9ea0202a2351940bc077763ec7249f2cc41d3bd1b94"
+    },
+    "provenance/original/src/events/types/serialization.d.ts": {
+      "bytes": 142,
+      "sha256": "97daa95d9a02c788a97dc4958ed32b3d1ed6f5bef69d5263048c1246cd0b0cc3"
+    },
+    "provenance/original/src/events/types/sourcing.d.ts": {
+      "bytes": 138,
+      "sha256": "7b52eef742fd45b31ad81116423a631509be859ed7f6be2414ee352eaa9f2848"
+    },
+    "provenance/original/src/events/types/testing.d.ts": {
+      "bytes": 110,
+      "sha256": "8373d705cc5704dd99f0244d176c11378094b4e5ef755c86699b4111c9dba57e"
+    },
+    "provenance/original/src/events/types/workflows.d.ts": {
+      "bytes": 66,
+      "sha256": "a4437fc54008c78d0941d5f1349be7f2551d3482457b904d17d42d2b667f93c6"
+    },
+    "provenance/original/src/events/universal/UniversalEventFabric.js": {
+      "bytes": 23461,
+      "sha256": "602b6f97b69127128ee1666b2464606aa82ef94528c2a07f6bfe016ca4a6652b"
+    },
+    "provenance/original/src/events/universal/context/ExplicitEventContextManager.js": {
+      "bytes": 2978,
+      "sha256": "e8a83499be1040fe8e8108da2005f9443cae48bc09b58faeb6b3c23222c6e18a"
+    },
+    "provenance/original/src/events/universal/createUniversalEventFabric.js": {
+      "bytes": 227,
+      "sha256": "e82fd1ff42fff938886e43d80430867cb4e515650b48d6760dac4a57fffd9662"
+    },
+    "provenance/original/src/events/universal/definitions/EventDefinition.js": {
+      "bytes": 4215,
+      "sha256": "dc7013570900b0f919a3143d75303d4b114edccda1e2e3e969926df13ed97a73"
+    },
+    "provenance/original/src/events/universal/definitions/EventDefinitionRegistry.js": {
+      "bytes": 10265,
+      "sha256": "7c9a72a8535100b0f2a9fa0d428ad4291e5627dccce255223a7f9d2611f6d701"
+    },
+    "provenance/original/src/events/universal/delivery/EventDelivery.js": {
+      "bytes": 1983,
+      "sha256": "9b47e825926aef23104bb86272f5b21b701652d918eae5b41f44e8983b249d6c"
+    },
+    "provenance/original/src/events/universal/envelope/UniversalEventEnvelope.js": {
+      "bytes": 12538,
+      "sha256": "eb41be9a70793c109fa902b8bc4be08a1af052e53ee07503e5fcb5479ff7a890"
+    },
+    "provenance/original/src/events/universal/index.js": {
+      "bytes": 1190,
+      "sha256": "ea1b0e80efbdef4325dd79cd014e814e4c701b3352746fee8d51982f3daf1c64"
+    },
+    "provenance/original/src/events/universal/middleware/EventMiddlewarePipeline.js": {
+      "bytes": 5256,
+      "sha256": "36008f02cb0751a43e2073b77a229facd51fa11ce1d69ca4197a14eec0e78281"
+    },
+    "provenance/original/src/events/universal/observability/EventFlightRecorder.js": {
+      "bytes": 3508,
+      "sha256": "c1593817a031dfd6d3c9991584570d3af0b87e73c373d95e3ec47883c12ac43f"
+    },
+    "provenance/original/src/events/universal/observability/UniversalEventMetrics.js": {
+      "bytes": 3295,
+      "sha256": "873e6e83f97bc54b40a1745dfc1bd2679fb2aae46354b7e3040cbd4ed02d0847"
+    },
+    "provenance/original/src/events/universal/operations/EventOperationBuilder.js": {
+      "bytes": 4541,
+      "sha256": "da76e4b5ef436421af4b1f0f8c605b2369d2b4bb601c62bab71ecd08c1b1a346"
+    },
+    "provenance/original/src/events/universal/operations/EventSubscriptionBuilder.js": {
+      "bytes": 5120,
+      "sha256": "b6150e42ee23d5affcb2d086f9efc61483e2a637279aaf15493b0decf1b5aa3c"
+    },
+    "provenance/original/src/events/universal/requests/EventRequestManager.js": {
+      "bytes": 4705,
+      "sha256": "716f7a92034c8f0c6468dd03630183737b1ff996d02d3e722bf631dbe5c080fa"
+    },
+    "provenance/original/src/events/universal/resources/EventResourceGovernor.js": {
+      "bytes": 5630,
+      "sha256": "76f8e430b54939b44857c0f89058428c50977f9019ae7414c00ac2a2b2f76a3e"
+    },
+    "provenance/original/src/events/universal/runtime/UniversalRuntimeAdapter.js": {
+      "bytes": 2658,
+      "sha256": "2c9441de674e836e4100d1683088fc45a07d7eda625f770bad1981ab9fa64182"
+    },
+    "provenance/original/src/events/universal/security/ChannelAuthorizationRegistry.js": {
+      "bytes": 3063,
+      "sha256": "7c25d0e5ad03b6a1c625a7a82415e0e63fc374b358f63359888cb58abe4be7a5"
+    },
+    "provenance/original/src/events/universal/security/EventAdmissionGateway.js": {
+      "bytes": 7554,
+      "sha256": "037a1180312e0cd414b344b5ae9caecb8e6ce4ce10607b425dbc0b4fedd12fcd"
+    },
+    "provenance/original/src/events/universal/security/SeenEventWindow.js": {
+      "bytes": 1367,
+      "sha256": "08ba6bbbbee48102ad7948151c3969809a86c4b335a422be52ef3bde364a4727"
+    },
+    "provenance/original/src/events/universal/security/index.js": {
+      "bytes": 147,
+      "sha256": "31ef6c1739fd7a4102493b90f389a9e9b8f24d7082d4cd5a0e08fd91677efdb7"
+    },
+    "provenance/original/src/events/universal/support/safe.js": {
+      "bytes": 10500,
+      "sha256": "b73189a08d4c4becacdee19cb05bc2a7f1e332953206636ac6eeb13e30b9f4d6"
+    },
+    "provenance/original/src/events/universal/transport/EventTransport.js": {
+      "bytes": 2483,
+      "sha256": "579268b4034503d7ba06003acf7a8c10ff706d90be7bef0a935ec82a552db0bd"
+    },
+    "provenance/original/src/events/universal/transport/EventTransportRegistry.js": {
+      "bytes": 2863,
+      "sha256": "f02b985364ebffedeff4227ff1e1d56747091cbb5c2d7a1afac018ec2b51e841"
+    },
+    "provenance/original/src/events/universal/transport/EventTransportRouter.js": {
+      "bytes": 10820,
+      "sha256": "4ce2920d86ccca574fc22fb104ef4f5d6905e2e42a98107a19088d0d4d765ba1"
+    },
+    "provenance/original/src/events/universal/transport/LocalEventTransport.js": {
+      "bytes": 1779,
+      "sha256": "67c7c73fce497ba339f51bfcaeee22aee9aa3f52e5865d831796143e85f9c804"
+    },
+    "provenance/original/src/events/universal/transport/OutboxFabricTransport.js": {
+      "bytes": 1162,
+      "sha256": "85d578352729dcaf9db340f094dcaf1846c1b45bf5c2a04e8a3cb26fc6af3b86"
+    },
+    "provenance/original/src/events/validation-doctor.json": {
+      "bytes": 3659,
+      "sha256": "c77bef24095e232d243c3733fbbf708b06ce1e173ba7cea64712c0260a0ae0ca"
+    },
+    "provenance/original/src/events/workflows/MemoryWorkflowStore.js": {
+      "bytes": 1819,
+      "sha256": "66181b0b0114f663ffbf238b4b6e39f405f755f80d9c8cdb521dc89e49ac0a02"
+    },
+    "provenance/original/src/events/workflows/WorkflowEngine.js": {
+      "bytes": 8805,
+      "sha256": "8d5dc838fc73bbb2f0561a00f488c8831c488cdbe72f03bf5402c051549b4964"
+    },
+    "provenance/original/src/events/workflows/index.js": {
+      "bytes": 93,
+      "sha256": "855aea8190539c4ad60f8aec5e15d1bbc178cd7eed5d5e96980b56f01fbfa9a7"
+    },
+    "provenance/original/src/foundation/lifecycle/InvocationContext.js": {
+      "bytes": 7495,
+      "sha256": "a9ff4e52d02d61e43c104a6efc39010277f83d938a2e917ef52b9c96b931e1fe"
+    },
+    "provenance/original/src/foundation/providers/MonitorServiceProvider.js": {
+      "bytes": 10678,
+      "sha256": "5286225782c72fc0b7f03663f8cdc101f6f9ab24967d2d2a1ecd5b2514b9bb8b"
+    },
+    "provenance/original/src/logger/CHANGELOG.md": {
+      "bytes": 2368,
+      "sha256": "6f9c9a7a22b7df04ac6fba4087722854c9419cb4fc638b24e9b8e89a1518981e"
+    },
+    "provenance/original/src/logger/COMPATIBILITY.md": {
+      "bytes": 1208,
+      "sha256": "4075187cbe44d3371103aa697a1967cdba6275706f2cfd262a2a1b61f4a748e9"
+    },
+    "provenance/original/src/logger/IMPLEMENTATION_GUIDE.md": {
+      "bytes": 1998,
+      "sha256": "e729403cc18cbdbb6bfdff97f53dcbcbcbd7191a586f7aaaa9eabf3b0bd9f413"
+    },
+    "provenance/original/src/logger/LICENSE": {
+      "bytes": 733,
+      "sha256": "802aa8e80590f609305a3b18c14bd67f9913415a79615037f22c76e384ffa412"
+    },
+    "provenance/original/src/logger/MANIFEST.json": {
+      "bytes": 43002,
+      "sha256": "306d17426e7a453e57c1196e3f1217b2040081e94c08748489f57756ff28db41"
+    },
+    "provenance/original/src/logger/README.html": {
+      "bytes": 565,
+      "sha256": "6e4618651a1ad1b99c2942cc2a4c907766b00f122d2a275433c03ec4dd8d4e42"
+    },
+    "provenance/original/src/logger/README.md": {
+      "bytes": 5517,
+      "sha256": "64a061e14509ba930f64682959cf9321dc6c7babd4d891e706248ec5b4364a53"
+    },
+    "provenance/original/src/logger/UPGRADE.md": {
+      "bytes": 2180,
+      "sha256": "5f40afb9d366c5ff0caf5310aeecc51a26cf59107279fb5070f17b8eb1803b3a"
+    },
+    "provenance/original/src/logger/benchmarks/bunyan.js": {
+      "bytes": 869,
+      "sha256": "8babbf37c100066e0d7d387a9e7bcb3640c7e336da93ca3356861df14d3e3986"
+    },
+    "provenance/original/src/logger/benchmarks/enterprise/runner.js": {
+      "bytes": 4502,
+      "sha256": "ffb82edab782006d8d8b662ad861148d92a67c4cd09c223d858f76bfdbb6b069"
+    },
+    "provenance/original/src/logger/benchmarks/laravel.js": {
+      "bytes": 737,
+      "sha256": "b0a67f73b7530f29fa4dd44cc04818230c579243812e3362da831df7669fd472"
+    },
+    "provenance/original/src/logger/benchmarks/pino.js": {
+      "bytes": 716,
+      "sha256": "bd0eebd234032f5f35a93572ea42abad7206f4170837fe6338043d4003bb2b19"
+    },
+    "provenance/original/src/logger/benchmarks/rawnode.js": {
+      "bytes": 732,
+      "sha256": "de5dee17a51ee529dbde30d8e71c17e35fa0b29aa0d653814636b1e7541d43c1"
+    },
+    "provenance/original/src/logger/benchmarks/runner.js": {
+      "bytes": 787,
+      "sha256": "501e33570e0c681a8996a780e66fb5858406fb3ffea2334a693c68e4b9a5b30a"
+    },
+    "provenance/original/src/logger/benchmarks/utils.js": {
+      "bytes": 987,
+      "sha256": "fcd286c0a4c4f71b5730a534c727813d410a11b8c8ed6a01f24110c50869b1e2"
+    },
+    "provenance/original/src/logger/benchmarks/winston.js": {
+      "bytes": 723,
+      "sha256": "54bafc7c8e71d9482038c47c239aaac91cf43a25bad10ceebea035201c6250a7"
+    },
+    "provenance/original/src/logger/bin/index.js": {
+      "bytes": 319,
+      "sha256": "ce42eb27f5e428a97615e6a0879eccc661bf023f4b29eed3c9af6dcf0edc08ea"
+    },
+    "provenance/original/src/logger/config/logger.js": {
+      "bytes": 2622,
+      "sha256": "a178153b798612a2d795992b42b1e8816a71bc625a9dd3477673ac0cea25eebb"
+    },
+    "provenance/original/src/logger/docs/architecture.md": {
+      "bytes": 1043,
+      "sha256": "c3e9fb4889cac1ab23d1b03b45d0a31f754c67f7f4651fb1c6449d9c1aa4f9bc"
+    },
+    "provenance/original/src/logger/docs/benchmarking.md": {
+      "bytes": 528,
+      "sha256": "74cac76b21c9c1aa2da91ba81feb50e206d2904fb4f3dbd27e5bbf5ce6f9f99a"
+    },
+    "provenance/original/src/logger/docs/channels.md": {
+      "bytes": 649,
+      "sha256": "b952440cf251ec2f53f4a595b405d39dfc73de1a3fee9930e59d2671507f458b"
+    },
+    "provenance/original/src/logger/docs/configuration.md": {
+      "bytes": 563,
+      "sha256": "023e210ff86272d46647e25e73566f34ad1a1cc6f1ef7f762afb2ee9ecb3060c"
+    },
+    "provenance/original/src/logger/docs/observability.md": {
+      "bytes": 472,
+      "sha256": "f3a4d14df6bd6a9e79cb90dff1e998f1f0ea850d9147da1ebff7cf566c7d73ac"
+    },
+    "provenance/original/src/logger/docs/production.md": {
+      "bytes": 589,
+      "sha256": "e7e3ca5afbb9efbde3641d8d6bf537d91437720fee1379d19e3d2ab3a28299e2"
+    },
+    "provenance/original/src/logger/docs/security.md": {
+      "bytes": 725,
+      "sha256": "90d6247afc69a3877d5dcaf28f79e3b2824838e1effe2340311321640e547439"
+    },
+    "provenance/original/src/logger/docs/structured-logging.md": {
+      "bytes": 669,
+      "sha256": "ed8c786f41f56a1aec3a434e90b9037707fbe76c79e8f23cf63d8eb83da34cb6"
+    },
+    "provenance/original/src/logger/docs/testing.md": {
+      "bytes": 465,
+      "sha256": "5ee49786f70f5b088a5d64eb03e1f8e95fffc3c33005c5c65cae19f7b9b6de0f"
+    },
+    "provenance/original/src/logger/docs/transports.md": {
+      "bytes": 641,
+      "sha256": "3643462ec8932cd5c924f3d4ba0aa6f79d760c2f8218e8ebf5a9d7dac3003920"
+    },
+    "provenance/original/src/logger/index.js": {
+      "bytes": 1494,
+      "sha256": "a44659bc7406220ce41dd49e4504424c12cfac174a88b0605a792e376e2e180d"
+    },
+    "provenance/original/src/logger/logger.js": {
+      "bytes": 814,
+      "sha256": "4dd77e66ab09b46baa0f10402bf07fd86061c3285fd19faaddc1b7e3e0a727c7"
+    },
+    "provenance/original/src/logger/package.json": {
+      "bytes": 4850,
+      "sha256": "329590818006f94c422a0b5c2a6f09fa70b28abbe77e8f4be4156d1186545a5a"
+    },
+    "provenance/original/src/logger/rawnode-src-logger-full-code.txt": {
+      "bytes": 826170,
+      "sha256": "17322d31d80da581405f07d41a0908d8bcce63ba2410f2723db0f49d054a5005"
+    },
+    "provenance/original/src/logger/report.json": {
+      "bytes": 1244,
+      "sha256": "5bbb5c3c32b488292809e4a8cd9c24b5f87a8e2877cf070ff31c04875ba212c9"
+    },
+    "provenance/original/src/logger/src/channels/Channel.js": {
+      "bytes": 85,
+      "sha256": "e2ec242c63d1d2c972c71c92ffc7291c716b1261aee88b9ef1eb6f8d5b887eb9"
+    },
+    "provenance/original/src/logger/src/channels/ChannelManager.js": {
+      "bytes": 99,
+      "sha256": "cd2aae6f26b8a3bb03f57008247841763aae375b0e645eca1b122a94c8b10088"
+    },
+    "provenance/original/src/logger/src/channels/StackChannel.js": {
+      "bytes": 95,
+      "sha256": "217544133fbd2a23d9c3f1c9874db3c9ef7cf729d83abb70d69a4cab24d8f71d"
+    },
+    "provenance/original/src/logger/src/compatibility/v1/LegacyRecordFactory.js": {
+      "bytes": 1625,
+      "sha256": "e753d9f4142ab1c825e108494ab569e9cd6574299505be146d296c757ba71160"
+    },
+    "provenance/original/src/logger/src/compatibility/v1/index.js": {
+      "bytes": 1118,
+      "sha256": "d2666226872153586e402c7f0b8d1b8cd536e5706aedbf5da2b993c3149e5650"
+    },
+    "provenance/original/src/logger/src/config/CompatibilityProfile.js": {
+      "bytes": 254,
+      "sha256": "b82a2b4a8b515ca1d18443279a5bc50e80a27e837e8280b63a7f9eb572be06ee"
+    },
+    "provenance/original/src/logger/src/context/ContextManager.js": {
+      "bytes": 167,
+      "sha256": "cc7f1f457750a33b1a991bcca158c3a817f4c6caa1ee70f641efbaa70e8317ff"
+    },
+    "provenance/original/src/logger/src/core/DeliveryQueue.js": {
+      "bytes": 92,
+      "sha256": "44de5dc58aeb801356613473c9c85d7e18c82d586019a75bcefb9fbdc19a5172"
+    },
+    "provenance/original/src/logger/src/core/InternalDiagnostics.js": {
+      "bytes": 105,
+      "sha256": "f61a68092f90aba4e36d4696e916c66ec27728fee982d96c3cab992b3dacce6c"
+    },
+    "provenance/original/src/logger/src/core/LevelRegistry.js": {
+      "bytes": 109,
+      "sha256": "c83aee3fe023b7a59ecbd4f7bddc4d1026b5fff8ebafacf79a6656e253cad018"
+    },
+    "provenance/original/src/logger/src/core/LoggerLifecycle.js": {
+      "bytes": 97,
+      "sha256": "e722ed05def5ab8c614bd0ce1d2027dfeac7e0a6befb01f1f4907b16890c70ef"
+    },
+    "provenance/original/src/logger/src/core/LoggerRuntime.js": {
+      "bytes": 106,
+      "sha256": "46384d9f1a6de8a63c571197435270da7f2938fe60204734c3453bf9801d2f7e"
+    },
+    "provenance/original/src/logger/src/enterprise/channels/Channel.js": {
+      "bytes": 1942,
+      "sha256": "1e94790e8b8f35e7b72ddc6156ede31bd07162a08fa2047f4218b8cfd6945d7f"
+    },
+    "provenance/original/src/logger/src/enterprise/channels/ChannelManager.js": {
+      "bytes": 12943,
+      "sha256": "419787e3e2e5013e61601399a2633e783618aa2995f62f070354b448a577cecb"
+    },
+    "provenance/original/src/logger/src/enterprise/channels/StackChannel.js": {
+      "bytes": 3149,
+      "sha256": "4c80df8fb50b213da4104ee384f3d2af270e46b25a6ec328a668e9ba487dfb54"
+    },
+    "provenance/original/src/logger/src/enterprise/channels/index.js": {
+      "bytes": 192,
+      "sha256": "c3bdee3eaea654629ee3c8f337c360df186dd646314c790788e0c6bbfca4e56a"
+    },
+    "provenance/original/src/logger/src/enterprise/compatibility/CompatibilityProfile.js": {
+      "bytes": 2243,
+      "sha256": "c0304f3ee99c75edfaee0d23cca00bb1d3f0e1012b1dce845b6568275e7d1d05"
+    },
+    "provenance/original/src/logger/src/enterprise/config/LoggerConfiguration.js": {
+      "bytes": 5916,
+      "sha256": "8c8d21aad3894f4b61d5311e71bd15b631f78e7bb2839f0805fc1e6372f84074"
+    },
+    "provenance/original/src/logger/src/enterprise/config/index.js": {
+      "bytes": 250,
+      "sha256": "78c92ecb8e092aaca615c27b12ea2db124e11749178191b05dc83bde575e6a84"
+    },
+    "provenance/original/src/logger/src/enterprise/console/LoggerDoctor.js": {
+      "bytes": 6132,
+      "sha256": "e4a0b25445068bcc53dd0af5435617421f349f16e91cfd071527b7a1de2e960e"
+    },
+    "provenance/original/src/logger/src/enterprise/console/index.js": {
+      "bytes": 130,
+      "sha256": "2ace91c7fd2f9404fa8e3944cfb48bee8ec1be99b41c3690161ccab213b693ff"
+    },
+    "provenance/original/src/logger/src/enterprise/console/run.js": {
+      "bytes": 9606,
+      "sha256": "920c8e0ec84532eb324bd4a61b1605fc38cbc3dc28a9805d3fcbc73ce3708bcb"
+    },
+    "provenance/original/src/logger/src/enterprise/context/ContextManager.js": {
+      "bytes": 3371,
+      "sha256": "d8d8f90e21b0903409820ee60d898bc91bbda31e84c1c4d47950a2d3835df222"
+    },
+    "provenance/original/src/logger/src/enterprise/context/index.js": {
+      "bytes": 149,
+      "sha256": "b671bef7856bf0f9e7f9697aedee1739523d98708fcebc0e285d511277e5a474"
+    },
+    "provenance/original/src/logger/src/enterprise/core/DeliveryQueue.js": {
+      "bytes": 12139,
+      "sha256": "ca4a7bf34afc737703abbd3d33f8c983302c0028141ec9d247f81359072fb8c8"
+    },
+    "provenance/original/src/logger/src/enterprise/core/InternalDiagnostics.js": {
+      "bytes": 1544,
+      "sha256": "ebfb39f4fc76bf21c15701c40d01de34215986fed05ef5dea4410f005f00bb97"
+    },
+    "provenance/original/src/logger/src/enterprise/core/LevelRegistry.js": {
+      "bytes": 6135,
+      "sha256": "1a9f343dba5c7d756bb5e89dc0fbefe186a415621dd91e2fd9f39f7e584af7c1"
+    },
+    "provenance/original/src/logger/src/enterprise/core/LoggerLifecycle.js": {
+      "bytes": 1358,
+      "sha256": "631293f4461cd38df39c4d34962d505a3a2a39b4da93c10cb93f8459556ad2b6"
+    },
+    "provenance/original/src/logger/src/enterprise/core/LoggerRuntime.js": {
+      "bytes": 34863,
+      "sha256": "7ca9cc06b066ec01514dd30203d0feaa0cc3744246737f2dff5e99e8682a9995"
+    },
+    "provenance/original/src/logger/src/enterprise/core/TransportAdapter.js": {
+      "bytes": 23855,
+      "sha256": "3f7a2fbbbea21522b7cea75eef830b22098d21adde1cb4fef0b184eb74a03d33"
+    },
+    "provenance/original/src/logger/src/enterprise/core/TransportDispatcher.js": {
+      "bytes": 5437,
+      "sha256": "976b73838c944b694349ff840cc28b3644d9a299da0518c3d1984fb39cdd5dcc"
+    },
+    "provenance/original/src/logger/src/enterprise/core/index.js": {
+      "bytes": 589,
+      "sha256": "ccdba83fa57c6074e01c0face960c8c9d57018ef2488fd1246c806f4bda374e6"
+    },
+    "provenance/original/src/logger/src/enterprise/index.js": {
+      "bytes": 5111,
+      "sha256": "9db8adb1136203f6c5d0f55a27ccf1ec59c8766b04f6c8fac05749486578d530"
+    },
+    "provenance/original/src/logger/src/enterprise/inspector/InspectorServer.js": {
+      "bytes": 5570,
+      "sha256": "7bef314beb04dfb2504c6411be9448f968dea2ca55e9ccef1b93d9d79b4a2927"
+    },
+    "provenance/original/src/logger/src/enterprise/inspector/InspectorTransport.js": {
+      "bytes": 2824,
+      "sha256": "a2ef346073e5bff613544d26ad8ac456458d9edc82744b3c1f5b2e0d2e806241"
+    },
+    "provenance/original/src/logger/src/enterprise/inspector/index.js": {
+      "bytes": 154,
+      "sha256": "570d46b982a25731e4da3f6baeb553df85daa050fc52971ce6e6fb4a3b71c025"
+    },
+    "provenance/original/src/logger/src/enterprise/integrations/EventLoggingBridge.js": {
+      "bytes": 767,
+      "sha256": "eed22aeab912b46d186e9ada001753eaffc8b1073f4a025c60d4593dbdab761e"
+    },
+    "provenance/original/src/logger/src/enterprise/integrations/HttpLoggingMiddleware.js": {
+      "bytes": 2944,
+      "sha256": "33c2e1c8fba71cbf8483ed366665ea01b0d19ffe48e0be996955170f0be0fa08"
+    },
+    "provenance/original/src/logger/src/enterprise/integrations/LoggerServiceProvider.js": {
+      "bytes": 5176,
+      "sha256": "12ac26166c494c8889e44c12d1d327321424a0a3dc1c4e890206772ca695763c"
+    },
+    "provenance/original/src/logger/src/enterprise/integrations/ProcessErrorHandler.js": {
+      "bytes": 2004,
+      "sha256": "89f1d7a2df7ce4fd5a5973c44751a69c7e326adee68fea5463ef2861aba7de77"
+    },
+    "provenance/original/src/logger/src/enterprise/integrations/SwappableLogger.js": {
+      "bytes": 3575,
+      "sha256": "35ca1eec5ba97f9957ca8132f65b2ac653256c0c22ab9d97aafaccd8408d8b8d"
+    },
+    "provenance/original/src/logger/src/enterprise/integrations/index.js": {
+      "bytes": 416,
+      "sha256": "f935ca9a0649ad5d45cb5ef109797a570e3c2164a5df1301f8cf4a71dd912c1e"
+    },
+    "provenance/original/src/logger/src/enterprise/observability/LoggerHealth.js": {
+      "bytes": 552,
+      "sha256": "43041b9d35d157bed5cfe4c5d860a263f35d78f76b2eb4f87d21fb619493f42a"
+    },
+    "provenance/original/src/logger/src/enterprise/observability/LoggerMetrics.js": {
+      "bytes": 2755,
+      "sha256": "c9c711e4e46d6037c40d9e6c6742c5076675d3cacdb7896acb4736645386ea23"
+    },
+    "provenance/original/src/logger/src/enterprise/observability/index.js": {
+      "bytes": 139,
+      "sha256": "151aaac568def074c808d065d68fe54cd0721ca5061a5e76f439165477dae92a"
+    },
+    "provenance/original/src/logger/src/enterprise/plugins/PluginManager.js": {
+      "bytes": 5942,
+      "sha256": "b024be31d64739070b2d5d528bcf9eaaf57f97bc1481c8842e8f9bf800044595"
+    },
+    "provenance/original/src/logger/src/enterprise/plugins/index.js": {
+      "bytes": 78,
+      "sha256": "a0f1b7108fdfad27725f471f0b70fa5d79f74f1b996fc63f5a7fc63ab4106f70"
+    },
+    "provenance/original/src/logger/src/enterprise/processing/DeduplicationProcessor.js": {
+      "bytes": 786,
+      "sha256": "c013702d254ae09f761978e4269f02dbbd87a7bee90343f2e327290b32f72760"
+    },
+    "provenance/original/src/logger/src/enterprise/processing/ProcessorRegistry.js": {
+      "bytes": 5141,
+      "sha256": "cb7d21a73384dad7896b85612c1ccc97b56f20572561d053241984d5febb3cef"
+    },
+    "provenance/original/src/logger/src/enterprise/processing/SamplingProcessor.js": {
+      "bytes": 489,
+      "sha256": "cc4917e0b2980296a537b8b42dd27695d9bd1f5269e45e23e1e825afe43aae0b"
+    },
+    "provenance/original/src/logger/src/enterprise/processing/index.js": {
+      "bytes": 238,
+      "sha256": "02345a516b6f6da05468455c60aec9e7e79969d1b22015783cd27ee9dd0e77d8"
+    },
+    "provenance/original/src/logger/src/enterprise/public/LoggerBuilder.js": {
+      "bytes": 4738,
+      "sha256": "7e3e02cc4ebc7330e7f2fc6174628bf10f48764cb1cb4de8ccb47a92430028cb"
+    },
+    "provenance/original/src/logger/src/enterprise/public/LoggerFacade.js": {
+      "bytes": 11056,
+      "sha256": "eb0694475c6df3dca0d2c292b609bf61e96cc4fc94ca09c09f78b482df7e4a7d"
+    },
+    "provenance/original/src/logger/src/enterprise/public/NullLogger.js": {
+      "bytes": 2183,
+      "sha256": "d0416c90a87919c45d7e4e5fdfafa53215417ad1824759b1cacae6d20ee811b6"
+    },
+    "provenance/original/src/logger/src/enterprise/public/createLogger.js": {
+      "bytes": 615,
+      "sha256": "c197f367af5f651fa9353edb15a5ee63106f81eac0c6898c9abe066509b5dfc1"
+    },
+    "provenance/original/src/logger/src/enterprise/public/index.js": {
+      "bytes": 269,
+      "sha256": "198fa1128f892b0336909022e42e693e21daf24dca7279065dd7355085811099"
+    },
+    "provenance/original/src/logger/src/enterprise/records/ErrorNormalizer.js": {
+      "bytes": 1640,
+      "sha256": "d93d2b867a66ec7e89dfc699b6b001d7121579510955feee9b906792fd445011"
+    },
+    "provenance/original/src/logger/src/enterprise/records/RecordFactory.js": {
+      "bytes": 5164,
+      "sha256": "4857daa7ff5577e1fe7cdd47cc56fe2a1b57380b3aed713dd847a7ef3a125e1a"
+    },
+    "provenance/original/src/logger/src/enterprise/records/index.js": {
+      "bytes": 169,
+      "sha256": "e363c7f33dc94822e2dc556634fefed0385457263f803caf83ca16d20e1c0768"
+    },
+    "provenance/original/src/logger/src/enterprise/security/AuditChain.js": {
+      "bytes": 3464,
+      "sha256": "fdab7e4f61a29b739e34da5e49d73ac4a700ad1ed54311e01d7501d421a31f45"
+    },
+    "provenance/original/src/logger/src/enterprise/security/ControlCharacterSanitizer.js": {
+      "bytes": 1034,
+      "sha256": "a108eb787308808b33b8e64255d2998e3f402667f75a069b0b8cb83012a617de"
+    },
+    "provenance/original/src/logger/src/enterprise/security/Redactor.js": {
+      "bytes": 6022,
+      "sha256": "ba62d910e5e09733b3acb949b1a590032cdbbef63630bbd00ca34cee7a1e5726"
+    },
+    "provenance/original/src/logger/src/enterprise/security/SensitiveFieldRegistry.js": {
+      "bytes": 1183,
+      "sha256": "96df1da57b3e0ab07deb625dfedeed02ed6e14241bf053abb7bde4b2e07f693d"
+    },
+    "provenance/original/src/logger/src/enterprise/security/index.js": {
+      "bytes": 438,
+      "sha256": "4145b30c51e00ee99a740b619f3e48ac48bfbc437ea752e92fef90682714b7ec"
+    },
+    "provenance/original/src/logger/src/enterprise/serialization/JsonFormatter.js": {
+      "bytes": 603,
+      "sha256": "06d1a1949605353e755635b1332eae063a52c63bdfba511cef14091de4d95c91"
+    },
+    "provenance/original/src/logger/src/enterprise/serialization/LogfmtFormatter.js": {
+      "bytes": 923,
+      "sha256": "7decbda44945f73e9f9c3f11396909f6bdb3c506ed293b8241a66c6d63f3fff1"
+    },
+    "provenance/original/src/logger/src/enterprise/serialization/NdjsonFormatter.js": {
+      "bytes": 239,
+      "sha256": "3a5f65aaf2010454f7948a04a5a8f5e34390885909823c5e20b68c579bcf3dbf"
+    },
+    "provenance/original/src/logger/src/enterprise/serialization/SafeSerializer.js": {
+      "bytes": 8790,
+      "sha256": "0624e43769579e8aca312966ca74db1b6adcd9be705e139c7c393b1894b8ca30"
+    },
+    "provenance/original/src/logger/src/enterprise/serialization/TextFormatter.js": {
+      "bytes": 1252,
+      "sha256": "92ffe0f00f79fdc56178e5681b33b4c4dfb66d0796a7a2a593495cd606d7b2ed"
+    },
+    "provenance/original/src/logger/src/enterprise/serialization/index.js": {
+      "bytes": 373,
+      "sha256": "4990adc2ee374e8b0e3c03564ca0eb57447fd112a526f3efe333853ec7116757"
+    },
+    "provenance/original/src/logger/src/enterprise/testing/FakeClock.js": {
+      "bytes": 326,
+      "sha256": "9a4370665cfd810ecb504396026201efd82db699591e17267bfc5da4c098f8fc"
+    },
+    "provenance/original/src/logger/src/enterprise/testing/LoggerRecorder.js": {
+      "bytes": 2049,
+      "sha256": "bdccc4a9756166443ea8eea073e89b00672fe0369d76105633d3014ce92a5378"
+    },
+    "provenance/original/src/logger/src/enterprise/testing/index.js": {
+      "bytes": 213,
+      "sha256": "5517f6395c307d3f62fa6e3b1b3400672d1e5461b384f71d43f3e623193819d3"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/AuditFileTransport.js": {
+      "bytes": 4401,
+      "sha256": "19de8770e61579fe06f1171865fa53e9e9cd28ab3a6e2d0cacb44180d9f3e66b"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/BaseTransport.js": {
+      "bytes": 1959,
+      "sha256": "f974ccde54d29b231afe08543d1e0e2b413fcb36be36f2ca7d6380e892ccaa72"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/CallbackTransport.js": {
+      "bytes": 585,
+      "sha256": "03b13b483b3834989caf9fddccd515aa4a8de99786a67b8db7bd350f0b080af0"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/ConsoleTransport.js": {
+      "bytes": 2239,
+      "sha256": "f0b178eda1bdcf3f6e86216a1329b2fc0190409e602ec78b4c1689650d8cfa26"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/FileTransport.js": {
+      "bytes": 16954,
+      "sha256": "80faaa8d0f1cd42e00d1a53bec2d4eacea24d7e8cd3ac76dfd7f0c0ab721266a"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/HttpBatchTransport.js": {
+      "bytes": 2701,
+      "sha256": "f5b5cd616b38e20d8684362dc7f2944b97ef3093868f183e0af3d56982fe865b"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/MemoryTransport.js": {
+      "bytes": 1422,
+      "sha256": "44eeddc9a1fe5fc34512d6115f979d793dca8b290642539d43ab5f9cc0a0a470"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/NullTransport.js": {
+      "bytes": 295,
+      "sha256": "f5497b2bc15b866d92c95d235fe6dcc06001ea835c5da3e2aba56ac25f7cc1f5"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/RedisStreamTransport.js": {
+      "bytes": 1694,
+      "sha256": "20adc797c9a1baaeb317211d7590bedf5fcc9317a1299d5c705897a6636f3cf5"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/StreamTransport.js": {
+      "bytes": 1448,
+      "sha256": "0aab259004c2203cea5311a8fe60249525379c17b1607b5644bcf9aa081d3d71"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/TcpTransport.js": {
+      "bytes": 3970,
+      "sha256": "b49647271ba2a3b6d12b1c2c9a5fe6d394d2dece77f55c9a1e6da4c45ca01980"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/UdpTransport.js": {
+      "bytes": 1997,
+      "sha256": "8c08d7492b63dac4217103b3f0fa2c02b560a9ca9d1bf824272eb1e5fa2b172c"
+    },
+    "provenance/original/src/logger/src/enterprise/transports/index.js": {
+      "bytes": 853,
+      "sha256": "644373821755d7eb7878a69afe4306d5936816f906e356ef161183a8f96c3ee4"
+    },
+    "provenance/original/src/logger/src/formatters/JsonFormatter.js": {
+      "bytes": 102,
+      "sha256": "2cc41729a999c63c3ec11bd0420320dcd0a23232a73a9382f64e0d33957a1d31"
+    },
+    "provenance/original/src/logger/src/formatters/LogfmtFormatter.js": {
+      "bytes": 106,
+      "sha256": "4fbb62c747bc2e187db31cab36d4cf55af413248675074d02dda7c408f83348b"
+    },
+    "provenance/original/src/logger/src/formatters/NdjsonFormatter.js": {
+      "bytes": 106,
+      "sha256": "8d1c1d5726c40a0403cb11f5691267ae29ed4b4bf7be08de2a6d329dbcbc15d9"
+    },
+    "provenance/original/src/logger/src/formatters/TextFormatter.js": {
+      "bytes": 102,
+      "sha256": "31c5624f0af61ce63b77e329692dbffdcae1bbd476623cd6a93eee2d67151638"
+    },
+    "provenance/original/src/logger/src/index.js": {
+      "bytes": 82,
+      "sha256": "430ce99d78c1ec172ce12f3a38c2ab64184b177ff1191301a3794366e04226cf"
+    },
+    "provenance/original/src/logger/src/integrations/HttpLoggingMiddleware.js": {
+      "bytes": 123,
+      "sha256": "1b37b7a6e62a4a481838274d675c36ba6d4c9a478cac6a9fdb34144809f9fdee"
+    },
+    "provenance/original/src/logger/src/integrations/LoggerServiceProvider.js": {
+      "bytes": 117,
+      "sha256": "02112239ea873696c5d2011204d36f8af4252cb37bf31f3abe225c3ab5f0ae03"
+    },
+    "provenance/original/src/logger/src/integrations/ProcessErrorHandler.js": {
+      "bytes": 113,
+      "sha256": "4a180858680e27a94ce24626880fd4fc2a76788f8a30ca91f5ce7478b8754714"
+    },
+    "provenance/original/src/logger/src/logger.js": {
+      "bytes": 71,
+      "sha256": "0c047f5b08ab9f3fc9588ef0eee3c709ba2db5e1c836c4e877041bb639224462"
+    },
+    "provenance/original/src/logger/src/observability/LoggerHealth.js": {
+      "bytes": 100,
+      "sha256": "95c8b8b4dd26aff915755260a7c6ac8a7199d86f9c195544e3949bc9a08a0baa"
+    },
+    "provenance/original/src/logger/src/observability/LoggerMetrics.js": {
+      "bytes": 102,
+      "sha256": "3c1983fa3daef5364356c03a6467181e2ff874ce2d14cbd451bc070a53f9322e"
+    },
+    "provenance/original/src/logger/src/plugins/PluginManager.js": {
+      "bytes": 95,
+      "sha256": "26ba8cf8b04fe4dd253571aa45309c226154c87130ce6b1632e8106d96e3c946"
+    },
+    "provenance/original/src/logger/src/plugins/container.js": {
+      "bytes": 989,
+      "sha256": "2c995b090f28880476842d27a8887f08511afee94b5be546ba667fe3d3d81031"
+    },
+    "provenance/original/src/logger/src/processing/DeduplicationProcessor.js": {
+      "bytes": 117,
+      "sha256": "be45e08ef99fc9ed075c37b337a027b6747827af9746116cd9ea485f1141dd1f"
+    },
+    "provenance/original/src/logger/src/processing/ProcessorRegistry.js": {
+      "bytes": 106,
+      "sha256": "3acf429513ec9126fb5a54d8fc530698c272141334cd97390cc7b5bde6a334fa"
+    },
+    "provenance/original/src/logger/src/processing/SamplingProcessor.js": {
+      "bytes": 107,
+      "sha256": "5357a083f8a261220bcdf0a91a38b3dcba524ac079feab4a4e4915e6fed0a729"
+    },
+    "provenance/original/src/logger/src/public/LoggerBuilder.js": {
+      "bytes": 95,
+      "sha256": "71af37b2f8bc2a1775eb33e4f92bb9f614554ff8547e93c19552675bfa1a06da"
+    },
+    "provenance/original/src/logger/src/public/LoggerFacade.js": {
+      "bytes": 93,
+      "sha256": "42a301fb21ebbd640e23551da65fd500956914778aa62117b9f78cf2854fe274"
+    },
+    "provenance/original/src/logger/src/public/NullLogger.js": {
+      "bytes": 100,
+      "sha256": "286b3fd2519c5359401e264bb0644c15106be8fccce5c2cb6c5bb51a7d076f50"
+    },
+    "provenance/original/src/logger/src/public/createLogger.js": {
+      "bytes": 93,
+      "sha256": "bfc8e8a73de98eae591473b5115d8c73f9f5fc237edaebfa9284db645d651595"
+    },
+    "provenance/original/src/logger/src/records/ErrorNormalizer.js": {
+      "bytes": 100,
+      "sha256": "7c72537848a641065e69c7bfef337f7f1bc51c4aae487afb865f5636971b99df"
+    },
+    "provenance/original/src/logger/src/records/ProcessMetadata.js": {
+      "bytes": 406,
+      "sha256": "42c2d65fed9fb47e2090dd64a4c7295ac553aee9a76b0cda8227db9330fcce3b"
+    },
+    "provenance/original/src/logger/src/records/RecordFactory.js": {
+      "bytes": 120,
+      "sha256": "4c9b1d1dc870a34fcacb566ecab2f0afb9c308d68668934549328ad42a9b1ba0"
+    },
+    "provenance/original/src/logger/src/security/AuditChain.js": {
+      "bytes": 108,
+      "sha256": "f58839d02e00bb93544fb6398f09cfa65467a029d4ef1bfe5f465ffe69395910"
+    },
+    "provenance/original/src/logger/src/security/ControlCharacterSanitizer.js": {
+      "bytes": 149,
+      "sha256": "e05166aad49b9b7ed5175f42e3e38645494458243532794fccdfa1b057272b30"
+    },
+    "provenance/original/src/logger/src/security/Redactor.js": {
+      "bytes": 117,
+      "sha256": "575022d8266e060bc7097c1f8deb2bfa7f87d7695dec70d54b4045a254209eaf"
+    },
+    "provenance/original/src/logger/src/security/SensitiveFieldRegistry.js": {
+      "bytes": 133,
+      "sha256": "f915d0d9d5fe7b81c42e17eb77dc9fb982b911bb9f32ddc69cf1660d1cd96f4e"
+    },
+    "provenance/original/src/logger/src/serialization/SafeSerializer.js": {
+      "bytes": 137,
+      "sha256": "feda5e0b277015602469bc1cfa04ef77b5e0aba2b5528f52b708bf424b6b4e81"
+    },
+    "provenance/original/src/logger/src/submodules/EventEmitter/index.js": {
+      "bytes": 58993,
+      "sha256": "794fa5ea42d774a7045060342a544122b9b324e6f1ec7705c828a3611a34a0be"
+    },
+    "provenance/original/src/logger/src/submodules/Transformer/index.js": {
+      "bytes": 66197,
+      "sha256": "e9a70ce5af30775e4752af5f22fd030d614c14b53bd565800df5a8499f48e681"
+    },
+    "provenance/original/src/logger/src/submodules/advanced-logger/errors/index.js": {
+      "bytes": 3454,
+      "sha256": "750865eb4c799363345ce566a02c05a244ea00f5496f2a7cc0ea00b16dea361a"
+    },
+    "provenance/original/src/logger/src/submodules/advanced-logger/formatter.js": {
+      "bytes": 4868,
+      "sha256": "cc57ea7f9dee0432c2cdcfd27fd9ed7717c6e64831473cd03d1f7ee99577dc3d"
+    },
+    "provenance/original/src/logger/src/submodules/advanced-logger/index.js": {
+      "bytes": 12554,
+      "sha256": "d0e509c2d418ba8a3327683ea36ab0c5077bc4c677967e35041ecad9155f1f2b"
+    },
+    "provenance/original/src/logger/src/submodules/app/core.js": {
+      "bytes": 862,
+      "sha256": "b77cc91793fafc6426e02a65b0f701af066dd6e7c0c9f5db852fd33b13d6a519"
+    },
+    "provenance/original/src/logger/src/submodules/app/index.js": {
+      "bytes": 68,
+      "sha256": "92c749e2a0797d26a3cb3b10220f59fe3f8c96ecb1ee2718ba408e9f3c24b153"
+    },
+    "provenance/original/src/logger/src/submodules/base/BaseTransport.js": {
+      "bytes": 2542,
+      "sha256": "1d1dbe87dce79864d9a45f60f7c1fc3c2fa526d13aac8ad1bd3b54ef8ab767c3"
+    },
+    "provenance/original/src/logger/src/submodules/builder/LoggerBuilder.js": {
+      "bytes": 2754,
+      "sha256": "2e61e64e8787cd65053cb40b5b71f34f0ff375a76ac615aa15adfde572e8d189"
+    },
+    "provenance/original/src/logger/src/submodules/builder/index.js": {
+      "bytes": 97,
+      "sha256": "8573961a8cdf09d548b25568420471217e102cb1d6d93d49bd1749f2455bcc0f"
+    },
+    "provenance/original/src/logger/src/submodules/colors/index.js": {
+      "bytes": 12030,
+      "sha256": "7d51e59015a5dbca3d34193d277d2369c793e19321608b7f805929f7fc259503"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/convert.js": {
+      "bytes": 4811,
+      "sha256": "68e76bbaa684921d5a2406230bc7c6c36b1131e563b2217b558b889d7a2c8a92"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/errors.js": {
+      "bytes": 464,
+      "sha256": "1448877fbc85b579c4def30424cb093735c4feb476dde01f44301e37f1f41c74"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/fns.js": {
+      "bytes": 13255,
+      "sha256": "625dfe5843ae3d435af62940dda9e2750f5e5b970f7891274212e131d26f22fd"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/hooks.js": {
+      "bytes": 2237,
+      "sha256": "23a1acccaa12fb9f3c53e17c6bd1027a7452be92573aea990e0c6013ba935878"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/index.js": {
+      "bytes": 14783,
+      "sha256": "0e1b3b927096e86bdd168dbd9991b08413ecc12f65d8b38adc80c52acac2eecb"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/palette.js": {
+      "bytes": 4637,
+      "sha256": "d9949c9cb393866de2356a7bf549fe37b750aaf8472bbfa731f81908a6cbf4c6"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/parse.js": {
+      "bytes": 6691,
+      "sha256": "28c335c6d51d25c7b50eafe715b4be51b91b42438a7869a3e440dc9e074c7eee"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/color-functions/tables.js": {
+      "bytes": 4480,
+      "sha256": "cafe8badc46262ebc4b0c706a298f64a26fea17604df930bba33ec8d9d82175d"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/convert/index.js": {
+      "bytes": 5500,
+      "sha256": "b5e7975cb930a9f9a231d06529de18764980d0e736f6e2f42557def7941d608d"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/core.js": {
+      "bytes": 82910,
+      "sha256": "9eda197ec2b161359fd1a43905db8792e8e613d51928b014c8a4daba30506967"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/degrade/index.js": {
+      "bytes": 2528,
+      "sha256": "28ea15e4f2b5cd77131861abcb15fd965e8de217b1d005e9a1c6db764dd8fae2"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/detect/index.js": {
+      "bytes": 3248,
+      "sha256": "d1f413449fc9a9495866aa9bf3425235004fbdb48edb642b9f74dafb09eb613f"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/esc/index.js": {
+      "bytes": 1533,
+      "sha256": "4be671ea2aa77a8fb52be539d50c8730ce4873561beca0950a578f55aa8033c3"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/functions/colorsFunction.js": {
+      "bytes": 6784,
+      "sha256": "77905ba0cc205d44864de924c039bd03f5439077f3ba107033ce4cee25c040e5"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/hooks/index.js": {
+      "bytes": 1580,
+      "sha256": "1056c5420742e6c628b91b6c553656bf177408d06aa31f6de67194a889583891"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/palette/index.js": {
+      "bytes": 1815,
+      "sha256": "47f88e8340e0f3d89b86b3a9e78d1aa603f90beb12f3952c9e6439a65da325f7"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/parse/index.js": {
+      "bytes": 2244,
+      "sha256": "d132ddb24afbf6b4aa4a97d198e2364e96ab9034c33e2d422e60527176bbc788"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/style/index.js": {
+      "bytes": 5351,
+      "sha256": "5134dd1c407d3e72a7b76ab15316b7cba4150dfd1d7932fc68975a89ac0918e2"
+    },
+    "provenance/original/src/logger/src/submodules/colors/src/submodules/colors/width/index.js": {
+      "bytes": 2335,
+      "sha256": "a0c4d605a23b7da35294ad3d13794f15e0edde9388d885a17882cc788dd00867"
+    },
+    "provenance/original/src/logger/src/submodules/config/index.js": {
+      "bytes": 4498,
+      "sha256": "22a8dfc01e9d506eb004d79238be7d40876c2b472bb98e974d0064632420767c"
+    },
+    "provenance/original/src/logger/src/submodules/console-transport/index.js": {
+      "bytes": 774,
+      "sha256": "d20f5bdf30ef59c74c18fe05d0e96c520f76ee5084c6bc54a7933a5cd85b10f2"
+    },
+    "provenance/original/src/logger/src/submodules/default-logger/index.js": {
+      "bytes": 583,
+      "sha256": "fde4c7b51fbef7c6509ab2130b56c76e1380c35d5d4b5bd739b9b8e7d39b8ef8"
+    },
+    "provenance/original/src/logger/src/submodules/defaulted-logger/index.js": {
+      "bytes": 189,
+      "sha256": "b1a80a0c58e19216a6e428a735d8a3672f50edeb969c7dac0f8c9bb4d45f831c"
+    },
+    "provenance/original/src/logger/src/submodules/file-transport/index.js": {
+      "bytes": 1845,
+      "sha256": "b91aa5e4d08b67aa4eca5e764805774defc5d8be0325b808e0703d8b61c927c9"
+    },
+    "provenance/original/src/logger/src/submodules/formatter/buildLogEntry.js": {
+      "bytes": 6012,
+      "sha256": "122da327135342635379d374719b31f61e529d3f57ec64d0ee309c7db1f4504f"
+    },
+    "provenance/original/src/logger/src/submodules/formatter/config/index.js": {
+      "bytes": 5104,
+      "sha256": "2a0c90e5050b8029cf29dc4fa30f36c10a0cc861bf4c79a8ee8f107bb9e5b971"
+    },
+    "provenance/original/src/logger/src/submodules/formatter/createLevelConfig.js": {
+      "bytes": 2043,
+      "sha256": "c29d5f715a43552da1470db2fc0bfa6aa4f15ddf5c4e3b4fd8c733201b7f9be6"
+    },
+    "provenance/original/src/logger/src/submodules/formatter/formatLog.js": {
+      "bytes": 4409,
+      "sha256": "e9e1b4a221c30992001e6b020668ea2d5669ed0936c62f4ae76e3f8ce2806153"
+    },
+    "provenance/original/src/logger/src/submodules/formatter/formatter.js": {
+      "bytes": 5531,
+      "sha256": "af777d03f951e4ba66e51b520b2e035ce86ce7d7a7e42bcbf4ca6f7d09549cdf"
+    },
+    "provenance/original/src/logger/src/submodules/formatter/levelColors.js": {
+      "bytes": 1922,
+      "sha256": "59052686149614f8af88f5c9519f5be07911254b826e31fc294c64fe1bd6f9d6"
+    },
+    "provenance/original/src/logger/src/submodules/index.js": {
+      "bytes": 88,
+      "sha256": "88ac6b5a896a79dcc66856c0b165b76517d99e83fd4eb5ae657fc35cc189553b"
+    },
+    "provenance/original/src/logger/src/submodules/inspector/InspectorServer.js": {
+      "bytes": 104,
+      "sha256": "8feaa105012f93d1c8b8c7bf80774aa589be01e6833536b8944b32f651e4b034"
+    },
+    "provenance/original/src/logger/src/submodules/inspector/InspectorTransport.js": {
+      "bytes": 110,
+      "sha256": "c3b7382d5c4436aed52c76a7ffcfa252e337f0f84d67b700f05cc3d40332f795"
+    },
+    "provenance/original/src/logger/src/submodules/inspector/index.js": {
+      "bytes": 214,
+      "sha256": "fd5f7a5639ad3b82ca7b5afc32ec1aae165542c73d3d9abe0488fb201d5ca49e"
+    },
+    "provenance/original/src/logger/src/submodules/logger/index.js": {
+      "bytes": 70,
+      "sha256": "000c44d7aae1458a2eebda816c341a9a092ef2601b134272c3c997f5843a0f58"
+    },
+    "provenance/original/src/logger/src/submodules/logs/application-2026-08-10T13-39-33-562Z-1536-1.log": {
+      "bytes": 10,
+      "sha256": "770c2d18aa4ec3159f46da461ef452972949942ff4f6a9771044485faa146398"
+    },
+    "provenance/original/src/logger/src/submodules/logs/application.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "provenance/original/src/logger/src/submodules/observable-console-transport-enhanced/errors/index.js": {
+      "bytes": 3529,
+      "sha256": "4043d7377a35161a5e0e9c79caf1daf1603f5c2583424f0f581efcbe57b3d7ae"
+    },
+    "provenance/original/src/logger/src/submodules/observable-console-transport-enhanced/index.js": {
+      "bytes": 2074,
+      "sha256": "e7e7f9a167182ba232b559fe2694af00be4ee11c03ff38cbd95b51114b18c973"
+    },
+    "provenance/original/src/logger/src/submodules/observable-console-transport/index.js": {
+      "bytes": 1055,
+      "sha256": "9b60387c41ecb7a39011c82998164a6e6783d5375406bb275c7971b2569009ca"
+    },
+    "provenance/original/src/logger/src/submodules/observable-file-transport-enhanced/index.js": {
+      "bytes": 540,
+      "sha256": "ce731d9041c057a8b906d633eec2205f9305882274dd15bd6e1d10a7869ba40e"
+    },
+    "provenance/original/src/logger/src/submodules/observable-file-transport/index.js": {
+      "bytes": 1785,
+      "sha256": "84cf3653c52ca886a2ee28c4f472301de0aec76f5dd8fdf4b817b55d35b72b34"
+    },
+    "provenance/original/src/logger/src/submodules/simple-logger/index.js": {
+      "bytes": 4947,
+      "sha256": "e7d8cd55ec491c74bf162a502a026fa285ca658cf00c114f210a688ca06f6526"
+    },
+    "provenance/original/src/logger/src/transports/AsyncFileTransport.js": {
+      "bytes": 136,
+      "sha256": "99fbb35c7cfd399eebd9fb20372147916ed15da6e5f53f184bdb450a394cde47"
+    },
+    "provenance/original/src/logger/src/transports/AuditFileTransport.js": {
+      "bytes": 109,
+      "sha256": "e9447cfb2e0473b32a98caab8a3a4e010fb5a348f80bd2c63f17dc055b597002"
+    },
+    "provenance/original/src/logger/src/transports/BaseTransport.js": {
+      "bytes": 99,
+      "sha256": "f53bcf262d3c8f86a2747f839a10b0ebdd9b41cc77120fbaa740c0b48e6dada8"
+    },
+    "provenance/original/src/logger/src/transports/CallbackTransport.js": {
+      "bytes": 107,
+      "sha256": "408aed6a936c9d92e1aafefe9cd9ef81059e79632bd07dd7fdd5f030f64c3034"
+    },
+    "provenance/original/src/logger/src/transports/ConsoleTransport.js": {
+      "bytes": 105,
+      "sha256": "786e65438a614afe213f1c6ef138571c4741907c3a5c683dbe47ccafd85283af"
+    },
+    "provenance/original/src/logger/src/transports/HttpBatchTransport.js": {
+      "bytes": 109,
+      "sha256": "6030374bef728c7daf34b9e8fa44a8e938ef73b72fb7431e43552870377f5435"
+    },
+    "provenance/original/src/logger/src/transports/MemoryTransport.js": {
+      "bytes": 103,
+      "sha256": "537536f6e8429a6d6f30884d9f6763ae07c6b9420fe65d9ba12ac2e49cc4dbc0"
+    },
+    "provenance/original/src/logger/src/transports/NullTransport.js": {
+      "bytes": 99,
+      "sha256": "8939850164a3bb7c7cea4b8fefc3d6d269a6ce31b875150f9afea389e3e40d3d"
+    },
+    "provenance/original/src/logger/src/transports/RedisStreamTransport.js": {
+      "bytes": 113,
+      "sha256": "89824fd765e63885264ff86d7b4fddddb4a0d05ac38fd91ed22a50b369aa40e5"
+    },
+    "provenance/original/src/logger/src/transports/StreamTransport.js": {
+      "bytes": 103,
+      "sha256": "40128cc9ece7347c9d836a9f7218eca620c37e551156ebbda841251927dad23a"
+    },
+    "provenance/original/src/logger/src/transports/TcpTransport.js": {
+      "bytes": 97,
+      "sha256": "0e6b74d8ef1ad3139f349c67bbb6edd21cf29bd59a3d00dea54532caee00c0f5"
+    },
+    "provenance/original/src/logger/src/transports/TransportAdapter.js": {
+      "bytes": 163,
+      "sha256": "a4ee244f9c034943180ae58e1770c545333ff614839cf71deb07a06061a7f1c3"
+    },
+    "provenance/original/src/logger/src/transports/TransportDispatcher.js": {
+      "bytes": 104,
+      "sha256": "b5bd3116e492967c002f33821864698d79832a75cc43ab08023138ff2ed4cc1c"
+    },
+    "provenance/original/src/logger/src/transports/UdpTransport.js": {
+      "bytes": 97,
+      "sha256": "3cd9c2580166198539b6abb19d9ac277966f057a601723d7f42fa6cf2162a6ec"
+    },
+    "provenance/original/src/logger/tests/contract/public-api.test.js": {
+      "bytes": 7323,
+      "sha256": "8b0bb3d5b7f143eaba257358a3346bb69e3b26fc43aa46af3e416c1b14d412d2"
+    },
+    "provenance/original/src/logger/tests/integration/cli.test.js": {
+      "bytes": 2465,
+      "sha256": "dddcaacb2bf3f83e283c7de40bbb2e8121708708c1d9df88f7892b2814e56246"
+    },
+    "provenance/original/src/logger/tests/integration/file-transport.test.js": {
+      "bytes": 4448,
+      "sha256": "07fb82328d3c555c2fa4f2c2179bb753228943d414103e6e75b22bd4d989bf11"
+    },
+    "provenance/original/src/logger/tests/integration/framework-integrations.test.js": {
+      "bytes": 4392,
+      "sha256": "e9f7d18f003a162968094a02523e22fafdd69c940b5ea48d9185d2ed2b6081c0"
+    },
+    "provenance/original/src/logger/tests/integration/inspector.test.js": {
+      "bytes": 4844,
+      "sha256": "9da4cd1cb371e20ead3d0d1b83a172c4d76b8937352dd0b53d66ed2006c15106"
+    },
+    "provenance/original/src/logger/tests/integration/network-transports.test.js": {
+      "bytes": 4686,
+      "sha256": "085de72ec7ec15c93da4e5950e44da4010030c58844e0d824364b881472246f7"
+    },
+    "provenance/original/src/logger/tests/integration/process-lifecycle.test.js": {
+      "bytes": 2730,
+      "sha256": "1b64a13a7e7921edb166c7dbcbaa1e2cc46c8b73b3d6d930dc534ac592340872"
+    },
+    "provenance/original/src/logger/tests/security/serializer-redaction.test.js": {
+      "bytes": 4075,
+      "sha256": "cf8b19b58d2c11d0cc72f2bea9f7fff36a5e87a6b2eaca2db7177d01a9ca9b8c"
+    },
+    "provenance/original/src/logger/tests/types/consumer.ts": {
+      "bytes": 2208,
+      "sha256": "efac4188c631eab1978c00d13b78a4dda80b5aa9faf41a7287d959597a88dab1"
+    },
+    "provenance/original/src/logger/tests/unit/backpressure.test.js": {
+      "bytes": 2235,
+      "sha256": "f2120523c836c9640a421c177d15118f0fd952370513a268d25c8c66b4d9845c"
+    },
+    "provenance/original/src/logger/tests/unit/channels-provider.test.js": {
+      "bytes": 4376,
+      "sha256": "b2db21a42a5c814783c4d8acea4152a3876928da9c6dcfa5c2813d03ffac4f43"
+    },
+    "provenance/original/src/logger/tests/unit/queue.test.js": {
+      "bytes": 2134,
+      "sha256": "6e1d6db751102fcc36f1d6ccdb90da9a25d2fb14834d1f016111432d9b2ccd13"
+    },
+    "provenance/original/src/logger/tests/unit/runtime.test.js": {
+      "bytes": 9188,
+      "sha256": "2772a2a02b726453be5a99d7f0e46efd86bde49d7bf230b3f8bebb2cf0cc3c06"
+    },
+    "provenance/original/src/logger/tests/unit/testing-tools.test.js": {
+      "bytes": 876,
+      "sha256": "0b82f4ca2c70a4e144109c43492ec142fc18a44680f8f5413c87105098779adc"
+    },
+    "provenance/original/src/logger/tests/unit/transport-adapter.test.js": {
+      "bytes": 2617,
+      "sha256": "36d017e96ffeeb4aa57cdbd433095d2820dba541eca248426d90d96bdba98863"
+    },
+    "provenance/original/src/logger/tools/build-manifest.js": {
+      "bytes": 1336,
+      "sha256": "9c58ab05c7e86fe477be5f34466c335e872f8a1c78c716cd60d5ec43cde18d88"
+    },
+    "provenance/original/src/logger/tools/check-exports.js": {
+      "bytes": 2274,
+      "sha256": "f1e2e518f1a65e6c2f6ae0237ee387a489d20afd93573710d2e0b7692e1dda0a"
+    },
+    "provenance/original/src/logger/tools/check-package-consumer.js": {
+      "bytes": 3299,
+      "sha256": "edf880ccd110b97259af201a730f5e514c3802678dc56445a3d8d58a08eb87ac"
+    },
+    "provenance/original/src/logger/tools/check-source-parser.js": {
+      "bytes": 664,
+      "sha256": "785c6a7ccb60ad8cae56e79c0574e6e1382b103c2e93f6357a9356790de79034"
+    },
+    "provenance/original/src/logger/tools/check-source.js": {
+      "bytes": 2915,
+      "sha256": "ab79e05b7a8bbdd249eab230e5bf8bb79663d581778cc853c8f63efa7de94d83"
+    },
+    "provenance/original/src/logger/tools/check-types.js": {
+      "bytes": 365,
+      "sha256": "1dfe1b8a55ebb00f891651a3020cad436e30cb7abb9964f10f3848cf8dbe12a7"
+    },
+    "provenance/original/src/logger/tools/check-zero-deps.js": {
+      "bytes": 544,
+      "sha256": "5a3b205090b44dce08475625b319c6c0072fad7e10965b6676e0ee624eb9f92d"
+    },
+    "provenance/original/src/logger/tools/run-tests.js": {
+      "bytes": 701,
+      "sha256": "35bb384667d119d0263306758f4eae7c754d21be6524c3729805801e5bad1ee0"
+    },
+    "provenance/original/src/logger/tsconfig.types.json": {
+      "bytes": 878,
+      "sha256": "adca93ddfd0d5ab0d96f7fbf6f1fe88b9cef7fa48174d93b983cb02cad03c92f"
+    },
+    "provenance/original/src/logger/types/channels.d.ts": {
+      "bytes": 68,
+      "sha256": "21e979bb625e858bdd4cc2b9ce4565b24ccda44f05404591c1ba6729240a2961"
+    },
+    "provenance/original/src/logger/types/colors.d.ts": {
+      "bytes": 85,
+      "sha256": "144e42927de02a834992f6fbd172364f3ca40b5ccb8538a310717e7e977e09f9"
+    },
+    "provenance/original/src/logger/types/config.d.ts": {
+      "bytes": 78,
+      "sha256": "a9374ffaa92f7a3c026e13200d46ea2cf456368bc92f6b932f462727a84373aa"
+    },
+    "provenance/original/src/logger/types/console.d.ts": {
+      "bytes": 354,
+      "sha256": "554d1ae6b93f638e5c7534e15515db3b9107c0d1611d12426182b3420b49f08c"
+    },
+    "provenance/original/src/logger/types/context.d.ts": {
+      "bytes": 90,
+      "sha256": "eab0962bac02047ddb31882b8046b18caa31fb34321e89f804813004bc06e08d"
+    },
+    "provenance/original/src/logger/types/core.d.ts": {
+      "bytes": 217,
+      "sha256": "d9fb0b52d12cfbf692df42d49765f8da24f3b18b5fdedd4fb6a548211d7fa557"
+    },
+    "provenance/original/src/logger/types/index.d.ts": {
+      "bytes": 24651,
+      "sha256": "5e88f491d3e78f4d9e8c5e1c46ef1286b110af67b06fd5ecb64b31ea10b1baf9"
+    },
+    "provenance/original/src/logger/types/inspector.d.ts": {
+      "bytes": 748,
+      "sha256": "ff503b04f8ea9c02592a5696de02307285f2b70696fbc2f350c0e87cca76ea56"
+    },
+    "provenance/original/src/logger/types/integrations.d.ts": {
+      "bytes": 1318,
+      "sha256": "0c1235bc56cbfe5a811b9cd0226f9cf7d411393eacb23abffbe96bff50cda255"
+    },
+    "provenance/original/src/logger/types/legacy.d.ts": {
+      "bytes": 248,
+      "sha256": "05874a6c05f974714d5d1d0ab767b8435a8df414c2084a6b3619cd23b0692079"
+    },
+    "provenance/original/src/logger/types/observability.d.ts": {
+      "bytes": 58,
+      "sha256": "5595ff33c5b9437da65702510bbdf455ed9287c956aa9dc7018d92e82fd45915"
+    },
+    "provenance/original/src/logger/types/processing.d.ts": {
+      "bytes": 106,
+      "sha256": "f4c3664c21f9551d57f0531cfd06cac50cec36e36778bdd479be9276ee1a0e0e"
+    },
+    "provenance/original/src/logger/types/public.d.ts": {
+      "bytes": 96,
+      "sha256": "9ed5618c8d3250f6a394bcb4f70635ff8275a130a36710afccd55b37960ce968"
+    },
+    "provenance/original/src/logger/types/records.d.ts": {
+      "bytes": 85,
+      "sha256": "8a2709787c3aa59617020b8317a30663d26fe468bca0645ea4685668c2c2d6f5"
+    },
+    "provenance/original/src/logger/types/security.d.ts": {
+      "bytes": 192,
+      "sha256": "d0e50e90abfdbc7f72df25b4bda2017b5c84f0d59797f1135f902964c7ebdef6"
+    },
+    "provenance/original/src/logger/types/serialization.d.ts": {
+      "bytes": 142,
+      "sha256": "9858c16d520b2f3a5aa40153c0f0bad8f7887f09d5e142428ba60c126cbb6f8b"
+    },
+    "provenance/original/src/logger/types/testing.d.ts": {
+      "bytes": 944,
+      "sha256": "5eca2af2bf5fc78b3a07fe3caceefd4a0f2a531a5de0ee3e64f4e7d418d0a9fc"
+    },
+    "provenance/original/src/logger/types/transports.d.ts": {
+      "bytes": 3808,
+      "sha256": "c0b352f3b4b5d84f4d7e9ec58dde162d8a56f95bef0d619acd2892b995c480cb"
+    },
+    "provenance/original/src/monitor/MonitorManager.js": {
+      "bytes": 1904,
+      "sha256": "c122fdeb034b4e5fde6bcef9ca852970f9e06819177f47cf902a7b3437cb8303"
+    },
+    "provenance/original/src/monitor/MonitorRuntime.js": {
+      "bytes": 46351,
+      "sha256": "90f6d39a8c26c671346f79e373b57df0a09127dca1d79bb59d4864f2683e3a27"
+    },
+    "provenance/original/src/monitor/alerts/AlertEngine.js": {
+      "bytes": 9646,
+      "sha256": "0208be79b5055208fcea9e17e2e94b6b8844cde86f506e8ef2ed7063e623294c"
+    },
+    "provenance/original/src/monitor/alerts/AlertRule.js": {
+      "bytes": 7039,
+      "sha256": "e39591020e92a12b30ac9892f8166dc38524fa4fe3582e3c4bca1f2858915c04"
+    },
+    "provenance/original/src/monitor/alerts/NotificationRouter.js": {
+      "bytes": 3637,
+      "sha256": "2b63f2724a42691e1a06f96380946b697c90d4a21470624477a2db377cf71b32"
+    },
+    "provenance/original/src/monitor/alerts/SilenceManager.js": {
+      "bytes": 1993,
+      "sha256": "afdf7c95e1958289baec05f2f95423be8e475591076dd82c33a477a30574640b"
+    },
+    "provenance/original/src/monitor/alerts/index.js": {
+      "bytes": 158,
+      "sha256": "3e01f1d0596b1b17ca8c0a9fee5f9c49863d455ec1605a5d57277e465810a24e"
+    },
+    "provenance/original/src/monitor/analysis/AnomalyDetector.js": {
+      "bytes": 11222,
+      "sha256": "806621ba62d09e91ab25fb264961106a116c3af1e1540324d1623b4256bfe40c"
+    },
+    "provenance/original/src/monitor/analysis/CorrelationEngine.js": {
+      "bytes": 5621,
+      "sha256": "7865dc69a652437c49eba1518834460dc901a5f3310132318dc674d418d5a561"
+    },
+    "provenance/original/src/monitor/analysis/LeakDetector.js": {
+      "bytes": 8115,
+      "sha256": "a74a4614762806b33c49ac8715428c6d5902a879f8ac468c7e7485eef8b60d2e"
+    },
+    "provenance/original/src/monitor/analysis/StreamingBaseline.js": {
+      "bytes": 5131,
+      "sha256": "c3eda66a4a9a85a9207859267be472000aace95a1960ce97c64989293fa84ad0"
+    },
+    "provenance/original/src/monitor/analysis/index.js": {
+      "bytes": 167,
+      "sha256": "f5ef946f1a1fc324d584a0bf54e68f6bc5249ef0e9c6c404f9b314c24c3ee86a"
+    },
+    "provenance/original/src/monitor/cluster/FleetRegistry.js": {
+      "bytes": 4107,
+      "sha256": "ef7925c76262d4d3581ff7cfbe4965bd3902ff10edcf1c39694e7613dfcf7a88"
+    },
+    "provenance/original/src/monitor/cluster/LeaderLease.js": {
+      "bytes": 4096,
+      "sha256": "50dc9db395128dbc48f0ed2157342a3cb3dc9576b57c685d0a440a74dceb5f13"
+    },
+    "provenance/original/src/monitor/cluster/MonitorClusterEnvelope.js": {
+      "bytes": 2610,
+      "sha256": "ddc8afa2d55f75007f7edbdb1b93d2c9e2aa3b0b6dc7ab529e32092ef70a781c"
+    },
+    "provenance/original/src/monitor/cluster/RedisMonitorBridge.js": {
+      "bytes": 3078,
+      "sha256": "e4c3b20b898104131cce2e0987162fc4a0aed098832f8004e4a8522c9917645c"
+    },
+    "provenance/original/src/monitor/cluster/index.js": {
+      "bytes": 170,
+      "sha256": "9cef57dec3d3e12b68733a1c8052de7dc833e14e70b0b66e99fcc5c3a5b1e1dc"
+    },
+    "provenance/original/src/monitor/compatibility/CompatibilityProfile.js": {
+      "bytes": 2761,
+      "sha256": "cc319cd4071aa4d3506b1013bb261eca83f33d657dca24fb687e216583d56f5a"
+    },
+    "provenance/original/src/monitor/config/MonitorConfiguration.js": {
+      "bytes": 27208,
+      "sha256": "a8d7374c0e3fad385be52f2e1e90ef528b386c2c570b3ac1d83ed5c0e6acd957"
+    },
+    "provenance/original/src/monitor/console/MonitorCommands.js": {
+      "bytes": 12780,
+      "sha256": "715516c8b9de0ea94ac830569484260e726a1035bebeac1b2c5e13f99e9f821d"
+    },
+    "provenance/original/src/monitor/console/index.js": {
+      "bytes": 52,
+      "sha256": "e357ace6006ccbd81d1b3907d19db32f1de3169d67aebb8c67fce11dbff05f92"
+    },
+    "provenance/original/src/monitor/constants.js": {
+      "bytes": 1855,
+      "sha256": "37f28885e7d3d5c442da2d9b7cd1809c558d0af8994f2e28119dd76ea6ce2a28"
+    },
+    "provenance/original/src/monitor/core/MonitorContextManager.js": {
+      "bytes": 3222,
+      "sha256": "4b5a5dc4ecbc1195079ba117b21b26e05b21d2842c39954fd9308d3e430eef67"
+    },
+    "provenance/original/src/monitor/core/MonitorLifecycle.js": {
+      "bytes": 2277,
+      "sha256": "0f0679cef1ff6011770f23812db0e2bb050ce4a13b160598647861ad110f5473"
+    },
+    "provenance/original/src/monitor/core/TelemetryEnvelope.js": {
+      "bytes": 1968,
+      "sha256": "c631adec1406689dea3ae8193ad48a621b46b3a14b2cc2f2b2ab5c603bce3887"
+    },
+    "provenance/original/src/monitor/core/index.js": {
+      "bytes": 137,
+      "sha256": "2c49d3f52f04773c2feff222aa84e2434bf203eb3dfa7a4e6e9179cc498347f2"
+    },
+    "provenance/original/src/monitor/deployments/DeploymentRegistry.js": {
+      "bytes": 2835,
+      "sha256": "1cb20c4d2d9f3102f7b20e4639b7ca40ee3b09fa18539e71d6794a2a3c8d8b8a"
+    },
+    "provenance/original/src/monitor/deployments/index.js": {
+      "bytes": 55,
+      "sha256": "5cf6559610f294b0a102a6a300821ea6ba94f1a6770103c32a147f215f2b853f"
+    },
+    "provenance/original/src/monitor/diagnostics/DiagnosticBundleBuilder.js": {
+      "bytes": 2328,
+      "sha256": "368e0d2f0584c06ad50f0adb843727f3170fe38b69e264a9465ad02bd485f22d"
+    },
+    "provenance/original/src/monitor/diagnostics/MonitorDoctor.js": {
+      "bytes": 3750,
+      "sha256": "5e967b5679d3dac0f5e9ba0b70cd3d38a38c3541705c1e592048f07657c486ea"
+    },
+    "provenance/original/src/monitor/diagnostics/index.js": {
+      "bytes": 96,
+      "sha256": "b1558a5545cf7716da4e4e7f70b9214838552a15201fe3214e5668598c3e8c3a"
+    },
+    "provenance/original/src/monitor/errors.js": {
+      "bytes": 2481,
+      "sha256": "5d36e9736bf7607c86ef4f2156f817232611c8eadd16eaf71478a22a81ef268c"
+    },
+    "provenance/original/src/monitor/exporters/CallbackExporter.js": {
+      "bytes": 786,
+      "sha256": "c27419f06e8bd8549e818a71bac3b1729c2fe568304f26044749acdaf5af4c65"
+    },
+    "provenance/original/src/monitor/exporters/EventExporter.js": {
+      "bytes": 1010,
+      "sha256": "7d6a0ed9b1b782b7bd8af6419c9e05ca88ebf5fbeeadf64d8647e0402b3f4150"
+    },
+    "provenance/original/src/monitor/exporters/ExporterRegistry.js": {
+      "bytes": 3101,
+      "sha256": "7d1a6cfb66a33d78ae05b9e88994fe8332c79e0b2569f85ab4ce5bf423a09ae4"
+    },
+    "provenance/original/src/monitor/exporters/HttpJsonExporter.js": {
+      "bytes": 9226,
+      "sha256": "ab49a89615c2a55a50905bf822dee94fe0e50dc67c125548638f86da7ef99945"
+    },
+    "provenance/original/src/monitor/exporters/OtlpJsonExporter.js": {
+      "bytes": 4540,
+      "sha256": "fc880699a8a16ac16f24d7023ad043c5fedda565333a73eeac90a1014a6d8edf"
+    },
+    "provenance/original/src/monitor/exporters/StatsdExporter.js": {
+      "bytes": 2690,
+      "sha256": "44f5932653769222c23986221d1e7b059f3c68c27a7a8301d52a3e1386e73486"
+    },
+    "provenance/original/src/monitor/exporters/index.js": {
+      "bytes": 243,
+      "sha256": "a0449a760222a21fce652e692d48abfea1aafc71f9afafbbd48feb8d110f32c3"
+    },
+    "provenance/original/src/monitor/health/HealthRegistry.js": {
+      "bytes": 7236,
+      "sha256": "2728f1ca3334a0f5bd5617d51733441ce2708aad1d8557c55bca0605af5f347f"
+    },
+    "provenance/original/src/monitor/health/index.js": {
+      "bytes": 51,
+      "sha256": "a3a96f8a19ce9875b742935747fade8537fa1ab6357599202233b1aedcb16ee1"
+    },
+    "provenance/original/src/monitor/incidents/IncidentManager.js": {
+      "bytes": 7327,
+      "sha256": "eb33028fc755735d93a676793a13d0ece48009b15f665322bf514c38fcbf7da7"
+    },
+    "provenance/original/src/monitor/incidents/RunbookRegistry.js": {
+      "bytes": 1215,
+      "sha256": "2295bda83b036625ee1fd9ad6c6f5f984802c7fc098085a5796a5eeb2e1169c5"
+    },
+    "provenance/original/src/monitor/incidents/index.js": {
+      "bytes": 90,
+      "sha256": "cefb2bb2f5ef28107594405fca985d18f48df10db31468ea71ba205620cdbf39"
+    },
+    "provenance/original/src/monitor/index.js": {
+      "bytes": 1245,
+      "sha256": "a5fb776e15c0f77af4fd90b262e353e595aff711f2f254d43e974adddd227a15"
+    },
+    "provenance/original/src/monitor/integrations/EventMonitorBridge.js": {
+      "bytes": 3111,
+      "sha256": "52669ecdfbcc7c4d0659fedd2f826a951da793158b4242621eb0a9fa132a1311"
+    },
+    "provenance/original/src/monitor/integrations/HttpMonitorMiddleware.js": {
+      "bytes": 6005,
+      "sha256": "ff47bb1374bfb8d87764513279ddfd5fb8fec1ae46ee8ffa3368aec0e16204d5"
+    },
+    "provenance/original/src/monitor/integrations/LoggerMonitorBridge.js": {
+      "bytes": 1276,
+      "sha256": "0d64f50591d9ee8612229e46f2014209872a12f0466e30581cb387125f8d6b47"
+    },
+    "provenance/original/src/monitor/integrations/MonitorFetch.js": {
+      "bytes": 2345,
+      "sha256": "02ee284b7baa32dd2fa165864e9b8c412912b79488b0eca4ae0706350ac0131e"
+    },
+    "provenance/original/src/monitor/integrations/MonitorLogTransport.js": {
+      "bytes": 1750,
+      "sha256": "25121968f2c06651c944611c5d98c0c4f762783eb815d8ce2e6da1f5b28d26ad"
+    },
+    "provenance/original/src/monitor/integrations/OperationInstrumentor.js": {
+      "bytes": 3329,
+      "sha256": "25a8fa628a1a5c734e9e96b86d4191c67da57ad17974139b6e9474f0631abb16"
+    },
+    "provenance/original/src/monitor/integrations/PMMonitorBridge.js": {
+      "bytes": 1508,
+      "sha256": "13d980c3b38e76b3882b43db76337a5663691c2c69641fe73668bb10397b8fa9"
+    },
+    "provenance/original/src/monitor/integrations/ProtocolMonitorBridge.js": {
+      "bytes": 2223,
+      "sha256": "864643fefd1ab7b34cee534cf1bd94bd2f265d81b2225d56d1164e4bbf33f42b"
+    },
+    "provenance/original/src/monitor/integrations/RawNodeIntegrationManager.js": {
+      "bytes": 2992,
+      "sha256": "670f8c4c83289a2d382c4c1b39f06ac70d43011fb72d5eeb82d6097f0119c21d"
+    },
+    "provenance/original/src/monitor/integrations/index.js": {
+      "bytes": 392,
+      "sha256": "e1d3bd7fda16e446144cc0082985a0d3193770eef0d4d973f4e607078940d3cf"
+    },
+    "provenance/original/src/monitor/metrics/Instruments.js": {
+      "bytes": 13847,
+      "sha256": "4f9e3f6094769ea110e2c0620b6b44543eb02d609cd7cff3d92eb596ef159a41"
+    },
+    "provenance/original/src/monitor/metrics/MetricHistory.js": {
+      "bytes": 1359,
+      "sha256": "f96487ebfc995d7ba1de72f1a0c8509d4363d620641de202d6e230d7cfc05c32"
+    },
+    "provenance/original/src/monitor/metrics/MetricRegistry.js": {
+      "bytes": 6012,
+      "sha256": "d07be6c08092f99031ee830ed798a80b6185d5cd4b82b35ca6bcf734556e95ca"
+    },
+    "provenance/original/src/monitor/metrics/PrometheusFormatter.js": {
+      "bytes": 2410,
+      "sha256": "246f254782e00d1d6846f8d7429edcc225a6b8f69628da6d3b8fb4dff2d0e548"
+    },
+    "provenance/original/src/monitor/metrics/index.js": {
+      "bytes": 163,
+      "sha256": "43fa0977454eefedbfdb3257cc59d6eb8dacc45d2c9bd1494f5db16b95d81c37"
+    },
+    "provenance/original/src/monitor/pipeline/BoundedSignalQueue.js": {
+      "bytes": 7965,
+      "sha256": "5f781a72610e10e76427225e56176fed5ccc69c18ee8c91dbe538a287e2f62bf"
+    },
+    "provenance/original/src/monitor/pipeline/SignalPipeline.js": {
+      "bytes": 11154,
+      "sha256": "da62ed67c881c5cc086a891ecdb5b232d196dcb1db9908fd94c7d3a8b2aaeff1"
+    },
+    "provenance/original/src/monitor/pipeline/index.js": {
+      "bytes": 92,
+      "sha256": "4ee02acb52a6606c29f4f2a9a025b2281933a1fdd4fa33823e5abe20db617db1"
+    },
+    "provenance/original/src/monitor/plugins/MonitorPluginManager.js": {
+      "bytes": 14561,
+      "sha256": "3a0cbacf029751e58ba4bfd9d4f7473d1f24fd4425b95c01bbf288c9c4c541c9"
+    },
+    "provenance/original/src/monitor/plugins/index.js": {
+      "bytes": 57,
+      "sha256": "03fdee86ff793b42360009881cd8403fe2f21f154bc3779683ab521cce2e6230"
+    },
+    "provenance/original/src/monitor/query/MonitorQueryEngine.js": {
+      "bytes": 5739,
+      "sha256": "3f05641af5feb542ff4c69b27d5ffde4d7a8f5f48a8c8b007df07ad67aec0575"
+    },
+    "provenance/original/src/monitor/query/index.js": {
+      "bytes": 55,
+      "sha256": "96ea0307db04d291f10722511f40f79d27d47eeca7b85e309fa4dd5d433880af"
+    },
+    "provenance/original/src/monitor/rawnode-src-monitor-full-code.txt": {
+      "bytes": 455442,
+      "sha256": "e735b1e0f703b24ebe9b232beb7a7d961ff5f8c71d2669bfce04f6abff61b99b"
+    },
+    "provenance/original/src/monitor/resources/RawNodeResourceCatalog.js": {
+      "bytes": 3614,
+      "sha256": "4b86a803eea67e4a0eca5b1dc68cec04d345231b875c08e2660025ed7bf73fa5"
+    },
+    "provenance/original/src/monitor/resources/ResourceRegistry.js": {
+      "bytes": 7512,
+      "sha256": "0867d79cd2b5bf6d6b51af4094807208423806ea5e563c946eed822f5862665f"
+    },
+    "provenance/original/src/monitor/resources/index.js": {
+      "bytes": 98,
+      "sha256": "e1e9f570573322f280b31d18561b4ac86b558b79c3056a701329c44d1460ac6e"
+    },
+    "provenance/original/src/monitor/security/SafeTelemetrySerializer.js": {
+      "bytes": 5266,
+      "sha256": "93e171da6ab337e16b75ca05c0e2ef907dc99d2b1a18a2fb62b442e962ac1db2"
+    },
+    "provenance/original/src/monitor/security/TelemetryAuthenticator.js": {
+      "bytes": 1936,
+      "sha256": "40ae3306efcfca4805b08c32bd7f450ea4de4235c30d005293e34e10c8b64cf5"
+    },
+    "provenance/original/src/monitor/security/TelemetryRedactor.js": {
+      "bytes": 3452,
+      "sha256": "4d996bc262c3c5f2271724f7a566648467290b0d4b1ee9f4ad5f1c86c18fca3b"
+    },
+    "provenance/original/src/monitor/security/index.js": {
+      "bytes": 145,
+      "sha256": "d82c4967bcd334a69ace36aa1d49e8cb73f1b3d2ecb8fc52ef208ba53a354529"
+    },
+    "provenance/original/src/monitor/slo/SloDefinition.js": {
+      "bytes": 3949,
+      "sha256": "27b2f9e700b8d9f4c56cadfc3ef58c135aac624846d72876fb111d199589a2f7"
+    },
+    "provenance/original/src/monitor/slo/SloRegistry.js": {
+      "bytes": 5925,
+      "sha256": "becdc79334a4831e5d365715a2551e485b4defaee7de9d2e4f4bb951b4a18eca"
+    },
+    "provenance/original/src/monitor/slo/index.js": {
+      "bytes": 84,
+      "sha256": "d341e83dcdc288e798d6c1524fceb4e2b2a383566cde011f073b41da2c2efe6a"
+    },
+    "provenance/original/src/monitor/storage/CompositeTelemetryStore.js": {
+      "bytes": 7285,
+      "sha256": "f3c7c76a86cd04028bc3e75b7331a95056ac34ea7c58027fe4d130cb0650da39"
+    },
+    "provenance/original/src/monitor/storage/JsonlTelemetryStore.js": {
+      "bytes": 10727,
+      "sha256": "ce4636a6f7b847febdc89c6c201ed892a563e10806f7ba76cb434814551b9a3f"
+    },
+    "provenance/original/src/monitor/storage/MemoryTelemetryStore.js": {
+      "bytes": 4319,
+      "sha256": "45fd197d61f857f53b4c22441f098c12edf244145c10b70b5912c11c97c85596"
+    },
+    "provenance/original/src/monitor/storage/NoopTelemetryStore.js": {
+      "bytes": 481,
+      "sha256": "4750942c4e0a531005b8a474cbc3f3b959f57d036db7e54b5473b26d110c8814"
+    },
+    "provenance/original/src/monitor/storage/RawMongoTelemetryStore.js": {
+      "bytes": 6830,
+      "sha256": "eae53989aaebbdbc1305d85070b140fd9f816816b5e42d1a9133fec7b2cf4b24"
+    },
+    "provenance/original/src/monitor/storage/RetentionManager.js": {
+      "bytes": 1131,
+      "sha256": "21982490d7fe32996d0dbccf8a4a7c3c244c3a59a0a6c29e6be40e8c83afcc67"
+    },
+    "provenance/original/src/monitor/storage/createTelemetryStore.js": {
+      "bytes": 3199,
+      "sha256": "a1e8624a8e3ae373a85c65653dc9f9594e7faf18a3fccc707da8462dfa7b2436"
+    },
+    "provenance/original/src/monitor/storage/index.js": {
+      "bytes": 313,
+      "sha256": "eadb0b18d5672be7c24892dbdd28bddf9b812b709302f49819da658d1f24bfd5"
+    },
+    "provenance/original/src/monitor/studio/MonitorStudioAssets.js": {
+      "bytes": 1193,
+      "sha256": "1ec7e7d108108fdcb30b4522bc27e1ad1ee788d3d10718ee1b1e33596085468c"
+    },
+    "provenance/original/src/monitor/studio/MonitorStudioAuthorizer.js": {
+      "bytes": 3415,
+      "sha256": "4c8d178ae770d19f3042b8bb4dd5f242628a62c49aebdd4bfaba3d03a939ca58"
+    },
+    "provenance/original/src/monitor/studio/MonitorStudioController.js": {
+      "bytes": 9139,
+      "sha256": "398575df141e39fac729d8b0b923ac4eee0c8dcb8b51e6177e7945ec94df5f71"
+    },
+    "provenance/original/src/monitor/studio/MonitorStudioManager.js": {
+      "bytes": 11421,
+      "sha256": "39c1a452fe44450e3cc831b730df857f745e9c4c692aef5e42fdb5b5c87cc0e6"
+    },
+    "provenance/original/src/monitor/studio/MonitorStudioPage.js": {
+      "bytes": 2973,
+      "sha256": "2bf6ee5e85fe5891870285ae5a0b9c9ffa0ce904f3a7b81a12df26f3f35ed2fd"
+    },
+    "provenance/original/src/monitor/studio/MonitorStudioRateLimiter.js": {
+      "bytes": 2815,
+      "sha256": "69ea57def6d9e71224642978e0b8bd8c3c80bbe281520dacc9f1ef5c3f2d02d3"
+    },
+    "provenance/original/src/monitor/studio/index.js": {
+      "bytes": 328,
+      "sha256": "0cfebba0a2a7b0ffadb00bce4f3fc8048440fc9defa6d5d2c0e587c1e9f1502c"
+    },
+    "provenance/original/src/monitor/studio/registerMonitorStudioRoutes.js": {
+      "bytes": 3484,
+      "sha256": "4adb2db8c7f608975d31afd72126e4003cbb779f066e7297a4372318cce2d791"
+    },
+    "provenance/original/src/monitor/support.js": {
+      "bytes": 12280,
+      "sha256": "fdea72695a9a6d7e181883a012c2db44034191cddfe99488b3f06a4c4bbe125c"
+    },
+    "provenance/original/src/monitor/synthetics/SyntheticCheck.js": {
+      "bytes": 2711,
+      "sha256": "076d619d1768d0b160743da96739d78ae2927c797d40aadc7a53ae7c636e7cc3"
+    },
+    "provenance/original/src/monitor/synthetics/SyntheticMonitor.js": {
+      "bytes": 18601,
+      "sha256": "991b5f2a7fa783cfaf69c51d31108b55218b75b5ae2f4c3f2b06146c9293b93f"
+    },
+    "provenance/original/src/monitor/synthetics/index.js": {
+      "bytes": 90,
+      "sha256": "fcf1033f3c498af83500877edf7ea9020923009a4c5243ae1e445f09c1c625b1"
+    },
+    "provenance/original/src/monitor/system/ProcessMetricsCollector.js": {
+      "bytes": 10098,
+      "sha256": "017ef6015250570a0e7ccd76d4ac73e8f38d66fdd28f063dfaecfa952d33baa1"
+    },
+    "provenance/original/src/monitor/system/SystemMetricsCollector.js": {
+      "bytes": 646,
+      "sha256": "574a0714cf0a20d19f5008a76d4e470dfe5f45454cfc1e1ccc70e22ad49ad3d6"
+    },
+    "provenance/original/src/monitor/system/index.js": {
+      "bytes": 105,
+      "sha256": "561d42b5884db63fb71e352bb50d081a69a19e2a65c4e2fcb5e71ccfdbcaace9"
+    },
+    "provenance/original/src/monitor/testing/MonitorRecorder.js": {
+      "bytes": 1799,
+      "sha256": "ca8639eaa263b067e24027f8d63d5eb021102ad43d20d3aa63c7d18f06e13b5a"
+    },
+    "provenance/original/src/monitor/testing/index.js": {
+      "bytes": 52,
+      "sha256": "ac33c1f0ce60d216af74b2947214e12034305539510734edd1d257941651a99c"
+    },
+    "provenance/original/src/monitor/tracing/InMemorySpanStore.js": {
+      "bytes": 3226,
+      "sha256": "f4cb6023b306d0edb9e295873190e8573e5189e1730fc0318998063dab0ad70e"
+    },
+    "provenance/original/src/monitor/tracing/Sampler.js": {
+      "bytes": 1955,
+      "sha256": "af4f899e703123e0131acdc034aac91522b02818d587a9ba9fe374dda44507cb"
+    },
+    "provenance/original/src/monitor/tracing/SignalSpanProcessor.js": {
+      "bytes": 760,
+      "sha256": "b138bafde4976fa86544e90acbc60517689f6c80e2595d2fc8de9537d7802c42"
+    },
+    "provenance/original/src/monitor/tracing/Span.js": {
+      "bytes": 5388,
+      "sha256": "aba705560edb528bb9c65f1fa31bf157f5f11de1d4def7e919fa16b943705cb1"
+    },
+    "provenance/original/src/monitor/tracing/TraceContext.js": {
+      "bytes": 5270,
+      "sha256": "ef9e27a62cc1ce1738cd83cc1333a20bb075d45d408744a80f262c20b0df1d46"
+    },
+    "provenance/original/src/monitor/tracing/Tracer.js": {
+      "bytes": 5411,
+      "sha256": "393f09c43ecaa0070cde2ab494e6c26c2104e0c2fd51c1e87ae4b2238cea984d"
+    },
+    "provenance/original/src/monitor/tracing/index.js": {
+      "bytes": 217,
+      "sha256": "47b82fbb0c112dd0eabfef42f4228c1b0c0811e5d136d23e07d8e32a59e1e0ff"
+    },
+    "provenance/original/src/pm/CHANGELOG.md": {
+      "bytes": 831,
+      "sha256": "8aefa72a0cff90002f71fde46366d90fb032cfc1baf5c6f416d6ce437be93717"
+    },
+    "provenance/original/src/pm/LICENSE": {
+      "bytes": 1064,
+      "sha256": "8cd194c1cc94ff3e70aa337679cb750b86da1d7b6a3af4fb0da099919e97884a"
+    },
+    "provenance/original/src/pm/README.md": {
+      "bytes": 8037,
+      "sha256": "b2a877af4e7fe4cf5d00ab9a500beb55e6f480db25b16de962423a0575ebe0a5"
+    },
+    "provenance/original/src/pm/bin/rawnode-pm.js": {
+      "bytes": 353,
+      "sha256": "142c3e9b52b3b8cbf7dab5be0677968785fe2b2b3cf00fb05789d6844d96cd40"
+    },
+    "provenance/original/src/pm/config/pm.js": {
+      "bytes": 850,
+      "sha256": "53d5c141fc68df99bef624b8cf346f3cafea29deb0bd4e365e164f97238731b2"
+    },
+    "provenance/original/src/pm/config/rawnode.process.example.mjs": {
+      "bytes": 944,
+      "sha256": "69b7a42d4f6696300a721a2a15fd53c99b8362f6f35c1250b4fb54a0d82169ca"
+    },
+    "provenance/original/src/pm/docs/ARCHITECTURE.md": {
+      "bytes": 5100,
+      "sha256": "af1105c1e173e8379c28660e30f83e97261a18e0814d958e168ef1648cdd5e90"
+    },
+    "provenance/original/src/pm/docs/OPERATIONS.md": {
+      "bytes": 4010,
+      "sha256": "fa48318e4a11603b9d82b516dbea31553ab43c03a93145a72ca498ad14ed398a"
+    },
+    "provenance/original/src/pm/docs/RAWNODE_INTEGRATION.md": {
+      "bytes": 4487,
+      "sha256": "54e34320f992ce925334e809a62c8e9371629bd6be2ae7f02eafe44ad88143f0"
+    },
+    "provenance/original/src/pm/docs/ROADMAP.md": {
+      "bytes": 1782,
+      "sha256": "251c692db6b0b3700b814b08cb54fae2d4d03d8270321802bb671ec93510003a"
+    },
+    "provenance/original/src/pm/docs/SECURITY.md": {
+      "bytes": 3054,
+      "sha256": "3ff6b96e5e317e9d2ca26c25f5fcd342cd314344f692c4d9d9e572131c2712b6"
+    },
+    "provenance/original/src/pm/docs/VALIDATION.md": {
+      "bytes": 4644,
+      "sha256": "901bbe968a98233fc7494f7ef9ad9cf939069185a7c4ff40c13906b437438ba9"
+    },
+    "provenance/original/src/pm/package.json": {
+      "bytes": 1529,
+      "sha256": "111fd22875907b527d3a18b2c458c77e33fd6e606f4a6e72d072c26be61a7e96"
+    },
+    "provenance/original/src/pm/rawnode-src-pm-full-code.txt": {
+      "bytes": 249212,
+      "sha256": "e443ce4ce676756bc2214e276f12a7446e90367c703da12ff2bf0e475e679189"
+    },
+    "provenance/original/src/pm/src/config/ManifestLoader.js": {
+      "bytes": 2364,
+      "sha256": "e7f6cbf5efd3fc3275efe7020505cc4b9b1ca8aad4f46de0fa25dcd7fe6fde96"
+    },
+    "provenance/original/src/pm/src/config/ProcessDefinition.js": {
+      "bytes": 7818,
+      "sha256": "4caa5d0fa21e3c89ec3ff731a9c4831b1f6dbbba0bd498c1174e823bd8c86e1d"
+    },
+    "provenance/original/src/pm/src/console/arguments.js": {
+      "bytes": 1204,
+      "sha256": "dda3f71df91f9c4253cc70e7abc6c1e7a437760e5a6e213d33d6a3be9608c513"
+    },
+    "provenance/original/src/pm/src/console/daemon.js": {
+      "bytes": 1837,
+      "sha256": "6e10742ca0c4f0e6fdb437eb6640440a15a237e104bb6f4506ae015c675ad1d7"
+    },
+    "provenance/original/src/pm/src/console/format.js": {
+      "bytes": 3350,
+      "sha256": "ec9d0aef2715c5d0997dfe364928562dd00a465c9b333481f76eb7c0acd2c012"
+    },
+    "provenance/original/src/pm/src/console/index.js": {
+      "bytes": 79,
+      "sha256": "0f1796dc4d6b34e101242e8b6ed533a8babe14657fec0cb0032eac139e4777e7"
+    },
+    "provenance/original/src/pm/src/console/run.js": {
+      "bytes": 9715,
+      "sha256": "04e04b9e66e1f70680b406578d97c4c108af192b9a3351bc9ebb2297e010f45b"
+    },
+    "provenance/original/src/pm/src/constants.js": {
+      "bytes": 1543,
+      "sha256": "aaa6c49abbefa38d792812c30add1e4986f2ada0aaad39ddb1713d3f3b94bf22"
+    },
+    "provenance/original/src/pm/src/control/ControlClient.js": {
+      "bytes": 4178,
+      "sha256": "708bf2c6eb70ad4df46b720d46ad589e4c5f202d3ee9badafe4a0430876f9daf"
+    },
+    "provenance/original/src/pm/src/control/ControlProtocol.js": {
+      "bytes": 860,
+      "sha256": "6d8227d99ba008e811508f11f97680c6b65ce6de531fc5bebdaf6672cbf9c399"
+    },
+    "provenance/original/src/pm/src/control/ControlServer.js": {
+      "bytes": 6080,
+      "sha256": "b0493061a0518ac74c818d23c4d15424296e9a276440308e301afeb96bab628f"
+    },
+    "provenance/original/src/pm/src/control/ManagementHttpServer.js": {
+      "bytes": 8430,
+      "sha256": "78b7d57fbd277465688bd6ff9f19ad07c33cb5195cc48247bcd86fee41b6b099"
+    },
+    "provenance/original/src/pm/src/control/index.js": {
+      "bytes": 256,
+      "sha256": "1071c4e695d4814e8e087c839ccb6b9705f6ac77796e6994d2c5bb8d7f31edab"
+    },
+    "provenance/original/src/pm/src/diagnostics/DiagnosticManager.js": {
+      "bytes": 1732,
+      "sha256": "998533281a08ea31ea6a6d6ed15b4c60581c5bedc78daf93f1b7a66888ad0bb0"
+    },
+    "provenance/original/src/pm/src/diagnostics/index.js": {
+      "bytes": 60,
+      "sha256": "0170bae418add9e38b9eb1e762c3444931395e17fdbda3e04e71fc8c57f7419b"
+    },
+    "provenance/original/src/pm/src/drivers/ClusterDriver.js": {
+      "bytes": 2400,
+      "sha256": "b944fc54d3b2f5bb48ec7c5b43b0f0aa1741297f732e582b20ad2fff5d24cec0"
+    },
+    "provenance/original/src/pm/src/drivers/DriverHandle.js": {
+      "bytes": 1084,
+      "sha256": "10e9f5f4b4f80193e576e6e01d69094e538a036fd1c253b08a68690e5c8cf7af"
+    },
+    "provenance/original/src/pm/src/drivers/ExternalProcessDriver.js": {
+      "bytes": 1049,
+      "sha256": "b2968e594cce6358ca7890e11a10e140bcee8d6366db69222cfd62d53c7d51a9"
+    },
+    "provenance/original/src/pm/src/drivers/ForkDriver.js": {
+      "bytes": 1786,
+      "sha256": "2c1bf362d92b1a1506b26f5c02e2d6b737e0470c72c5c18eed069e68e31b23f2"
+    },
+    "provenance/original/src/pm/src/drivers/index.js": {
+      "bytes": 260,
+      "sha256": "e90d355c091e404244376ffa8288391b1b62903ed65635634c9db4e041ba32c4"
+    },
+    "provenance/original/src/pm/src/drivers/probes.js": {
+      "bytes": 1449,
+      "sha256": "d5e553e394e7d6de8c1838e41f36981998f82700b59e3f01f4e01e274ea36452"
+    },
+    "provenance/original/src/pm/src/errors.js": {
+      "bytes": 1650,
+      "sha256": "289084281b8c8bd3e9a79cfba67c5d2ec9ff3b497d2bf28e9e993daf0d8c3849"
+    },
+    "provenance/original/src/pm/src/foundation/ProcessManager.js": {
+      "bytes": 20406,
+      "sha256": "78aa55a9412553ccfa53f2a2ea1c347e1009f5deaacf5fb3310603091d74898e"
+    },
+    "provenance/original/src/pm/src/foundation/ProcessRegistry.js": {
+      "bytes": 7326,
+      "sha256": "6c917e14a0d2e8eb42d64bde018f0ddcfb22b7cc97891fce9333582bb75b0456"
+    },
+    "provenance/original/src/pm/src/foundation/Supervisor.js": {
+      "bytes": 24666,
+      "sha256": "00b003ec42669c9354dc3d604ea495bdd4f570be2d39189b400b9106414fde50"
+    },
+    "provenance/original/src/pm/src/foundation/index.js": {
+      "bytes": 173,
+      "sha256": "91cfd531f7eea893377e6a2d1e1119cfc74a2fe4cd9323882f3b10d0119e4203"
+    },
+    "provenance/original/src/pm/src/index.js": {
+      "bytes": 722,
+      "sha256": "a9c9c7792baf5e491002ab81e4f805a5bcfded0a571070f5c979d12c05b0f047"
+    },
+    "provenance/original/src/pm/src/integrations/RawNodeIntegrator copy.js": {
+      "bytes": 8746,
+      "sha256": "13d4ccef5aea9dd7a200a108d5aaeb4608f939d457ea3bb6e1b5b3f42e066799"
+    },
+    "provenance/original/src/pm/src/integrations/RawNodeIntegrator.js": {
+      "bytes": 9358,
+      "sha256": "4719c95564213f9984fc706102202180f9f8c4f54f79bc8b6d9eac9d74f6f971"
+    },
+    "provenance/original/src/pm/src/integrations/RawNodePmServiceProvider.js": {
+      "bytes": 2362,
+      "sha256": "91da365722605483bc3f2d979207b41ba176832a3895924b979641942e42ef04"
+    },
+    "provenance/original/src/pm/src/integrations/StartupGenerator.js": {
+      "bytes": 5213,
+      "sha256": "00fa43c09a102bf3a44f4d9b1407ba2603d21f2c0bd8402fcd8cc4e55ecac54d"
+    },
+    "provenance/original/src/pm/src/integrations/attachRawNodeRuntime.js": {
+      "bytes": 720,
+      "sha256": "4bfe1a3c7d4318f3fe065e836613c23a1c4da39f43172426e72230a3246efff2"
+    },
+    "provenance/original/src/pm/src/integrations/commands.js": {
+      "bytes": 4163,
+      "sha256": "4d4b9b237622b434f0a53a71cd24bb2351e0a5f78898c97199bce61fd9d9d74f"
+    },
+    "provenance/original/src/pm/src/integrations/index.js": {
+      "bytes": 473,
+      "sha256": "e7647f802dbfdfc81668eaf1114ce0adce5905f60856346c03e1311011a1605a"
+    },
+    "provenance/original/src/pm/src/lifecycle/BackoffPolicy.js": {
+      "bytes": 731,
+      "sha256": "cc7f93df63e4a144e9901fb9bf9961d3de25eebe3bfa10501d29c2c5786fd803"
+    },
+    "provenance/original/src/pm/src/lifecycle/ProcessStateMachine.js": {
+      "bytes": 2683,
+      "sha256": "c43c10b4e4f043ad47587cf9429b309049ddb227b9e8535fbf92028f3e4c5d53"
+    },
+    "provenance/original/src/pm/src/lifecycle/RestartPolicy.js": {
+      "bytes": 2137,
+      "sha256": "07f7e0c008f3633e55c0c13e6088d45a2f0d746932712606fb51e64d75d512e2"
+    },
+    "provenance/original/src/pm/src/logs/LineRingBuffer.js": {
+      "bytes": 1031,
+      "sha256": "be18261aca44d0b7209f29eb4f840ec0b4f2a5be7a2cc9848b9ef0d24b0fab18"
+    },
+    "provenance/original/src/pm/src/logs/LogMultiplexer.js": {
+      "bytes": 4103,
+      "sha256": "c9ce6f36c28405d17319d3ee66beb3757cbb5b16e7ea8c0153be7f17ac2e0f5d"
+    },
+    "provenance/original/src/pm/src/logs/LogWriter.js": {
+      "bytes": 2721,
+      "sha256": "0c9a9a4e0d465a0975bd0e2b45ed37f266bd3f390849663570b5592b9e821fcf"
+    },
+    "provenance/original/src/pm/src/logs/index.js": {
+      "bytes": 152,
+      "sha256": "89c25b0c832801fca34716a7e360ed81edf638683e26fe94cd81ecbc2dbb8013"
+    },
+    "provenance/original/src/pm/src/persistence/AtomicJournal.js": {
+      "bytes": 2601,
+      "sha256": "4778f08a573c35064eb6738bc91b70cafaf4f9818fc410335f63782498b3a285"
+    },
+    "provenance/original/src/pm/src/persistence/DaemonLock.js": {
+      "bytes": 1488,
+      "sha256": "9123a503d801a8762357a7f292d533fb6abe1d938d5d4db5be399389a35e9b66"
+    },
+    "provenance/original/src/pm/src/persistence/JsonStateStore.js": {
+      "bytes": 2595,
+      "sha256": "d80044f12b30381fde6b4883bad8cdc21f2a5c8c0d8ef49e20e287ab20fe858b"
+    },
+    "provenance/original/src/pm/src/persistence/index.js": {
+      "bytes": 152,
+      "sha256": "af515a696ba2504ce995c96b04010d375e0910dcc71bce45adbbe78833c57c85"
+    },
+    "provenance/original/src/pm/src/realtime/RealtimeGateway.js": {
+      "bytes": 1866,
+      "sha256": "b77f870316f1b0833c0114ca718dbe2ed308d20afaead548eb0c53eb6dc2aeb3"
+    },
+    "provenance/original/src/pm/src/realtime/index.js": {
+      "bytes": 56,
+      "sha256": "acd36f8203af561ac23aad809c2e9b9c616b4249e50e379206fb0c5785c4e4c9"
+    },
+    "provenance/original/src/pm/src/runtime/RawNodeRuntimeAdapter.js": {
+      "bytes": 9135,
+      "sha256": "57e3b5576c8cc65da99fd691252610716ab6e31cab525ab08d0b62bf07c2da63"
+    },
+    "provenance/original/src/pm/src/runtime/RuntimeAgent.js": {
+      "bytes": 8164,
+      "sha256": "e67500b1c12caf873ebd1c3f9f931a4578484473a5ffd24c6b4cd3c14c680397"
+    },
+    "provenance/original/src/pm/src/runtime/RuntimeProtocol.js": {
+      "bytes": 715,
+      "sha256": "0292daf6d14302858f5b997ffa18224c027258b33b62d44b0076f894098775d1"
+    },
+    "provenance/original/src/pm/src/runtime/index.js": {
+      "bytes": 209,
+      "sha256": "05ba8de074273a9c267caf4866b60b22c4e36db33736951e97dcd3b2006da70d"
+    },
+    "provenance/original/src/pm/src/security/AuditTrail.js": {
+      "bytes": 1371,
+      "sha256": "282e75855e7fc71697900c9bab8961dfb2df5a42910d1061e4fb80c72a45b0d0"
+    },
+    "provenance/original/src/pm/src/security/ControlAuthenticator.js": {
+      "bytes": 1558,
+      "sha256": "16df1aa62e6404ee5fc786ac52c856598c61bcc21e6d7d118e02cd8f2b2c2a35"
+    },
+    "provenance/original/src/pm/src/security/SecretRedactor.js": {
+      "bytes": 2253,
+      "sha256": "b6efe3710c622daf9759107a3aa70d9fc406146c8fa4af686166b9cafc1d77b5"
+    },
+    "provenance/original/src/pm/src/security/index.js": {
+      "bytes": 183,
+      "sha256": "c76f0c47f2f48e8254a53aa8b1a4d367c38a40ae445a1f36d749977c983d7b9f"
+    },
+    "provenance/original/src/pm/src/support/async.js": {
+      "bytes": 2520,
+      "sha256": "533c9766eea4c922d951c86b21abf1c0649b1e93770334ffd02398842f510b23"
+    },
+    "provenance/original/src/pm/src/support/duration.js": {
+      "bytes": 885,
+      "sha256": "40a88b1355e3a462d3e4739b7e76f8e046f25905ac140ee8baa1aa158a620955"
+    },
+    "provenance/original/src/pm/src/support/fs.js": {
+      "bytes": 1973,
+      "sha256": "f9fcdc73b6ef68dfc4937aea6326f75eb3828280a105663886fc16e3eb964710"
+    },
+    "provenance/original/src/pm/src/support/glob.js": {
+      "bytes": 1244,
+      "sha256": "da4e26f6a73233e4b154a3f46f9cccfbb027969039b4b18a54b37aee56d23e70"
+    },
+    "provenance/original/src/pm/src/support/json.js": {
+      "bytes": 624,
+      "sha256": "086263071b4d43a03dc5a694cd04cc6c63a2cdc34cdfc525ec0450c6980d371c"
+    },
+    "provenance/original/src/pm/src/support/paths.js": {
+      "bytes": 1449,
+      "sha256": "7735089320fab010758b42b51551344e8b8952905f4da9a9e7573bbfbabf4b61"
+    },
+    "provenance/original/src/pm/src/telemetry/MetricsAggregator.js": {
+      "bytes": 1556,
+      "sha256": "590224f87f2dfd0f77219d7e8d33e9642823e59262cb9fdf7c8ee04f5ac7f48b"
+    },
+    "provenance/original/src/pm/src/telemetry/PrometheusFormatter.js": {
+      "bytes": 2813,
+      "sha256": "0a74190fefa9168a23cdfc1fa0e12a7b745dacb0b9b22633865bff9d4026c54a"
+    },
+    "provenance/original/src/pm/src/telemetry/index.js": {
+      "bytes": 142,
+      "sha256": "86d66dc2bd7b4d9bb25a7885c6f6b63e48dd1aaf3693b746576be89713b9de43"
+    },
+    "provenance/original/src/pm/src/watch/ChangeCoalescer.js": {
+      "bytes": 997,
+      "sha256": "76a5b80c219c1894368bf147fa78a7bac263a29eb05115da203fbb7d4bacd305"
+    },
+    "provenance/original/src/pm/src/watch/WatchManager.js": {
+      "bytes": 5746,
+      "sha256": "ee5ed1e13bc40ff2f3b358272c1ae84ab92cb460c7a5d737e8e5e0f4a2ef55d7"
+    },
+    "provenance/original/src/pm/src/watch/index.js": {
+      "bytes": 106,
+      "sha256": "3f1de0f7981ee916b2fa9c2cb15c6d64f1bd300c1d09d924c70b00b2647feeba"
+    },
+    "provenance/original/src/pm/tests/cluster.test.js": {
+      "bytes": 1528,
+      "sha256": "8fa99a0f72669c8fb006e05e6c5fb271dde1f39c2f30e2be913ee5915a8f863f"
+    },
+    "provenance/original/src/pm/tests/control.test.js": {
+      "bytes": 1824,
+      "sha256": "51e07a9a54d6e70f035101b4a7faed3cb90cdf9e9e26151bace38084b2155ad7"
+    },
+    "provenance/original/src/pm/tests/fixtures/external-app.mjs": {
+      "bytes": 306,
+      "sha256": "95d425306dcef2060862387269024cb4a60a7acc5eab3a8a8d89e9fbace115e4"
+    },
+    "provenance/original/src/pm/tests/fixtures/runtime-app.mjs": {
+      "bytes": 1342,
+      "sha256": "243e8fa64c0a7829bd8027026e3695d357cc71f0b09c8ece41299644b490e031"
+    },
+    "provenance/original/src/pm/tests/integrator.test.js": {
+      "bytes": 2255,
+      "sha256": "a1a2a980642cc33065de73cd75e351d897c216a081efca70932d18541308bf8e"
+    },
+    "provenance/original/src/pm/tests/lifecycle.test.js": {
+      "bytes": 1078,
+      "sha256": "3472e9cd24353d73015b2abc9877363f591b8b9504bfef2a1fdd7702492644c8"
+    },
+    "provenance/original/src/pm/tests/management-http.test.js": {
+      "bytes": 2227,
+      "sha256": "c21a05b314abe1b78978b9dfd389d28108f23db059939c47a3d23935f8450019"
+    },
+    "provenance/original/src/pm/tests/process-definition.test.js": {
+      "bytes": 1179,
+      "sha256": "de3b5630ad03412e4f16284d0c8cf34dcc012210fa8c8805c63f98882e1f69ef"
+    },
+    "provenance/original/src/pm/tests/process-manager.test.js": {
+      "bytes": 3786,
+      "sha256": "73bfe11bed40728204497d6d4209e0f7017ae34f988c41e7eb8a5bf692ffd5cc"
+    },
+    "provenance/original/src/pm/tests/security.test.js": {
+      "bytes": 1250,
+      "sha256": "f7c7d640985a9fc06958aece1b04d5c2013f0f23a57041b0d05f5921cc3150c2"
+    },
+    "provenance/original/src/pm/tests/startup-generator.test.js": {
+      "bytes": 1316,
+      "sha256": "cfea7feb7ab6960298221a632b432dda7b61e5e1707f356afe85ab6bd874c6c8"
+    },
+    "provenance/original/src/pm/tests/state-store.test.js": {
+      "bytes": 816,
+      "sha256": "26fb4f72246c0e992eb3df87390fbb135327d2e7b57ceb339158c4f4d6a3bf22"
+    },
+    "provenance/original/src/pm/tests/supervisor.test.js": {
+      "bytes": 3045,
+      "sha256": "5fc554e033e30d82812e365c5151c17d4b5fa5eae4af9ddea67229b6d7227786"
+    },
+    "provenance/original/src/pm/tests/types/consumer.ts": {
+      "bytes": 960,
+      "sha256": "7f3b8fe05ff8092d0a516999e19109f129506d7335027b87af5a05e5c339e3f2"
+    },
+    "provenance/original/src/pm/tests/watch.test.js": {
+      "bytes": 1267,
+      "sha256": "bae676dbe011c048864d8f248068a487c5d58340cfc7096cf8a633f2ee238e7e"
+    },
+    "provenance/original/src/pm/tools-check-types.js": {
+      "bytes": 1777,
+      "sha256": "a3c8870de12cdcbb8a0b4dd0c1bd13af330a8074f67173a5ff1f5685344edaac"
+    },
+    "provenance/original/src/pm/tools-check.js": {
+      "bytes": 1391,
+      "sha256": "f671932fe9c970871b6f25c0b9cf0fdf13a31ceefd0d2efc33ea990983a9ac95"
+    },
+    "provenance/original/src/pm/tsconfig.types.json": {
+      "bytes": 308,
+      "sha256": "219cd4ac3a8fbf98f8f02a9996a00a79ca53c50479f7299064fff16abd221f41"
+    },
+    "provenance/original/src/pm/types/index.d.ts": {
+      "bytes": 24169,
+      "sha256": "20e6fde28cf6fc6810e985cc23546f21401933383d44ffaea2a92d5beb9d0da9"
+    },
+    "provenance/original/src/support/Facades/Monitor.js": {
+      "bytes": 185,
+      "sha256": "e22dd158f9c0c5a3176d7f02791b5b399f2ca84f18d9bfaf7e50ea41ce8bdf5e"
+    },
+    "provenance/original/src/unified/.DS_Store": {
+      "bytes": 6148,
+      "sha256": "fd1679fa747fdb41646f3d7371cb494235739a35bbebaeaa49864897f0ace63d"
+    },
+    "provenance/original/src/unified/UnifiedServer.js": {
+      "bytes": 34047,
+      "sha256": "bb7ab6b6cf674571c2d3d3779928a1940d49898fdb3b8669dad70a07ff41cacd"
+    },
+    "provenance/original/src/unified/config/normalizeUnifiedOptions.js": {
+      "bytes": 13771,
+      "sha256": "49f4910d576e1bb49af6026529bb81c607af0b02bbfe54e86c6cf8ea59fd998e"
+    },
+    "provenance/original/src/unified/console/UnifiedCommands.js": {
+      "bytes": 2841,
+      "sha256": "47809456af21c4a021e64ffba0c7f7dee9d4365d277191b5a114b7e00847bcee"
+    },
+    "provenance/original/src/unified/console/index.js": {
+      "bytes": 52,
+      "sha256": "5cc811abf742b3a575ec2c41526ccc32a952e9457178fefac851fa2aebcc3593"
+    },
+    "provenance/original/src/unified/createUnifiedApplication.js": {
+      "bytes": 6608,
+      "sha256": "d1c1c64b656aeee774f360b26d1ab809c565e488c94e1056600ab7c74a1e7f51"
+    },
+    "provenance/original/src/unified/errors/UnifiedError.js": {
+      "bytes": 1765,
+      "sha256": "4b3db4c1dabe4d8a3dd80a7c912a8b65dbc3a4aa8e56a97725e0a8795a735591"
+    },
+    "provenance/original/src/unified/examples/cookbook/01-minimal-http/server.js": {
+      "bytes": 453,
+      "sha256": "26b98f390223431ceaabf40e708b419124396d83865d745f14bbb1f8bea146e5"
+    },
+    "provenance/original/src/unified/examples/cookbook/02-basic-all-protocols/server.js": {
+      "bytes": 1637,
+      "sha256": "98faff4684f2085ccb02dbb82d52801f53515565fd731d29c8950650a7504b1b"
+    },
+    "provenance/original/src/unified/examples/cookbook/03-listen-callback/server.js": {
+      "bytes": 901,
+      "sha256": "b16f309865b6a117487e8d94103da243efb481de8e512a8051d68e6bed77359d"
+    },
+    "provenance/original/src/unified/examples/cookbook/04-http/server.js": {
+      "bytes": 2349,
+      "sha256": "d9542d318ac61d1a98137f7c405fc6b870934710ad7750dca96229741332fd88"
+    },
+    "provenance/original/src/unified/examples/cookbook/05-websocket/browser-client.js": {
+      "bytes": 1239,
+      "sha256": "ce04377a30d54d4a4172f1c2001b8244f7e8523a5322162cf268ba64db147b49"
+    },
+    "provenance/original/src/unified/examples/cookbook/05-websocket/server.js": {
+      "bytes": 2075,
+      "sha256": "6b96eba9e9bb52891a1fdb7763b55a6426d1c56287bd74cb07f8773aed05cde1"
+    },
+    "provenance/original/src/unified/examples/cookbook/06-tcp/client.js": {
+      "bytes": 1193,
+      "sha256": "e62b351d952d7000f5d0fad5f042a3b27ded9d5d92e9bd3909bfe5aab87cafab"
+    },
+    "provenance/original/src/unified/examples/cookbook/06-tcp/server.js": {
+      "bytes": 1915,
+      "sha256": "bf03b3a5b92123b24129f202c250b63fb139390a987631b955673422219717cb"
+    },
+    "provenance/original/src/unified/examples/cookbook/07-udp/client.js": {
+      "bytes": 1009,
+      "sha256": "fb79d11bd7bd22f8c13cce77b07d2ad270918bd2178d608ad71a3734036f1a9d"
+    },
+    "provenance/original/src/unified/examples/cookbook/07-udp/server.js": {
+      "bytes": 1785,
+      "sha256": "be8098e027496626c0bf4095a7cfe5b07dadb12ad6b1f0e5faaabcebb7ff5793"
+    },
+    "provenance/original/src/unified/examples/cookbook/08-combined/browser-ws-client.js": {
+      "bytes": 360,
+      "sha256": "288a1421894a6f5c911f91637677bf0db89488a6ccf060f26500cd986ea7556b"
+    },
+    "provenance/original/src/unified/examples/cookbook/08-combined/server.js": {
+      "bytes": 1052,
+      "sha256": "8aff0f6620e91aa7b7873f545bb48bb38e243604053ea893f66ddde38f8e4db2"
+    },
+    "provenance/original/src/unified/examples/cookbook/08-combined/tcp-client.js": {
+      "bytes": 289,
+      "sha256": "b44bdc7622faab187d95ee74183a8cd04da94ab22312b5b4a55604073dfcdcb1"
+    },
+    "provenance/original/src/unified/examples/cookbook/08-combined/udp-client.js": {
+      "bytes": 421,
+      "sha256": "65269f4802dff3d8383dc463341aa11f30bd5fd1a248bddf5cfad61d95e853d8"
+    },
+    "provenance/original/src/unified/examples/cookbook/09-observability-and-drain/server.js": {
+      "bytes": 2064,
+      "sha256": "775a61b74344b4a85c51ccf1634e6251e2b768cb844809a9877863434fc5cd83"
+    },
+    "provenance/original/src/unified/examples/cookbook/10-lifecycle-plugin/server.js": {
+      "bytes": 1294,
+      "sha256": "91c13296eb237931c58b8e945a790dbaac4fc42895ca7288ee26bfdf02f098ee"
+    },
+    "provenance/original/src/unified/examples/cookbook/11-optional-protocol/server.js": {
+      "bytes": 958,
+      "sha256": "ebda88d06ca193c4a8a176bbd5415a8a1c9bb20dedaff7ee506647ff518711e3"
+    },
+    "provenance/original/src/unified/examples/cookbook/12-production/.env.example": {
+      "bytes": 550,
+      "sha256": "e0c219f86bbad6cbbca488c5fdd03435ae6ec5f5a8138f5d38ccc470e9923a15"
+    },
+    "provenance/original/src/unified/examples/cookbook/12-production/server.js": {
+      "bytes": 6533,
+      "sha256": "ebfa2448d2e8e8ad7c3b60477f4e4b9da703c62b0f7ddb0c7a957d7a4a802731"
+    },
+    "provenance/original/src/unified/examples/cookbook/13-enterprise-tls/.env.example": {
+      "bytes": 434,
+      "sha256": "17990d39df97bf226957c07346c30d0e16d07cf57b66f4e419181898b2e8c2ef"
+    },
+    "provenance/original/src/unified/examples/cookbook/13-enterprise-tls/server.js": {
+      "bytes": 2451,
+      "sha256": "071f5bdeeeb64a978738b5d34583e42156e9281cfbcd5e7c8ff8ec35d3654db9"
+    },
+    "provenance/original/src/unified/examples/cookbook/13-enterprise-tls/tcp-client.js": {
+      "bytes": 683,
+      "sha256": "97e2f800fcbf1172202d29730474777732d3adcf41aba25056d4d47e2f146e6a"
+    },
+    "provenance/original/src/unified/examples/cookbook/14-foundation-provider/.env.example": {
+      "bytes": 1375,
+      "sha256": "c5ed2d903bf9146bbd0cef3a63d2f7abd8eb825fa7db1ae4a3f36d4b65433b3b"
+    },
+    "provenance/original/src/unified/examples/cookbook/14-foundation-provider/AppProtocolServiceProvider.js": {
+      "bytes": 1481,
+      "sha256": "711e059b304c6971b753bfab449a25974d82fa8f68c64444c5ede6833c07bb3a"
+    },
+    "provenance/original/src/unified/examples/cookbook/14-foundation-provider/inspect-runtime.js": {
+      "bytes": 788,
+      "sha256": "47e9737fa4177ee4ff75f44bdcb527d7f390721a41e8abf0489bf7e31f694b5b"
+    },
+    "provenance/original/src/unified/examples/cookbook/15-proxy-protocol/server.js": {
+      "bytes": 889,
+      "sha256": "95f4d38fa42b9f5c5bb27fdf4855d7ae4e5db6a0a7a51e18578bfc959afcd017"
+    },
+    "provenance/original/src/unified/examples/cookbook/16-profile-and-protocol-matrix/examples.js": {
+      "bytes": 992,
+      "sha256": "7eb48d07fe3ce14e51cbc288de74d73f35817f59ff7d735a71d241401a297bf1"
+    },
+    "provenance/original/src/unified/examples/cookbook/MANIFEST.json": {
+      "bytes": 4790,
+      "sha256": "50a76bcb1cdbeaec5ebc17733452abf5f1b89c8972997521f3b959a0c73e9c98"
+    },
+    "provenance/original/src/unified/examples/cookbook/README.md": {
+      "bytes": 4466,
+      "sha256": "94b11d6075035573e77868cddd12b862902e90c6738df4bf1e781316eff5c75b"
+    },
+    "provenance/original/src/unified/examples/cookbook/VALIDATION.md": {
+      "bytes": 1197,
+      "sha256": "522317f2fd3e7f906d8970cd9abfbfa7802f7103c532f2de6f93e4e6af20bfa7"
+    },
+    "provenance/original/src/unified/index.js": {
+      "bytes": 1355,
+      "sha256": "050f61b73cbf690fb695379cfbfb8e5572f10fd10c4cedb51223d35eda1b4dcb"
+    },
+    "provenance/original/src/unified/lifecycle/UnifiedState.js": {
+      "bytes": 2120,
+      "sha256": "323f06b65f3bea0d9c24ffb4ad171bf191691aeefe8e6ab7474b3b5990d48363"
+    },
+    "provenance/original/src/unified/observability/UnifiedDiagnostics.js": {
+      "bytes": 1818,
+      "sha256": "a6aaf7642f0b4f6ca1fe02905826eb8cf6a86e38ff1673700e629e2576768151"
+    },
+    "provenance/original/src/unified/observability/UnifiedMetrics.js": {
+      "bytes": 4597,
+      "sha256": "5f61e6b246bb889e86f216b5ba669c0f62be9ed5478099a384f3e6d834c192b2"
+    },
+    "provenance/original/src/unified/rawnode-src-unified-full-code.txt": {
+      "bytes": 113961,
+      "sha256": "f246e2dc65f7fd8715b8129e5e3cf1cccc98241705f90b58cbeaabce74ae0d22"
+    },
+    "provenance/original/tests/fixtures/v1-public-manifest.json": {
+      "bytes": 751,
+      "sha256": "182221f105a23184990d0c06a5521fe012443299e142445e25dae6ae570732fa"
+    },
+    "provenance/original/types/monitor/index.d.ts": {
+      "bytes": 22494,
+      "sha256": "41a9c4565e59ffae3f442ccc034e8b42a0e8bf1968c037450a76f23649972a72"
+    },
+    "provenance/source-inventory.json": {
+      "bytes": 152111,
+      "sha256": "8512889e4256c0f4edc3320413b8c4fe9fbd97797b81753d719744f25aca14c4"
+    },
+    "evidence/additional-controls.md": {
+      "bytes": 1353,
+      "sha256": "673c5a055f2ab784c9afd29a65685e88534560dd820485b78da86af5c665bf4f"
+    },
+    "evidence/adversarial-review.json": {
+      "bytes": 2090,
+      "sha256": "e18ff34729b28598b57b5fa0f640a885813c80764f5b59018009b3551b5f001b"
+    },
+    "evidence/browser-availability.json": {
+      "bytes": 216,
+      "sha256": "ac43f4b884fc8b126d0678a793cde1053019ea003b10c195ec79fdab047433f5"
+    },
+    "evidence/build-check.txt": {
+      "bytes": 67,
+      "sha256": "11bf10f201b57b47a9d0793f6a71766ef3e0aaf1951dcdca7ba4355c14605f34"
+    },
+    "evidence/candidate-inventory.json": {
+      "bytes": 27202,
+      "sha256": "a2453e61961f6cb6078dba3a770b946cc3fa028fb2a5e85fd2133084060c2480"
+    },
+    "evidence/events-materialization.json": {
+      "bytes": 439,
+      "sha256": "c1157e2bc8e4deca802724bfe61cab355d7a72876f28a803c66f45a14fbde913"
+    },
+    "evidence/full-native-tests.txt": {
+      "bytes": 4617,
+      "sha256": "0a506238ef22cf45b807db6f216ffd0a1a845074a686149e9233ccbb40f9ecf9"
+    },
+    "evidence/library-save.json": {
+      "bytes": 437,
+      "sha256": "15a8ce6a2fdd49bf133e1970b46e63e0258236a8e25b4db4e7f23ec9a962b381"
+    },
+    "evidence/library-tool-discovery.json": {
+      "bytes": 855,
+      "sha256": "3d3214f0786f6e514c37510668fcff493b3b660dcb85de7c702a406e98dd9284"
+    },
+    "evidence/native-tests.txt": {
+      "bytes": 5528,
+      "sha256": "c7c1afc772cdfa0df051738f87f26ab04a39cf8997318244ea33d5d8255f37ef"
+    },
+    "evidence/npm-pack.json": {
+      "bytes": 18218,
+      "sha256": "946bfa2fb33f9613e2449e7584bdd61bd119fec3cc6ac633431b5f37e2f2c72a"
+    },
+    "evidence/packed-example.txt": {
+      "bytes": 33,
+      "sha256": "86702dec7c2489d42402c2d3f9469b9629c952297757c2f22d14dfcf3704b0af"
+    },
+    "evidence/packed-hash.json": {
+      "bytes": 145,
+      "sha256": "77fe4d4436ce1fe8485ae98681cbd54a6a9e9b364e4f99df1d0d39eaf8d5d8d1"
+    },
+    "evidence/packed-imports.txt": {
+      "bytes": 840,
+      "sha256": "9925433760e2873d1a44f0b954bd7403a9495e8f05864a65dffa75ae620fb65f"
+    },
+    "evidence/packed-tests.txt": {
+      "bytes": 4616,
+      "sha256": "320fd6b6eab98318154eb390640604d5e50dd80c437a4ec32843bc1fbf0b11da"
+    },
+    "evidence/packed-types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/pm-composition-history/340b2fa87/adversarial-final-review.md": {
+      "bytes": 8047,
+      "sha256": "3755f66d1f49fbd12fff21f5d7b16fa5c1954aea74501f195b2277e4a6c22970"
+    },
+    "evidence/pm-composition-history/340b2fa87/log-shutdown-fail-before.json": {
+      "bytes": 198,
+      "sha256": "bf38bf07929c0c7e07869a48aabab7bc96f2917ee4802d431f541b49dab7c9b0"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-composition.json": {
+      "bytes": 458,
+      "sha256": "5fcd5a857c8f52e5c5dda496c7e5d53e6ae3cbe8510ca03625694b72f13a4e4e"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-input.json": {
+      "bytes": 392,
+      "sha256": "30c4800401abc0747d7fde39e7c5de928bc7fdce4c86bb0b514c0f5d515fd2f5"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/composition-types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/composition.test.mjs": {
+      "bytes": 3339,
+      "sha256": "17625fc17eb2a9617854b4347c0dba009ad695a832f0100636bf73de9afcc8a6"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/composition.txt": {
+      "bytes": 532,
+      "sha256": "3db962d1d0cf1aea8fff635ef884f32da1dce485c57dc4c7ef7a3a45a095220c"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/consumer.ts": {
+      "bytes": 609,
+      "sha256": "f82c7b4e03f0dd87047df8870df344f205069fe5931a77306b87b811ab21355b"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/package.json": {
+      "bytes": 33,
+      "sha256": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/receipt.json": {
+      "bytes": 1329,
+      "sha256": "edbbf6f90260964ffc08b632c21465b155c64cf1bfcfdd4bc25e6fd30279a929"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-lane/worker.mjs": {
+      "bytes": 955,
+      "sha256": "2c4539f23ec1351997f8b0709065bd03f7c60e272a1d987425c1635c60a6841f"
+    },
+    "evidence/pm-composition-history/340b2fa87/pm-types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/pm-composition-history/README.md": {
+      "bytes": 1111,
+      "sha256": "a93bb25a197d31541e5ee578122ef8d11df218891bc56aa83d95d6a26982068d"
+    },
+    "evidence/pm-composition-history/f7e512c44/input.json": {
+      "bytes": 392,
+      "sha256": "65ed2ee40d599764ed357ac31060f19d11021dd8d537ea96a5004a0053b8ae79"
+    },
+    "evidence/pm-composition-history/f7e512c44/pm-lane/composition-types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/pm-composition-history/f7e512c44/pm-lane/composition.test.mjs": {
+      "bytes": 3339,
+      "sha256": "442876f5ea0324a49cfec582373759afb4d172fb967118fdb43233e39534bf6e"
+    },
+    "evidence/pm-composition-history/f7e512c44/pm-lane/composition.txt": {
+      "bytes": 529,
+      "sha256": "f5d09ee73a12b6b0316c2565391bc66e990e5eee6ffee3da62ef0dfa79e15b70"
+    },
+    "evidence/pm-composition-history/f7e512c44/pm-lane/consumer.ts": {
+      "bytes": 609,
+      "sha256": "f82c7b4e03f0dd87047df8870df344f205069fe5931a77306b87b811ab21355b"
+    },
+    "evidence/pm-composition-history/f7e512c44/pm-lane/package.json": {
+      "bytes": 33,
+      "sha256": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035"
+    },
+    "evidence/pm-composition-history/f7e512c44/pm-lane/worker.mjs": {
+      "bytes": 955,
+      "sha256": "2c4539f23ec1351997f8b0709065bd03f7c60e272a1d987425c1635c60a6841f"
+    },
+    "evidence/pm-composition-history/f7e512c44/result.json": {
+      "bytes": 458,
+      "sha256": "5fcd5a857c8f52e5c5dda496c7e5d53e6ae3cbe8510ca03625694b72f13a4e4e"
+    },
+    "evidence/pm-composition-history/f7e512c44/types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/pm-composition.json": {
+      "bytes": 458,
+      "sha256": "5fcd5a857c8f52e5c5dda496c7e5d53e6ae3cbe8510ca03625694b72f13a4e4e"
+    },
+    "evidence/pm-composition.mjs": {
+      "bytes": 2727,
+      "sha256": "24a54d87afeb2a21ed8f3e201ac895ff4fa319b3205011212ea6bd94dec03739"
+    },
+    "evidence/pm-input.json": {
+      "bytes": 392,
+      "sha256": "38c439f4eeca46106f94629672df191f97a7e45295074d335c6e4b06e7c00afb"
+    },
+    "evidence/pm-pin-withdrawal.json": {
+      "bytes": 522,
+      "sha256": "993bf672d29ce6bc283a8613fcce02932198c1771f83d3d60583ec92540cab87"
+    },
+    "evidence/pm-reciprocal/adversarial-r6-resolution.md": {
+      "bytes": 5250,
+      "sha256": "a561e715b5fba8cbdcea9da2118a7ed84708ee8fd3eef442b0da9b20f480f79f"
+    },
+    "evidence/pm-reciprocal/composition-types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/pm-reciprocal/composition.test.mjs": {
+      "bytes": 3339,
+      "sha256": "b942256bd3cc18c9651cf3481d9edfb2bee2936f0f72800558f8960286a3d74e"
+    },
+    "evidence/pm-reciprocal/composition.txt": {
+      "bytes": 531,
+      "sha256": "61edb44ff84c4e62b85e0e5908961ccbdd95118f7f4c28352f40ebed67d5b1bd"
+    },
+    "evidence/pm-reciprocal/consumer.ts": {
+      "bytes": 609,
+      "sha256": "f82c7b4e03f0dd87047df8870df344f205069fe5931a77306b87b811ab21355b"
+    },
+    "evidence/pm-reciprocal/log-shutdown-affected-tests.txt": {
+      "bytes": 1310,
+      "sha256": "327eeccbe0515667f071d512214be9394e3363deb2ab0158255dfb328c400833"
+    },
+    "evidence/pm-reciprocal/native-final.txt": {
+      "bytes": 4230,
+      "sha256": "a5605a411f887f58bcb1bd76cd37b69df99bee22043473ae4f9d03e4dba57865"
+    },
+    "evidence/pm-reciprocal/package.json": {
+      "bytes": 33,
+      "sha256": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035"
+    },
+    "evidence/pm-reciprocal/packed-consumer.json": {
+      "bytes": 1533,
+      "sha256": "14b92c3309c5b854484a26d2e78ed850392e7846c17e29dc209aed765ff5e634"
+    },
+    "evidence/pm-reciprocal/receipt.json": {
+      "bytes": 2187,
+      "sha256": "7c17e9a7c858bcc46533468556e6690a4379863fc6e3d37f68fc0f96b064d087"
+    },
+    "evidence/pm-reciprocal/worker.mjs": {
+      "bytes": 955,
+      "sha256": "2c4539f23ec1351997f8b0709065bd03f7c60e272a1d987425c1635c60a6841f"
+    },
+    "evidence/pm-types.mts": {
+      "bytes": 570,
+      "sha256": "78957c4a75dadeed7e30142ddd1be7d3f4060215b15ff6120f3039097e5b0c94"
+    },
+    "evidence/pm-types.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/publication-guard.txt": {
+      "bytes": 185,
+      "sha256": "07a3f3de37aaef9d6eb92b15b3f9066c278c36b66322a61f8aebf06c6a54cb76"
+    },
+    "evidence/reference-generation.txt": {
+      "bytes": 53,
+      "sha256": "ab7f4d184ea4537dbf8866b8dc75f70c0f771a2ffdbd542688673d36ef6bfdca"
+    },
+    "evidence/runtime-regression.txt": {
+      "bytes": 1468,
+      "sha256": "20ed8b6bd064d03972aa7460ceaaadf9896c05049cb19ecb1c8cde795a7dd134"
+    },
+    "evidence/source-verification.json": {
+      "bytes": 80,
+      "sha256": "c261b2ae3c7ae990d1a1285132d4cf5dcc177b7d43eef3e5259ec7190c8424bc"
+    },
+    "evidence/types-check.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/validation-summary.json": {
+      "bytes": 3913,
+      "sha256": "5d1f42f0cd3bd961a1c4dd24d12974d220fc5043c17bcf1f08d0ef5db11ce73b"
+    },
+    "artifacts/rawnode-monitor-1.0.0.tgz": {
+      "bytes": 184659,
+      "sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad"
+    },
+    "AGENTS.md": {
+      "bytes": 2862,
+      "sha256": "4e2cd1879a59fa2a41b2626ca463e8a33e8ab7227273dbd140095d52a8070656"
+    },
+    "DELIVERY.md": {
+      "bytes": 4527,
+      "sha256": "9fc22fb05b635caa17605e43480b82a018cb4def4ea305c36f5ab7a922ae7009"
+    },
+    "RawNode_Monitor_Codex_Production_Readiness_Prompt.md": {
+      "bytes": 23593,
+      "sha256": "dd9bbb2062b2fac92fb0b4d6616dae312d692b6921cdbe8b6396a9d5c9003e46"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-siwG8b/extracted/node_modules/@rawnode/monitor",
+    "started": "2026-10-21T22:29:09.062Z",
+    "milliseconds": 3101,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  }
+]

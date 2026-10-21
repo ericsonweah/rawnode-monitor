@@ -36,7 +36,7 @@ export class ResourceRegistry extends EventEmitter {
       tags: Object.freeze(Array.from(new Set(options.tags || []))),
       sourceBinding: options.sourceBinding || null,
     };
-    if (this.resources.has(key)) this.healthRegistry?.unregister(`resource.${key}`);
+    if (this.resources.has(key)) { this.healthRegistry?.unregister(`resource.${key}`); this.latest.delete(key); }
     this.resources.set(key, record);
     this.stats.registered++;
     if (this.healthRegistry && (record.health || hasMethod(resource, ['health', 'readiness', 'liveness', 'ping']))) {
@@ -115,8 +115,7 @@ export class ResourceRegistry extends EventEmitter {
     }
     snapshot.durationMs = Number(process.hrtime.bigint() - started) / 1e6;
     const sanitized = this.serializer?.sanitize ? this.serializer.sanitize(snapshot, { maxPayloadBytes: this.maxPayloadBytes }) : snapshot;
-    if (this.resources.get(key) === record) this.latest.set(key, sanitized);
-    this.emit('snapshot', sanitized);
+    if (this.resources.get(key) === record) { this.latest.set(key, sanitized); this.emit('snapshot', sanitized); }
     return sanitized;
   }
 

@@ -1,0 +1,209 @@
+{
+  "base": "0e4de7f5acf5698918b1938d0cc4e46ad65645eb",
+  "files": [
+    {
+      "path": "package/CHANGELOG.md",
+      "status": "modified",
+      "bytes": 1501,
+      "sha256": "76e4404cbd3b798b2dcf21d9ee51d58ffa578a6469bc3ba5ae04210771e57cbb"
+    },
+    {
+      "path": "package/README.md",
+      "status": "modified",
+      "bytes": 4153,
+      "sha256": "9a0d43fdc457ac15aaa9ac080816cd09430e1d7cc68334a6d1faaea392e7afe3"
+    },
+    {
+      "path": "package/docs/API.md",
+      "status": "modified",
+      "bytes": 33997,
+      "sha256": "2b8faf5a9c69338f2aa32546df10ccafd5c54ce58f7faa1d99c6023d54a52538"
+    },
+    {
+      "path": "package/docs/CONFIGURATION.md",
+      "status": "modified",
+      "bytes": 11278,
+      "sha256": "f33ad30719177fc799f94f9daddf46ddbde74d4aef58a39801fdd7ee321de755"
+    },
+    {
+      "path": "package/docs/LIFECYCLE.md",
+      "status": "modified",
+      "bytes": 5275,
+      "sha256": "5bc1f5253a6f2caf9020ae8f47a37be28fe2ce1b702ed534cb8d6d8eb035dabc"
+    },
+    {
+      "path": "package/docs/MIGRATION.md",
+      "status": "modified",
+      "bytes": 4081,
+      "sha256": "720bc6bc6e2aebc12a0a4b1bf4ac23a9871383ebaf7c63676babde49b1707d8e"
+    },
+    {
+      "path": "package/docs/PUBLICATION.md",
+      "status": "modified",
+      "bytes": 3075,
+      "sha256": "2d8997a8b4bdde86e18815dd0a8d4080d58fd9aefe5f3eb95ab78c905e7d2704"
+    },
+    {
+      "path": "package/docs/SECURITY.md",
+      "status": "modified",
+      "bytes": 4068,
+      "sha256": "d70853cf768fd2bd9e5d0465b97ebfa823a5a2f7ef9bd4e618a81309f4997c5e"
+    },
+    {
+      "path": "package/docs/STUDIO.md",
+      "status": "modified",
+      "bytes": 4307,
+      "sha256": "5dac9f685483498a55900c82c14f69463278eaabdf156dbc0c26ab1f89072499"
+    },
+    {
+      "path": "package/docs/VALIDATION.md",
+      "status": "modified",
+      "bytes": 5109,
+      "sha256": "e689fd0235beb6dc98bee3bd383f6d8d955fdba4f6ac6b9369fb34818ce185a5"
+    },
+    {
+      "path": "package/examples/studio-fixture.mjs",
+      "status": "modified",
+      "bytes": 7167,
+      "sha256": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c"
+    },
+    {
+      "path": "package/resources/assets/css/monitor/studio.css",
+      "status": "modified",
+      "bytes": 10436,
+      "sha256": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3"
+    },
+    {
+      "path": "package/resources/assets/js/monitor/studio.js",
+      "status": "modified",
+      "bytes": 30080,
+      "sha256": "83f37a900b1678ac2dfa3da095a8dae004e18c385b772ece8812791287e02c36"
+    },
+    {
+      "path": "package/src/alerts/AlertEngine.js",
+      "status": "modified",
+      "bytes": 11917,
+      "sha256": "3ef5603672200f87323d23de70850947ae7a5000f9ed5c5498eaff90ec857c8a"
+    },
+    {
+      "path": "package/src/alerts/NotificationRouter.js",
+      "status": "modified",
+      "bytes": 5457,
+      "sha256": "1f42be4b23ba7e75385c9eb16621d9f3f0297b02ce7b4292186bc412b118cee9"
+    },
+    {
+      "path": "package/src/cluster/MonitorClusterEnvelope.js",
+      "status": "modified",
+      "bytes": 2724,
+      "sha256": "08a0cc9ed0a7663a96cf603a1c38b4fe800a2858bd34aa0efa767ef6dedc6ba9"
+    },
+    {
+      "path": "package/src/cluster/RedisMonitorBridge.js",
+      "status": "modified",
+      "bytes": 4025,
+      "sha256": "2a2785003cf5c168009a941b045850ded96936f70bc0ed5f960fa76471a787d7"
+    },
+    {
+      "path": "package/src/core/MonitorContextManager.js",
+      "status": "modified",
+      "bytes": 3237,
+      "sha256": "d166da5bb8063b593751d0cb4cbecee9888a6efb6324c7b9bda676088cd0abfa"
+    },
+    {
+      "path": "package/src/exporters/HttpJsonExporter.js",
+      "status": "modified",
+      "bytes": 10558,
+      "sha256": "79e0a37465b2ad7c6bfb7ab5f15ba82d37fb5eb1c8ca5379fa5afe90e7513b1b"
+    },
+    {
+      "path": "package/src/health/HealthRegistry.js",
+      "status": "modified",
+      "bytes": 7746,
+      "sha256": "fd118aa589e1c8b5f0b23280c50e26f62204fd17f20e223dec75eb929e2b88c9"
+    },
+    {
+      "path": "package/src/integrations/HttpMonitorMiddleware.js",
+      "status": "modified",
+      "bytes": 5997,
+      "sha256": "5ea1a34a78e28fcbe0c08f01fe0dd35414328853a3dd8ef74edb87d5d179f8b8"
+    },
+    {
+      "path": "package/src/resources/ResourceRegistry.js",
+      "status": "modified",
+      "bytes": 8264,
+      "sha256": "311ac012a77a05d5deaf85a482c7d6e6fa974155c220dc496a40055ad7dc255f"
+    },
+    {
+      "path": "package/src/storage/JsonlTelemetryStore.js",
+      "status": "modified",
+      "bytes": 11282,
+      "sha256": "c42f78edaee4705fe06d79f49b15c3bd61444a6c60888121c6e3a2a82fbf5b76"
+    },
+    {
+      "path": "package/src/studio/MonitorStudioController.js",
+      "status": "modified",
+      "bytes": 10298,
+      "sha256": "7c56d2863247777785cc78340bba837ea6fe8be978a049224f78c16b9275aa98"
+    },
+    {
+      "path": "package/src/tracing/Sampler.js",
+      "status": "modified",
+      "bytes": 1947,
+      "sha256": "c53132d310ad206854d98171265462d3464f2197eba6519e277001ede2339c10"
+    },
+    {
+      "path": "package/src/tracing/TraceContext.js",
+      "status": "modified",
+      "bytes": 5305,
+      "sha256": "40e62525d433de02f3263425555a351390496cae8393cdb703c9959bf93015de"
+    },
+    {
+      "path": "package/test/alert-lifecycle.test.mjs",
+      "status": "added",
+      "bytes": 6807,
+      "sha256": "9f15d82b021feab511c18e89029658d526a1b57b591913c69799ad09e7c472d4"
+    },
+    {
+      "path": "package/test/contracts-hardening.test.mjs",
+      "status": "added",
+      "bytes": 8327,
+      "sha256": "ba30d21aa7b51493995dff4e210c69bbe64cd8344263cf545453b13fd79f2eac"
+    },
+    {
+      "path": "package/test/exports-types.mts",
+      "status": "added",
+      "bytes": 4831,
+      "sha256": "bf40cbd5b182f398642e69537bdbaf070ed7de94755a589cb423bd20e144ed15"
+    },
+    {
+      "path": "package/test/readiness-lifecycle.test.mjs",
+      "status": "added",
+      "bytes": 11946,
+      "sha256": "9f410fdf0afb8d53ac7c6809ba61ab1b94a169d15c22daeaa256772f2c0a4c5e"
+    },
+    {
+      "path": "package/test/studio-actions.test.mjs",
+      "status": "added",
+      "bytes": 8930,
+      "sha256": "723a30fab1d1c76dc22260118b83ae429af47f3539725b272ccb05c513f0654c"
+    },
+    {
+      "path": "package/test/studio-http.test.mjs",
+      "status": "modified",
+      "bytes": 3414,
+      "sha256": "ed5933ee798f618939fccaedfa1352f7ff0a24fc82a7069aec02f4394548bb04"
+    },
+    {
+      "path": "package/test/studio-security-regression.test.mjs",
+      "status": "added",
+      "bytes": 3860,
+      "sha256": "b97a51b35ba188a8325e3877ca2903dc2c1874330eadf3154a5a587065b6821e"
+    },
+    {
+      "path": "package/types/index.d.ts",
+      "status": "modified",
+      "bytes": 28858,
+      "sha256": "7f88b27ec91ebabc6c685bad6be8783473b7e47c4ab5684c463f5567a692b2dd"
+    }
+  ]
+}

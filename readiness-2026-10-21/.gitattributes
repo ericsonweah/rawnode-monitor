@@ -1,0 +1,3 @@
+# Preserve captured command output and unified-diff context byte for byte.
+logs/** -whitespace
+review.patch -whitespace
