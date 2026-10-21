@@ -1,0 +1,42 @@
+{
+  "scope": "independent adversarial review and authorized corrections",
+  "candidate": "@rawnode/monitor",
+  "command": "node --test test/adversarial-*.test.mjs",
+  "tests": 24,
+  "passed": 24,
+  "failed": 0,
+  "skipped": 0,
+  "node": "v24.21.0",
+  "platform": "macOS-15.7.9-x86_64-i386-64bit",
+  "test_files": [
+    "adversarial-pipeline-metrics.test.mjs",
+    "adversarial-retention-synthetics.test.mjs",
+    "adversarial-synthetic-http.test.mjs",
+    "adversarial-plugins.test.mjs"
+  ],
+  "real_integration": [
+    "task-owned ephemeral HTTP listeners on 127.0.0.1 for synthetic redirects; no external host requests"
+  ],
+  "modeled": [
+    "HTTPS downgrade rejection modeled by local transport stub; no live TLS handshake",
+    "span retention clock advance modeled in test process"
+  ],
+  "restrictions": [
+    "sandbox initially rejected loopback listen with EPERM; authorized node --test escalation succeeded"
+  ],
+  "limitations": [
+    "JavaScript callbacks ignoring AbortSignal cannot be forcibly stopped. Pending callbacks remain visible/capped; underlying synthetic work holds its concurrency slot until settlement.",
+    "Plugin close rejects new work, aborts in-flight callback wrappers, and drops queued notifications; call flush before close to request notification delivery.",
+    "No packed-package, actual browser, production service, or broader framework integration validation performed by this reviewer."
+  ],
+  "changes": [
+    "bounded pipeline writes/flush/close and cancellation, incomplete acknowledgement rejection",
+    "metric series release/reset/remove and strict aggregate cardinality",
+    "observable collector deadline and no relaunch of unresolved collector",
+    "span cap mapping and consistent time retention in ring and index",
+    "composite durability requires complete acknowledgement",
+    "synthetic unregister/replacement/close race handling, bounded pending work/waiters",
+    "synthetic credential/body/protocol/downgrade redirect controls",
+    "plugin lifecycle invalidation/idempotence/deadlines and hook/callback admission caps"
+  ]
+}

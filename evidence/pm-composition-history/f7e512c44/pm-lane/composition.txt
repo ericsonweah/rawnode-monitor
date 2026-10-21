@@ -1,0 +1,13 @@
+✔ exact local package pins (7.888826ms)
+✔ actual Monitor bridge resource attach/query/diagnostics/detach: direct (82.598294ms)
+✔ actual Monitor bridge resource attach/query/diagnostics/detach: runtime (53.218899ms)
+✔ actual Monitor bridge resource attach/query/diagnostics/detach: adapter (47.399169ms)
+✔ actual packed Monitor health metrics diagnostics traverse PM child IPC and shutdown (297.367443ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 812.087914

@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "tar": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz",
+  "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+  "fileCount": 122,
+  "imports": [
+    "@rawnode/pm 64",
+    "@rawnode/pm/runtime 5",
+    "@rawnode/pm/integration/rawnode 13",
+    "@rawnode/pm/drivers 5",
+    "@rawnode/pm/console 2"
+  ],
+  "types": "passed",
+  "examples": [
+    {
+      "name": "resources.mjs",
+      "output": "{\"ok\":true,\"ready\":true,\"draining\":false,\"activeRequests\":0,\"openSockets\":0,\"framework\":null,\"resources\":{\"jobs\":{\"ok\":true}}}\n{\"ok\":true,\"file\":\"/var/folders/40/vbyqdlc14vv7612wv0"
+    },
+    {
+      "name": "supervise.mjs",
+      "output": "{\"running\":1,\"health\":true}\n"
+    },
+    {
+      "name": "generate-service.mjs",
+      "output": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n  <key>La"
+    }
+  ],
+  "guard": "rejected",
+  "packedTests": "e and restores it (195.046939ms)\n✔ supervisor starts, observes, diagnoses, and gracefully stops a fork worker (486.987481ms)\n✔ supervisor crash policy eventually quarantines an always-crashing process (653.585467ms)\n✔ watch manager coalesces filesystem changes with polling fallback (217.895552ms)\nℹ tests 47\nℹ suites 0\nℹ pass 47\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 4056.501393\n"
+}

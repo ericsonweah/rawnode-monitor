@@ -1,0 +1,193 @@
+{
+  "name": "rawnode-events",
+  "version": "2.0.0",
+  "description": "RawNode zero-dependency, compatibility-preserving, enterprise event platform",
+  "keywords": [
+    "rawnode",
+    "events",
+    "event-bus",
+    "pubsub",
+    "redis-streams",
+    "outbox",
+    "event-sourcing",
+    "zero-dependency"
+  ],
+  "homepage": "https://rawnode.org",
+  "license": "MIT",
+  "author": "RawNode",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./types/index.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bin": {
+    "rawnode-events": "./bin/rawnode-events.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./index.js"
+    },
+    "./dispatcher": {
+      "types": "./types/dispatcher.d.ts",
+      "import": "./src/events/AdvancedEventDispatcher.js"
+    },
+    "./bridge": {
+      "types": "./types/bridge.d.ts",
+      "import": "./src/events/bridge/index.js"
+    },
+    "./durable": {
+      "types": "./types/durable.d.ts",
+      "import": "./src/events/durable/index.js"
+    },
+    "./durability": {
+      "types": "./types/durable.d.ts",
+      "import": "./src/events/durability/index.js"
+    },
+    "./queue": {
+      "types": "./types/queue.d.ts",
+      "import": "./src/events/queue/index.js"
+    },
+    "./workflows": {
+      "types": "./types/workflows.d.ts",
+      "import": "./src/events/workflows/index.js"
+    },
+    "./sourcing": {
+      "types": "./types/sourcing.d.ts",
+      "import": "./src/events/sourcing/index.js"
+    },
+    "./testing": {
+      "types": "./types/testing.d.ts",
+      "import": "./src/events/testing/index.js"
+    },
+    "./contracts": {
+      "types": "./types/contracts.d.ts",
+      "import": "./src/events/contracts/index.js"
+    },
+    "./observability": {
+      "types": "./types/observability.d.ts",
+      "import": "./src/events/observability/index.js"
+    },
+    "./serialization": {
+      "types": "./types/serialization.d.ts",
+      "import": "./src/events/serialization/index.js"
+    },
+    "./broadcasting": {
+      "types": "./types/index.d.ts",
+      "import": "./src/events/broadcasting/index.js"
+    },
+    "./config": {
+      "types": "./types/config.d.ts",
+      "import": "./config/events.js"
+    },
+    "./provider": {
+      "types": "./types/provider.d.ts",
+      "import": "./src/foundation/providers/EventServiceProvider.js"
+    },
+    "./console": {
+      "types": "./types/console.d.ts",
+      "import": "./src/events/console/index.js"
+    },
+    "./legacy": {
+      "types": "./types/legacy.d.ts",
+      "import": "./src/events/EventDispatcher.js"
+    },
+    "./core": {
+      "types": "./types/core.d.ts",
+      "import": "./src/events/core/index.js"
+    },
+    "./context": {
+      "types": "./types/context.d.ts",
+      "import": "./src/events/context/index.js"
+    },
+    "./errors": {
+      "types": "./types/errors.d.ts",
+      "import": "./src/events/errors/index.js"
+    },
+    "./history": {
+      "types": "./types/history.d.ts",
+      "import": "./src/events/history/index.js"
+    },
+    "./scheduling": {
+      "types": "./types/scheduling.d.ts",
+      "import": "./src/events/scheduling/index.js"
+    },
+    "./security": {
+      "types": "./types/security.d.ts",
+      "import": "./src/events/security/index.js"
+    },
+    "./AdvancedEventDispatcher.js": {
+      "types": "./types/dispatcher.d.ts",
+      "import": "./src/events/AdvancedEventDispatcher.js"
+    },
+    "./EventDispatcher.js": {
+      "types": "./types/legacy.d.ts",
+      "import": "./src/events/EventDispatcher.js"
+    },
+    "./Event.js": {
+      "types": "./types/event.d.ts",
+      "import": "./src/events/Event.js"
+    },
+    "./EventName.js": {
+      "types": "./types/event-name.d.ts",
+      "import": "./src/events/EventName.js"
+    },
+    "./EventRegistry.js": {
+      "types": "./types/event-registry.d.ts",
+      "import": "./src/events/EventRegistry.js"
+    },
+    "./EventMetrics.js": {
+      "types": "./types/event-metrics.d.ts",
+      "import": "./src/events/EventMetrics.js"
+    },
+    "./RedisEventBridge.js": {
+      "types": "./types/redis-event-bridge.d.ts",
+      "import": "./src/events/RedisEventBridge.js"
+    },
+    "./Broadcastable.js": {
+      "types": "./types/broadcastable.d.ts",
+      "import": "./src/events/Broadcastable.js"
+    },
+    "./ProtocolEvent.js": {
+      "types": "./types/protocol-event.d.ts",
+      "import": "./src/events/ProtocolEvent.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "config",
+    "docs",
+    "src/events",
+    "types",
+    "index.js",
+    "README.md",
+    "ARCHITECTURE.md",
+    "COMPATIBILITY.md",
+    "UPGRADE.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "MANIFEST.json",
+    "src/foundation/providers/EventServiceProvider.js",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "check": "node tools/check-source.js && node tools/check-zero-deps.js && node tools/check-exports.js && node tools/check-compatibility.js",
+    "check:types": "node tools/check-types.js",
+    "test": "node tools/run-tests.js",
+    "test:contract": "node --test tests/contract/*.test.js tests/events/compatibility.test.js tests/events/once-replay.test.js",
+    "test:events": "node --test tests/events/*.test.js",
+    "test:consumer": "node tools/check-package-consumer.js",
+    "bench": "node benchmarks/run.mjs --json",
+    "doctor": "node bin/rawnode-events.js doctor --json",
+    "manifest": "node tools/build-manifest.js",
+    "prepack": "npm run manifest && npm run check && npm run test && npm run check:types",
+    "check:consumer": "node tools/check-package-consumer.js",
+    "test:enterprise": "node --test tests/events/*.test.js"
+  },
+  "dependencies": {},
+  "optionalDependencies": {},
+  "peerDependencies": {}
+}

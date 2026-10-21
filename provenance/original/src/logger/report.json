@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "timestamp": "2025-11-21T11:06:27.030Z",
+  "aborted": false,
+  "roots": [
+    "/Users/ericsonweah/Sites/projects/javascript/node/core/rawnodemvc-documentation/src/core/modules/www.rawnode.org/src/core/modules/rawnode-logger"
+  ],
+  "dryRun": false,
+  "workerCount": 1,
+  "workerConcurrency": null,
+  "includeExts": [
+    ".js"
+  ],
+  "excludeNames": [
+    "node_modules",
+    ".git"
+  ],
+  "elapsedSeconds": 1.51,
+  "totalFilesConverted": 33,
+  "totalErrors": 0,
+  "perWorkerStats": [
+    {
+      "workerId": 1,
+      "dirsProcessed": 1,
+      "filesConverted": 33,
+      "activeMs": 1393.238019,
+      "totalMs": 0,
+      "batchSize": 24,
+      "avgMsPerBatch": 69.49,
+      "throughput": 337.9,
+      "queueRemaining": 425,
+      "respawns": 0
+    }
+  ],
+  "perRoot": [
+    {
+      "dir": "/Users/ericsonweah/Sites/projects/javascript/node/core/rawnodemvc-documentation/src/core/modules/www.rawnode.org/src/core/modules/rawnode-logger",
+      "converted": 33,
+      "durationMs": 1393.238019,
+      "errors": 0
+    }
+  ],
+  "summary": {
+    "avgBatchSize": 24,
+    "avgMsPerBatch": 69.49,
+    "avgThroughput": 337.9,
+    "totalActiveMs": 1393.238019,
+    "efficiency": 23.69,
+    "efficiencyLabel": "🐢 Low"
+  }
+}

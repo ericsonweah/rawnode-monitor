@@ -1,0 +1,43 @@
+{
+  "author": "PM sibling lane",
+  "source_workspace": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3",
+  "evidence_read_and_preserved_by": "Monitor lane",
+  "pm_sha256": "340b2fa87b9ba4a1f18631f75af1c9d056f0e1b1df590f012a8eb6eb435aed33",
+  "monitor_sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad",
+  "tests": 5,
+  "passed": 5,
+  "real_child_ipc": true,
+  "strict_paired_types": true,
+  "files": [
+    {
+      "path": "composition-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "composition.test.mjs",
+      "bytes": 3339,
+      "sha256": "17625fc17eb2a9617854b4347c0dba009ad695a832f0100636bf73de9afcc8a6"
+    },
+    {
+      "path": "composition.txt",
+      "bytes": 532,
+      "sha256": "3db962d1d0cf1aea8fff635ef884f32da1dce485c57dc4c7ef7a3a45a095220c"
+    },
+    {
+      "path": "consumer.ts",
+      "bytes": 609,
+      "sha256": "f82c7b4e03f0dd87047df8870df344f205069fe5931a77306b87b811ab21355b"
+    },
+    {
+      "path": "package.json",
+      "bytes": 33,
+      "sha256": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035"
+    },
+    {
+      "path": "worker.mjs",
+      "bytes": 955,
+      "sha256": "2c4539f23ec1351997f8b0709065bd03f7c60e272a1d987425c1635c60a6841f"
+    }
+  ]
+}

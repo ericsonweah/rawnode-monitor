@@ -1,0 +1,166 @@
+{
+  "name": "rawnode-logger",
+  "version": "1.1.0",
+  "description": "Zero-dependency, structured, context-aware, enterprise logging for RawNode and modern Node.js",
+  "keywords": [
+    "rawnode",
+    "logger",
+    "structured-logging",
+    "zero-dependency",
+    "observability",
+    "audit",
+    "enterprise"
+  ],
+  "homepage": "https://github.com/rawnode/rawnode-logger#readme",
+  "bugs": {
+    "url": "https://github.com/rawnode/rawnode-logger/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rawnode/rawnode-logger.git"
+  },
+  "license": "ISC",
+  "author": "RawNode",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./types/index.d.ts",
+  "sideEffects": [
+    "./logger.js",
+    "./src/logger.js",
+    "./src/submodules/default-logger/index.js"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bin": {
+    "rawnode-logger": "./bin/index.js",
+    "rnlog": "./bin/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./index.js"
+    },
+    "./enterprise": {
+      "types": "./types/index.d.ts",
+      "import": "./src/enterprise/index.js"
+    },
+    "./public": {
+      "types": "./types/public.d.ts",
+      "import": "./src/enterprise/public/index.js"
+    },
+    "./core": {
+      "types": "./types/core.d.ts",
+      "import": "./src/enterprise/core/index.js"
+    },
+    "./transports": {
+      "types": "./types/transports.d.ts",
+      "import": "./src/enterprise/transports/index.js"
+    },
+    "./serialization": {
+      "types": "./types/serialization.d.ts",
+      "import": "./src/enterprise/serialization/index.js"
+    },
+    "./formatters": {
+      "types": "./types/serialization.d.ts",
+      "import": "./src/enterprise/serialization/index.js"
+    },
+    "./security": {
+      "types": "./types/security.d.ts",
+      "import": "./src/enterprise/security/index.js"
+    },
+    "./observability": {
+      "types": "./types/observability.d.ts",
+      "import": "./src/enterprise/observability/index.js"
+    },
+    "./channels": {
+      "types": "./types/channels.d.ts",
+      "import": "./src/enterprise/channels/index.js"
+    },
+    "./processing": {
+      "types": "./types/processing.d.ts",
+      "import": "./src/enterprise/processing/index.js"
+    },
+    "./plugins": {
+      "types": "./types/processing.d.ts",
+      "import": "./src/enterprise/plugins/index.js"
+    },
+    "./context": {
+      "types": "./types/context.d.ts",
+      "import": "./src/enterprise/context/index.js"
+    },
+    "./records": {
+      "types": "./types/records.d.ts",
+      "import": "./src/enterprise/records/index.js"
+    },
+    "./testing": {
+      "types": "./types/testing.d.ts",
+      "import": "./src/enterprise/testing/index.js"
+    },
+    "./integrations": {
+      "types": "./types/integrations.d.ts",
+      "import": "./src/enterprise/integrations/index.js"
+    },
+    "./inspector": {
+      "types": "./types/inspector.d.ts",
+      "import": "./src/enterprise/inspector/index.js"
+    },
+    "./console": {
+      "types": "./types/console.d.ts",
+      "import": "./src/enterprise/console/index.js"
+    },
+    "./config": {
+      "types": "./types/config.d.ts",
+      "import": "./config/logger.js"
+    },
+    "./colors": {
+      "types": "./types/colors.d.ts",
+      "import": "./src/submodules/colors/index.js"
+    },
+    "./legacy": {
+      "types": "./types/legacy.d.ts",
+      "import": "./src/compatibility/v1/index.js"
+    },
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "files": [
+    "bin",
+    "config",
+    "src",
+    "types",
+    "docs",
+    "benchmarks",
+    "tools",
+    "index.js",
+    "logger.js",
+    "README.md",
+    "CHANGELOG.md",
+    "UPGRADE.md",
+    "COMPATIBILITY.md",
+    "IMPLEMENTATION_GUIDE.md",
+    "LICENSE",
+    "MANIFEST.json"
+  ],
+  "scripts": {
+    "test": "node tools/run-tests.js",
+    "test:contract": "node --test tests/contract",
+    "test:unit": "node --test tests/unit tests/security",
+    "test:integration": "node --test tests/integration",
+    "check": "node tools/check-source.js && node tools/check-exports.js",
+    "check:types": "node tools/check-types.js",
+    "doctor": "node ./bin/index.js doctor --json",
+    "bench": "node ./bin/index.js bench --json",
+    "bench:core": "node benchmarks/enterprise/runner.js",
+    "ci:zero-deps": "node tools/check-zero-deps.js",
+    "prepack": "npm run check && npm run test && npm run check:types && npm run ci:zero-deps",
+    "manifest": "node tools/build-manifest.js",
+    "test:security": "node --test tests/security",
+    "test:types": "node tools/check-types.js",
+    "validate": "npm run check && npm run test && npm run check:types && npm run ci:zero-deps && npm run check:package && npm run doctor",
+    "check:package": "node tools/check-package-consumer.js"
+  },
+  "dependencies": {},
+  "optionalDependencies": {},
+  "peerDependencies": {}
+}

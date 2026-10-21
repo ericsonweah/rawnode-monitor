@@ -1,0 +1,3173 @@
+
+
+================================================
+FILE PATH: ./config/normalizeUnifiedOptions.js
+================================================
+
+
+'use strict';
+
+import { UnifiedConfigurationError } from '../errors/UnifiedError.js';
+
+const TRUE = new Set(['1', 'true', 'yes', 'on', 'enabled']);
+const FALSE = new Set(['0', 'false', 'no', 'off', 'disabled']);
+const PROFILES = new Set(['compat', 'ultra', 'enterprise', 'production', 'safe', 'strict']);
+
+const PROTOCOL_PROFILE_MAP = Object.freeze({
+  compat: Object.freeze({ http: 'compat', websocket: 'compat', tcp: 'compat', udp: 'compat' }),
+  ultra: Object.freeze({ http: 'ultra', websocket: 'compat', tcp: 'compat', udp: 'compat' }),
+  enterprise: Object.freeze({ http: 'enterprise', websocket: 'production', tcp: 'enterprise', udp: 'production' }),
+  production: Object.freeze({ http: 'enterprise', websocket: 'production', tcp: 'enterprise', udp: 'production' }),
+  safe: Object.freeze({ http: 'safe', websocket: 'production', tcp: 'enterprise', udp: 'production' }),
+  strict: Object.freeze({ http: 'strict', websocket: 'strict', tcp: 'enterprise', udp: 'strict' }),
+});
+
+function isPlainObject(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === Object.prototype || prototype === null;
+}
+function object(value) { return isPlainObject(value) ? value : {}; }
+function bool(value, fallback) {
+  if (value === true || value === false) return value;
+  if (value == null || value === '') return fallback;
+  const normalized = String(value).trim().toLowerCase();
+  if (TRUE.has(normalized)) return true;
+  if (FALSE.has(normalized)) return false;
+  return fallback;
+}
+function integer(value, fallback, min = 0, max = Number.MAX_SAFE_INTEGER) {
+  const number = Number(value);
+  return Number.isSafeInteger(number) && number >= min && number <= max ? number : fallback;
+}
+function string(value, fallback) {
+  if (value == null) return fallback;
+  const normalized = String(value).trim();
+  return normalized || fallback;
+}
+function normalizeProfile(value, fallback = 'compat') {
+  const normalized = string(value, fallback).toLowerCase();
+  if (!PROFILES.has(normalized)) {
+    throw new UnifiedConfigurationError(`Unsupported RawNode Unified profile '${normalized}'.`, {
+      code: 'UNIFIED_PROFILE_INVALID',
+      details: { profile: normalized, supported: Array.from(PROFILES) },
+    });
+  }
+  return normalized;
+}
+function merge(base, overlay) {
+  const source = object(base);
+  const output = { ...source };
+  for (const [key, value] of Object.entries(object(overlay))) {
+    if (isPlainObject(value) && isPlainObject(source[key])) output[key] = merge(source[key], value);
+    else output[key] = value;
+  }
+  return output;
+}
+
+export const UNIFIED_DEFAULTS = Object.freeze({
+  profile: 'compat',
+  host: '127.0.0.1',
+  port: 3000,
+  backlog: 511,
+  protocols: Object.freeze({ http: true, websocket: true, tcp: true, udp: true }),
+  startup: Object.freeze({ atomic: true, maxPortAttempts: 10, ephemeralPortRetries: 10, optionalProtocols: Object.freeze([]), rollbackTimeoutMs: 2_000 }),
+  shutdown: Object.freeze({ timeoutMs: 15_000, forceCloseTimeoutMs: 2_000, force: true, closeExternal: false }),
+  classification: Object.freeze({ maxBytes: 64, timeoutMs: 300, ambiguous: 'tcp' }),
+  tls: Object.freeze({ enabled: false, options: null, alpnProtocols: Object.freeze(['http/1.1', 'rawnode-tcp/1']), unknownAlpn: 'reject' }),
+  http2: Object.freeze({ enabled: false, server: null }),
+  proxyProtocol: Object.freeze({ enabled: false, required: false, trusted: false }),
+  stun: Object.freeze({ enabled: false }),
+  observability: Object.freeze({ enabled: true, prefix: 'rawnode_unified', historyLimit: 256 }),
+});
+
+function normalizeProtocols(input) {
+  const source = object(input);
+  const protocols = {
+    http: bool(source.http, true),
+    websocket: bool(source.websocket ?? source.ws, true),
+    tcp: bool(source.tcp, true),
+    udp: bool(source.udp, true),
+  };
+  if (protocols.websocket && !protocols.http) {
+    throw new UnifiedConfigurationError('WebSocket requires the HTTP upgrade pipeline. Enable protocols.http or disable protocols.websocket.', {
+      code: 'UNIFIED_WEBSOCKET_REQUIRES_HTTP',
+    });
+  }
+  if (!Object.values(protocols).some(Boolean)) {
+    throw new UnifiedConfigurationError('At least one protocol must be enabled.', { code: 'UNIFIED_NO_PROTOCOLS_ENABLED' });
+  }
+  return Object.freeze(protocols);
+}
+
+export function resolveUnifiedProtocolProfiles(profile = UNIFIED_DEFAULTS.profile, overrides = {}) {
+  const normalized = normalizeProfile(profile, UNIFIED_DEFAULTS.profile);
+  const preset = PROTOCOL_PROFILE_MAP[normalized] || PROTOCOL_PROFILE_MAP.compat;
+  const source = object(overrides);
+  return Object.freeze({
+    http: string(source.http, preset.http),
+    websocket: string(source.websocket ?? source.ws, preset.websocket),
+    tcp: string(source.tcp, preset.tcp),
+    udp: string(source.udp, preset.udp),
+  });
+}
+
+function normalizeTls(input) {
+  if (input === true) return { ...UNIFIED_DEFAULTS.tls, enabled: true };
+  if (input === false || input == null) return { ...UNIFIED_DEFAULTS.tls };
+  const source = object(input);
+  const options = object(source.options);
+  const direct = { ...source };
+  for (const key of ['enabled', 'options', 'alpnProtocols', 'unknownAlpn']) delete direct[key];
+  const tlsOptions = { ...direct, ...options };
+  return {
+    enabled: bool(source.enabled, Object.keys(tlsOptions).length > 0),
+    options: Object.keys(tlsOptions).length ? tlsOptions : null,
+    alpnProtocols: Array.isArray(source.alpnProtocols || source.ALPNProtocols)
+      ? [...(source.alpnProtocols || source.ALPNProtocols)]
+      : [...UNIFIED_DEFAULTS.tls.alpnProtocols],
+    unknownAlpn: string(source.unknownAlpn, 'reject'),
+  };
+}
+
+export function normalizeUnifiedFactoryOptions(input = {}) {
+  const source = object(input);
+  const profile = normalizeProfile(source.profile, UNIFIED_DEFAULTS.profile);
+  const enterprise = ['enterprise', 'production', 'safe', 'strict'].includes(profile);
+  return Object.freeze({
+    ...source,
+    profile,
+    protocolProfiles: resolveUnifiedProtocolProfiles(profile, {
+      ...object(source.protocolProfiles),
+      http: source.http?.profile ?? source.protocolProfiles?.http,
+      websocket: source.websocket?.profile ?? source.ws?.profile ?? source.protocolProfiles?.websocket ?? source.protocolProfiles?.ws,
+      tcp: source.tcp?.profile ?? source.protocolProfiles?.tcp,
+      udp: source.udp?.profile ?? source.protocolProfiles?.udp,
+    }),
+    http: object(source.http),
+    websocket: object(source.websocket ?? source.ws),
+    tcp: object(source.tcp),
+    udp: object(source.udp),
+    lifecycle: object(source.lifecycle),
+    ownership: Object.freeze({
+      http: source.httpApp == null,
+      websocket: source.wsApp == null && source.websocketApp == null,
+      tcp: source.tcpApp == null,
+      udp: source.udpApp == null,
+    }),
+    closeExternal: bool(source.closeExternal, false),
+    plugins: Object.freeze(Array.isArray(source.plugins) ? [...source.plugins] : []),
+    classification: Object.freeze({
+      maxBytes: integer(source.classification?.maxBytes, 64, 8, 65_536),
+      timeoutMs: integer(source.classification?.timeoutMs, 300, 0, 60_000),
+      ambiguous: string(source.classification?.ambiguous, enterprise ? 'reject' : 'tcp'),
+      rawPrefaces: source.classification?.rawPrefaces,
+      detectors: Array.isArray(source.classification?.detectors) ? [...source.classification.detectors] : [],
+    }),
+    observability: Object.freeze(merge(UNIFIED_DEFAULTS.observability, source.observability)),
+  });
+}
+
+export function normalizeUnifiedStartOptions(factory = {}, input = {}) {
+  const source = merge(factory, input);
+  const listen = merge(factory.listen, source.listen);
+  const lifecycle = merge(factory.lifecycle, source.lifecycle);
+  const profile = normalizeProfile(source.profile ?? factory.profile, UNIFIED_DEFAULTS.profile);
+  const enterprise = ['enterprise', 'production', 'safe', 'strict'].includes(profile);
+  const proxyInput = source.proxyProtocol ?? factory.proxyProtocol ?? false;
+  const proxy = proxyInput === true
+    ? { enabled: true, required: false, trusted: false }
+    : proxyInput === false
+      ? { ...UNIFIED_DEFAULTS.proxyProtocol }
+      : merge(UNIFIED_DEFAULTS.proxyProtocol, proxyInput);
+  const tls = normalizeTls(source.tls ?? factory.tls);
+  const classification = merge({
+    ...UNIFIED_DEFAULTS.classification,
+    ambiguous: enterprise ? 'reject' : 'tcp',
+  }, merge(factory.classification, source.classification));
+  if (!['reject', 'tcp', 'http'].includes(classification.ambiguous)) {
+    throw new UnifiedConfigurationError(`Unsupported ambiguity policy '${classification.ambiguous}'.`, {
+      code: 'UNIFIED_CLASSIFICATION_POLICY_INVALID',
+    });
+  }
+  const protocols = normalizeProtocols(source.protocols ?? factory.protocols ?? UNIFIED_DEFAULTS.protocols);
+  const protocolProfiles = resolveUnifiedProtocolProfiles(profile, {
+    ...object(factory.protocolProfiles),
+    ...object(source.protocolProfiles),
+    http: source.http?.profile ?? source.protocolProfiles?.http ?? factory.http?.profile ?? factory.protocolProfiles?.http,
+    websocket: source.websocket?.profile ?? source.ws?.profile ?? source.protocolProfiles?.websocket ?? source.protocolProfiles?.ws
+      ?? factory.websocket?.profile ?? factory.protocolProfiles?.websocket ?? factory.protocolProfiles?.ws,
+    tcp: source.tcp?.profile ?? source.protocolProfiles?.tcp ?? factory.tcp?.profile ?? factory.protocolProfiles?.tcp,
+    udp: source.udp?.profile ?? source.protocolProfiles?.udp ?? factory.udp?.profile ?? factory.protocolProfiles?.udp,
+  });
+  const atomic = bool(source.startup?.atomic, true);
+  if (!atomic) {
+    throw new UnifiedConfigurationError('RawNode Unified requires atomic startup; startup.atomic cannot be disabled.', {
+      code: 'UNIFIED_ATOMIC_STARTUP_REQUIRED',
+    });
+  }
+  return Object.freeze({
+    profile,
+    host: string(source.host ?? listen.host, UNIFIED_DEFAULTS.host),
+    port: integer(source.port ?? listen.port, UNIFIED_DEFAULTS.port, 0, 65_535),
+    backlog: integer(source.backlog ?? listen.backlog, UNIFIED_DEFAULTS.backlog, 1, 65_535),
+    ipv6Only: bool(source.ipv6Only ?? listen.ipv6Only, false),
+    reusePort: bool(source.reusePort ?? listen.reusePort, false),
+    reuseAddr: bool(source.reuseAddr ?? listen.reuseAddr, true),
+    protocols,
+    protocolProfiles,
+    startup: Object.freeze({
+      atomic,
+      maxPortAttempts: integer(
+        source.startup?.maxPortAttempts ?? source.startup?.ephemeralPortRetries,
+        UNIFIED_DEFAULTS.startup.maxPortAttempts,
+        1,
+        128,
+      ),
+      ephemeralPortRetries: integer(
+        source.startup?.ephemeralPortRetries ?? source.startup?.maxPortAttempts,
+        UNIFIED_DEFAULTS.startup.ephemeralPortRetries,
+        1,
+        128,
+      ),
+      optionalProtocols: Object.freeze(Array.from(new Set(
+        (Array.isArray(source.startup?.optionalProtocols) ? source.startup.optionalProtocols : [])
+          .map((name) => String(name).toLowerCase())
+          .filter((name) => ['http', 'websocket', 'tcp', 'udp'].includes(name)),
+      ))),
+      rollbackTimeoutMs: integer(source.startup?.rollbackTimeoutMs, UNIFIED_DEFAULTS.startup.rollbackTimeoutMs, 1, 120_000),
+    }),
+    shutdown: Object.freeze({
+      timeoutMs: integer(
+        source.shutdown?.timeoutMs ?? lifecycle.shutdownTimeoutMs ?? source.timeoutMs,
+        UNIFIED_DEFAULTS.shutdown.timeoutMs,
+        1,
+        600_000,
+      ),
+      forceCloseTimeoutMs: integer(
+        source.shutdown?.forceCloseTimeoutMs ?? lifecycle.forceCloseTimeoutMs,
+        UNIFIED_DEFAULTS.shutdown.forceCloseTimeoutMs,
+        0,
+        120_000,
+      ),
+      force: bool(source.shutdown?.force ?? lifecycle.force, true),
+      closeExternal: bool(
+        source.shutdown?.closeExternal ?? lifecycle.closeExternal ?? source.closeExternal,
+        factory.closeExternal ?? false,
+      ),
+    }),
+    classification: Object.freeze({
+      maxBytes: integer(classification.maxBytes, 64, 8, 65_536),
+      timeoutMs: integer(classification.timeoutMs, 300, 0, 60_000),
+      ambiguous: classification.ambiguous,
+      rawPrefaces: classification.rawPrefaces,
+      detectors: Array.isArray(classification.detectors) ? [...classification.detectors] : [],
+    }),
+    proxyProtocol: Object.freeze({
+      enabled: bool(proxy.enabled, proxyInput !== false),
+      required: bool(proxy.required, false),
+      trusted: proxy.trusted ?? proxy.trustedProxies ?? false,
+      maxHeaderBytes: integer(proxy.maxHeaderBytes, 536, 16, 65_536),
+    }),
+    tls: Object.freeze(tls),
+    http2: Object.freeze(merge(UNIFIED_DEFAULTS.http2, source.http2 ?? factory.http2)),
+    stun: Object.freeze(merge(UNIFIED_DEFAULTS.stun, source.stun ?? factory.stun)),
+    http: Object.freeze(merge(factory.http, source.http)),
+    websocket: Object.freeze(merge(factory.websocket, source.websocket ?? source.ws)),
+    tcp: Object.freeze(merge(factory.tcp, source.tcp)),
+    udp: Object.freeze(merge(factory.udp, source.udp)),
+    observability: Object.freeze(merge(factory.observability, source.observability)),
+  });
+}
+
+export function parseListenArguments(args = []) {
+  const values = [...args];
+  const callback = typeof values.at(-1) === 'function' ? values.pop() : null;
+  if (values[0] && typeof values[0] === 'object' && !Array.isArray(values[0])) {
+    return { options: { ...values[0] }, callback };
+  }
+  const options = {};
+  if (values[0] != null) options.port = values[0];
+  if (typeof values[1] === 'string') options.host = values[1];
+  else if (typeof values[1] === 'number') options.backlog = values[1];
+  if (typeof values[2] === 'number') options.backlog = values[2];
+  return { options, callback };
+}
+
+export default normalizeUnifiedStartOptions;
+
+================================================
+FILE PATH: ./lifecycle/UnifiedState.js
+================================================
+
+'use strict';
+
+import { UnifiedStateError } from '../errors/UnifiedError.js';
+
+export const UNIFIED_STATE = Object.freeze({
+  IDLE: 'idle',
+  STARTING: 'starting',
+  LISTENING: 'listening',
+  DRAINING: 'draining',
+  CLOSING: 'closing',
+  CLOSED: 'closed',
+  FAILED: 'failed',
+});
+
+const TRANSITIONS = Object.freeze({
+  [UNIFIED_STATE.IDLE]: new Set([UNIFIED_STATE.STARTING, UNIFIED_STATE.CLOSING, UNIFIED_STATE.CLOSED]),
+  [UNIFIED_STATE.STARTING]: new Set([UNIFIED_STATE.LISTENING, UNIFIED_STATE.FAILED, UNIFIED_STATE.CLOSING]),
+  [UNIFIED_STATE.LISTENING]: new Set([UNIFIED_STATE.DRAINING, UNIFIED_STATE.CLOSING, UNIFIED_STATE.FAILED]),
+  [UNIFIED_STATE.DRAINING]: new Set([UNIFIED_STATE.CLOSING, UNIFIED_STATE.CLOSED, UNIFIED_STATE.FAILED]),
+  [UNIFIED_STATE.CLOSING]: new Set([UNIFIED_STATE.CLOSED, UNIFIED_STATE.FAILED]),
+  [UNIFIED_STATE.FAILED]: new Set([UNIFIED_STATE.STARTING, UNIFIED_STATE.CLOSING, UNIFIED_STATE.CLOSED]),
+  [UNIFIED_STATE.CLOSED]: new Set(),
+});
+
+export class UnifiedStateMachine {
+  constructor(initial = UNIFIED_STATE.IDLE, onTransition = null) {
+    this.value = initial;
+    this.sequence = 0;
+    this.changedAt = Date.now();
+    this.onTransition = typeof onTransition === 'function' ? onTransition : null;
+  }
+
+  can(next) {
+    return next === this.value || TRANSITIONS[this.value]?.has(next) === true;
+  }
+
+  transition(next, details = null) {
+    if (next === this.value) return this.snapshot();
+    if (!this.can(next)) {
+      throw new UnifiedStateError(`Invalid RawNode Unified lifecycle transition: ${this.value} -> ${next}`, {
+        code: 'UNIFIED_INVALID_TRANSITION',
+        details: { current: this.value, next },
+      });
+    }
+    const previous = this.value;
+    this.value = next;
+    this.sequence++;
+    this.changedAt = Date.now();
+    const event = Object.freeze({ previous, current: next, sequence: this.sequence, changedAt: this.changedAt, details });
+    this.onTransition?.(event);
+    return event;
+  }
+
+  snapshot() {
+    return Object.freeze({ state: this.value, sequence: this.sequence, changedAt: this.changedAt });
+  }
+}
+
+export default UNIFIED_STATE;
+
+
+================================================
+FILE PATH: ./index.js
+================================================
+
+'use strict';
+
+import rawnodeHttp from '#http-server';
+import { createUnifiedApplication } from './createUnifiedApplication.js';
+
+export default function Unified(options = {}) {
+  return createUnifiedApplication(options);
+}
+
+for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(rawnodeHttp))) {
+  if (['name', 'length', 'prototype', 'caller', 'arguments'].includes(name)) continue;
+  try { Object.defineProperty(Unified, name, descriptor); } catch {}
+}
+
+Unified.createApp = createUnifiedApplication;
+Unified.createUnifiedApplication = createUnifiedApplication;
+
+export { createUnifiedApplication } from './createUnifiedApplication.js';
+export { UnifiedServer } from './UnifiedServer.js';
+export { UNIFIED_STATE, UnifiedStateMachine } from './lifecycle/UnifiedState.js';
+export { UnifiedMetrics } from './observability/UnifiedMetrics.js';
+export { UnifiedDiagnostics, redactUnifiedDiagnostics } from './observability/UnifiedDiagnostics.js';
+export {
+  UnifiedError,
+  UnifiedConfigurationError,
+  UnifiedStateError,
+  UnifiedStartupError,
+  UnifiedShutdownError,
+} from './errors/UnifiedError.js';
+export {
+  UNIFIED_DEFAULTS,
+  normalizeUnifiedFactoryOptions,
+  normalizeUnifiedStartOptions,
+  resolveUnifiedProtocolProfiles,
+  parseListenArguments,
+} from './config/normalizeUnifiedOptions.js';
+
+export * from '#http-server';
+
+
+================================================
+FILE PATH: ./observability/UnifiedMetrics.js
+================================================
+
+'use strict';
+
+import { monitorEventLoopDelay } from 'node:perf_hooks';
+
+function metricName(value) { return String(value || '').replace(/[^a-zA-Z0-9_:]/g, '_'); }
+function finite(value) { const number = Number(value); return Number.isFinite(number) ? number : 0; }
+function milliseconds(value) { return Number.isFinite(value) ? value / 1e6 : 0; }
+
+export class UnifiedMetrics {
+  constructor(options = {}) {
+    this.enabled = options.enabled !== false;
+    this.prefix = metricName(options.prefix || 'rawnode_unified');
+    this.createdAt = Date.now();
+    this.counters = new Map();
+    this.gauges = new Map();
+    this.histograms = new Map();
+    this._eventLoopFinal = null;
+    this._eventLoop = null;
+    if (this.enabled && options.eventLoopMonitoring !== false) {
+      try {
+        this._eventLoop = monitorEventLoopDelay({
+          resolution: Math.max(1, Math.trunc(Number(options.eventLoopResolutionMs) || 20)),
+        });
+        this._eventLoop.enable();
+      } catch {
+        this._eventLoop = null;
+      }
+    }
+  }
+
+  inc(name, value = 1) {
+    if (!this.enabled) return 0;
+    const key = metricName(name);
+    const next = finite(this.counters.get(key)) + finite(value);
+    this.counters.set(key, next);
+    return next;
+  }
+
+  set(name, value) {
+    if (!this.enabled) return 0;
+    const key = metricName(name);
+    const next = finite(value);
+    this.gauges.set(key, next);
+    return next;
+  }
+
+  observe(name, value) {
+    if (!this.enabled) return null;
+    const key = metricName(name);
+    const number = finite(value);
+    const current = this.histograms.get(key) || { count: 0, sum: 0, min: Number.POSITIVE_INFINITY, max: Number.NEGATIVE_INFINITY };
+    current.count++;
+    current.sum += number;
+    current.min = Math.min(current.min, number);
+    current.max = Math.max(current.max, number);
+    this.histograms.set(key, current);
+    return current;
+  }
+
+  eventLoopSnapshot() {
+    if (this._eventLoopFinal) return { ...this._eventLoopFinal };
+    const loop = this._eventLoop;
+    if (!loop) return null;
+    return {
+      minMs: milliseconds(loop.min),
+      maxMs: milliseconds(loop.max),
+      meanMs: milliseconds(loop.mean),
+      stddevMs: milliseconds(loop.stddev),
+      p50Ms: milliseconds(loop.percentile(50)),
+      p95Ms: milliseconds(loop.percentile(95)),
+      p99Ms: milliseconds(loop.percentile(99)),
+    };
+  }
+
+  snapshot(extra = null) {
+    const histograms = {};
+    for (const [name, value] of this.histograms) {
+      histograms[name] = {
+        count: value.count,
+        sum: value.sum,
+        min: value.count ? value.min : 0,
+        max: value.count ? value.max : 0,
+        average: value.count ? value.sum / value.count : 0,
+      };
+    }
+    return {
+      enabled: this.enabled,
+      prefix: this.prefix,
+      uptimeMs: Date.now() - this.createdAt,
+      counters: Object.fromEntries(this.counters),
+      gauges: Object.fromEntries(this.gauges),
+      histograms,
+      eventLoopDelay: this.eventLoopSnapshot(),
+      ...(extra && typeof extra === 'object' ? extra : {}),
+    };
+  }
+
+  prometheus(extra = null) {
+    if (!this.enabled) return '';
+    const lines = [];
+    for (const [name, value] of this.counters) {
+      const full = `${this.prefix}_${name}`;
+      lines.push(`# TYPE ${full} counter`, `${full} ${finite(value)}`);
+    }
+    for (const [name, value] of this.gauges) {
+      const full = `${this.prefix}_${name}`;
+      lines.push(`# TYPE ${full} gauge`, `${full} ${finite(value)}`);
+    }
+    for (const [name, value] of this.histograms) {
+      const full = `${this.prefix}_${name}`;
+      lines.push(`# TYPE ${full} summary`, `${full}_count ${value.count}`, `${full}_sum ${value.sum}`);
+    }
+    const eventLoop = this.eventLoopSnapshot();
+    if (eventLoop) {
+      for (const [name, value] of Object.entries(eventLoop)) {
+        const full = `${this.prefix}_event_loop_delay_${metricName(name.replace(/Ms$/, ''))}_ms`;
+        lines.push(`# TYPE ${full} gauge`, `${full} ${finite(value)}`);
+      }
+    }
+    if (extra && typeof extra === 'object') {
+      for (const [name, value] of Object.entries(extra)) {
+        if (!Number.isFinite(Number(value))) continue;
+        const full = `${this.prefix}_${metricName(name)}`;
+        lines.push(`# TYPE ${full} gauge`, `${full} ${Number(value)}`);
+      }
+    }
+    return `${lines.join('\n')}\n`;
+  }
+
+  close() {
+    if (!this._eventLoop) return this;
+    this._eventLoopFinal = this.eventLoopSnapshot();
+    try { this._eventLoop.disable(); } catch {}
+    this._eventLoop = null;
+    return this;
+  }
+}
+
+export default UnifiedMetrics;
+
+
+================================================
+FILE PATH: ./observability/UnifiedDiagnostics.js
+================================================
+
+'use strict';
+
+import { safeError } from '../errors/UnifiedError.js';
+
+const SECRET = /(secret|password|passwd|token|private.?key|certificate|authorization|cookie|api.?key)/i;
+
+function redact(value, depth = 0, seen = new WeakSet()) {
+  if (depth > 8) return '[depth-limit]';
+  if (value == null || typeof value !== 'object') return value;
+  if (seen.has(value)) return '[circular]';
+  seen.add(value);
+  if (Buffer.isBuffer(value) || value instanceof Uint8Array) return `[bytes:${value.byteLength}]`;
+  if (Array.isArray(value)) return value.map((entry) => redact(entry, depth + 1, seen));
+  const output = {};
+  for (const [key, entry] of Object.entries(value)) {
+    output[key] = SECRET.test(key) ? '[redacted]' : redact(entry, depth + 1, seen);
+  }
+  return output;
+}
+
+export class UnifiedDiagnostics {
+  constructor(options = {}) {
+    this.limit = Math.max(0, Number(options.historyLimit) || 256);
+    this.entries = [];
+    this.sequence = 0;
+    this.lastError = null;
+  }
+
+  record(type, details = null, level = 'info') {
+    const entry = Object.freeze({
+      sequence: ++this.sequence,
+      at: Date.now(),
+      type: String(type || 'event'),
+      level: String(level || 'info'),
+      details: redact(details),
+    });
+    if (level === 'error' && details?.error) this.lastError = safeError(details.error);
+    if (this.limit > 0) {
+      this.entries.push(entry);
+      if (this.entries.length > this.limit) this.entries.splice(0, this.entries.length - this.limit);
+    }
+    return entry;
+  }
+
+  snapshot(extra = null) {
+    return {
+      sequence: this.sequence,
+      lastError: this.lastError,
+      history: this.entries.slice(),
+      ...(extra && typeof extra === 'object' ? redact(extra) : {}),
+    };
+  }
+}
+
+export { redact as redactUnifiedDiagnostics };
+export default UnifiedDiagnostics;
+
+
+================================================
+FILE PATH: ./createUnifiedApplication.js
+================================================
+
+'use strict';
+
+import { randomBytes } from 'node:crypto';
+import rawnodeHttp, { SignalManager } from '#http-server';
+import { SocketIOSkin } from '#ws';
+import { resolveWebSocketOptions } from '#ws/foundation/WebSocketConfiguration.js';
+import { SocketSkin } from '#tcp';
+import { App as UdpApp, normalizeEnterpriseOptions as normalizeUdpEnterpriseOptions } from '#udp';
+import { normalizeUnifiedFactoryOptions, parseListenArguments } from './config/normalizeUnifiedOptions.js';
+import { UnifiedServer } from './UnifiedServer.js';
+import { UnifiedStateError } from './errors/UnifiedError.js';
+
+const kUnified = Symbol.for('rawnode.unified.server');
+const kOriginal = Symbol.for('rawnode.unified.original-http-api');
+
+function define(target, name, value) {
+  Object.defineProperty(target, name, { value, configurable: true, enumerable: true, writable: false });
+}
+
+function captureHttpApi(app) {
+  return Object.freeze({
+    ready: app.ready.bind(app),
+    boot: app.boot?.bind(app),
+    createServer: app.createServer.bind(app),
+    listen: app.listen.bind(app),
+    start: app.start.bind(app),
+    drain: app.drain.bind(app),
+    close: app.close.bind(app),
+    health: app.health.bind(app),
+    metrics: app.metrics.bind(app),
+    diagnostics: app.diagnostics.bind(app),
+    manageSignals: app.manageSignals.bind(app),
+  });
+}
+
+function ownedWebSocketOptions(factory) {
+  return resolveWebSocketOptions({
+    profile: factory.protocolProfiles.websocket,
+    ...factory.websocket,
+  });
+}
+
+function ownedUdpOptions(factory) {
+  const options = {
+    profile: factory.protocolProfiles.udp,
+    startPaused: true,
+    reuseAddr: factory.listen?.reuseAddr ?? factory.reuseAddr ?? factory.udp?.reuseAddr,
+    ...factory.udp,
+  };
+  if (factory.protocolProfiles.udp === 'compat') return options;
+  const handshake = { ...(options.handshake || {}) };
+  if (!handshake.secret) handshake.secret = randomBytes(32).toString('base64url');
+  if (!handshake.mode) handshake.mode = 'required';
+  return normalizeUdpEnterpriseOptions({ ...options, handshake });
+}
+
+function claimStartupApi(manager, current, next) {
+  if (current.value && current.value !== next && !['idle', 'failed'].includes(manager.state)) {
+    throw new UnifiedStateError(`start() and listen() are alternative startup APIs. This application already started through ${current.value}().`, {
+      code: 'UNIFIED_STARTUP_API_CONFLICT',
+      details: { active: current.value, attempted: next },
+    });
+  }
+  current.value ||= next;
+}
+
+export function createUnifiedApplication(options = {}) {
+  const factory = normalizeUnifiedFactoryOptions(options);
+  const app = options.httpApp || rawnodeHttp({ profile: factory.protocolProfiles.http, ...factory.http });
+  const ws = options.wsApp || options.websocketApp || new SocketIOSkin(null, ownedWebSocketOptions(factory));
+  const tcp = options.tcpApp || new SocketSkin({ profile: factory.protocolProfiles.tcp, ...factory.tcp });
+  const udp = options.udpApp || new UdpApp(ownedUdpOptions(factory));
+  const original = captureHttpApi(app);
+  const manager = new UnifiedServer(app, { http: app, ws, tcp, udp }, factory, original);
+  const startupApi = { value: null };
+
+  define(app, kOriginal, original);
+  define(app, kUnified, manager);
+  define(app, 'http', app);
+  define(app, 'ws', ws);
+  define(app, 'tcp', tcp);
+  define(app, 'udp', udp);
+  define(app, 'unified', manager);
+
+  app.start = function start(startOptions = {}) {
+    claimStartupApi(manager, startupApi, 'start');
+    return manager.start(startOptions);
+  };
+
+  app.listen = function listen(...args) {
+    claimStartupApi(manager, startupApi, 'listen');
+    const { options: listenOptions, callback } = parseListenArguments(args);
+    const promise = manager.start(listenOptions);
+    promise.then(() => callback?.()).catch((error) => manager.emit('listenError', error));
+    return manager;
+  };
+
+  app.ready = function ready() {
+    const httpReady = original.ready();
+    if (manager.state === 'failed' || manager.state === 'closed') {
+      return manager.ready().then(() => app);
+    }
+    if (!manager._startPromise) return Promise.resolve(httpReady).then(() => app);
+    return Promise.all([httpReady, manager.ready()]).then(() => app);
+  };
+  app.boot = app.ready;
+
+  app.beginDrain = function beginDrain(drainOptions = {}) { manager.beginDrain(drainOptions); return app; };
+  app.waitForIdle = function waitForIdle(timeoutMs = 0) { return manager.waitForIdle(timeoutMs).then(() => app); };
+  app.drain = function drain(drainOptions = {}) {
+    manager.beginDrain(drainOptions);
+    return manager.waitForIdle(drainOptions.timeoutMs || 0).then(() => manager.health());
+  };
+  app.close = function close(closeOptions = {}) { return manager.close(closeOptions); };
+  app.gracefulClose = function gracefulClose(closeOptions = {}) { return manager.gracefulClose(closeOptions); };
+  app.address = function address() { return manager.address(); };
+  app.addresses = function addresses() { return manager.addresses(); };
+  app.health = function health() { return manager.health(); };
+  app.metrics = function metrics(format = 'snapshot') { return manager.metricsOutput(format); };
+  app.metricsText = function metricsText() { return manager.metricsOutput('prometheus'); };
+  app.diagnostics = function diagnostics() { return manager.diagnosticsSnapshot(); };
+  app.snapshot = function snapshot() { return manager.snapshot(); };
+  app.useUnifiedPlugin = function useUnifiedPlugin(plugin) { manager.use(plugin); return app; };
+  app.ref = function ref() { manager.ref(); return app; };
+  app.unref = function unref() { manager.unref(); return app; };
+  app.getUnifiedServer = function getUnifiedServer() { return manager; };
+
+  app.manageSignals = function manageSignals(signalOptions = {}) {
+    const signalManager = signalOptions instanceof SignalManager
+      ? signalOptions
+      : new SignalManager(app, signalOptions);
+    signalManager.install();
+    app._signalManagers?.add?.(signalManager);
+    return signalManager;
+  };
+
+  manager.on('state', (event) => app.emit?.('unified:state', event));
+  manager.on('starting', (event) => app.emit?.('unified:starting', event));
+  manager.on('listening', (event) => app.emit?.('unified:listening', event));
+  manager.on('draining', (event) => app.emit?.('unified:draining', event));
+  manager.on('close', (event) => app.emit?.('unified:close', event));
+  manager.on('unifiedError', (event) => app.emit?.('unified:error', event.error, event));
+
+  return app;
+}
+
+export { kUnified as UNIFIED_SERVER_SYMBOL, kOriginal as ORIGINAL_HTTP_API_SYMBOL };
+export default createUnifiedApplication;
+
+
+================================================
+FILE PATH: ./examples/cookbook/01-minimal-http/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({ profile: 'compat' });
+
+app.get('/', (_req, res) => {
+  res.type('text/plain').send('Hello from RawNode Unified HTTP');
+});
+
+const server = await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: {
+    http: true,
+    websocket: false,
+    tcp: false,
+    udp: false,
+  },
+});
+
+console.log('HTTP address:', server.address());
+
+
+================================================
+FILE PATH: ./examples/cookbook/09-observability-and-drain/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({
+  profile: 'production',
+  observability: {
+    enabled: true,
+    prefix: 'rawnode_unified',
+    historyLimit: 256,
+    eventLoopMonitoring: true,
+    eventLoopResolutionMs: 20,
+  },
+});
+
+app.on('unified:state', (event) => console.log('state:', event));
+app.on('unified:starting', ({ options }) => console.log('starting:', options.host, options.port));
+app.on('unified:listening', (addresses) => console.log('listening:', addresses));
+app.on('unified:draining', (event) => console.log('draining:', event));
+app.on('unified:close', (event) => console.log('closed:', event));
+app.on('unified:error', (error, context) => console.error('unified error:', error, context));
+
+app.get('/health/live', (_req, res) => {
+  const health = app.health();
+  res.status(health.live ? 200 : 503).json({ live: health.live, state: health.state });
+});
+
+app.get('/health/ready', (_req, res) => {
+  const health = app.health();
+  res.status(health.ready ? 200 : 503).json(health);
+});
+
+app.get('/metrics', (_req, res) => {
+  res.type('text/plain; version=0.0.4').send(app.metrics('prometheus'));
+});
+
+app.get('/internal/snapshot', (_req, res) => res.json(app.snapshot()));
+app.tcp.handle('work', async (_socket, payload, ack) => ack?.({ completed: payload }));
+app.udp.on('work', (body, response) => response.reply({ completed: body }));
+
+await app.start({ host: '127.0.0.1', port: Number(process.env.PORT || 3000) });
+
+let shuttingDown = false;
+async function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log(`Received ${signal}; stopping admission and draining.`);
+
+  app.beginDrain({ timeoutMs: 15_000, deadline: Date.now() + 15_000 });
+  try {
+    await app.waitForIdle(15_000);
+    await app.close({ timeoutMs: 15_000, forceCloseTimeoutMs: 2_000, force: true });
+  } catch (error) {
+    console.error('Shutdown failed:', error);
+    process.exitCode = 1;
+  }
+}
+
+process.once('SIGINT', () => void shutdown('SIGINT'));
+process.once('SIGTERM', () => void shutdown('SIGTERM'));
+
+
+================================================
+FILE PATH: ./examples/cookbook/14-foundation-provider/AppProtocolServiceProvider.js
+================================================
+
+'use strict';
+
+// Application-owned protocol registration using UnifiedServerServiceProvider.
+// Keep UNIFIED_AUTO_START=false so all routes/handlers are registered before
+// this provider explicitly starts the endpoint.
+export class AppProtocolServiceProvider {
+  static dependencies = ['app'];
+  static after = ['UnifiedServerServiceProvider'];
+  static priority = 100;
+
+  constructor(app) {
+    this.app = app;
+  }
+
+  register() {}
+
+  async boot() {
+    const unified = this.app.resolve('unified.app');
+
+    unified.get('/', (_req, res) => res.json({ framework: 'RawNode', unified: true }));
+    unified.get('/health/live', this.app.resolve('unified.health.handler'));
+    unified.get('/health/ready', this.app.resolve('unified.ready.handler'));
+    unified.get('/internal/metrics', this.app.resolve('unified.metrics.handler'));
+
+    this.app.resolve('unified.ws').on('connection', (socket) => {
+      socket.on('echo', async (payload, ack) => ack?.({ transport: 'websocket', payload }));
+    });
+
+    this.app.resolve('unified.tcp').handle('echo', async (_socket, payload, ack) => {
+      await ack?.({ transport: 'tcp', payload });
+    });
+
+    this.app.resolve('unified.udp').on('echo', (body, response) => {
+      response.reply({ transport: 'udp', payload: body });
+    });
+
+    const server = await this.app.resolve('unified.start')();
+    this.app.resolve('logger')?.info?.('Unified endpoint ready', server.addresses());
+  }
+}
+
+export default AppProtocolServiceProvider;
+
+
+================================================
+FILE PATH: ./examples/cookbook/14-foundation-provider/inspect-runtime.js
+================================================
+
+'use strict';
+
+// Run this from code that already has the booted RawNode Application instance.
+export function inspectUnified(app) {
+  const unified = app.resolve('unified.app');
+  const manager = app.resolve('unified.manager');
+
+  return {
+    sameHttpObject: unified.http === unified,
+    ws: app.resolve('unified.ws'),
+    tcp: app.resolve('unified.tcp'),
+    udp: app.resolve('unified.udp'),
+    addresses: app.resolve('unified.addresses')(),
+    health: app.resolve('unified.health')(),
+    readiness: app.resolve('unified.readiness')(),
+    liveness: app.resolve('unified.liveness')(),
+    metrics: app.resolve('unified.metrics')(),
+    prometheus: app.resolve('unified.prometheus')(),
+    diagnostics: app.resolve('unified.diagnostics')(),
+    snapshot: manager.snapshot(),
+  };
+}
+
+
+================================================
+FILE PATH: ./examples/cookbook/12-production/server.js
+================================================
+
+'use strict';
+
+import { timingSafeEqual } from 'node:crypto';
+import Unified, {
+  accessLog,
+  compress,
+  cors,
+  hostPolicy,
+  MemoryRateLimitStore,
+  rateLimit,
+  requestLimits,
+  secureHeaders,
+  trustedProxy,
+} from '#unified';
+
+const required = (name) => {
+  const value = process.env[name];
+  if (!value) throw new Error(`${name} is required.`);
+  return value;
+};
+
+const splitCsv = (value, fallback = []) => String(value || '')
+  .split(',')
+  .map((item) => item.trim())
+  .filter(Boolean)
+  .concat(value ? [] : fallback);
+
+const constantTimeEqual = (left, right) => {
+  const a = Buffer.from(String(left || ''));
+  const b = Buffer.from(String(right || ''));
+  return a.length === b.length && timingSafeEqual(a, b);
+};
+
+const appKey = required('APP_KEY');
+const managementToken = required('UNIFIED_MANAGEMENT_TOKEN');
+const allowedHosts = splitCsv(process.env.UNIFIED_ALLOWED_HOSTS, ['api.example.com']);
+const allowedOrigins = splitCsv(process.env.UNIFIED_ALLOWED_ORIGINS, ['https://app.example.com']);
+const trustedProxies = splitCsv(process.env.UNIFIED_TRUSTED_PROXIES);
+
+const app = Unified({
+  profile: 'production',
+  classification: { maxBytes: 64, timeoutMs: 300, ambiguous: 'reject' },
+  http: {
+    server: {
+      timeouts: { handlerTimeout: 10_000 },
+      limits: { maxActiveRequests: 20_000 },
+    },
+  },
+  websocket: {
+    path: '/realtime',
+    allowedOrigins,
+    maxConnections: 50_000,
+    middlewareTimeoutMs: 5_000,
+    upgradeRateLimit: { limit: 100, windowMs: 1_000 },
+    eventSocket: {
+      ackTimeoutMs: 5_000,
+      maxPacketBytes: 256 * 1024,
+      maxBufferBytes: 2 * 1024 * 1024,
+      maxBufferMessages: 2_048,
+      maxInboundPerWindow: 1_000,
+      inboundWindowMs: 1_000,
+    },
+  },
+  tcp: {
+    heartbeat: { enabled: true, intervalMs: 25_000, timeoutMs: 60_000 },
+    protocol: {
+      maxPendingAcks: 10_000,
+      maxRoomsPerSocket: 64,
+      maxEventsPerSecond: 1_000,
+      maxBytesPerSecond: 2 * 1024 * 1024,
+      handlerMode: 'serial',
+      maxConcurrentHandlers: 1,
+      onViolation: 'disconnect',
+    },
+    observability: { enabled: true, metricsPrefix: 'rawnode_tcp_' },
+  },
+  udp: {
+    maxPacketSize: 8_192,
+    handshake: {
+      mode: 'required',
+      secret: process.env.UNIFIED_UDP_HANDSHAKE_SECRET || appKey,
+      rateLimit: { windowMs: 1_000, maxAttempts: 20, maxEntries: 65_536 },
+      amp: { maxFactor: 3, maxBytes: 65_536 },
+    },
+    admission: { maxEntries: 65_536, ttlMs: 60_000, ratePerSecond: 200, burst: 400 },
+    limits: { maxJsonBytes: 64 * 1024, maxPayloadBytes: 256 * 1024 },
+    peer: { maxMessageSize: 256 * 1024, maxPending: 1_024, maxQueue: 4_096, maxRetries: 8 },
+  },
+  observability: {
+    enabled: true,
+    prefix: 'rawnode_unified',
+    historyLimit: 256,
+    eventLoopMonitoring: true,
+    eventLoopResolutionMs: 20,
+  },
+});
+
+app.use(accessLog({ logger: console, slowMs: 250 }));
+app.use(secureHeaders({
+  hsts: { maxAge: 15_552_000, includeSubDomains: true },
+  contentSecurityPolicy: {
+    "default-src": ["'none'"],
+    "frame-ancestors": ["'none'"],
+    "base-uri": ["'none'"],
+  },
+}));
+app.use(hostPolicy({ allow: allowedHosts }));
+app.use(requestLimits({ maxRequestTargetBytes: 16 * 1024, maxHeaders: 100 }));
+app.use(cors({ origins: allowedOrigins, credentials: true }));
+if (trustedProxies.length) app.use(trustedProxy({ trust: trustedProxies }));
+app.use(rateLimit({
+  store: new MemoryRateLimitStore({ maxEntries: 250_000 }),
+  window: '1m',
+  max: 300,
+}));
+app.use(compress({ minBytes: 1024, encodings: ['br', 'gzip'] }));
+app.use(Unified.json({ limit: '1mb', compressedLimit: '512kb' }));
+
+const management = (req, res, next) => {
+  const supplied = req.headers['x-rawnode-management-token'];
+  if (!constantTimeEqual(supplied, managementToken)) {
+    return res.status(404).json({ error: 'Not Found' });
+  }
+  return next();
+};
+
+app.get('/health/live', (_req, res) => {
+  const health = app.health();
+  res.status(health.live ? 200 : 503).json({ live: health.live, state: health.state });
+});
+app.get('/health/ready', (_req, res) => {
+  const health = app.health();
+  res.status(health.ready ? 200 : 503).json(health);
+});
+app.get('/internal/metrics', management, (_req, res) => {
+  res.type('text/plain; version=0.0.4').send(app.metrics('prometheus'));
+});
+app.get('/internal/diagnostics', management, (_req, res) => res.json(app.diagnostics()));
+
+// Authenticate WS connections from a secure HttpOnly cookie or another trusted
+// handshake value. This simplified example checks a cookie value directly.
+app.ws.use(async (socket) => {
+  const cookie = String(socket.handshake.headers.cookie || '');
+  const authenticated = cookie.split(';').some((part) => part.trim() === 'rn_session=valid-example');
+  if (!authenticated) throw Object.assign(new Error('Unauthorized'), { code: 'WS_UNAUTHORIZED' });
+});
+app.ws.on('connection', (socket) => {
+  socket.on('notification:subscribe', async (room, ack) => {
+    socket.join(`notifications:${String(room)}`);
+    await ack?.({ subscribed: true });
+  });
+});
+
+// Application-level TCP authentication. Transport classification and admission
+// happen first; protected handlers require this authenticated flag.
+app.tcp.handle('auth:login', async (socket, payload, ack) => {
+  const ok = constantTimeEqual(payload?.token, process.env.TCP_APPLICATION_TOKEN);
+  socket.data.authenticated = ok;
+  await ack?.({ ok });
+  if (!ok) socket.disconnect('authentication failed');
+});
+app.tcp.handle('orders:create', async (socket, payload, ack) => {
+  if (!socket.data.authenticated) return ack?.({ ok: false, error: 'UNAUTHENTICATED' });
+  await ack?.({ ok: true, orderId: `order-${Date.now()}`, payload });
+});
+
+app.udp.on('telemetry:ingest', (body, response) => {
+  const ok = constantTimeEqual(body?.token, process.env.UDP_APPLICATION_TOKEN);
+  if (!ok) return response.reply({ ok: false, error: 'UNAUTHENTICATED' }, true);
+  return response.reply({ ok: true, receivedAt: Date.now() }, true);
+});
+
+app.manageSignals({
+  signals: ['SIGINT', 'SIGTERM'],
+  timeoutMs: 30_000,
+  setExitCode: true,
+});
+
+const server = await app.start({
+  host: process.env.UNIFIED_HOST || '0.0.0.0',
+  port: Number(process.env.UNIFIED_PORT || 3000),
+  backlog: Number(process.env.UNIFIED_BACKLOG || 511),
+  reuseAddr: true,
+  reusePort: process.env.UNIFIED_REUSE_PORT === 'true',
+  protocols: { http: true, websocket: true, tcp: true, udp: true },
+});
+
+if (!server.health().ready) throw new Error('Unified server did not become ready.');
+console.log('Production Unified endpoint:', server.addresses());
+
+
+================================================
+FILE PATH: ./examples/cookbook/08-combined/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({ profile: 'enterprise' });
+
+app.get('/', (_req, res) => res.json({
+  name: 'RawNode Unified',
+  protocols: ['http', 'websocket', 'tcp', 'udp'],
+}));
+app.get('/addresses', (_req, res) => res.json(app.addresses()));
+
+app.ws.on('connection', (socket) => {
+  socket.on('echo', async (payload, ack) => ack?.({ transport: 'websocket', payload }));
+});
+
+app.tcp.handle('echo', async (_socket, payload, ack) => {
+  await ack?.({ transport: 'tcp', payload });
+});
+
+app.udp.on('echo', (body, response) => {
+  response.reply({ transport: 'udp', payload: body });
+});
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+
+const server = await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: true, websocket: true, tcp: true, udp: true },
+});
+
+const addresses = server.addresses();
+if (!addresses.sameNumericPort) throw new Error('TCP and UDP did not bind the same numeric port.');
+console.log(addresses);
+
+
+================================================
+FILE PATH: ./examples/cookbook/08-combined/udp-client.js
+================================================
+
+'use strict';
+
+import { RawNodeClient } from '#udp';
+
+const client = new RawNodeClient({ reconnect: false, timeout: 5_000 });
+await new Promise((resolve, reject) => {
+  client.once('validated', resolve);
+  client.once('error', reject);
+  client.connect(
+    process.env.HOST || '127.0.0.1',
+    Number(process.env.PORT || 3000),
+  );
+});
+
+console.log(await client.request('echo', { hello: 'udp' }));
+client.disconnect();
+
+
+================================================
+FILE PATH: ./examples/cookbook/08-combined/tcp-client.js
+================================================
+
+'use strict';
+
+import { TcpClient } from '#tcp';
+
+const client = new TcpClient(
+  process.env.HOST || '127.0.0.1',
+  Number(process.env.PORT || 3000),
+  { ackTimeoutMs: 5_000 },
+);
+
+await client.connect();
+console.log(await client.request('echo', { hello: 'tcp' }));
+await client.close();
+
+
+================================================
+FILE PATH: ./examples/cookbook/08-combined/browser-ws-client.js
+================================================
+
+'use strict';
+
+import { RawSocketClient } from '#ws';
+
+const scheme = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+const client = new RawSocketClient(`${scheme}//${window.location.host}/`, {
+  autoConnect: false,
+});
+
+client.on('connect', async () => {
+  console.log(await client.emitWithAck('echo', { hello: 'websocket' }));
+});
+
+client.connect();
+
+
+================================================
+FILE PATH: ./examples/cookbook/10-lifecycle-plugin/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const lifecyclePlugin = {
+  name: 'deployment-audit',
+
+  async beforeStart({ options }) {
+    console.log('[plugin] beforeStart', { host: options.host, port: options.port });
+  },
+
+  async afterStart({ health }) {
+    console.log('[plugin] afterStart', { ready: health.ready, degraded: health.degraded });
+  },
+
+  async beforeDrain({ options }) {
+    console.log('[plugin] beforeDrain', options);
+  },
+
+  async beforeClose({ shutdown }) {
+    console.log('[plugin] beforeClose', shutdown);
+  },
+
+  async afterClose({ forced, error }) {
+    console.log('[plugin] afterClose', { forced, error: error?.message || null });
+  },
+
+  async onError({ error, phase }) {
+    console.error('[plugin] unified failure', { phase, message: error?.message });
+  },
+};
+
+const app = Unified({ profile: 'enterprise', plugins: [lifecyclePlugin] });
+
+// Equivalent additive registration:
+app.useUnifiedPlugin((manager) => ({
+  name: 'address-observer',
+  afterStart() {
+    console.log('[plugin] addresses', manager.addresses());
+  },
+}));
+
+app.get('/', (_req, res) => res.send('Plugin-enabled Unified server'));
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+await app.start({ host: '127.0.0.1', port: Number(process.env.PORT || 3000) });
+
+
+================================================
+FILE PATH: ./examples/cookbook/16-profile-and-protocol-matrix/examples.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+// HTTP-only ultra profile.
+export const httpOnly = Unified({ profile: 'ultra' });
+await httpOnly.start({
+  host: '127.0.0.1',
+  port: 0,
+  protocols: { http: true, websocket: false, tcp: false, udp: false },
+});
+await httpOnly.close();
+
+// HTTP + WebSocket.
+export const realtimeWeb = Unified({ profile: 'enterprise' });
+await realtimeWeb.start({
+  host: '127.0.0.1',
+  port: 0,
+  protocols: { http: true, websocket: true, tcp: false, udp: false },
+});
+await realtimeWeb.close();
+
+// RawNode TCP only.
+export const tcpOnly = Unified({ profile: 'enterprise' });
+await tcpOnly.start({
+  host: '127.0.0.1',
+  port: 0,
+  protocols: { http: false, websocket: false, tcp: true, udp: false },
+});
+await tcpOnly.close();
+
+// UDP/RUDP only.
+export const udpOnly = Unified({ profile: 'enterprise' });
+await udpOnly.start({
+  host: '127.0.0.1',
+  port: 0,
+  protocols: { http: false, websocket: false, tcp: false, udp: true },
+});
+await udpOnly.close();
+
+
+================================================
+FILE PATH: ./examples/cookbook/06-tcp/client.js
+================================================
+
+'use strict';
+
+import { TcpClient } from '#tcp';
+
+const client = new TcpClient(
+  process.env.HOST || '127.0.0.1',
+  Number(process.env.PORT || 3000),
+  {
+    connectTimeoutMs: 5_000,
+    ackTimeoutMs: 5_000,
+    reconnect: {
+      enabled: true,
+      minDelayMs: 250,
+      maxDelayMs: 5_000,
+      factor: 2,
+      jitter: 0.2,
+      maxAttempts: 10,
+    },
+    heartbeat: { enabled: true, intervalMs: 25_000, timeoutMs: 10_000 },
+  },
+);
+
+client.on('server:welcome', (payload) => console.log('welcome:', payload));
+client.on('chat:message', (payload) => console.log('chat:', payload));
+client.on('reconnecting', (info) => console.log('reconnecting:', info));
+client.on('clientError', (error) => console.error('TCP client error:', error));
+
+await client.connect();
+
+const sum = await client.timeout(5_000).request('math:add', { a: 20, b: 22 });
+console.log('sum:', sum);
+
+console.log('join:', await client.request('room:join', { room: 'general' }));
+console.log('chat ack:', await client.request('chat:message', {
+  room: 'general',
+  text: 'Hello over RawNode TCP',
+}));
+console.log('user:', await client.request('user:find', { id: 'user-1' }));
+
+await client.close({ timeoutMs: 2_000 });
+
+
+================================================
+FILE PATH: ./examples/cookbook/06-tcp/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({
+  profile: 'enterprise',
+  tcp: {
+    heartbeat: { enabled: true, intervalMs: 25_000, timeoutMs: 60_000 },
+    protocol: {
+      maxPendingAcks: 10_000,
+      maxRoomsPerSocket: 64,
+      maxEventsPerSecond: 1_000,
+      maxBytesPerSecond: 2 * 1024 * 1024,
+      handlerMode: 'serial',
+      maxConcurrentHandlers: 1,
+      onViolation: 'disconnect',
+    },
+    observability: { enabled: true, metricsPrefix: 'rawnode_tcp_' },
+  },
+});
+
+app.tcp.use(async (socket) => {
+  socket.data.connectedAt = Date.now();
+  socket.data.role = 'client';
+});
+
+app.tcp.on('connection', (socket) => {
+  socket.emit('server:welcome', {
+    socketId: socket.id,
+    ip: socket.ip,
+    connectedAt: socket.data.connectedAt,
+  });
+});
+
+app.tcp.schema('math:add', { a: 'number', b: 'number' });
+app.tcp.handle('math:add', async (_socket, payload, ack) => {
+  await ack?.({ result: payload.a + payload.b });
+}, { timeoutMs: 2_000 });
+
+app.tcp.handle('room:join', async (socket, payload, ack) => {
+  const room = String(payload?.room || 'general');
+  await socket.joinAsync(room);
+  await ack?.({ joined: room });
+});
+
+app.tcp.handle('chat:message', async (socket, payload, ack) => {
+  const room = String(payload?.room || 'general');
+  socket.to(room).emit('chat:message', {
+    from: socket.id,
+    room,
+    text: String(payload?.text || ''),
+    at: Date.now(),
+  });
+  await ack?.({ accepted: true });
+});
+
+app.tcp.group('user:', (group) => {
+  group.schema('find', { id: 'string' });
+  group.handle('find', async (_socket, payload, ack) => {
+    await ack?.({ id: payload.id, name: 'RawNode User' });
+  });
+});
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+
+await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: false, websocket: false, tcp: true, udp: false },
+});
+
+
+================================================
+FILE PATH: ./examples/cookbook/03-listen-callback/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({ profile: 'compat' });
+
+app.get('/', (_req, res) => res.send('Callback-style startup works'));
+app.tcp.handle('echo', async (_socket, payload, ack) => ack?.(payload));
+app.udp.on('ping', (_body, response) => response.reply({ pong: true }));
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+
+// listen() returns UnifiedServer immediately. The callback runs after the
+// atomic startup transaction has committed.
+const server = app.listen(
+  {
+    host: process.env.HOST || '127.0.0.1',
+    port: Number(process.env.PORT || 3000),
+    protocols: { http: true, websocket: true, tcp: true, udp: true },
+  },
+  () => {
+    console.log('RawNode Unified is ready:', server.addresses());
+  },
+);
+
+server.on('listenError', (error) => {
+  console.error('Unified startup failed:', error);
+  process.exitCode = 1;
+});
+
+
+================================================
+FILE PATH: ./examples/cookbook/15-proxy-protocol/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({
+  profile: 'enterprise',
+  proxyProtocol: {
+    enabled: true,
+    required: true,
+    // Only infrastructure addresses that actually originate Proxy Protocol.
+    trusted: ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16'],
+    maxHeaderBytes: 536,
+  },
+  classification: { maxBytes: 64, timeoutMs: 300, ambiguous: 'reject' },
+});
+
+app.get('/client', (req, res) => {
+  res.json({ ip: req.ip, clientIp: req.clientIp, requestId: req.id });
+});
+app.tcp.handle('client:identity', async (socket, _payload, ack) => {
+  await ack?.({ ip: socket.ip, context: socket.context?.metadata || null });
+});
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+await app.start({
+  host: '0.0.0.0',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: true, websocket: true, tcp: true, udp: false },
+});
+
+
+================================================
+FILE PATH: ./examples/cookbook/11-optional-protocol/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({ profile: 'production' });
+
+app.get('/', (_req, res) => res.json({ ok: true, degraded: app.health().degraded }));
+app.tcp.handle('echo', async (_socket, payload, ack) => ack?.(payload));
+app.udp.on('ping', (_body, response) => response.reply({ pong: true }));
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+
+const server = await app.start({
+  host: '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: true, websocket: true, tcp: true, udp: true },
+  startup: {
+    atomic: true,
+    maxPortAttempts: 10,
+    rollbackTimeoutMs: 2_000,
+    // A UDP bind/boot failure may degrade the endpoint instead of aborting it.
+    optionalProtocols: ['udp'],
+  },
+});
+
+const health = server.health();
+console.log({
+  ready: health.ready,
+  degraded: health.degraded,
+  protocolFailures: health.protocolFailures,
+  addresses: server.addresses(),
+});
+
+
+
+================================================
+FILE PATH: ./examples/cookbook/04-http/server.js
+================================================
+
+'use strict';
+
+import Unified, {
+  accessLog,
+  compress,
+  cors,
+  hostPolicy,
+  MemoryRateLimitStore,
+  rateLimit,
+  requestLimits,
+  secureHeaders,
+} from '#unified';
+
+const app = Unified({
+  profile: 'enterprise',
+  http: {
+    server: {
+      timeouts: { handlerTimeout: 10_000 },
+      limits: { maxActiveRequests: 10_000 },
+    },
+  },
+});
+
+const rateLimitStore = new MemoryRateLimitStore({ maxEntries: 100_000 });
+
+app.use(accessLog({ logger: console, slowMs: 250 }));
+app.use(secureHeaders({
+  hsts: false,
+  contentSecurityPolicy: {
+    "default-src": ["'self'"],
+    "object-src": ["'none'"],
+    "frame-ancestors": ["'none'"],
+  },
+}));
+app.use(hostPolicy({ allow: ['127.0.0.1', 'localhost', '*.example.test'] }));
+app.use(requestLimits({ maxRequestTargetBytes: 16 * 1024, maxHeaders: 100 }));
+app.use(cors({ origins: ['https://app.example.test'], credentials: true }));
+app.use(rateLimit({ store: rateLimitStore, window: '1m', max: 120 }));
+app.use(compress({ minBytes: 1024, encodings: ['br', 'gzip'] }));
+app.use(Unified.json({ limit: '1mb', compressedLimit: '512kb' }));
+
+app.get('/health/live', (_req, res) => {
+  const health = app.health();
+  res.status(health.live ? 200 : 503).json({ live: health.live, state: health.state });
+}).name('health.live');
+
+app.get('/health/ready', (_req, res) => {
+  const health = app.health();
+  res.status(health.ready ? 200 : 503).json(health);
+}).name('health.ready');
+
+app.get('/metrics', (_req, res) => {
+  res.type('text/plain; version=0.0.4').send(app.metrics('prometheus'));
+}).name('metrics');
+
+app.group({ prefix: '/api', name: 'api.', domain: '{tenant}.example.test' }, () => {
+  app.get('/users/:id', (req, res) => {
+    res.json({
+      tenant: req.domainParams.tenant,
+      id: req.params.id,
+      requestId: req.id,
+    });
+  }).whereUuid('id').name('users.show').timeout('2s');
+
+  app.post('/echo', (req, res) => {
+    res.status(201).json({ received: req.body, requestId: req.id });
+  }).name('echo');
+});
+
+app.onNotFound((req, res) => {
+  res.status(404).json({ error: 'Not Found', method: req.method, path: req.path });
+});
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 30_000 });
+
+await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: true, websocket: false, tcp: false, udp: false },
+});
+
+
+================================================
+FILE PATH: ./examples/cookbook/MANIFEST.json
+================================================
+
+{
+  "schemaVersion": 1,
+  "fileCount": 29,
+  "javascriptFiles": 24,
+  "hashAlgorithm": "sha256",
+  "files": [
+    {
+      "path": "01-minimal-http/server.js",
+      "bytes": 453,
+      "sha256": "26b98f390223431ceaabf40e708b419124396d83865d745f14bbb1f8bea146e5"
+    },
+    {
+      "path": "02-basic-all-protocols/server.js",
+      "bytes": 1637,
+      "sha256": "98faff4684f2085ccb02dbb82d52801f53515565fd731d29c8950650a7504b1b"
+    },
+    {
+      "path": "03-listen-callback/server.js",
+      "bytes": 901,
+      "sha256": "b16f309865b6a117487e8d94103da243efb481de8e512a8051d68e6bed77359d"
+    },
+    {
+      "path": "04-http/server.js",
+      "bytes": 2349,
+      "sha256": "d9542d318ac61d1a98137f7c405fc6b870934710ad7750dca96229741332fd88"
+    },
+    {
+      "path": "05-websocket/browser-client.js",
+      "bytes": 1239,
+      "sha256": "ce04377a30d54d4a4172f1c2001b8244f7e8523a5322162cf268ba64db147b49"
+    },
+    {
+      "path": "05-websocket/server.js",
+      "bytes": 2070,
+      "sha256": "6d89f34270dd6e079be598eb0452cc119b915e6df5dd47e9abc749e8c1ddb032"
+    },
+    {
+      "path": "06-tcp/client.js",
+      "bytes": 1193,
+      "sha256": "e62b351d952d7000f5d0fad5f042a3b27ded9d5d92e9bd3909bfe5aab87cafab"
+    },
+    {
+      "path": "06-tcp/server.js",
+      "bytes": 1915,
+      "sha256": "bf03b3a5b92123b24129f202c250b63fb139390a987631b955673422219717cb"
+    },
+    {
+      "path": "07-udp/client.js",
+      "bytes": 1009,
+      "sha256": "fb79d11bd7bd22f8c13cce77b07d2ad270918bd2178d608ad71a3734036f1a9d"
+    },
+    {
+      "path": "07-udp/server.js",
+      "bytes": 1785,
+      "sha256": "be8098e027496626c0bf4095a7cfe5b07dadb12ad6b1f0e5faaabcebb7ff5793"
+    },
+    {
+      "path": "08-combined/browser-ws-client.js",
+      "bytes": 360,
+      "sha256": "288a1421894a6f5c911f91637677bf0db89488a6ccf060f26500cd986ea7556b"
+    },
+    {
+      "path": "08-combined/server.js",
+      "bytes": 1052,
+      "sha256": "8aff0f6620e91aa7b7873f545bb48bb38e243604053ea893f66ddde38f8e4db2"
+    },
+    {
+      "path": "08-combined/tcp-client.js",
+      "bytes": 289,
+      "sha256": "b44bdc7622faab187d95ee74183a8cd04da94ab22312b5b4a55604073dfcdcb1"
+    },
+    {
+      "path": "08-combined/udp-client.js",
+      "bytes": 421,
+      "sha256": "65269f4802dff3d8383dc463341aa11f30bd5fd1a248bddf5cfad61d95e853d8"
+    },
+    {
+      "path": "09-observability-and-drain/server.js",
+      "bytes": 2064,
+      "sha256": "775a61b74344b4a85c51ccf1634e6251e2b768cb844809a9877863434fc5cd83"
+    },
+    {
+      "path": "10-lifecycle-plugin/server.js",
+      "bytes": 1294,
+      "sha256": "91c13296eb237931c58b8e945a790dbaac4fc42895ca7288ee26bfdf02f098ee"
+    },
+    {
+      "path": "11-optional-protocol/server.js",
+      "bytes": 958,
+      "sha256": "ebda88d06ca193c4a8a176bbd5415a8a1c9bb20dedaff7ee506647ff518711e3"
+    },
+    {
+      "path": "12-production/.env.example",
+      "bytes": 550,
+      "sha256": "e0c219f86bbad6cbbca488c5fdd03435ae6ec5f5a8138f5d38ccc470e9923a15"
+    },
+    {
+      "path": "12-production/server.js",
+      "bytes": 6533,
+      "sha256": "ebfa2448d2e8e8ad7c3b60477f4e4b9da703c62b0f7ddb0c7a957d7a4a802731"
+    },
+    {
+      "path": "13-enterprise-tls/.env.example",
+      "bytes": 434,
+      "sha256": "17990d39df97bf226957c07346c30d0e16d07cf57b66f4e419181898b2e8c2ef"
+    },
+    {
+      "path": "13-enterprise-tls/server.js",
+      "bytes": 2451,
+      "sha256": "071f5bdeeeb64a978738b5d34583e42156e9281cfbcd5e7c8ff8ec35d3654db9"
+    },
+    {
+      "path": "13-enterprise-tls/tcp-client.js",
+      "bytes": 683,
+      "sha256": "97e2f800fcbf1172202d29730474777732d3adcf41aba25056d4d47e2f146e6a"
+    },
+    {
+      "path": "14-foundation-provider/.env.example",
+      "bytes": 1375,
+      "sha256": "c5ed2d903bf9146bbd0cef3a63d2f7abd8eb825fa7db1ae4a3f36d4b65433b3b"
+    },
+    {
+      "path": "14-foundation-provider/AppProtocolServiceProvider.js",
+      "bytes": 1481,
+      "sha256": "711e059b304c6971b753bfab449a25974d82fa8f68c64444c5ede6833c07bb3a"
+    },
+    {
+      "path": "14-foundation-provider/inspect-runtime.js",
+      "bytes": 788,
+      "sha256": "47e9737fa4177ee4ff75f44bdcb527d7f390721a41e8abf0489bf7e31f694b5b"
+    },
+    {
+      "path": "15-proxy-protocol/server.js",
+      "bytes": 889,
+      "sha256": "95f4d38fa42b9f5c5bb27fdf4855d7ae4e5db6a0a7a51e18578bfc959afcd017"
+    },
+    {
+      "path": "16-profile-and-protocol-matrix/examples.js",
+      "bytes": 992,
+      "sha256": "7eb48d07fe3ce14e51cbc288de74d73f35817f59ff7d735a71d241401a297bf1"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4466,
+      "sha256": "94b11d6075035573e77868cddd12b862902e90c6738df4bf1e781316eff5c75b"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 1197,
+      "sha256": "522317f2fd3e7f906d8970cd9abfbfa7802f7103c532f2de6f93e4e6af20bfa7"
+    }
+  ]
+}
+
+
+================================================
+FILE PATH: ./examples/cookbook/02-basic-all-protocols/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const app = Unified({ profile: 'compat' });
+
+// HTTP
+app.get('/', (_req, res) => {
+  res.type('text/plain').send('RawNode Unified is online');
+});
+
+app.get('/users/:id', (req, res) => {
+  res.json({
+    id: req.params.id,
+    query: req.query,
+    requestId: req.id ?? null,
+  });
+});
+
+app.post('/echo', Unified.json({ limit: '64kb' }), (req, res) => {
+  res.status(201).json({ received: req.body });
+});
+
+app.onNotFound((req, res) => {
+  res.status(404).json({ error: 'Not Found', method: req.method, path: req.path });
+});
+
+// WebSocket
+app.ws.on('connection', (socket) => {
+  socket.emit('server:welcome', { socketId: socket.id });
+
+  socket.on('chat:message', async (message, ack) => {
+    socket.broadcast.emit('chat:message', {
+      socketId: socket.id,
+      message,
+      at: Date.now(),
+    });
+    await ack?.({ received: true, message });
+  });
+});
+
+// RawNode TCP
+app.tcp.on('connection', (socket) => {
+  socket.emit('server:welcome', { socketId: socket.id });
+});
+
+app.tcp.handle('echo', async (_socket, payload, ack) => {
+  await ack?.(payload);
+});
+
+// RawNode UDP/RUDP. Handler arguments are: (body, response, request).
+app.udp.on('ping', (_body, response) => {
+  response.reply({ pong: true, time: Date.now() });
+});
+
+app.manageSignals({
+  signals: ['SIGINT', 'SIGTERM'],
+  timeoutMs: 15_000,
+  setExitCode: true,
+});
+
+const server = await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: true, websocket: true, tcp: true, udp: true },
+});
+
+console.log('RawNode Unified is ready:', server.addresses());
+
+
+================================================
+FILE PATH: ./examples/cookbook/07-udp/client.js
+================================================
+
+'use strict';
+
+import { RawNodeClient } from '#udp';
+
+const client = new RawNodeClient({
+  timeout: 5_000,
+  keepAlive: 2_000,
+  reconnect: false,
+  maxRetries: 5,
+  handshakeRetryMs: 300,
+  peer: {
+    maxMessageSize: 256 * 1024,
+    maxPending: 1_024,
+    maxQueue: 4_096,
+  },
+});
+
+client.on('message', (path, data) => console.log('UDP push:', path, data));
+client.on('error', (error) => console.error('UDP error:', error));
+
+await new Promise((resolve, reject) => {
+  client.once('validated', resolve);
+  client.once('error', reject);
+  client.connect(process.env.HOST || '127.0.0.1', Number(process.env.PORT || 3000));
+});
+
+console.log('ping:', await client.request('ping', { sequence: 1 }, true));
+console.log('telemetry:', await client.request('telemetry:ingest', {
+  deviceId: 'sensor-1',
+  samples: [{ temperature: 21.5 }, { temperature: 21.7 }],
+}, true));
+
+// Fire-and-forget unreliable datagram:
+client.send('telemetry:ingest', { deviceId: 'sensor-1', samples: [] }, false);
+
+client.disconnect();
+
+
+================================================
+FILE PATH: ./examples/cookbook/07-udp/server.js
+================================================
+
+'use strict';
+
+import Unified from '#unified';
+
+const udpSecret = process.env.UNIFIED_UDP_HANDSHAKE_SECRET || process.env.APP_KEY;
+if (!udpSecret) throw new Error('UNIFIED_UDP_HANDSHAKE_SECRET or APP_KEY is required.');
+
+const app = Unified({
+  profile: 'enterprise',
+  udp: {
+    maxPacketSize: 8_192,
+    limits: { maxJsonBytes: 64 * 1024, maxPayloadBytes: 256 * 1024 },
+    handshake: {
+      mode: 'required',
+      secret: udpSecret,
+      rateLimit: { windowMs: 1_000, maxAttempts: 20, maxEntries: 65_536 },
+      amp: { maxFactor: 3, maxBytes: 65_536 },
+    },
+    admission: {
+      maxEntries: 65_536,
+      ttlMs: 60_000,
+      ratePerSecond: 200,
+      burst: 400,
+      cleanupBudget: 16,
+    },
+    peer: {
+      maxMessageSize: 256 * 1024,
+      maxPending: 1_024,
+      maxQueue: 4_096,
+      maxRetries: 8,
+    },
+  },
+});
+
+app.udp.use((request, _response, next) => {
+  if (!request.rinfo?.address) return;
+  return next();
+});
+
+app.udp.on('ping', (_body, response, request) => {
+  response.reply({
+    pong: true,
+    requestId: request.id,
+    remote: `${request.rinfo.address}:${request.rinfo.port}`,
+    at: Date.now(),
+  });
+});
+
+app.udp.on('telemetry:ingest', async (body, response) => {
+  // Persist or enqueue asynchronously in a real application.
+  await Promise.resolve();
+  response.reply({ accepted: true, samples: Array.isArray(body?.samples) ? body.samples.length : 0 });
+});
+
+app.udp.onLifecycle('peerValidated', (_peer, rinfo) => {
+  console.log('UDP peer validated:', rinfo.address, rinfo.port);
+});
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+
+await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: false, websocket: false, tcp: false, udp: true },
+});
+
+
+================================================
+FILE PATH: ./examples/cookbook/13-enterprise-tls/server.js
+================================================
+
+'use strict';
+
+import { readFile } from 'node:fs/promises';
+import Unified, { secureHeaders } from '#unified';
+
+const [key, cert, ca] = await Promise.all([
+  readFile(process.env.UNIFIED_TLS_KEY_PATH || './storage/certs/server.key'),
+  readFile(process.env.UNIFIED_TLS_CERT_PATH || './storage/certs/server.crt'),
+  readFile(process.env.UNIFIED_TLS_CA_PATH || './storage/certs/ca.crt'),
+]);
+
+const udpSecret = process.env.UNIFIED_UDP_HANDSHAKE_SECRET || process.env.APP_KEY;
+if (!udpSecret) throw new Error('A shared UDP handshake secret is required.');
+
+const app = Unified({
+  profile: 'enterprise',
+  tls: {
+    enabled: true,
+    options: {
+      key,
+      cert,
+      ca,
+      minVersion: 'TLSv1.2',
+      honorCipherOrder: true,
+      requestCert: false,
+      rejectUnauthorized: false,
+    },
+    alpnProtocols: ['http/1.1', 'rawnode-tcp/1'],
+    unknownAlpn: 'reject',
+  },
+  websocket: {
+    path: '/realtime',
+    allowedOrigins: ['https://app.example.com'],
+  },
+  udp: {
+    handshake: { mode: 'required', secret: udpSecret },
+    // UDP is not protected by TLS. Configure RawNode UDP codec encryption here
+    // when confidentiality is required for UDP payloads.
+    codec: {
+      mode: 'json',
+      encryption: {
+        enabled: process.env.UNIFIED_UDP_ENCRYPTION === 'true',
+        required: process.env.UNIFIED_UDP_ENCRYPTION === 'true',
+        secrets: process.env.UNIFIED_UDP_ENCRYPTION_KEY
+          ? [process.env.UNIFIED_UDP_ENCRYPTION_KEY]
+          : undefined,
+        activeKeyId: 0,
+        bindHandshake: 'required',
+        requireValidated: true,
+      },
+    },
+  },
+});
+
+app.use(secureHeaders({ hsts: { maxAge: 15_552_000, includeSubDomains: true } }));
+app.get('/', (_req, res) => res.json({ secure: true, alpn: ['http/1.1', 'rawnode-tcp/1'] }));
+app.ws.on('connection', (socket) => {
+  socket.on('secure:echo', async (payload, ack) => ack?.({ payload, secure: true }));
+});
+app.tcp.handle('secure:echo', async (_socket, payload, ack) => {
+  await ack?.({ payload, secure: true });
+});
+app.udp.on('secure:echo', (body, response) => response.reply({ payload: body }));
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 30_000 });
+
+const server = await app.start({
+  host: process.env.UNIFIED_HOST || '0.0.0.0',
+  port: Number(process.env.UNIFIED_PORT || 3443),
+  protocols: { http: true, websocket: true, tcp: true, udp: true },
+});
+
+console.log('HTTPS/WSS/secure TCP + UDP:', server.addresses());
+
+
+================================================
+FILE PATH: ./examples/cookbook/13-enterprise-tls/tcp-client.js
+================================================
+
+'use strict';
+
+import { readFile } from 'node:fs/promises';
+import { SecureTcpClient } from '#tcp';
+
+const ca = await readFile(process.env.UNIFIED_TLS_CA_PATH || './storage/certs/ca.crt');
+const client = new SecureTcpClient(
+  process.env.UNIFIED_HOST || '127.0.0.1',
+  Number(process.env.UNIFIED_PORT || 3443),
+  {
+    ackTimeoutMs: 5_000,
+    tls: {
+      ca,
+      servername: process.env.UNIFIED_TLS_SERVERNAME || 'api.example.com',
+      rejectUnauthorized: true,
+      minVersion: 'TLSv1.2',
+      ALPNProtocols: ['rawnode-tcp/1'],
+    },
+  },
+);
+
+await client.connect();
+console.log(await client.request('secure:echo', { hello: 'secure RawNode TCP' }));
+await client.close();
+
+
+================================================
+FILE PATH: ./examples/cookbook/05-websocket/server.js
+================================================
+
+'use strict';
+
+// 
+
+import Unified from '#unified';
+
+const app = Unified({
+  profile: 'enterprise',
+  websocket: {
+    path: '/realtime',
+    allowedOrigins: ['http://127.0.0.1:3000', 'https://app.example.test'],
+    maxConnections: 25_000,
+    middlewareTimeoutMs: 5_000,
+    upgradeRateLimit: { limit: 100, windowMs: 1_000 },
+    eventSocket: {
+      ackTimeoutMs: 5_000,
+      maxPacketBytes: 256 * 1024,
+      maxBufferBytes: 2 * 1024 * 1024,
+      maxBufferMessages: 2_048,
+      maxInboundPerWindow: 1_000,
+      inboundWindowMs: 1_000,
+    },
+  },
+});
+
+app.get('/', (_req, res) => res.json({ websocket: '/realtime', namespace: '/chat' }));
+
+// Global WebSocket handshake middleware. A thrown error rejects the upgrade.
+app.ws.use(async (socket) => {
+  const token = socket.handshake.query.token;
+  if (token !== 'dev-token') {
+    const error = new Error('Unauthorized WebSocket connection');
+    error.code = 'WS_UNAUTHORIZED';
+    throw error;
+  }
+  socket.data.userId = socket.handshake.query.userId || socket.id;
+});
+
+const chat = app.ws.of('/chat');
+
+chat.on('connection', (socket) => {
+  socket.emit('chat:ready', { socketId: socket.id, userId: socket.data.userId });
+
+  socket.on('room:join', async (room, ack) => {
+    socket.join(room);
+    await ack?.({ joined: room, rooms: socket.joinedRooms });
+  });
+
+  socket.on('chat:message', async (payload, ack) => {
+    const room = String(payload?.room || 'general');
+    const message = {
+      id: `${Date.now()}:${socket.id}`,
+      room,
+      text: String(payload?.text || ''),
+      userId: socket.data.userId,
+      at: Date.now(),
+    };
+
+    socket.to(room).emit('chat:message', message);
+    await ack?.({ accepted: true, message });
+  });
+
+  socket.on('server:probe', async (_payload, ack) => {
+    await ack?.({ ok: true, at: Date.now() });
+  });
+});
+
+app.manageSignals({ signals: ['SIGINT', 'SIGTERM'], timeoutMs: 15_000 });
+
+await app.start({
+  host: process.env.HOST || '127.0.0.1',
+  port: Number(process.env.PORT || 3000),
+  protocols: { http: true, websocket: true, tcp: false, udp: false },
+});
+
+
+================================================
+FILE PATH: ./examples/cookbook/05-websocket/browser-client.js
+================================================
+
+'use strict';
+
+// This file is intended for RawNode's browser asset pipeline/import map.
+import { RawSocketClient } from '#ws';
+
+const socket = new RawSocketClient('ws://127.0.0.1:3000/realtime', {
+  autoConnect: false,
+  namespace: '/chat',
+  query: { token: 'dev-token', userId: 'browser-user-1' },
+  reconnection: true,
+  reconnectionAttempts: 10,
+  reconnectionDelay: 250,
+  reconnectionDelayMax: 5_000,
+  ackTimeout: 5_000,
+  offlineQueue: true,
+  maxQueueMessages: 1_000,
+  maxQueueBytes: 1024 * 1024,
+});
+
+socket.on('connect', async () => {
+  console.log('WebSocket connected');
+
+  const joined = await socket.timeout(5_000).emitWithAck('room:join', 'general');
+  console.log('joined:', joined);
+
+  const reply = await socket.timeout(5_000).emitWithAck('chat:message', {
+    room: 'general',
+    text: 'Hello over RawNode WebSocket',
+  });
+  console.log('server acknowledgement:', reply);
+});
+
+socket.on('chat:ready', (payload) => console.log('ready:', payload));
+socket.on('chat:message', (payload) => console.log('message:', payload));
+socket.on('disconnect', (info) => console.log('disconnected:', info));
+socket.on('error', (error) => console.error('WebSocket error:', error));
+
+socket.connect();
+window.rawnodeSocket = socket;
+
+
+================================================
+FILE PATH: ./UnifiedServer.js
+================================================
+
+'use strict';
+
+import { EventEmitter } from 'node:events';
+import { performance } from 'node:perf_hooks';
+import { HybridServer, SecureHybridServer } from '#tcp';
+import { normalizeUnifiedStartOptions } from './config/normalizeUnifiedOptions.js';
+import { UnifiedDiagnostics } from './observability/UnifiedDiagnostics.js';
+import { UnifiedMetrics } from './observability/UnifiedMetrics.js';
+import { UNIFIED_STATE, UnifiedStateMachine } from './lifecycle/UnifiedState.js';
+import {
+  UnifiedShutdownError,
+  UnifiedStartupError,
+  UnifiedStateError,
+  safeError,
+} from './errors/UnifiedError.js';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, Math.max(0, ms)));
+}
+
+function withTimeout(promise, timeoutMs, createError) {
+  if (!(Number(timeoutMs) > 0)) return Promise.resolve(promise);
+  let timer = null;
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise((_, reject) => {
+      timer = setTimeout(() => reject(createError()), Number(timeoutMs));
+      timer.unref?.();
+    }),
+  ]).finally(() => { if (timer) clearTimeout(timer); });
+}
+
+function isAddress(value) {
+  return value && typeof value === 'object' && Number.isInteger(value.port);
+}
+
+function protocolHealth(configured, active, native, extra = null, failure = null, required = false) {
+  const health = active && typeof native?.health === 'function' ? native.health() : null;
+  return {
+    enabled: configured === true,
+    active: active === true,
+    required: required === true,
+    ready: active === true && (health ? health.ready !== false && health.ok !== false : true),
+    draining: health?.draining === true,
+    degraded: !!failure,
+    failure,
+    health,
+    ...(extra || {}),
+  };
+}
+
+function closeCode(error) {
+  return error?.code || error?.cause?.code || null;
+}
+
+function retryablePortConflict(error) {
+  return ['EADDRINUSE', 'EACCES'].includes(closeCode(error));
+}
+
+const PROTOCOL_NAMES = Object.freeze(['http', 'websocket', 'tcp', 'udp']);
+const TCP_SIDE_PROTOCOLS = Object.freeze(['http', 'websocket', 'tcp']);
+
+function enabledProtocolNames(protocols) {
+  return PROTOCOL_NAMES.filter((name) => protocols?.[name] === true);
+}
+
+function aggregateFailures(results, message) {
+  const failures = results
+    .filter((result) => result.status === 'rejected')
+    .map((result) => result.reason);
+  if (!failures.length) return null;
+  return new AggregateError(failures, message);
+}
+
+function pluginName(plugin, index = 0) {
+  return String(plugin?.name || plugin?.constructor?.name || `plugin-${index + 1}`);
+}
+
+export class UnifiedServer extends EventEmitter {
+  constructor(app, protocols, factoryOptions, original) {
+    super();
+    this.app = app;
+    this.protocols = protocols;
+    this.factoryOptions = factoryOptions;
+    this.original = original;
+    this.ownership = { ...factoryOptions.ownership };
+    this.stateMachine = new UnifiedStateMachine(UNIFIED_STATE.IDLE, (event) => {
+      this.metrics.set('state', stateNumber(event.current));
+      this.diagnostics.record('state-transition', event);
+      this.emit('state', event);
+    });
+    this.metrics = new UnifiedMetrics(factoryOptions.observability);
+    this.diagnostics = new UnifiedDiagnostics(factoryOptions.observability);
+    this.startedAt = 0;
+    this.closedAt = 0;
+    this.lastError = null;
+    this.lastOptions = null;
+    this.startAttempts = 0;
+    this.rollbackCount = 0;
+    this.forcedShutdowns = 0;
+    this._startPromise = null;
+    this._closePromise = null;
+    this._attempt = null;
+    this.httpServer = null;
+    this.hybrid = null;
+    this._address = null;
+    this._draining = false;
+    this._forced = false;
+    this._degraded = false;
+    this._protocolFailures = Object.create(null);
+    this._activeProtocols = Object.freeze({ http: false, websocket: false, tcp: false, udp: false });
+    this.plugins = [];
+    for (const plugin of factoryOptions.plugins || []) this.use(plugin);
+  }
+
+  get state() { return this.stateMachine.value; }
+  get listening() { return this.state === UNIFIED_STATE.LISTENING; }
+  get draining() { return this._draining || this.state === UNIFIED_STATE.DRAINING || this.state === UNIFIED_STATE.CLOSING; }
+  get degraded() { return this._degraded; }
+
+  use(plugin) {
+    if (![UNIFIED_STATE.IDLE, UNIFIED_STATE.FAILED].includes(this.state)) {
+      throw new UnifiedStateError('Unified plugins must be registered before startup.', {
+        code: 'UNIFIED_PLUGIN_REGISTRATION_CLOSED',
+        details: { state: this.state },
+      });
+    }
+    if (!plugin) throw new TypeError('Unified plugin is required.');
+    let candidate = plugin;
+    if (typeof plugin === 'function') {
+      const installed = plugin(this);
+      if (installed && typeof installed.then === 'function') {
+        throw new TypeError('Unified plugin setup functions must be synchronous; use lifecycle hooks for async work.');
+      }
+      if (installed == null) return this;
+      candidate = installed;
+    }
+    if (!candidate || typeof candidate !== 'object') {
+      throw new TypeError('Unified plugin must be an object or a synchronous setup function.');
+    }
+    this.plugins.push(candidate);
+    this.diagnostics.record('plugin-registered', { name: pluginName(candidate, this.plugins.length - 1) });
+    return this;
+  }
+
+  async _runHooks(name, payload = null, { isolate = false } = {}) {
+    for (let index = 0; index < this.plugins.length; index++) {
+      const plugin = this.plugins[index];
+      const hook = plugin?.[name];
+      if (typeof hook !== 'function') continue;
+      try {
+        await hook.call(plugin, payload, this);
+      } catch (error) {
+        this.metrics.inc('plugin_hook_failures_total');
+        this.diagnostics.record('plugin-hook-error', {
+          plugin: pluginName(plugin, index), hook: name, error,
+        }, isolate ? 'warn' : 'error');
+        if (!isolate) throw error;
+      }
+    }
+  }
+
+  _isOptional(name, options = this.lastOptions) {
+    return options?.startup?.optionalProtocols?.includes(name) === true;
+  }
+
+  _isRequired(name, options = this.lastOptions) {
+    return options?.protocols?.[name] === true && !this._isOptional(name, options);
+  }
+
+  _recordProtocolFailure(name, error, phaseName, options) {
+    const failure = Object.freeze({
+      protocol: name,
+      optional: this._isOptional(name, options),
+      phase: phaseName,
+      error: safeError(error),
+      at: Date.now(),
+    });
+    this._protocolFailures[name] = failure;
+    this._degraded = true;
+    this.metrics.inc('protocol_failures_total');
+    this.metrics.inc(`protocol_${name}_failures_total`);
+    this.metrics.set('degraded', 1);
+    this.diagnostics.record('protocol-degraded', failure, 'warn');
+    this.emit('protocolDegraded', failure);
+    return failure;
+  }
+
+  _optionalFailureCanContinue(names, options) {
+    const enabled = names.filter((name) => options.protocols[name] === true);
+    return enabled.length > 0 && enabled.every((name) => this._isOptional(name, options));
+  }
+
+  ready() {
+    if (this.state === UNIFIED_STATE.LISTENING) return Promise.resolve(this);
+    if (this._startPromise) return this._startPromise;
+    return Promise.reject(new UnifiedStateError('RawNode Unified has not been started.', {
+      code: 'UNIFIED_NOT_STARTED', details: { state: this.state },
+    }));
+  }
+
+  start(input = {}) {
+    if (this.state === UNIFIED_STATE.CLOSED) {
+      return Promise.reject(new UnifiedStateError('RawNode Unified is closed and cannot be restarted.', { code: 'UNIFIED_CLOSED' }));
+    }
+    if (this.state === UNIFIED_STATE.LISTENING) return Promise.resolve(this);
+    if (this._startPromise) return this._startPromise;
+    this._startPromise = this._start(input).catch((error) => {
+      this._startPromise = null;
+      throw error;
+    });
+    return this._startPromise;
+  }
+
+  async _start(input) {
+    const options = normalizeUnifiedStartOptions(this.factoryOptions, input);
+    this.lastOptions = options;
+    this._draining = false;
+    this._forced = false;
+    this._degraded = false;
+    this._protocolFailures = Object.create(null);
+    this._activeProtocols = Object.freeze({ http: false, websocket: false, tcp: false, udp: false });
+    this.lastError = null;
+    this.metrics.set('degraded', 0);
+    this.stateMachine.transition(UNIFIED_STATE.STARTING, { host: options.host, port: options.port, protocols: options.protocols });
+    this.emit('starting', { options });
+    this.diagnostics.record('startup-begin', { options });
+    this.metrics.inc('starts_total');
+    const started = performance.now();
+
+    try {
+      await this._runHooks('beforeStart', { options, app: this.app });
+      await this.original.ready();
+      const maxAttempts = options.port === 0 ? options.startup.maxPortAttempts : 1;
+      let lastFailure = null;
+      for (let index = 1; index <= maxAttempts; index++) {
+        this.startAttempts++;
+        this.metrics.inc('startup_attempts_total');
+        try {
+          await this._startAttempt(options, index);
+          this.startedAt = Date.now();
+          this.metrics.observe('startup_duration_ms', performance.now() - started);
+          this.metrics.set('ready', 1);
+          this.stateMachine.transition(UNIFIED_STATE.LISTENING, { attempt: index, addresses: this.addresses() });
+          this.emit('listening', this.addresses());
+          this.diagnostics.record('startup-committed', {
+            attempt: index,
+            addresses: this.addresses(),
+            degraded: this._degraded,
+            protocolFailures: this._protocolFailures,
+          });
+          await this._runHooks('afterStart', { options, server: this, health: this.health() }, { isolate: true });
+          return this;
+        } catch (error) {
+          lastFailure = error;
+          await this._rollbackAttempt(error, options);
+          const retry = options.port === 0 && error?.phase === 'udp-bind' && retryablePortConflict(error) && index < maxAttempts;
+          this.diagnostics.record('startup-attempt-failed', { attempt: index, retry, error }, retry ? 'warn' : 'error');
+          if (!retry) throw error;
+          this.metrics.inc('startup_retries_total');
+          await sleep(Math.min(25 * index, 100));
+        }
+      }
+      throw lastFailure || new UnifiedStartupError('RawNode Unified exhausted startup attempts.', { code: 'UNIFIED_STARTUP_ATTEMPTS_EXHAUSTED' });
+    } catch (error) {
+      this.lastError = safeError(error);
+      this.metrics.inc('startup_failures_total');
+      this.metrics.set('ready', 0);
+      this.stateMachine.transition(UNIFIED_STATE.FAILED, { error: this.lastError });
+      this._emitError(error, 'startup');
+      throw error instanceof UnifiedStartupError
+        ? error
+        : new UnifiedStartupError(`RawNode Unified startup failed: ${error?.message || error}`, {
+            code: 'UNIFIED_STARTUP_FAILED', cause: error, details: { phase: error?.phase || null, host: options.host, port: options.port },
+          });
+    }
+  }
+
+  async _startAttempt(options, attemptNumber) {
+    const attempt = {
+      number: attemptNumber,
+      httpServer: null,
+      hybrid: null,
+      wsAttached: false,
+      udpBound: false,
+      committed: false,
+      address: null,
+      enabled: { ...options.protocols },
+    };
+    this._attempt = attempt;
+    let needsTcpListener = TCP_SIDE_PROTOCOLS.some((name) => attempt.enabled[name]);
+    let selectedPort = options.port;
+
+    if (needsTcpListener && attempt.enabled.http) {
+      try {
+        attempt.httpServer = this.original.createServer({
+          ...(options.http.server || {}),
+          externalTransport: true,
+        });
+      } catch (error) {
+        const affected = ['http', 'websocket'].filter((name) => attempt.enabled[name]);
+        if (!this._optionalFailureCanContinue(affected, options)) throw phase(error, 'http-create');
+        for (const name of affected) {
+          this._recordProtocolFailure(name, error, 'http-create', options);
+          attempt.enabled[name] = false;
+        }
+      }
+    }
+
+    needsTcpListener = TCP_SIDE_PROTOCOLS.some((name) => attempt.enabled[name]);
+    if (needsTcpListener) {
+      try {
+        attempt.hybrid = this._createHybrid(options, attempt.httpServer, attempt.enabled);
+        attempt.hybrid.on('error', (error) => this._emitError(error, 'tcp-listener'));
+        attempt.hybrid.on('protocolError', (error, socket, context) => this.emit('protocolError', error, socket, context));
+        attempt.hybrid.on('classification', (entry) => this.emit('classification', entry));
+        await attempt.hybrid.listenAsync(options.port, options.host, options.backlog);
+        attempt.address = attempt.hybrid.address();
+        if (!isAddress(attempt.address)) throw new Error('TCP listener did not return a numeric address.');
+        selectedPort = attempt.address.port;
+      } catch (error) {
+        const affected = TCP_SIDE_PROTOCOLS.filter((name) => attempt.enabled[name]);
+        if (!this._optionalFailureCanContinue(affected, options)) throw phase(error, 'tcp-bind');
+        for (const name of affected) {
+          this._recordProtocolFailure(name, error, 'tcp-bind', options);
+          attempt.enabled[name] = false;
+        }
+        try { await attempt.hybrid?.close?.({ graceful: false, drainSkin: false, timeoutMs: 1, forceCloseTimeoutMs: 0 }); } catch {}
+        try { await attempt.httpServer?.gracefulClose?.({ timeoutMs: 1, force: true, closeUpgrades: true }); } catch {}
+        attempt.hybrid = null;
+        attempt.httpServer = null;
+        attempt.address = null;
+        needsTcpListener = false;
+      }
+    }
+
+    // Fixed startup order: bind the TCP listener first, then the same numeric
+    // UDP port, and only then register WebSocket in the HTTP upgrade pipeline.
+    if (attempt.enabled.udp) {
+      try {
+        this.protocols.udp.deactivate?.();
+        const udpAddress = await this.protocols.udp.listen(selectedPort, options.host);
+        attempt.udpBound = true;
+        if (!needsTcpListener) {
+          attempt.address = udpAddress;
+          selectedPort = udpAddress.port;
+        }
+      } catch (error) {
+        if (!this._isOptional('udp', options)) throw phase(error, 'udp-bind');
+        this._recordProtocolFailure('udp', error, 'udp-bind', options);
+        attempt.enabled.udp = false;
+      }
+    }
+
+    if (attempt.enabled.websocket) {
+      try {
+        if (!attempt.httpServer || !attempt.hybrid) {
+          throw new UnifiedStartupError('WebSocket requires an active HTTP upgrade pipeline.', {
+            code: 'UNIFIED_WEBSOCKET_PIPELINE_UNAVAILABLE',
+          });
+        }
+        this.protocols.ws.attachUpgradeRegistry(attempt.httpServer, options.websocket.upgrade || {});
+        attempt.wsAttached = true;
+      } catch (error) {
+        if (!this._isOptional('websocket', options)) throw phase(error, 'websocket-attach');
+        try { this.protocols.ws.detachUpgradeRegistry?.(attempt.httpServer); } catch {}
+        this._recordProtocolFailure('websocket', error, 'websocket-attach', options);
+        attempt.enabled.websocket = false;
+      }
+    }
+
+    const activeNames = enabledProtocolNames(attempt.enabled);
+    if (!activeNames.length) {
+      throw new UnifiedStartupError('No protocol remained active after optional startup failures.', {
+        code: 'UNIFIED_NO_ACTIVE_PROTOCOLS',
+        details: { failures: this._protocolFailures },
+      });
+    }
+
+    try {
+      if (attempt.enabled.websocket && attempt.enabled.udp && options.stun.enabled) {
+        this.protocols.ws.attachStun(this.protocols.udp.server || this.protocols.udp.socket || this.protocols.udp);
+      }
+      if (attempt.enabled.http) attempt.httpServer?.markExternalListening?.(attempt.address);
+      attempt.hybrid?.activate?.();
+      if (attempt.enabled.udp) this.protocols.udp.activate?.();
+      attempt.committed = true;
+      this.httpServer = attempt.enabled.http ? attempt.httpServer : null;
+      this.hybrid = attempt.hybrid;
+      this._address = attempt.address;
+      this._activeProtocols = Object.freeze({ ...attempt.enabled });
+      this._attempt = null;
+      this.metrics.set('tcp_listener_active', needsTcpListener ? 1 : 0);
+      this.metrics.set('udp_listener_active', attempt.enabled.udp ? 1 : 0);
+      for (const name of PROTOCOL_NAMES) this.metrics.set(`protocol_${name}_active`, attempt.enabled[name] ? 1 : 0);
+    } catch (error) { throw phase(error, 'commit'); }
+  }
+
+  _createHybrid(options, httpServer, activeProtocols = options.protocols) {
+    const tcpOptions = options.tcp || {};
+    const serverOptions = {
+      ...tcpOptions,
+      profile: options.protocolProfiles?.tcp || options.profile,
+      server: {
+        ...(tcpOptions.server || {}),
+        host: options.host,
+        port: options.port,
+        backlog: options.backlog,
+        ipv6Only: options.ipv6Only,
+        reusePort: options.reusePort,
+      },
+      httpServer: httpServer || false,
+      http2Server: options.http2.enabled ? options.http2.server : null,
+      protocols: {
+        http: activeProtocols.http,
+        tcp: activeProtocols.tcp,
+        http2: options.http2.enabled === true,
+        tls: options.tls.enabled === true,
+      },
+      startPaused: true,
+      classification: options.classification,
+      proxyProtocol: options.proxyProtocol.enabled ? options.proxyProtocol : false,
+      closeSkinOnClose: this.ownership.tcp || options.shutdown.closeExternal,
+      closeHttpServerOnClose: false,
+      closeTlsServerOnClose: false,
+      unknownAlpn: options.tls.unknownAlpn,
+      alpnProtocols: options.tls.alpnProtocols,
+    };
+    if (options.tls.enabled) {
+      if (!options.tls.options) {
+        throw new UnifiedStartupError('TLS is enabled but no key/certificate options were provided.', { code: 'UNIFIED_TLS_OPTIONS_REQUIRED' });
+      }
+      return new SecureHybridServer(this.protocols.tcp, this.app, null, {
+        ...options.tls.options,
+        ALPNProtocols: options.tls.options.ALPNProtocols || options.tls.alpnProtocols,
+      }, serverOptions);
+    }
+    return new HybridServer(this.protocols.tcp, this.app, null, serverOptions);
+  }
+
+  async _rollbackAttempt(error, options) {
+    const attempt = this._attempt;
+    if (!attempt) return;
+    this.rollbackCount++;
+    this.metrics.inc('startup_rollbacks_total');
+    this.diagnostics.record('rollback-begin', { attempt: attempt.number, error }, 'warn');
+    try {
+      this.protocols.udp.deactivate?.();
+      if (attempt.httpServer) this.protocols.ws.detachUpgradeRegistry?.(attempt.httpServer);
+      attempt.httpServer?.clearExternalListening?.();
+      const work = [];
+      if (attempt.hybrid) work.push(attempt.hybrid.close({ graceful: false, drainSkin: false, timeoutMs: 1, forceCloseTimeoutMs: 0 }));
+      if (attempt.httpServer) work.push(attempt.httpServer.gracefulClose({ timeoutMs: 1, force: true, closeUpgrades: true }));
+      if (attempt.udpBound) {
+        work.push(typeof this.protocols.udp.unbind === 'function'
+          ? this.protocols.udp.unbind({ timeoutMs: 1 })
+          : this.protocols.udp.close?.({ timeoutMs: 1 }));
+      }
+      await withTimeout(Promise.allSettled(work), options.startup.rollbackTimeoutMs, () => new Error('Unified startup rollback timed out'));
+    } catch (rollbackError) {
+      this.diagnostics.record('rollback-error', { error: rollbackError }, 'error');
+      this._emitError(rollbackError, 'rollback');
+    } finally {
+      this._attempt = null;
+      this.httpServer = null;
+      this.hybrid = null;
+      this._address = null;
+      this._activeProtocols = Object.freeze({ http: false, websocket: false, tcp: false, udp: false });
+    }
+  }
+
+  beginDrain(options = {}) {
+    if ([UNIFIED_STATE.CLOSED, UNIFIED_STATE.CLOSING].includes(this.state)) return this;
+    if (!this._draining) {
+      void this._runHooks('beforeDrain', { options, server: this }, { isolate: true });
+      this._draining = true;
+      if (this.state === UNIFIED_STATE.LISTENING) this.stateMachine.transition(UNIFIED_STATE.DRAINING, { options });
+      this.metrics.set('ready', 0);
+      this.metrics.set('draining', 1);
+      this.diagnostics.record('drain-begin', { options });
+      this.emit('draining', { deadline: options.deadline || null, addresses: this.addresses() });
+      this.protocols.ws.detachUpgradeRegistry(this.httpServer);
+      this.httpServer?.beginDrain?.();
+      const closeExternal = this.lastOptions?.shutdown?.closeExternal === true;
+      if (this.ownership.ws || closeExternal) this.protocols.ws.beginDrain?.(options);
+      if (this.ownership.tcp || closeExternal) this.protocols.tcp.beginDrain?.(options);
+      this.protocols.udp.beginDrain?.(options);
+      this.hybrid?.beginDrain?.({ ...options, drainSkin: false });
+    }
+    return this;
+  }
+
+  async waitForIdle(timeoutMs = 0) {
+    const tasks = [
+      this.httpServer?.waitForIdle?.(timeoutMs),
+      this._activeProtocols.websocket ? this.protocols.ws.waitForIdle?.(timeoutMs) : null,
+      this._activeProtocols.tcp ? this.protocols.tcp.waitForIdle?.(timeoutMs) : null,
+      this._activeProtocols.udp ? this.protocols.udp.waitForIdle?.(timeoutMs) : null,
+    ].filter(Boolean);
+    const results = await Promise.allSettled(tasks);
+    const failure = aggregateFailures(results, 'One or more RawNode Unified protocols did not become idle.');
+    if (failure) throw failure;
+    return this;
+  }
+
+  close(options = {}) {
+    if (this._closePromise) return this._closePromise;
+    if (this.state === UNIFIED_STATE.CLOSED) return Promise.resolve(this.health());
+    const operation = this.state === UNIFIED_STATE.STARTING && this._startPromise
+      ? this._startPromise.catch(() => null).then(() => this._close(options))
+      : this._close(options);
+    this._closePromise = operation.catch((error) => {
+      this._closePromise = null;
+      throw error;
+    });
+    return this._closePromise;
+  }
+
+  gracefulClose(options = {}) { return this.close(options); }
+
+  async _close(input = {}) {
+    const configured = this.lastOptions || normalizeUnifiedStartOptions(this.factoryOptions, {});
+    const shutdown = {
+      ...configured.shutdown,
+      ...(input || {}),
+      timeoutMs: Number(input.timeoutMs ?? configured.shutdown.timeoutMs),
+      forceCloseTimeoutMs: Number(input.forceCloseTimeoutMs ?? configured.shutdown.forceCloseTimeoutMs),
+      closeExternal: input.closeExternal ?? configured.shutdown.closeExternal,
+    };
+    await this._runHooks('beforeClose', { shutdown, server: this }, { isolate: true });
+    if (this.state === UNIFIED_STATE.IDLE || this.state === UNIFIED_STATE.FAILED) {
+      this.stateMachine.transition(UNIFIED_STATE.CLOSING, { idle: true });
+    } else {
+      this.beginDrain({ timeoutMs: shutdown.timeoutMs, deadline: Date.now() + shutdown.timeoutMs });
+      if (this.state !== UNIFIED_STATE.CLOSING) this.stateMachine.transition(UNIFIED_STATE.CLOSING, { timeoutMs: shutdown.timeoutMs });
+    }
+    this.metrics.inc('closes_total');
+    this.diagnostics.record('close-begin', { shutdown });
+    const started = performance.now();
+    let primaryError = null;
+
+    try {
+      await withTimeout(this._gracefulClose(shutdown), shutdown.timeoutMs, () => new UnifiedShutdownError('RawNode Unified shutdown deadline exceeded.', {
+        code: 'UNIFIED_SHUTDOWN_TIMEOUT', details: { timeoutMs: shutdown.timeoutMs },
+      }));
+    } catch (error) {
+      primaryError = error;
+      if (shutdown.force === false) {
+        this.lastError = safeError(error);
+        this.metrics.inc('shutdown_failures_total');
+        this.stateMachine.transition(UNIFIED_STATE.FAILED, { error: this.lastError, forced: false });
+        this._emitError(error, 'shutdown');
+        throw error;
+      }
+      this._forced = true;
+      this.forcedShutdowns++;
+      this.metrics.inc('forced_shutdowns_total');
+      this.diagnostics.record('force-close-begin', { error }, 'warn');
+      await this._forceClose(shutdown);
+    }
+
+    this.startedAt = 0;
+    this.closedAt = Date.now();
+    this._address = null;
+    this._activeProtocols = Object.freeze({ http: false, websocket: false, tcp: false, udp: false });
+    this._draining = false;
+    this.metrics.set('ready', 0);
+    this.metrics.set('draining', 0);
+    this.metrics.set('tcp_listener_active', 0);
+    this.metrics.set('udp_listener_active', 0);
+    this.metrics.observe('shutdown_duration_ms', performance.now() - started);
+    this.stateMachine.transition(UNIFIED_STATE.CLOSED, { forced: this._forced, error: safeError(primaryError) });
+    this.emit('close', { forced: this._forced, error: primaryError, health: this.health() });
+    this.diagnostics.record('close-complete', { forced: this._forced, error: primaryError }, primaryError ? 'warn' : 'info');
+    await this._runHooks('afterClose', { forced: this._forced, error: primaryError, health: this.health() }, { isolate: true });
+    this.metrics.close?.();
+    return this.health();
+  }
+
+  async _gracefulClose(shutdown) {
+    await this.waitForIdle(Math.max(0, shutdown.timeoutMs));
+    const closeExternal = shutdown.closeExternal === true;
+    const tasks = [];
+
+    if (this.hybrid) {
+      tasks.push(this.hybrid.close({
+        graceful: true,
+        timeoutMs: Math.max(1, shutdown.timeoutMs),
+        forceCloseTimeoutMs: Math.max(0, shutdown.forceCloseTimeoutMs),
+        drainSkin: this.ownership.tcp || closeExternal,
+      }));
+    }
+    if (this.httpServer) tasks.push(this.httpServer.gracefulClose({ timeoutMs: shutdown.timeoutMs, force: true, closeUpgrades: true }));
+    if (this.ownership.ws || closeExternal) tasks.push(this.protocols.ws.close?.({ timeoutMs: shutdown.timeoutMs }));
+    else this.protocols.ws.detachUpgradeRegistry?.();
+    if (this.ownership.udp || closeExternal) tasks.push(this.protocols.udp.close?.({ timeoutMs: shutdown.timeoutMs }));
+    else if (this._activeProtocols.udp) tasks.push(this.protocols.udp.unbind?.({ timeoutMs: shutdown.timeoutMs }));
+    const results = await Promise.allSettled(tasks.filter(Boolean));
+    const failure = aggregateFailures(results, 'One or more RawNode Unified protocols failed graceful shutdown.');
+    if (failure) throw failure;
+
+    if (this.ownership.http || closeExternal) {
+      await this.original.close({ timeoutMs: shutdown.timeoutMs, force: true });
+    }
+    this.httpServer = null;
+    this.hybrid = null;
+  }
+
+  async _forceClose(shutdown) {
+    const error = new UnifiedShutdownError('RawNode Unified forced transport closure.', { code: 'UNIFIED_FORCE_CLOSE' });
+    try { this.protocols.ws.detachUpgradeRegistry?.(); } catch {}
+    for (const socket of this.hybrid?.registry?.sockets || []) {
+      try { socket.destroy(error); } catch {}
+    }
+    await Promise.allSettled([
+      this.hybrid?.close?.({ graceful: false, timeoutMs: 1, forceCloseTimeoutMs: 0, drainSkin: this.ownership.tcp || shutdown.closeExternal }),
+      this.httpServer?.gracefulClose?.({ timeoutMs: 1, force: true, closeUpgrades: true }),
+      (this.ownership.ws || shutdown.closeExternal) ? this.protocols.ws.close?.({ force: true }) : null,
+      (this.ownership.udp || shutdown.closeExternal)
+        ? this.protocols.udp.close?.({ timeoutMs: 1 })
+        : (this._activeProtocols.udp ? this.protocols.udp.unbind?.({ timeoutMs: 1 }) : null),
+    ].filter(Boolean));
+    if (this.ownership.http || shutdown.closeExternal) {
+      try { await this.original.close({ timeoutMs: 1, force: true }); } catch {}
+    }
+    this.httpServer = null;
+    this.hybrid = null;
+  }
+
+  address() {
+    return this.addresses().tcp || null;
+  }
+
+  addresses() {
+    const tcp = this.hybrid?.address?.() || (isAddress(this._address) && TCP_SIDE_PROTOCOLS.some((name) => this._activeProtocols[name]) ? this._address : null);
+    const udp = this._activeProtocols.udp ? (this.protocols.udp?.address?.() || null) : null;
+    const primary = tcp || udp || null;
+    return {
+      primary,
+      tcp,
+      udp,
+      http: this._activeProtocols.http ? tcp : null,
+      websocket: this._activeProtocols.websocket ? tcp : null,
+      rawTcp: this._activeProtocols.tcp ? tcp : null,
+      sameNumericPort: !!(tcp && udp && tcp.port === udp.port),
+    };
+  }
+
+  health() {
+    const configured = this.lastOptions?.protocols || this.factoryOptions.protocols || { http: true, websocket: true, tcp: true, udp: true };
+    const active = this._activeProtocols;
+    const httpHealth = active.http ? (this.httpServer?.health?.() || null) : null;
+    const http = {
+      enabled: configured.http === true,
+      active: active.http === true,
+      required: this._isRequired('http'),
+      ready: active.http === true && httpHealth?.ready !== false && this.state === UNIFIED_STATE.LISTENING,
+      draining: httpHealth?.draining === true,
+      degraded: !!this._protocolFailures.http,
+      failure: this._protocolFailures.http || null,
+      health: httpHealth,
+    };
+    const ws = protocolHealth(
+      configured.websocket,
+      active.websocket,
+      this.protocols.ws,
+      null,
+      this._protocolFailures.websocket || null,
+      this._isRequired('websocket'),
+    );
+    const tcp = protocolHealth(
+      configured.tcp,
+      active.tcp,
+      this.protocols.tcp,
+      { listener: this.hybrid?.health?.() || null },
+      this._protocolFailures.tcp || null,
+      this._isRequired('tcp'),
+    );
+    const udp = protocolHealth(
+      configured.udp,
+      active.udp,
+      this.protocols.udp,
+      null,
+      this._protocolFailures.udp || null,
+      this._isRequired('udp'),
+    );
+    const entries = { http, websocket: ws, tcp, udp };
+    const required = Object.values(entries).filter((entry) => entry.required);
+    const ready = this.state === UNIFIED_STATE.LISTENING
+      && !this._draining
+      && required.every((entry) => entry.ready === true)
+      && Object.values(active).some(Boolean);
+    const degraded = this._degraded || Object.values(entries).some((entry) => entry.degraded);
+    return {
+      ok: [UNIFIED_STATE.LISTENING, UNIFIED_STATE.STARTING, UNIFIED_STATE.DRAINING].includes(this.state),
+      live: this.state !== UNIFIED_STATE.CLOSED,
+      ready,
+      degraded,
+      state: this.state,
+      draining: this.draining,
+      forced: this._forced,
+      startedAt: this.startedAt || 0,
+      closedAt: this.closedAt || 0,
+      uptimeMs: this.startedAt ? Date.now() - this.startedAt : 0,
+      addresses: this.addresses(),
+      protocols: entries,
+      protocolFailures: { ...this._protocolFailures },
+      pressure: {
+        hybrid: this.hybrid?.pressure?.() || null,
+        tcp: active.tcp ? (this.protocols.tcp?.pressure?.() || null) : null,
+        udp: active.udp ? (this.protocols.udp?.health?.()?.pressure || null) : null,
+        websocket: active.websocket
+          ? (this.protocols.ws?.snapshot?.({ includeStun: false, includeSignaling: false })?.engine?.pressure || null)
+          : null,
+      },
+      lastError: this.lastError,
+    };
+  }
+
+  metricsSnapshot() {
+    return this.metrics.snapshot({
+      state: this.state,
+      starts: this.startAttempts,
+      rollbacks: this.rollbackCount,
+      forcedShutdowns: this.forcedShutdowns,
+      degraded: this._degraded,
+      activeProtocols: { ...this._activeProtocols },
+      protocolFailures: { ...this._protocolFailures },
+      protocols: {
+        http: this.original.metrics?.('snapshot') || null,
+        websocket: this.protocols.ws?.metrics?.() || null,
+        tcp: this.protocols.tcp?.metricsSnapshot?.() || this.hybrid?.metrics?.snapshot?.() || null,
+        udp: this.protocols.udp?.metrics?.('snapshot') || null,
+      },
+    });
+  }
+
+  metricsOutput(format = 'snapshot') {
+    if (format !== 'prometheus') return this.metricsSnapshot();
+    const parts = [this.metrics.prometheus({ ready: this.health().ready ? 1 : 0 })];
+    try { parts.push(this.original.metrics?.('prometheus') || ''); } catch {}
+    try { parts.push(this.protocols.udp?.metrics?.('prometheus') || ''); } catch {}
+    try { parts.push(this.hybrid?.metrics?.prometheus?.() || this.protocols.tcp?.metrics?.prometheus?.() || ''); } catch {}
+    try { parts.push(this.protocols.ws?.metrics?.('prometheus') || ''); } catch {}
+    return parts.filter((entry) => typeof entry === 'string' && entry.trim()).join('\n');
+  }
+
+  diagnosticsSnapshot() {
+    return this.diagnostics.snapshot({
+      lifecycle: this.stateMachine.snapshot(),
+      health: this.health(),
+      metrics: this.metricsSnapshot(),
+      startup: {
+        attempts: this.startAttempts,
+        rollbacks: this.rollbackCount,
+        options: this.lastOptions,
+        activeProtocols: { ...this._activeProtocols },
+        protocolFailures: { ...this._protocolFailures },
+      },
+      plugins: this.plugins.map((plugin, index) => pluginName(plugin, index)),
+      native: {
+        http: this.httpServer?.diagnostics?.() || this.original.diagnostics?.() || null,
+        websocket: this.protocols.ws?.snapshot?.() || null,
+        tcp: this.hybrid?.snapshot?.() || null,
+        udp: this.protocols.udp?.diagnostics?.() || null,
+      },
+    });
+  }
+
+  snapshot() {
+    return Object.freeze({
+      state: this.state,
+      health: this.health(),
+      metrics: this.metricsSnapshot(),
+      diagnostics: this.diagnosticsSnapshot(),
+    });
+  }
+
+  ref() { this.hybrid?.ref?.(); this.protocols.udp?.ref?.(); return this; }
+  unref() { this.hybrid?.unref?.(); this.protocols.udp?.unref?.(); return this; }
+  async [Symbol.asyncDispose]() { await this.close(); }
+
+  _emitError(error, phaseName) {
+    this.lastError = safeError(error);
+    const payload = { error, phase: phaseName, at: Date.now() };
+    void this._runHooks('onError', payload, { isolate: true });
+    if (this.listenerCount('error') > 0) this.emit('error', error, payload);
+    else this.emit('unifiedError', payload);
+  }
+}
+
+function phase(error, name) {
+  if (error && typeof error === 'object') {
+    try { error.phase = name; } catch {}
+    return error;
+  }
+  const wrapped = new Error(String(error));
+  wrapped.phase = name;
+  return wrapped;
+}
+
+function stateNumber(value) {
+  return ({ idle: 0, starting: 1, listening: 2, draining: 3, closing: 4, closed: 5, failed: 6 })[value] ?? -1;
+}
+
+export default UnifiedServer;
+
+
+================================================
+FILE PATH: ./errors/UnifiedError.js
+================================================
+
+'use strict';
+
+export class UnifiedError extends Error {
+  constructor(message, options = {}) {
+    super(String(message || 'RawNode Unified error'), options.cause ? { cause: options.cause } : undefined);
+    this.name = options.name || 'UnifiedError';
+    this.code = options.code || 'UNIFIED_ERROR';
+    this.details = options.details && typeof options.details === 'object' ? { ...options.details } : null;
+    if (Error.captureStackTrace) Error.captureStackTrace(this, this.constructor);
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      code: this.code,
+      message: this.message,
+      details: this.details,
+    };
+  }
+}
+
+export class UnifiedConfigurationError extends UnifiedError {
+  constructor(message, options = {}) {
+    super(message, { ...options, name: 'UnifiedConfigurationError', code: options.code || 'UNIFIED_CONFIGURATION_ERROR' });
+  }
+}
+
+export class UnifiedStateError extends UnifiedError {
+  constructor(message, options = {}) {
+    super(message, { ...options, name: 'UnifiedStateError', code: options.code || 'UNIFIED_STATE_ERROR' });
+  }
+}
+
+export class UnifiedStartupError extends UnifiedError {
+  constructor(message, options = {}) {
+    super(message, { ...options, name: 'UnifiedStartupError', code: options.code || 'UNIFIED_STARTUP_ERROR' });
+  }
+}
+
+export class UnifiedShutdownError extends UnifiedError {
+  constructor(message, options = {}) {
+    super(message, { ...options, name: 'UnifiedShutdownError', code: options.code || 'UNIFIED_SHUTDOWN_ERROR' });
+  }
+}
+
+export function safeError(error) {
+  if (!error) return null;
+  return {
+    name: error.name || 'Error',
+    code: error.code || null,
+    message: error.message || String(error),
+    details: error.details || null,
+  };
+}
+
+export default UnifiedError;
+
+
+================================================
+FILE PATH: ./console/index.js
+================================================
+
+'use strict';
+export * from './UnifiedCommands.js';
+
+
+================================================
+FILE PATH: ./console/UnifiedCommands.js
+================================================
+
+'use strict';
+
+function managerOf(app) {
+  if (app?.getUnifiedServer) return app.getUnifiedServer();
+  if (app?.unified?.start) return app.unified;
+  try { return app?.resolve?.('unified.manager') || app?.resolve?.('unified')?.unified; }
+  catch { return null; }
+}
+
+export class UnifiedServeCommand {
+  constructor(app) { this.app = app; this.signature = 'unified:serve {port?}'; this.description = 'Start the RawNode unified HTTP/WebSocket/TCP/UDP endpoint.'; }
+  async handle(input = {}) {
+    const manager = managerOf(this.app);
+    if (!manager) throw new Error('RawNode Unified manager is not registered.');
+    const argument = typeof this.argument === 'function' ? this.argument('port') : null;
+    const port = Number(input.port ?? argument ?? process.env.UNIFIED_PORT ?? process.env.PORT ?? 3000);
+    const host = String(input.host ?? process.env.UNIFIED_HOST ?? process.env.HOST ?? '127.0.0.1');
+    const server = await manager.start({ ...input, host, port });
+    this.info?.(`RawNode Unified listening at ${host}:${server.address()?.port}`);
+    return server;
+  }
+}
+
+export class UnifiedDoctorCommand {
+  constructor(app) { this.app = app; this.signature = 'unified:doctor'; this.description = 'Inspect unified lifecycle, protocol readiness, and classification policy.'; }
+  async handle() {
+    const manager = managerOf(this.app);
+    if (!manager) return { ok: false, code: 'UNIFIED_NOT_REGISTERED' };
+    const health = manager.health();
+    return { ok: health.ok, health, diagnostics: manager.diagnosticsSnapshot() };
+  }
+}
+
+export class UnifiedRoutesCommand {
+  constructor(app) { this.app = app; this.signature = 'unified:routes'; this.description = 'List HTTP routes and registered realtime/RPC handlers.'; }
+  async handle() {
+    const manager = managerOf(this.app);
+    if (!manager) return { ok: false, code: 'UNIFIED_NOT_REGISTERED' };
+    const http = manager.app?.diagnostics?.()?.native?.http?.router || manager.original?.diagnostics?.()?.router || null;
+    return {
+      ok: true,
+      http,
+      websocket: manager.protocols.ws?.snapshot?.({ includeStun: false, includeSignaling: false }) || null,
+      tcpHandlers: Array.from(manager.protocols.tcp?._handlers?.keys?.() || []),
+      udpRoutes: Array.from(manager.protocols.udp?.routes?.keys?.() || []),
+    };
+  }
+}
+
+export class UnifiedStatsCommand {
+  constructor(app) { this.app = app; this.signature = 'unified:stats'; this.description = 'Print unified protocol metrics and pressure.'; }
+  async handle(input = {}) {
+    const manager = managerOf(this.app);
+    if (!manager) return { ok: false, code: 'UNIFIED_NOT_REGISTERED' };
+    return input.prometheus === true ? manager.metricsOutput('prometheus') : manager.metricsSnapshot();
+  }
+}
+
+export default { UnifiedServeCommand, UnifiedDoctorCommand, UnifiedRoutesCommand, UnifiedStatsCommand };

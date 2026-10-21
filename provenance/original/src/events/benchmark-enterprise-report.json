@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "node": "v22.16.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "generatedAt": "2026-07-17T06:38:34.101Z",
+  "configuration": {
+    "iterations": 1000000,
+    "warmup": 25000,
+    "patternCount": 500
+  },
+  "eventLoopDelayMs": {
+    "mean": 135.610368,
+    "p99": 182.452223,
+    "max": 182.452223
+  },
+  "notes": [
+    "Results are directional microbenchmarks, not cross-framework HTTP benchmarks.",
+    "Synchronous scenarios do not await each operation; the async scenario awaits sequential dispatch.",
+    "Heap deltas are noisy and should be interpreted only across repeated controlled runs."
+  ],
+  "results": [
+    {
+      "name": "no-listener",
+      "mode": "sync",
+      "iterations": 1000000,
+      "elapsedMs": 1.5590579999999932,
+      "operationsPerSecond": 641412956,
+      "nanosecondsPerOperation": 2,
+      "heapDeltaBytes": 14072
+    },
+    {
+      "name": "exact-one-listener",
+      "mode": "sync",
+      "iterations": 1000000,
+      "elapsedMs": 141.714742,
+      "operationsPerSecond": 7056429,
+      "nanosecondsPerOperation": 142,
+      "heapDeltaBytes": -1244520,
+      "sink": 1025000
+    },
+    {
+      "name": "hierarchical-two-listeners",
+      "mode": "sync",
+      "iterations": 1000000,
+      "elapsedMs": 169.28722800000003,
+      "operationsPerSecond": 5907120,
+      "nanosecondsPerOperation": 169,
+      "heapDeltaBytes": -2186120,
+      "sink": 2050000
+    },
+    {
+      "name": "indexed-501-patterns",
+      "mode": "sync",
+      "iterations": 1000000,
+      "elapsedMs": 148.77116099999995,
+      "operationsPerSecond": 6721733,
+      "nanosecondsPerOperation": 149,
+      "heapDeltaBytes": -2107648,
+      "sink": 1025000
+    },
+    {
+      "name": "async-sequential-one-listener",
+      "mode": "async",
+      "iterations": 50000,
+      "elapsedMs": 33.97084199999995,
+      "operationsPerSecond": 1471850,
+      "nanosecondsPerOperation": 679,
+      "heapDeltaBytes": 539336
+    }
+  ]
+}

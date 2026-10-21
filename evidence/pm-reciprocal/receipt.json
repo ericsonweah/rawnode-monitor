@@ -1,0 +1,66 @@
+{
+  "author": "PM sibling lane",
+  "source_workspace": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3",
+  "evidence_read_and_preserved_by": "Monitor lane",
+  "pm_sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+  "monitor_sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad",
+  "tests": 5,
+  "passed": 5,
+  "real_child_ipc": true,
+  "strict_paired_types": true,
+  "pm_native_tests": 47,
+  "pm_packed_tests": 47,
+  "focused_independent_review": "adversarial-r6-resolution.md; static review and exact artifact/source byte comparison; runtime results inspected, not independently rerun",
+  "files": [
+    {
+      "path": "adversarial-r6-resolution.md",
+      "bytes": 5250,
+      "sha256": "a561e715b5fba8cbdcea9da2118a7ed84708ee8fd3eef442b0da9b20f480f79f"
+    },
+    {
+      "path": "composition-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "composition.test.mjs",
+      "bytes": 3339,
+      "sha256": "b942256bd3cc18c9651cf3481d9edfb2bee2936f0f72800558f8960286a3d74e"
+    },
+    {
+      "path": "composition.txt",
+      "bytes": 531,
+      "sha256": "61edb44ff84c4e62b85e0e5908961ccbdd95118f7f4c28352f40ebed67d5b1bd"
+    },
+    {
+      "path": "consumer.ts",
+      "bytes": 609,
+      "sha256": "f82c7b4e03f0dd87047df8870df344f205069fe5931a77306b87b811ab21355b"
+    },
+    {
+      "path": "log-shutdown-affected-tests.txt",
+      "bytes": 1310,
+      "sha256": "327eeccbe0515667f071d512214be9394e3363deb2ab0158255dfb328c400833"
+    },
+    {
+      "path": "native-final.txt",
+      "bytes": 4230,
+      "sha256": "a5605a411f887f58bcb1bd76cd37b69df99bee22043473ae4f9d03e4dba57865"
+    },
+    {
+      "path": "package.json",
+      "bytes": 33,
+      "sha256": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035"
+    },
+    {
+      "path": "packed-consumer.json",
+      "bytes": 1533,
+      "sha256": "14b92c3309c5b854484a26d2e78ed850392e7846c17e29dc209aed765ff5e634"
+    },
+    {
+      "path": "worker.mjs",
+      "bytes": 955,
+      "sha256": "2c4539f23ec1351997f8b0709065bd03f7c60e272a1d987425c1635c60a6841f"
+    }
+  ]
+}

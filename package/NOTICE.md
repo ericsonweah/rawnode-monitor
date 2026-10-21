@@ -1,0 +1,3 @@
+# Provenance and ownership
+
+RawNode is owned by First Principle Lab LLC, as directed by its owner. This candidate derives from the local src/monitor tree, its actual resources/assets/js/monitor/studio.js frontend, CSS, config, declarations and Foundation provider. The source MONITOR_VERSION is 1.0.0; that version is retained provisionally. No standalone source package manifest or nonempty Monitor license was found. The root manifest declares ISC and author Rawnode.org; its LICENSE is empty. No ISC grant has been fabricated. The source archive contains byte-for-byte copies and SHA-256 inventories. No third-party implementation is vendored.

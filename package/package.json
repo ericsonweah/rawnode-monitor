@@ -1,0 +1,148 @@
+{
+  "name": "@rawnode/monitor",
+  "version": "1.0.0",
+  "description": "Dependency-free embeddable RawNode observability and optional Monitor Studio",
+  "type": "module",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "First Principle Lab LLC",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./metrics": {
+      "types": "./types/metrics.d.ts",
+      "import": "./src/metrics/index.js"
+    },
+    "./pipeline": {
+      "types": "./types/pipeline.d.ts",
+      "import": "./src/pipeline/index.js"
+    },
+    "./studio": {
+      "types": "./types/studio.d.ts",
+      "import": "./src/studio/index.js"
+    },
+    "./tracing": {
+      "types": "./types/tracing.d.ts",
+      "import": "./src/tracing/index.js"
+    },
+    "./cluster": {
+      "types": "./types/cluster.d.ts",
+      "import": "./src/cluster/index.js"
+    },
+    "./core": {
+      "types": "./types/core.d.ts",
+      "import": "./src/core/index.js"
+    },
+    "./analysis": {
+      "types": "./types/analysis.d.ts",
+      "import": "./src/analysis/index.js"
+    },
+    "./security": {
+      "types": "./types/security.d.ts",
+      "import": "./src/security/index.js"
+    },
+    "./plugins": {
+      "types": "./types/plugins.d.ts",
+      "import": "./src/plugins/index.js"
+    },
+    "./synthetics": {
+      "types": "./types/synthetics.d.ts",
+      "import": "./src/synthetics/index.js"
+    },
+    "./exporters": {
+      "types": "./types/exporters.d.ts",
+      "import": "./src/exporters/index.js"
+    },
+    "./health": {
+      "types": "./types/health.d.ts",
+      "import": "./src/health/index.js"
+    },
+    "./resources": {
+      "types": "./types/resources.d.ts",
+      "import": "./src/resources/index.js"
+    },
+    "./storage": {
+      "types": "./types/storage.d.ts",
+      "import": "./src/storage/index.js"
+    },
+    "./alerts": {
+      "types": "./types/alerts.d.ts",
+      "import": "./src/alerts/index.js"
+    },
+    "./integrations": {
+      "types": "./types/integrations.d.ts",
+      "import": "./src/integrations/index.js"
+    },
+    "./testing": {
+      "types": "./types/testing.d.ts",
+      "import": "./src/testing/index.js"
+    },
+    "./system": {
+      "types": "./types/system.d.ts",
+      "import": "./src/system/index.js"
+    },
+    "./diagnostics": {
+      "types": "./types/diagnostics.d.ts",
+      "import": "./src/diagnostics/index.js"
+    },
+    "./slo": {
+      "types": "./types/slo.d.ts",
+      "import": "./src/slo/index.js"
+    },
+    "./query": {
+      "types": "./types/query.d.ts",
+      "import": "./src/query/index.js"
+    },
+    "./incidents": {
+      "types": "./types/incidents.d.ts",
+      "import": "./src/incidents/index.js"
+    },
+    "./deployments": {
+      "types": "./types/deployments.d.ts",
+      "import": "./src/deployments/index.js"
+    },
+    "./console": {
+      "types": "./types/console.d.ts",
+      "import": "./src/console/index.js"
+    },
+    "./provider": {
+      "types": "./types/provider.d.ts",
+      "import": "./src/provider/MonitorServiceProvider.js"
+    },
+    "./config": {
+      "types": "./types/config.d.ts",
+      "import": "./config/monitor.js"
+    },
+    "./studio/client": {
+      "types": "./types/studio-client.d.ts",
+      "import": "./resources/assets/js/monitor/studio.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "types",
+    "config",
+    "resources",
+    "docs",
+    "examples",
+    "scripts",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "CHANGELOG.md",
+    "test"
+  ],
+  "scripts": {
+    "build": "node scripts/check.mjs",
+    "test": "node --test --test-timeout=20000 test/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "prepack": "node scripts/check.mjs",
+    "prepublishOnly": "node scripts/reject-publication.mjs"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "library_file_id": "libfile_eef552d9f4608191b3c75068b30812f7",
+  "version": 3,
+  "file_id": "file_00000000db1c81fb8b83d54b13084c6c",
+  "filename": "rawnode-events-standalone-candidate.zip",
+  "expected_sha256": "9930c3a9a0d2708eabbcacf464e384c4894c8820c0b974ec5345f891c05295d6",
+  "prepare": "succeeded",
+  "download": "failed",
+  "attempts": 2,
+  "readableBytes": false,
+  "composition": "unverified",
+  "alternateRouteUsed": false
+}

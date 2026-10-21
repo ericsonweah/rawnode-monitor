@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "allowJs": false,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "rawnode-logger": ["./types/index.d.ts"],
+      "rawnode-logger/enterprise": ["./types/index.d.ts"],
+      "rawnode-logger/transports": ["./types/transports.d.ts"],
+      "rawnode-logger/testing": ["./types/testing.d.ts"],
+      "rawnode-logger/integrations": ["./types/integrations.d.ts"],
+      "rawnode-logger/inspector": ["./types/inspector.d.ts"],
+      "rawnode-logger/config": ["./types/config.d.ts"],
+      "rawnode-logger/console": ["./types/console.d.ts"],
+      "rawnode-logger/colors": ["./types/colors.d.ts"]
+    }
+  },
+  "include": ["tests/types/**/*.ts", "types/**/*.d.ts"]
+}

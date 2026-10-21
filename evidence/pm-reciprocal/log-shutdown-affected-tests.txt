@@ -1,0 +1,25 @@
+✔ closing unstarted manager leaves owner state bytes unchanged (133.978261ms)
+✔ manager close interrupts resurrection readiness rather than awaiting deadline (192.024701ms)
+✔ supervisor close attempts and awaits every record after a cleanup error (144.993407ms)
+✔ desired-state saves serialize snapshot and commit order (79.879604ms)
+✔ HTTP management close bounds a never-settling command handler (1090.41377ms)
+✔ failed rolling replacement leaves old cluster generation serving (375.977696ms)
+✔ external spawn failure never becomes ready (12.967506ms)
+✔ CLI rejects unknown and missing-argument commands without creating state (1082.469145ms)
+✔ bounded realtime delivery drops when an adapter is already pending (28.050754ms)
+✔ quoted multiword secrets and positional secret flags are redacted (4.377981ms)
+✔ failed foreground daemon startup restores process signal listeners (72.064018ms)
+✔ log close awaits a previously started detach and its final pipe tail (29.420264ms)
+✔ log close settles both stream writers when one close fails (33.327586ms)
+{
+  "ok": true
+}
+✔ CLI preserves scale --instances syntax through authenticated task-owned control (80.06931ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4158.085124

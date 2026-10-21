@@ -1,0 +1,9 @@
+{
+  "pm_sha256": "340b2fa87b9ba4a1f18631f75af1c9d056f0e1b1df590f012a8eb6eb435aed33",
+  "status": "final status withdrawn by PM owner; successful composition remains historical evidence",
+  "reason": "Independent rereview found log shutdown race: close could miss in-flight detach/flush",
+  "monitor_candidate_changed": false,
+  "replacement_pin": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+  "replacement_runtime_and_types": "passed",
+  "historical_evidence": "pm-composition-history/340b2fa87"
+}

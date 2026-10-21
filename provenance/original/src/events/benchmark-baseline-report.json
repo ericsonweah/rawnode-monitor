@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T06:36:55.682Z",
+  "node": "v22.16.0",
+  "platform": "linux",
+  "baselinePath": "/mnt/data/rawnode-events-baseline/src/events/AdvancedEventDispatcher.js",
+  "rounds": 9,
+  "iterations": 1000000,
+  "patterns": 500,
+  "notes": [
+    "Median in-process microbenchmark on one host; not an HTTP/framework benchmark.",
+    "Results are directional and should be repeated on production-class hardware.",
+    "Both implementations run with history and metrics disabled."
+  ],
+  "results": [
+    {
+      "scenario": "no-listener",
+      "iterations": 1000000,
+      "baseline": {
+        "elapsedMs": 49.38949799999999,
+        "operationsPerSecond": 20247219,
+        "nanosecondsPerOperation": 49,
+        "samplesMs": [
+          50.036744,
+          49.38949799999999,
+          50.682107,
+          49.00795200000002,
+          51.49994300000003,
+          48.55129299999999,
+          49.156244999999956,
+          47.58614,
+          49.42836300000005
+        ],
+        "observedInvocations": 0
+      },
+      "enterprise": {
+        "elapsedMs": 55.5104080000001,
+        "operationsPerSecond": 18014640,
+        "nanosecondsPerOperation": 56,
+        "samplesMs": [
+          13.171531000000073,
+          57.83448299999998,
+          59.96904299999994,
+          57.790167999999994,
+          56.630727999999976,
+          55.25795900000003,
+          55.02799600000003,
+          55.40678200000002,
+          55.5104080000001
+        ],
+        "observedInvocations": 0
+      },
+      "enterpriseVsBaseline": {
+        "throughputRatio": 0.8897340419936189,
+        "latencyChangePercent": 14.285714285714285
+      }
+    },
+    {
+      "scenario": "one-exact-listener",
+      "iterations": 1000000,
+      "baseline": {
+        "elapsedMs": 382.80859799999985,
+        "operationsPerSecond": 2612272,
+        "nanosecondsPerOperation": 383,
+        "samplesMs": [
+          382.80859799999985,
+          381.6515029999998,
+          380.5397019999998,
+          382.6880759999999,
+          382.6992559999999,
+          389.22888699999976,
+          384.28726099999994,
+          397.27763000000004,
+          395.933798
+        ],
+        "observedInvocations": 9450000
+      },
+      "enterprise": {
+        "elapsedMs": 159.11287900000025,
+        "operationsPerSecond": 6284846,
+        "nanosecondsPerOperation": 159,
+        "samplesMs": [
+          158.2618999999995,
+          158.30823200000032,
+          158.86458399999992,
+          159.11287900000025,
+          159.49371599999995,
+          161.59453600000052,
+          160.95146399999976,
+          159.06947299999956,
+          162.7405549999994
+        ],
+        "observedInvocations": 9450000
+      },
+      "enterpriseVsBaseline": {
+        "throughputRatio": 2.4058926482387744,
+        "latencyChangePercent": -58.485639686684074
+      }
+    },
+    {
+      "scenario": "hierarchical-two-listeners",
+      "iterations": 1000000,
+      "baseline": {
+        "elapsedMs": 630.1403900000005,
+        "operationsPerSecond": 1586948,
+        "nanosecondsPerOperation": 630,
+        "samplesMs": [
+          635.7667359999996,
+          615.9980729999997,
+          615.9465359999995,
+          623.6531589999995,
+          630.1403900000005,
+          622.1928819999994,
+          642.0586860000003,
+          733.7087280000014,
+          729.3661709999997
+        ],
+        "observedInvocations": 18900000
+      },
+      "enterprise": {
+        "elapsedMs": 200.37778400000025,
+        "operationsPerSecond": 4990573,
+        "nanosecondsPerOperation": 200,
+        "samplesMs": [
+          205.73255299999983,
+          188.47172599999976,
+          202.01962300000014,
+          206.36089899999934,
+          186.37212499999987,
+          197.24813800000084,
+          200.37778400000025,
+          203.52962200000002,
+          200.04364200000055
+        ],
+        "observedInvocations": 18900000
+      },
+      "enterpriseVsBaseline": {
+        "throughputRatio": 3.1447615170755436,
+        "latencyChangePercent": -68.25396825396825
+      }
+    },
+    {
+      "scenario": "500-patterns-one-match",
+      "iterations": 10000,
+      "baseline": {
+        "elapsedMs": 145.81365200000073,
+        "operationsPerSecond": 68581,
+        "nanosecondsPerOperation": 14581,
+        "samplesMs": [
+          155.29840200000035,
+          143.45158400000037,
+          146.42692200000056,
+          141.4556160000011,
+          146.85955100000137,
+          145.81365200000073,
+          142.99797099999887,
+          146.10815999999977,
+          143.4028279999984
+        ],
+        "observedInvocations": 180000
+      },
+      "enterprise": {
+        "elapsedMs": 2.3187030000008235,
+        "operationsPerSecond": 4312756,
+        "nanosecondsPerOperation": 232,
+        "samplesMs": [
+          5.282729999998992,
+          1.6876019999981509,
+          3.7848529999973834,
+          2.3187030000008235,
+          1.683898000002955,
+          3.396949999998469,
+          1.9253549999993993,
+          1.6644459999988612,
+          2.5879359999998996
+        ],
+        "observedInvocations": 180000
+      },
+      "enterpriseVsBaseline": {
+        "throughputRatio": 62.88558055438095,
+        "latencyChangePercent": -98.40888827926754
+      }
+    }
+  ]
+}

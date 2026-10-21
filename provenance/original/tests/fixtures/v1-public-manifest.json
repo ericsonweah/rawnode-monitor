@@ -1,0 +1,24 @@
+{
+  "exports": [
+    "Facade", "createFacade", "Access", "Auth", "Cache", "CodeHighlighter",
+    "Highlighter", "Editor", "Event", "Log", "Monitor", "Route", "Router",
+    "Security", "Storage", "Hash", "Jwt", "MiddlewareCompiler", "Pipeline"
+  ],
+  "facadeAccessors": {
+    "Access": "access",
+    "Auth": "auth",
+    "Cache": "cache.repository",
+    "CodeHighlighter": "code-highlighter",
+    "Editor": "editor",
+    "Event": "events",
+    "Log": "logger",
+    "Monitor": "monitor.runtime",
+    "Route": "router",
+    "Router": "router",
+    "Security": "security",
+    "Storage": "storage"
+  },
+  "pipelineMethods": ["send", "through", "then"],
+  "hashMethods": ["make", "check"],
+  "jwtMethods": ["sign", "verify", "signStr", "base64UrlEncode"]
+}

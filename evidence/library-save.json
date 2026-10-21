@@ -1,0 +1,14 @@
+{
+  "operation": "ordered Library create ZIP and npm tgz",
+  "route": "current unchanged prepared-upload helper",
+  "attempts": 1,
+  "result": "failed",
+  "error": "Library prepare_uploads is not available",
+  "library_file_id": null,
+  "version": null,
+  "file_id": null,
+  "fallback_route_used": false,
+  "local_deliverables_preserved": true,
+  "archive_finalized_after_failed_attempt": true,
+  "final_bytes_saved_to_library": false
+}

@@ -1,0 +1,167 @@
+{
+  "ok": true,
+  "profile": "production",
+  "node": "v22.16.0",
+  "zeroDependencies": true,
+  "health": {
+    "ok": true,
+    "ready": true,
+    "state": "ready",
+    "reasons": [],
+    "asyncInFlight": 0,
+    "pendingAsync": 0,
+    "scheduler": {
+      "accepting": true,
+      "closed": false,
+      "queuedItems": 0,
+      "queuedBytes": 0,
+      "inFlight": 0,
+      "limits": {
+        "maxItems": 100000,
+        "maxBytes": 67108864,
+        "maxInFlight": 32,
+        "overflow": "drop-oldest"
+      },
+      "stats": {
+        "accepted": 0,
+        "completed": 0,
+        "failed": 0,
+        "rejected": 0,
+        "dropped": 0,
+        "highWaterItems": 0,
+        "highWaterBytes": 0,
+        "slices": 0,
+        "yields": 0
+      }
+    },
+    "history": {
+      "enabled": false,
+      "eventNames": 0,
+      "entries": 0,
+      "bytes": 0,
+      "limits": {
+        "maxEntriesPerEvent": 0,
+        "maxEventNames": 1024,
+        "maxEntriesTotal": 100000,
+        "maxBytes": 67108864,
+        "maxPayloadBytes": 262144,
+        "ttlMs": 3600000
+      },
+      "clonePolicy": "shallow",
+      "stats": {
+        "recorded": 0,
+        "rejected": 0,
+        "evicted": 0,
+        "expired": 0,
+        "oversized": 0,
+        "eventNamesEvicted": 0,
+        "serializationFailures": 0
+      }
+    },
+    "bridge": null,
+    "subsystems": {},
+    "checkedAt": 1784270399831
+  },
+  "probe": {
+    "eventName": "doctor:probe",
+    "mode": "sync",
+    "startedAt": 1784270399830,
+    "completedAt": 1784270399830,
+    "durationMs": 0.07285700000000617,
+    "matched": 1,
+    "invoked": 1,
+    "skipped": 0,
+    "results": [
+      {
+        "listenerId": 1,
+        "status": "fulfilled",
+        "value": true
+      }
+    ],
+    "errors": [],
+    "aborted": false,
+    "timedOut": false,
+    "stopped": false,
+    "context": null,
+    "ok": true
+  },
+  "findings": [],
+  "configuration": {
+    "listeners": {
+      "maxPerEvent": 5000,
+      "maxTotal": 100000,
+      "maxPatterns": 10000,
+      "maxPerPattern": 1000,
+      "maxAny": 1000,
+      "planCacheMax": 4096
+    },
+    "history": {
+      "maxEntriesPerEvent": 0,
+      "maxEventNames": 1024,
+      "maxEntriesTotal": 100000,
+      "maxBytes": 67108864,
+      "maxPayloadBytes": 262144,
+      "ttlMs": 3600000,
+      "clonePolicy": "shallow",
+      "allow": [],
+      "deny": [
+        "internal:**"
+      ]
+    },
+    "deferred": {
+      "maxItems": 100000,
+      "maxBytes": 67108864,
+      "maxInFlight": 32,
+      "budgetMs": 4,
+      "maxPerSlice": 256,
+      "overflow": "drop-oldest",
+      "awaitTasks": false
+    },
+    "metrics": {
+      "enabled": true,
+      "maxSeries": 2048,
+      "slowMs": 25,
+      "prefix": "rawnode_events"
+    },
+    "context": {
+      "enabled": true
+    },
+    "diagnostics": {
+      "enabled": false,
+      "historyLimit": 256,
+      "maxHistoryBytes": 4194304,
+      "publishChannel": true
+    },
+    "contracts": {
+      "autoValidate": false
+    },
+    "broadcasting": {
+      "enabled": false,
+      "auto": false,
+      "errorPolicy": "isolate",
+      "defaultChannel": "global"
+    },
+    "security": {
+      "strictNames": true,
+      "maxEventNameBytes": 512,
+      "maxSegments": 32,
+      "maxPatternBytes": 4096,
+      "maxDispatchPayloadBytes": 16777216,
+      "maxContextBytes": 65536,
+      "blockControlChars": true,
+      "namespaceAllow": null,
+      "namespaceDeny": null
+    },
+    "dispatch": {
+      "errorPolicy": "isolate"
+    },
+    "lifecycle": {
+      "shutdownTimeoutMs": 30000,
+      "forceOnTimeout": true
+    },
+    "normalizeDot": false,
+    "logEvents": false,
+    "profile": "production",
+    "logger": {}
+  }
+}

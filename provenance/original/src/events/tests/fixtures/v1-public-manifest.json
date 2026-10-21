@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "files": {
+    "AdvancedEventDispatcher": [
+      "on", "once", "off", "onAny", "offAny", "onPattern", "offPattern",
+      "dispatch", "dispatchAsync", "dispatchDeferred", "getHistory", "getHistoryAll",
+      "clearHistory", "hasListeners", "onDiagnostic", "onceDiagnostic", "offDiagnostic",
+      "createContext", "getContext", "getContextId", "run", "childContext"
+    ],
+    "EventDispatcher": ["on", "dispatch"],
+    "Event": ["shouldBroadcast", "broadcastAs"],
+    "ProtocolEvent": [],
+    "EventRegistry": ["listen", "getListeners", "registerSubscriber"],
+    "EventMetrics": ["record", "snapshot"],
+    "RedisEventBridge": ["start", "stop"],
+    "Broadcastable": []
+  },
+  "exports": [
+    "AdvancedEventDispatcher", "EventDispatcher", "Event", "ProtocolEvent", "EventRegistry",
+    "EventMetrics", "RedisEventBridge", "Broadcastable", "validateEventName"
+  ]
+}

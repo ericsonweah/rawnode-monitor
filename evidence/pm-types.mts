@@ -1,0 +1,12 @@
+import { MonitorRuntime, PMMonitorBridge } from '@rawnode/monitor';
+import { RawNodeRuntimeAdapter, RuntimeAgent } from '@rawnode/pm';
+const monitor = new MonitorRuntime();
+const adapter = new RawNodeRuntimeAdapter({callbackTimeoutMs:100});
+const bridge = new PMMonitorBridge(adapter,monitor);
+const agent = new RuntimeAgent({adapter, managed:false,captureSignals:false,autoExit:false});
+new PMMonitorBridge(agent,monitor).start();
+new PMMonitorBridge({runtime:adapter},monitor).start();
+bridge.start();
+await bridge.close();
+await agent.close();
+await monitor.close();

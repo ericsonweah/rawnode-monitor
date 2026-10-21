@@ -1,0 +1,17 @@
+{
+  "model_catalog_exposes": [
+    "mcp__codex_apps__library_prepare_uploads",
+    "mcp__codex_apps__library_finalize_uploads",
+    "mcp__codex_apps__library_create_library_file",
+    "mcp__codex_apps__library_replace_library_file"
+  ],
+  "required_helper_result": "Library prepare_uploads is not available",
+  "helper_call_exit_code": 1,
+  "helper_resources": ["library_upload.py", "library_hosted_apps.py", "library_file_transfer.py"],
+  "resources_fetched_from_current_skill": true,
+  "helper_modified": false,
+  "same_flow_remedy_documented": false,
+  "manual_prepare_finalize_or_transfer_attempted": false,
+  "executor_or_route_switch_attempted": false,
+  "conclusion": "Model catalog availability does not establish helper-runtime availability. No supported same-flow remedy is described by the current skill. Retain failure and local artifacts."
+}

@@ -1,0 +1,10 @@
+{
+  "requested": "iab task-local Studio fixture",
+  "firstResult": "Browser is not available: iab",
+  "inventory": {
+    "apps": [],
+    "browsers": []
+  },
+  "actualBrowser": "unverified",
+  "fixtureClosed": true
+}

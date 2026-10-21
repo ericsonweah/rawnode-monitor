@@ -1,0 +1,11 @@
+import {MonitorRuntime} from '@rawnode/monitor';
+import {PMMonitorBridge} from '@rawnode/monitor/integrations';
+import {RuntimeAgent,RawNodeRuntimeAdapter} from '@rawnode/pm/runtime';
+setTimeout(()=>process.exit(124),15000).unref();
+const monitor=new MonitorRuntime({profile:'test',config:{profile:'test',service:'pm-child-composition',system:{enabled:false},resources:{autoDiscover:false},storage:{enabled:true,driver:'memory'}}});
+await monitor.start();monitor.metrics.counter('pm_monitor_composition_total').inc();
+const adapter=new RawNodeRuntimeAdapter({incidentDir:process.env.INCIDENT_DIR,callbackTimeoutMs:1000});
+const runtime=new RuntimeAgent({adapter,intervalMs:250,callbackTimeoutMs:2000});
+const bridge=new PMMonitorBridge(runtime,monitor);bridge.start();
+adapter.registerResource('monitor-lifecycle',{shutdown:async()=>{await bridge.close();await monitor.close();return{ok:true};}});
+runtime.start().ready({composition:'exact-pm-monitor'});

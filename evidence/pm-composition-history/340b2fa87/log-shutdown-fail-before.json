@@ -1,0 +1,6 @@
+{
+  "packageSha256": "340b2fa87b9ba4a1f18631f75af1c9d056f0e1b1df590f012a8eb6eb435aed33",
+  "raceReproduced": true,
+  "detachSettledWhenCloseReturned": false,
+  "sharedWritersWhenCloseReturned": 1
+}

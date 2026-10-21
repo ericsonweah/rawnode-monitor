@@ -1,0 +1,632 @@
+{
+  "name": "rawnode",
+  "version": "1.0.0",
+  "description": "Rawnode Framework",
+  "keywords": [
+    "zero",
+    "dependencies"
+  ],
+  "homepage": "https://github.com/rawnode/rawnode-framework-v1#readme",
+  "bugs": {
+    "url": "https://github.com/rawnode/rawnode-framework-v1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rawnode/rawnode-framework-v1.git"
+  },
+  "license": "ISC",
+  "author": "Rawnode.org",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.js"
+    },
+    "./live": {
+      "types": "./types/live/index.d.ts",
+      "import": "./src/live/src/index.js"
+    },
+    "./live/client": {
+      "types": "./types/live/client.d.ts",
+      "import": "./resources/assets/js/live/transport/LiveClientTransport.js"
+    },
+    "./live/browser": {
+      "types": "./types/live/browser.d.ts",
+      "import": "./resources/assets/js/live/browser/index.js"
+    },
+    "./live/protocol": {
+      "types": "./types/live/protocol.d.ts",
+      "import": "./src/live/src/protocol/LiveProtocol.js"
+    },
+    "./live/props": {
+      "types": "./types/live/props.d.ts",
+      "import": "./src/live/src/components/LiveProps.js"
+    },
+    "./live/tree": {
+      "types": "./types/live/tree.d.ts",
+      "import": "./src/live/src/components/LiveComponentTreeRegistry.js"
+    },
+    "./live/views": {
+      "types": "./types/live/views.d.ts",
+      "import": "./src/live/src/views/index.js"
+    },
+    "./live/config": {
+      "import": "./config/live.js"
+    },
+    "./editor": {
+      "types": "./src/editor/types/editor/index.d.ts",
+      "import": "./src/editor/src/editor/index.js"
+    },
+    "./editor/client": {
+      "types": "./src/editor/types/editor/client.d.ts",
+      "import": "./src/editor/resources/assets/js/editor/index.js"
+    },
+    "./editor/testing": {
+      "types": "./src/editor/types/editor/testing.d.ts",
+      "import": "./src/editor/src/editor/testing/index.js"
+    },
+    "./editor/config": {
+      "types": "./src/editor/types/editor/config.d.ts",
+      "import": "./src/editor/config/editor.js"
+    },
+    "./editor/*": {
+      "import": "./src/editor/src/editor/*"
+    },
+    "./modules/*": {
+      "import": "./src/modules/*/index.js"
+    },
+    "./package.json": "./package.json",
+    "./unified": {
+      "types": "./types/unified/index.d.ts",
+      "import": "./src/unified/index.js"
+    },
+    "./unified/console": {
+      "import": "./src/unified/console/index.js"
+    },
+    "./unified/config": {
+      "import": "./config/unified.js"
+    },
+    "./unified/*": {
+      "import": "./src/unified/*"
+    },
+    "./editor/enterprise": {
+      "types": "./types/editor-enterprise.d.ts",
+      "import": "./src/editor/enterprise/index.js",
+      "default": "./src/editor/enterprise/index.js"
+    },
+    "./editor/enterprise/realtime": "./src/editor/enterprise/realtime/index.js",
+    "./editor/enterprise/testing": "./src/editor/enterprise/testing/index.js",
+    "./editor/studio": {
+      "types": "./types/editor-studio.d.ts",
+      "import": "./resources/assets/js/editor/studio/index.js",
+      "default": "./resources/assets/js/editor/studio/index.js"
+    },
+    "./editor/studio/app": {
+      "types": "./types/editor-studio.d.ts",
+      "import": "./resources/assets/js/editor/studio/app.js",
+      "default": "./resources/assets/js/editor/studio/app.js"
+    },
+    "./editor/transport": {
+      "types": "./types/editor-studio.d.ts",
+      "import": "./resources/assets/js/editor/enterprise/index.js",
+      "default": "./resources/assets/js/editor/enterprise/index.js"
+    },
+    "./editor/compat/websocket": "./resources/assets/js/editor/enterprise/NativeWebSocketCompatibilityAdapter.js",
+    "./editor/enterprise/config": "./config/editor.enterprise.js",
+    "./sdspa": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/index.js"
+    },
+    "./sdspa/server": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/server/index.js"
+    },
+    "./sdspa/protocol": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/protocol/index.js"
+    },
+    "./sdspa/contracts": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/contracts/index.js"
+    },
+    "./sdspa/security": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/security/index.js"
+    },
+    "./sdspa/observability": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/observability/index.js"
+    },
+    "./sdspa/console": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/console/index.js"
+    },
+    "./sdspa/integrations": {
+      "types": "./types/sdspa/index.d.ts",
+      "import": "./src/sdspa/integrations/SdspaServiceProvider.js"
+    },
+    "./security": {
+      "types": "./types/security.d.ts",
+      "import": "./src/security/index.js"
+    },
+    "./security/*": "./src/security/*",
+    "./view": {
+      "types": "./types/view/index.d.ts",
+      "import": "./src/view/index.js"
+    },
+    "./view/universal": {
+      "types": "./types/view/universal.d.ts",
+      "import": "./src/view/universal/index.js"
+    },
+    "./view/browser": {
+      "types": "./types/view/browser.d.ts",
+      "import": "./resources/assets/js/view/universal/index.js"
+    },
+    "./auth": {
+      "types": "./types/auth/index.d.ts",
+      "import": "./src/auth/index.js"
+    },
+    "./auth/context": {
+      "types": "./types/auth/context.d.ts",
+      "import": "./src/auth/src/context/index.js"
+    },
+    "./auth/config": {
+      "types": "./types/auth/config.d.ts",
+      "import": "./config/auth.js"
+    },
+    "./auth/testing": {
+      "types": "./types/auth/testing.d.ts",
+      "import": "./src/auth/testing/index.js"
+    },
+    "./events": {
+      "types": "./types/events/index.d.ts",
+      "import": "./src/events/index.js"
+    },
+    "./events/browser": {
+      "types": "./types/events/browser.d.ts",
+      "import": "./resources/assets/js/events/browser/index.js"
+    },
+    "./events/browser/boot": {
+      "types": "./types/events/browser.d.ts",
+      "import": "./resources/assets/js/events/browser/boot.js"
+    },
+    "./events/node": {
+      "types": "./types/events/node.d.ts",
+      "import": "./src/events/node/index.js"
+    },
+    "./events/provider": {
+      "types": "./types/events/provider.d.ts",
+      "import": "./src/events/integrations/EventServiceProvider.js"
+    },
+    "./events/config": {
+      "types": "./types/events/config.d.ts",
+      "import": "./config/events.js"
+    },
+    "./events/transports": {
+      "types": "./types/events/transports.d.ts",
+      "import": "./src/events/node/transports/index.js"
+    },
+    "./events/persistence": {
+      "types": "./types/events/persistence.d.ts",
+      "import": "./src/events/persistence/index.js"
+    },
+    "./events/studio": {
+      "types": "./types/events/studio.d.ts",
+      "import": "./src/events/studio/index.js"
+    },
+    "./events/compatibility": {
+      "types": "./types/events/compatibility.d.ts",
+      "import": "./src/events/compatibility/index.js"
+    },
+    "./events/migrations": {
+      "types": "./types/events/migrations.d.ts",
+      "import": "./database/migrations/index.js"
+    },
+    "./events/*": {
+      "import": "./src/events/*"
+    }
+  },
+  "imports": {
+    "#app/*": "./app/*",
+    "#models/*": "./app/Models/*",
+    "#models": "./src/models/index.js",
+    "#app-models/*": "./app/Models/*",
+    "#app-models": "./src/models/index.js",
+    "#schemas/*": "./app/schemas/*",
+    "#schemas": "./src/schemas/index.js",
+    "#app-schemas/*": "./app/schemas/*",
+    "#app-schemas": "./src/schemas/index.js",
+    "#repositories/*": "./app/repositories/*",
+    "#repositories": "./src/repositories/index.js",
+    "#app-repositories/*": "./app/repositories/*",
+    "#app-repositories": "./src/repositories/index.js",
+    "#subscribers/*": "./app/subscribers/*",
+    "#subscribers": "./src/subscribers/index.js",
+    "#app-subscribers/*": "./app/subscribers/*",
+    "#app-subscribers": "./src/subscribers/index.js",
+    "#app-providers/*": "./app/providers/*",
+    "#app-providers": "./src/providers/index.js",
+    "#app-events/*": "./app/events/*",
+    "#app-events": "./src/events/index.js",
+    "#app-listeners/*": "./app/listeners/*",
+    "#app-listeners": "./src/listeners/index.js",
+    "#configs": "./config/index.js",
+    "#configs/*": "./config/*",
+    "#services/*": "./app/Services/*",
+    "#src/*": "./src/*",
+    "#modules/*": "./src/*",
+    "#editor": "./src/editor/src/editor/index.js",
+    "#editor/*": "./src/editor/src/editor/*",
+    "#axios": "./src/axios/index.js",
+    "#axios/*": "./src/axios/*",
+    "#foundation": "./src/foundation/index.js",
+    "#foundation/*": "./src/foundation/*",
+    "#providers/*": "./src/foundation/providers/*",
+    "#providers": "./src/foundation/providers/index.js",
+    "#commands": "./src/console/index.js",
+    "#commands/*": "./src/console/*",
+    "#console": "./src/console/index.js",
+    "#console/*": "./src/console/*",
+    "#middlewares/*": "./src/routes/http/middlewares/*",
+    "#middlewares*": "./src/routes/http/middlewares/*",
+    "#database": "./src/database/index.js",
+    "#database/*": "./src/database/*",
+    "#support": "./src/support/index.js",
+    "#support/*": "./src/support/*",
+    "#facades": "./src/support/Facades/index.js",
+    "#facades/*": "./src/support/Facades/*",
+    "#websocket": "./src/ws/index.js",
+    "#websocket/*": "./src/ws/*",
+    "#Router": "./src/support/Facades/Router.js",
+    "#ws": "./src/ws/index.js",
+    "#ws/*": "./src/ws/*",
+    "#rawsocket-client": "./src/ws/client/index.js",
+    "#rawsocket-client/*": "./src/ws/client/*",
+    "#ws/client-routing": "./src/ws/client/routing/index.js",
+    "#ws/client-routing/*": "./src/ws/client/routing/*",
+    "#ws-client-routing": "./src/ws/client/routing/index.js",
+    "#ws-client-routing/*": "./src/ws/client/routing/*",
+    "#tcp": "./src/tcp/index.js",
+    "#tcp/*": "./src/tcp/*",
+    "#udp": "./src/udp/index.js",
+    "#udp/*": "./src/udp/*",
+    "#bson": "./src/bson/index.js",
+    "#bson/*": "./src/bson/*",
+    "#redis": "./src/redis/index.js",
+    "#redis/*": "./src/redis/*",
+    "#cache": "./src/cache/index.js",
+    "#cache/*": "./src/cache/*",
+    "#events": "./src/events/index.js",
+    "#events/*": "./src/events/*",
+    "#dotenv": "./src/dotenv/index.js",
+    "#dotenv/*": "./src/dotenv/*",
+    "#config": "./src/config/index.js",
+    "#config/*": "./src/config/*",
+    "#rawmongo": "./src/rawmongo/index.js",
+    "#rawmongo/*": "./src/rawmongo/*",
+    "#jwt": "./src/jwt/index.js",
+    "#jwt/*": "./src/jwt/*",
+    "#auth": "./src/auth/index.js",
+    "#auth/*": "./src/auth/*",
+    "#access": "./src/access/src/access/index.js",
+    "#access/*": "./src/access/src/access/*",
+    "#hash": "./src/hash/index.js",
+    "#hash/*": "./src/hash/*",
+    "#view": "./src/view/index.js",
+    "#view/*": "./src/view/*",
+    "#session": "./src/session/src/session/index.js",
+    "#session/*": "./src/session/src/session/*",
+    "#mime": "./src/mime/index.js",
+    "#mime/*": "./src/mime/*",
+    "#validator": "./src/validator/index.js",
+    "#validator/*": "./src/validator/*",
+    "#faker": "./src/faker/index.js",
+    "#faker/*": "./src/faker/*",
+    "#Live/*": "./app/Http/Live/*",
+    "#Live": "./app/Http/Live/index.js",
+    "#rawnode-live/*": "./src/rawnode-live/*",
+    "#Handlers/*": "./app/Http/Handlers/*",
+    "#colors": "./src/colors/index.js",
+    "#colors/*": "./src/colors/*",
+    "#logger": "./src/logger/index.js",
+    "#logger/*": "./src/logger/*",
+    "#live/*": "./src/live/*",
+    "#live": "./src/live/src/index.js",
+    "#fs": "./src/fs/src/fs/index.js",
+    "#fs/*": "./src/fs/src/fs*",
+    "#mail": "./src/mail/index.js",
+    "#mail/*": "./src/mail/*",
+    "#test": "./src/test/index.mjs",
+    "#test/*": "./src/test/*",
+    "#http-server": "./src/http/src/index.js",
+    "#http-server/*": "./src/http/*",
+    "#http": "./src/http/src/index.js",
+    "#http/*": "./src/http/*",
+    "#rawnode-unified": "./src/unified/index.js",
+    "#routing": "./src/routes/index.js",
+    "#routing/*": "./src/routes/*",
+    "#routes": "./src/routes/index.js",
+    "#routes/*": "./src/routes/*",
+    "#routes-http": "./src/routes/http/index.js",
+    "#routes-http/*": "./src/routes/http/*",
+    "#routes-ws": "./src/routes/ws/index.js",
+    "#routes-ws/*": "./src/routes/ws/*",
+    "#routes-tcp": "./src/routes/tcp/index.js",
+    "#routes-tcp/*": "./src/routes/tcp/*",
+    "#routes-udp": "./src/routes/udp/index.js",
+    "#routes-udp/*": "./src/routes/udp/*",
+    "#app-http/*": "./app/Http/*",
+    "#app-http": "./app/Http/index.js",
+    "#controllers/*": "./app/Http/Controllers/*",
+    "#controllers": "./app/Http/Controllers/inde.js",
+    "#http-controllers/*": "./app/Http/Controllers/*",
+    "#http-controllers": "./app/Http/Controllers/index.js",
+    "#http-middlewares/*": "./app/Http/middlewares/*",
+    "#http-middlewares": "./app/Http/middlewares/index.js",
+    "#http-middleware/*": "./app/Http/middleware/*",
+    "#http-middleware": "./app/Http/middleware/index.js",
+    "#http-live/*": "./app/Http/Live/*",
+    "#http-live": "./app/Http/Live/index.js",
+    "#http-services/*": "./app/Http/Services/*",
+    "#http-services": "./app/Http/Services/index.js",
+    "#http-repositories/*": "./app/Http/Repositories/*",
+    "#http-repositories": "./app/Http/Repositories/index.js",
+    "#http-support/*": "./app/Http/Support/*",
+    "#http-support": "./app/Http/Support/index.js",
+    "#app-ws/*": "./app/Websocket/*",
+    "#app-ws": "./app/Websocket/index.js",
+    "#ws-controllers/*": "./app/Websocket/Controllers/*",
+    "#ws-controllers": "./app/Websocket/Controllers/index.js",
+    "#ws-middlewares/*": "./app/Websocket/middlewares/*",
+    "#ws-middlewares": "./app/Websocket/middlewares/index.js",
+    "#ws-middleware/*": "./app/Websocket/middleware/*",
+    "#ws-middleware": "./app/Websocket/middleware/index.js",
+    "#ws-live/*": "./app/Websocket/Live/*",
+    "#ws-live": "./app/Websocket/Live/index.js",
+    "#ws-services/*": "./app/Websocket/Services/*",
+    "#ws-services": "./app/Websocket/Services/index.js",
+    "#ws-repositories/*": "./app/Websocket/Repositories/*",
+    "#ws-repositories": "./app/Websocket/Repositories/index.js",
+    "#ws-support/*": "./app/Websocket/Support/*",
+    "#ws-support": "./app/Websocket/Support/index.js",
+    "#app-tcp": "./app/Tcp/index.js",
+    "#app-tcp/*": "./app/Tcp/*",
+    "#tcp-controllers": "./app/Tcp/Controllers/index.js",
+    "#tcp-controllers/*": "./app/Tcp/Controllers/*",
+    "#tcp-middlewares/*": "./app/Tcp/middlewares/*",
+    "#tcp-middlewares": "./app/Tcp/middlewares/index.js",
+    "#tcp-middleware/*": "./app/Tcp/middleware/*",
+    "#tcp-middleware": "./app/Tcp/middleware/index.js",
+    "#tcp-live/*": "./app/Tcp/Live/*",
+    "#tcp-live": "./app/Tcp/Live/index.js",
+    "#tcp-services/*": "./app/Tcp/Services/*",
+    "#tcp-services": "./app/Tcp/Services/index.js",
+    "#tcp-repositories/*": "./app/Tcp/Repositories/*",
+    "#tcp-repositories": "./app/Tcp/Repositories/index.js",
+    "#tcp-support/*": "./app/Tcp/Support/*",
+    "#tcp-support": "./app/Tcp/Support/index.js",
+    "#app-udp/*": "./app/Udp/*",
+    "#app-udp": "./app/Udp/index.js",
+    "#udp-controllers/*": "./app/Udp/Controllers/*",
+    "#udp-controllers": "./app/Udp/Controllers/index.js",
+    "#udp-middlewares/*": "./app/Udp/middlewares/*",
+    "#udp-middlewares": "./app/Udp/middlewares/index.js",
+    "#udp-middleware/*": "./app/Udp/middleware/*",
+    "#udp-middleware": "./app/Udp/middleware/index.js",
+    "#udp-live/*": "./app/Udp/Live/*",
+    "#udp-live": "./app/Udp/Live/index.js",
+    "#app-live/*": "./app/Live/*",
+    "#app-live": "./app/Live/index.js",
+    "#app-sdspa/*": "./app/Sdspa/*",
+    "#app-sdspa": "./app/Sdspa/index.js",
+    "#app-validator/*": "./app/Validator/*",
+    "#app-validator": "./app/Validator/index.js",
+    "#udp-services/*": "./app/Udp/Services/*",
+    "#udp-services": "./app/Udp/Services/index.js",
+    "#udp-repositories/*": "./app/Udp/Repositories/*",
+    "#udp-repositories": "./app/Udp/Repositories/index.js",
+    "#udp-support/*": "./app/Udp/Support/*",
+    "#udp-support": "./app/Udp/Support/index.js",
+    "#rawnode-unified/*": "./src/unified/*",
+    "#unified": "./src/unified/index.js",
+    "#unified/*": "./src/unified/*",
+    "#pm": "./src/pm/src/index.js",
+    "#pm/*": "./src/pm/src/*",
+    "#payment": {
+      "import": "./src/payment/index.mjs",
+      "require": "./src/payment/index.cjs"
+    },
+    "#payment/enterprise": "./src/payment/src/enterprise/index.mjs",
+    "#payment/legacy": "./src/payment/index.cjs",
+    "#payment/*": "./src/payment/*",
+    "#phone": {
+      "import": "./src/phone/index.mjs",
+      "require": "./src/phone/index.cjs"
+    },
+    "#phone/providers": {
+      "import": "./src/phone/providers.mjs",
+      "require": "./src/phone/providers.cjs"
+    },
+    "#phone/testing": {
+      "import": "./src/phone/testing.mjs",
+      "require": "./src/phone/testing.cjs"
+    },
+    "#phone/config": {
+      "import": "./src/phone/config/phone.mjs",
+      "require": "./src/phone/config/phone.cjs"
+    },
+    "#phone/inbound": {
+      "import": "./src/phone/inbound.mjs",
+      "require": "./src/phone/inbound.cjs"
+    },
+    "#phone/outbox": {
+      "import": "./src/phone/outbox.mjs",
+      "require": "./src/phone/outbox.cjs"
+    },
+    "#phone/webhooks": {
+      "import": "./src/phone/webhooks.mjs",
+      "require": "./src/phone/webhooks.cjs"
+    },
+    "#phone/verification": {
+      "import": "./src/phone/verification.mjs",
+      "require": "./src/phone/verification.cjs"
+    },
+    "#phone/observability": {
+      "import": "./src/phone/observability.mjs",
+      "require": "./src/phone/observability.cjs"
+    },
+    "#phone/integration": {
+      "import": "./src/phone/integration.mjs",
+      "require": "./src/phone/integration.cjs"
+    },
+    "#phone/integrations": {
+      "import": "./src/phone/integrations.mjs",
+      "require": "./src/phone/integrations.cjs"
+    },
+    "#phone/queue": {
+      "import": "./src/phone/queue.mjs",
+      "require": "./src/phone/queue.cjs"
+    },
+    "#phone/errors": {
+      "import": "./src/phone/errors.mjs",
+      "require": "./src/phone/errors.cjs"
+    },
+    "#phone/reliability": {
+      "import": "./src/phone/reliability.mjs",
+      "require": "./src/phone/reliability.cjs"
+    },
+    "#phone/*": "./src/phone/*",
+    "#reactivity": "./resources/assets/js/reactive/libs/reactivity.js",
+    "#rawnode": "./resources/assets/js/reactive/libs/rawnode.js",
+    "#html": "./resources/assets/js/reactive/libs/html.js",
+    "#domx": "./resources/assets/js/reactive/libs/domx.js",
+    "#dom": "./resources/assets/js/reactive/libs/dom.js",
+    "#helpers": "./resources/assets/js/reactive/libs/helpers.js",
+    "#raw-fetch": "./resources/assets/js/reactive/libs/raw-fetch.js",
+    "#ws-client": "./resources/assets/js/reactive/libs/ws/client.js",
+    "#resource": "./resources/assets/js/reactive/libs/resource.js",
+    "#observer": "./resources/assets/js/reactive/libs/observer.js",
+    "#reactive-cache": "./resources/assets/js/reactive/libs/cache.js",
+    "#create-cache": "./resources/assets/js/reactive/libs/create-cache.js",
+    "#live-sync-cache": "/resources/assets/js/reactive/libs/live-sync-cache.js",
+    "#storage": "./resources/assets/js/reactive/libs/storage.js",
+    "#persistenceidb": "./resources/assets/js/reactive/libs/persistenceidb.js",
+    "#offline-queue": "./resources/assets/js/reactive/libs/offline-queue.js",
+    "#directive": "./resources/assets/js/reactive/libs/directive.js",
+    "#bindings": "./resources/assets/js/reactive/libs/bindings.js",
+    "#directive-on-bind": "./resources/assets/js/reactive/libs/directive-on-bind.js",
+    "#effect-shim": "./resources/assets/js/reactive/libs/effect-shim.js",
+    "#css": "./resources/assets/js/reactive/libs/css.js",
+    "#renderer": "./resources/assets/js/reactive/renderer/view.js",
+    "#lib/*": "./resources/assets/js/reactive/libs/*",
+    "#libs/*": "./resources/assets/js/reactive/libs/*",
+    "#router/*": "./resources/assets/js/reactive/router/*",
+    "#provider/*": "./resources/assets/js/reactive/providers/*",
+    "#components": "./resources/assets/js/reactive/components/index.js",
+    "#components/*": "./resources/assets/js/reactive/components/*",
+    "#controller": "./resources/assets/js/app/controllers/index.js",
+    "#controller/*": "./resources/assets/js/app/controllers/*",
+    "#core": "./resources/assets/js/reactive/libs/core.js",
+    "#core/*": "./resources/assets/js/reactive/core/*",
+    "#plugins/*": "./resources/assets/js/reactive/plugins/*",
+    "#compiler/*": "./resources/assets/js/reactive/compiler/*",
+    "#parser/*": "./resources/assets/js/reactive/parser/*",
+    "#ssr/*": "./resources/assets/js/reactive/ssr/*",
+    "#editor/enterprise": "./src/editor/enterprise/index.js",
+    "#editor/enterprise/realtime": "./src/editor/enterprise/realtime/index.js",
+    "#editor/enterprise/testing": "./src/editor/enterprise/testing/index.js",
+    "#editor/studio": "./resources/assets/js/editor/studio/index.js",
+    "#editor/app": "./resources/assets/js/editor/studio/app.js",
+    "#editor/transport": "./resources/assets/js/editor/enterprise/index.js",
+    "#rawnode-live-browser": "./resources/assets/js/live/browser/index.js",
+    "#directives": "./resources/assets/js/reactive/directives/directives.js",
+    "#reactive-live-dom": "./resources/assets/js/reactive/live/liveDomAdapter.js",
+    "#sdspa": "./src/sdspa/index.js",
+    "#sdspa/*": "./src/sdspa/*",
+    "#security": "./src/security/index.js",
+    "#security/*": "./src/security/*",
+    "#monitor": "./src/monitor/index.js",
+    "#monitor/*": "./src/monitor/*",
+    "#code-highlighter": "./src/code-highlighter/index.js",
+    "#code-highlighter/*": "./src/code-highlighter/*",
+    "#highlighter": "./resources/assets/js/highlighter/index.js",
+    "#highlighter/*": "./resources/assets/js/highlighter/*",
+    "#view-universal": "./src/view/universal/index.js",
+    "#view-universal/*": "./src/view/universal/*",
+    "#view-browser": "./resources/assets/js/view/universal/index.js",
+    "#view-browser/*": "./resources/assets/js/view/universal/*",
+    "#auth/context": "./src/auth/src/context/index.js",
+    "#auth/config": "./config/auth.js",
+    "#auth/testing": "./src/auth/testing/index.js",
+    "#event-fabric": "./src/events/universal/index.js",
+    "#event-fabric/*": "./src/events/universal/*",
+    "#protocol-client-routing": "./src/routes/client/index.js",
+    "#protocol-client-routing/*": "./src/routes/client/*",
+    "#tcp-client-routing": "./src/routes/client/tcp/index.js",
+    "#tcp-client-routing/*": "./src/routes/client/tcp/*",
+    "#udp-client-routing": "./src/routes/client/udp/index.js",
+    "#udp-client-routing/*": "./src/routes/client/udp/*",
+    "#http-client-routing": "./src/routes/client/http/index.js",
+    "#http-client-routing/*": "./src/routes/client/http/*",
+    "#microservice": {
+      "types": "./types/microservice/index.d.ts",
+      "default": "./src/microservice/index.js"
+    },
+    "#microservice/contracts": {
+      "types": "./types/microservice/contracts.d.ts",
+      "default": "./src/microservice/contracts/index.js"
+    },
+    "#microservice/discovery": {
+      "types": "./types/microservice/discovery.d.ts",
+      "default": "./src/microservice/discovery/index.js"
+    },
+    "#microservice/resilience": {
+      "types": "./types/microservice/resilience.d.ts",
+      "default": "./src/microservice/resilience/index.js"
+    },
+    "#microservice/transports": {
+      "types": "./types/microservice/transports.d.ts",
+      "default": "./src/microservice/transport/index.js"
+    },
+    "#microservice/workflows": {
+      "types": "./types/microservice/workflows.d.ts",
+      "default": "./src/microservice/workflow/index.js"
+    },
+    "#microservice/security": {
+      "types": "./types/microservice/security.d.ts",
+      "default": "./src/microservice/security/index.js"
+    },
+    "#microservice/testing": {
+      "types": "./types/microservice/testing.d.ts",
+      "default": "./src/microservice/testing/index.js"
+    },
+    "#microservice/provider": {
+      "types": "./types/microservice/provider.d.ts",
+      "default": "./src/microservice/integrations/MicroserviceServiceProvider.js"
+    },
+    "#microservice/config": {
+      "types": "./types/microservice/config.d.ts",
+      "default": "./config/microservice.js"
+    }
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node raw test:run",
+    "test:coverage": "node raw test:coverage",
+    "test:doctor": "node raw test:doctor --deep --json",
+    "test:snapshots": "node raw test:snapshots --update",
+    "start": "node raw serve",
+    "test:routes": "node --test tests/routes/*.test.js",
+    "check": "node tools/check-routes.js",
+    "check:types": "tsc -p tsconfig.routes.json",
+    "bench": "node bench/routes/router-benchmark.js",
+    "manifest": "node tools/build-manifest.js",
+    "test:ws-client-routing": "node --test tests/ws/client/*.test.js",
+    "check:ws-client-routing": "node tools/check-ws-client-routing.js",
+    "publish:ws-client": "node tools/publish-ws-client-assets.js",
+    "test:editor-enterprise": "node --test tests/editor-enterprise/*.test.js",
+    "check:editor-enterprise": "node scripts/editor-enterprise-check.js"
+  }
+}

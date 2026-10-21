@@ -1,0 +1,86 @@
+✔ metric reset/remove releases ownership without corrupting replacements (5.60452ms)
+✔ aggregate policy reserves an overflow slot and respects both series bounds (8.344176ms)
+✔ observable callback deadline does not launch overlapping stuck collectors or accept late observations (20.173673ms)
+✔ stalled sink writes are bounded and a following sink remains usable (57.13671ms)
+✔ pipeline close is idempotent and finalizes despite required stalled lifecycle callback (14.229061ms)
+✔ flush cancellation reaches cooperative sinks and shutdown clears queued references (19.044934ms)
+✔ required sinks cannot acknowledge incomplete delivery as a success (1.70447ms)
+✔ pre-cancelled admission never retains a queue value (0.470443ms)
+✔ repeated flushes cannot accumulate unresolved sink lifecycle calls (12.091415ms)
+✔ close invalidates a pending setup and cannot resurrect plugin start (16.190483ms)
+✔ close invalidates a pending start and startup calls are idempotent (2.951251ms)
+✔ plugin callback deadlines isolate failures and repeated hooks cannot accumulate stuck work (58.955295ms)
+✔ once hooks run once across concurrent invoke calls and hook admission is bounded (3.541592ms)
+✔ failed required close still finalizes manager and drops pending notifications (13.142871ms)
+✔ configured span cap controls actual retained spans (7.222208ms)
+✔ pruning removes expired records from every index and reuses ring capacity (0.82889ms)
+✔ read paths enforce elapsed span retention without a timer (2.650453ms)
+✔ durability requires a full acknowledged write and optional partial stores report failure (4.172636ms)
+✔ unregister aborts the current check and late completion cannot restore state or scheduling (11.729269ms)
+✔ replacement preserves its new timer when an older scheduled run settles (4.312698ms)
+✔ non-cooperative checks retain their concurrency slot and waiting runs are bounded (21.363377ms)
+✖ real loopback cross-origin redirects strip sensitive headers and 303 removes body headers (24.367765ms)
+✖ real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding (5.570457ms)
+✔ modeled HTTPS response rejects downgrade before a second request (4.935275ms)
+✔ injected event/protocol bridges detach explicit subscriptions (123.634541ms)
+✔ readiness lifecycle and manager replacement ownership (32.658083ms)
+✔ alerts and SLO definition calculations preserve capability (0.95256ms)
+✔ HMAC accepts exact bytes and rejects changed/expired signatures (0.819045ms)
+✔ stuck health and resource callbacks are not relaunched (15.198632ms)
+✔ queue overflow, cancellation and close release memory (1.006236ms)
+✔ task-local file storage persists/query and diagnostics reject traversal (44.988884ms)
+✔ concurrent starts and closes settle once and terminal restart is explicit (138.319754ms)
+✔ closing idle runtime releases an already used pipeline (6.101539ms)
+✔ close wins race with blocked startup without later resurrection (24.38716ms)
+✔ pre-abort avoids callback and active abort settles ignoring callbacks (0.882982ms)
+✔ slow collection is coalesced and close cancels it (19.564608ms)
+✔ health distinguishes readiness, liveness, degraded and timeout (10.607149ms)
+✔ resource replace/unregister cleans health checks (0.675339ms)
+✔ public telemetry redacts payload context metadata span and diagnostics (21.411366ms)
+✔ untrusted signal kind and fake byte sizes cannot bypass bounds (7.64159ms)
+✔ serializer bounds serialized bytes, cycles, hostile getters, prototype input (1.133429ms)
+✔ PM bridge disposes direct, runtime and adapter owners idempotently (0.684393ms)
+✔ Studio authorizer uses socket, denies cross origin even with custom auth (1.259127ms)
+✔ Studio closes listeners and slow clients and rejects streams after close (8.284463ms)
+✔ Studio assets are packaged and reject unknown/prototype paths (6.142349ms)
+✔ preparsed and raw bodies obey request limits (8.441122ms)
+✔ synthetic custom callbacks support timeout and reject after close (102.668718ms)
+✔ memory store retention stays bounded (3.196273ms)
+✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1275.887141ms)
+✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (8.144527ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 48
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1552.085483
+
+✖ failing tests:
+
+test at package/test/adversarial-synthetic-http.test.mjs:14:1
+✖ real loopback cross-origin redirects strip sensitive headers and 303 removes body headers (24.367765ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at package/test/adversarial-synthetic-http.test.mjs:34:1
+✖ real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding (5.570457ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }

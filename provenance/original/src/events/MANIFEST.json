@@ -1,0 +1,991 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T06:38:10.167Z",
+  "package": {
+    "name": "rawnode-events",
+    "version": "2.0.0"
+  },
+  "fileCount": 163,
+  "totalBytes": 592366,
+  "hashAlgorithm": "sha256",
+  "files": [
+    {
+      "path": "ARCHITECTURE.md",
+      "bytes": 15253,
+      "mode": "0644",
+      "sha256": "9dd8fcf0e7cb0a4965bcf3f63220a621a7c543186a6f05f4f15629f8ada85186"
+    },
+    {
+      "path": "benchmark-baseline-report.json",
+      "bytes": 5283,
+      "mode": "0644",
+      "sha256": "e686f10e80d6cdd78ea5d79cc09701243b60e9e1dda9390b5af90f40b52de010"
+    },
+    {
+      "path": "benchmark-enterprise-report.json",
+      "bytes": 1946,
+      "mode": "0644",
+      "sha256": "d433f054956a0456bd33e70076e1adcd476105ca891f463bbfc0d70591441641"
+    },
+    {
+      "path": "benchmarks/compare-baseline.mjs",
+      "bytes": 4384,
+      "mode": "0644",
+      "sha256": "e2907247c475246f76f2baff442f9a5ae1e33fee3609ec109738fb26c1c46244"
+    },
+    {
+      "path": "benchmarks/run.mjs",
+      "bytes": 5269,
+      "mode": "0644",
+      "sha256": "8e9d9924e4507ff56200a98964bf7877a206ba4401f953a9874281b8844d3bb9"
+    },
+    {
+      "path": "bin/rawnode-events.js",
+      "bytes": 365,
+      "mode": "0755",
+      "sha256": "d253fec759772de02ba3ad166ab0a862339ad7609ddea933d2a0f2e0a52b39ab"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 1549,
+      "mode": "0644",
+      "sha256": "9e335dac3e207b1c2bbf7bd29032bf3912ea840226cca71ee0929c412505037c"
+    },
+    {
+      "path": "COMPATIBILITY.md",
+      "bytes": 6495,
+      "mode": "0644",
+      "sha256": "5b81e533865efc4273d4428ee01f17e324108666b6b035bee9aff565d891152a"
+    },
+    {
+      "path": "config/events.js",
+      "bytes": 7822,
+      "mode": "0644",
+      "sha256": "0b04104a2ac34fd0cbf1ac58f9994d58fbf5df188c947658fcbbd382d3b257c1"
+    },
+    {
+      "path": "docs/configuration.md",
+      "bytes": 1583,
+      "mode": "0644",
+      "sha256": "ddad965bdaf50c4db7df8bdef4440240cfd72fe7de8a7dd8a882ddae89fed08e"
+    },
+    {
+      "path": "docs/delivery-semantics.md",
+      "bytes": 1159,
+      "mode": "0644",
+      "sha256": "443402daf8b7ef0e8bcfa622e3323d15b007ba5cb80d10db41903e1e4df19c71"
+    },
+    {
+      "path": "docs/operations.md",
+      "bytes": 1554,
+      "mode": "0644",
+      "sha256": "29a68e14c90f1acfda7544178289e4c6613bfa483a2172fde51225e54dd9095d"
+    },
+    {
+      "path": "index.js",
+      "bytes": 102,
+      "mode": "0644",
+      "sha256": "0d95e7addb4e479f5451e2693ba6be40da964b0beb31989b551855ea5df115be"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1064,
+      "mode": "0644",
+      "sha256": "8cd194c1cc94ff3e70aa337679cb750b86da1d7b6a3af4fb0da099919e97884a"
+    },
+    {
+      "path": "package.json",
+      "bytes": 5707,
+      "mode": "0644",
+      "sha256": "7cd7e23af3864c0d663e57637897a214d49561d55d0031d1665b33f8c766c917"
+    },
+    {
+      "path": "README.md",
+      "bytes": 16914,
+      "mode": "0644",
+      "sha256": "c89b98303e9135e274efab98fff738a1fdec4c909e1a5e6460328728f052e304"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 10546,
+      "mode": "0644",
+      "sha256": "264ea931b4792f7839a6a1487a3979ace4558b92128f08e3a3a8cca19706dfaf"
+    },
+    {
+      "path": "src/events/AdvancedEventDispatcher.js",
+      "bytes": 60645,
+      "mode": "0644",
+      "sha256": "98211d7c6c410b2113719c21b5e0e5ed966b51471e9061ce1461499fcd12806d"
+    },
+    {
+      "path": "src/events/bridge/BridgeStateMachine.js",
+      "bytes": 1219,
+      "mode": "0644",
+      "sha256": "f83f891ab0eee375cb95793e66782f67018697119c01222fc5ae3e89c4804818"
+    },
+    {
+      "path": "src/events/bridge/index.js",
+      "bytes": 232,
+      "mode": "0644",
+      "sha256": "42fc9ee1568f1f99880d69967ce25c6dca7aed8c2d0907506a384ae035d099d2"
+    },
+    {
+      "path": "src/events/bridge/PublishQueue.js",
+      "bytes": 3301,
+      "mode": "0644",
+      "sha256": "9ec195fcad9345be63dea4bbb4e0120ddbb6bfbb32ea9b1b8f2da7ab170780e0"
+    },
+    {
+      "path": "src/events/bridge/RedisStreamTransport.js",
+      "bytes": 12717,
+      "mode": "0644",
+      "sha256": "ee55cdf3ce3aeb126aa134071b0c88e1c05e7e9c7308c8b9defd9537315fc442"
+    },
+    {
+      "path": "src/events/bridge/SeenMessageWindow.js",
+      "bytes": 1995,
+      "mode": "0644",
+      "sha256": "4d0eb78c24fcb4a3868aa8e0193737dbf4b0fc13a17b522221ef8a9bde45a032"
+    },
+    {
+      "path": "src/events/Broadcastable.js",
+      "bytes": 777,
+      "mode": "0644",
+      "sha256": "56a1f5b112a8b23035c792edf7987a4ae0769edf9bbbaa6519809c208e0570e7"
+    },
+    {
+      "path": "src/events/broadcasting/BroadcastManager.js",
+      "bytes": 7427,
+      "mode": "0644",
+      "sha256": "4ad436415fa31b167b7ec5832e56bd7d0b60ad71c08ef2ee5775d3d35b17d316"
+    },
+    {
+      "path": "src/events/broadcasting/index.js",
+      "bytes": 53,
+      "mode": "0644",
+      "sha256": "2e90730da8bf57fa6d6d2fccfba5c950cab78c3043c2fd9420a336378275449c"
+    },
+    {
+      "path": "src/events/config/EventConfiguration.js",
+      "bytes": 8894,
+      "mode": "0644",
+      "sha256": "3f1182c204b5c1fa0eddb2122270bbae3d1805f268f760f6ae6ca89a9e90d2f3"
+    },
+    {
+      "path": "src/events/config/index.js",
+      "bytes": 55,
+      "mode": "0644",
+      "sha256": "2f15c8035545f88de4436b29196b1d56691b7ad502380e19409e12a74a4ed3f9"
+    },
+    {
+      "path": "src/events/console/EventCommands.js",
+      "bytes": 7664,
+      "mode": "0644",
+      "sha256": "c9bac9c787353b0ca7c90966f6e52298b670509d5131405d730a7b169436d98a"
+    },
+    {
+      "path": "src/events/console/EventsBenchCommand.js",
+      "bytes": 1179,
+      "mode": "0644",
+      "sha256": "0ea2667484b47e16afeba2f58b644ba1da40bbc582b929414a9dafc82246b0bd"
+    },
+    {
+      "path": "src/events/console/EventsDoctorCommand.js",
+      "bytes": 1600,
+      "mode": "0644",
+      "sha256": "7c54337038bd48eb7c78234e59bdff8d5e5113de0d8c7f4a9cc7c50fd9b1eef1"
+    },
+    {
+      "path": "src/events/console/EventsInspectCommand.js",
+      "bytes": 599,
+      "mode": "0644",
+      "sha256": "8d81d60834b5d96db5862c40269016c22882674d57240ad6c79c7a2cc28127cc"
+    },
+    {
+      "path": "src/events/console/EventsListCommand.js",
+      "bytes": 625,
+      "mode": "0644",
+      "sha256": "50fa9ac1561a585257f20435add2122ae6634af71a688ef4d9a1ce650c5f2f4c"
+    },
+    {
+      "path": "src/events/console/EventsStatsCommand.js",
+      "bytes": 541,
+      "mode": "0644",
+      "sha256": "c9c9d3470963e2858e8827005ca1a84c16c45808cbc857dcf8d1784bc5f02aa9"
+    },
+    {
+      "path": "src/events/console/index.js",
+      "bytes": 76,
+      "mode": "0644",
+      "sha256": "13de83f9778ecaa64247161c993231e3e9e1861cc8037b2646d4f7b24269267b"
+    },
+    {
+      "path": "src/events/console/run.js",
+      "bytes": 5997,
+      "mode": "0644",
+      "sha256": "2a8127c3f8a60459d959312bb0e8d4c4c3a435bcd6809af79bdf99a065b734fa"
+    },
+    {
+      "path": "src/events/context/EventContext.js",
+      "bytes": 2071,
+      "mode": "0644",
+      "sha256": "b607b9e4ec605260e8d9ca3a356517c8a998c6b0e93e6dcf638ab028949b067e"
+    },
+    {
+      "path": "src/events/context/EventContextManager.js",
+      "bytes": 1826,
+      "mode": "0644",
+      "sha256": "808ac70071e4342bbb07183f680757b038307d576c683d1b5fbe14a30b2f7a30"
+    },
+    {
+      "path": "src/events/context/index.js",
+      "bytes": 91,
+      "mode": "0644",
+      "sha256": "bf7c959f184c52ada515fb10323d4f83be3861f0958574654f27254bd79249db"
+    },
+    {
+      "path": "src/events/contracts/EventSchemaRegistry.js",
+      "bytes": 9994,
+      "mode": "0644",
+      "sha256": "5f8bca1c07d4f89e6950d6c77f4d172d4e1cc931f154589451a9cbe82344dba4"
+    },
+    {
+      "path": "src/events/contracts/index.js",
+      "bytes": 56,
+      "mode": "0644",
+      "sha256": "e95779cb3b36a36b52b21b33f2292792df6148bbbc5c0c7c89e62332a37b04de"
+    },
+    {
+      "path": "src/events/core/AsyncEventIterator.js",
+      "bytes": 2517,
+      "mode": "0644",
+      "sha256": "b308c6533c72c96e657d6cfdf524b210e0fe72b3ce194cc36f670ca510b3ad7c"
+    },
+    {
+      "path": "src/events/core/DispatchReport.js",
+      "bytes": 1411,
+      "mode": "0644",
+      "sha256": "ddfb175d68d9abd2c50f6d771fa2ba713e17c26898899f3abcf8b8b8968ac0db"
+    },
+    {
+      "path": "src/events/core/index.js",
+      "bytes": 284,
+      "mode": "0644",
+      "sha256": "c055af93756ca48a1fc87b2b9d4118d3dc6044826d493be0d50abfc4c3349332"
+    },
+    {
+      "path": "src/events/core/ListenerBuilder.js",
+      "bytes": 540,
+      "mode": "0644",
+      "sha256": "62cc4e3330d9fd7f81cfab2d3f01178d1af85e68e9aa4c2ac621772f285e6d5a"
+    },
+    {
+      "path": "src/events/core/ListenerHandle.js",
+      "bytes": 2017,
+      "mode": "0644",
+      "sha256": "aaa442c266304abb8e246270c03d5616610dc7fab4bca2d04460846601557f18"
+    },
+    {
+      "path": "src/events/core/ListenerRegistry.js",
+      "bytes": 12514,
+      "mode": "0644",
+      "sha256": "4b175e68efe353886fe6e68d54f3fc51fd47e1a82dd2fd5e37ed3eeb5daa3708"
+    },
+    {
+      "path": "src/events/core/ListenerScope.js",
+      "bytes": 1712,
+      "mode": "0644",
+      "sha256": "0e224d42c04a4774febd33cf2b7efb10f0391dc72ab90ece0167f8531ea29cc5"
+    },
+    {
+      "path": "src/events/core/SubscriptionBuilder.js",
+      "bytes": 1898,
+      "mode": "0644",
+      "sha256": "1cbdb4323fe2e5fa1089ad2218476ad5e62533455cd587186f28e180ef230d2e"
+    },
+    {
+      "path": "src/events/durability/EventOutbox.js",
+      "bytes": 110,
+      "mode": "0644",
+      "sha256": "4597a5b6897ad909f7ce3c96d0884871cd0230094592264430ea0bf7691457e6"
+    },
+    {
+      "path": "src/events/durability/index.js",
+      "bytes": 123,
+      "mode": "0644",
+      "sha256": "c8ff6160d662f8099162ace3b996ef02f7cadc26dd6bb431a50be710068f8475"
+    },
+    {
+      "path": "src/events/durability/MemoryOutboxStore.js",
+      "bytes": 122,
+      "mode": "0644",
+      "sha256": "9f4d1f416f94d8e1d600e544b74d284cd6873d59ae78ddd4cac35c5f327addfa"
+    },
+    {
+      "path": "src/events/durability/OutboxPublisher.js",
+      "bytes": 118,
+      "mode": "0644",
+      "sha256": "7bff073bc77e60b5c48eff9e780f624d55e8405a16c1ce5c780fa9319d6c8b0a"
+    },
+    {
+      "path": "src/events/durable/EventOutbox.js",
+      "bytes": 2476,
+      "mode": "0644",
+      "sha256": "c68e2b086a4cc6620d085e6cb1d04a6f7e73d0b74ed300e2a6e3d273e272b169"
+    },
+    {
+      "path": "src/events/durable/index.js",
+      "bytes": 165,
+      "mode": "0644",
+      "sha256": "d43d8f5e4c2e4f513bbc5bcb32c474b26cd376483495ac8e19e1274240a7af5c"
+    },
+    {
+      "path": "src/events/durable/MemoryEventInbox.js",
+      "bytes": 2363,
+      "mode": "0644",
+      "sha256": "1bb5942554baac497802ed9c4c02db81aba8c71c1e0dff95fbf43e3ddb5b6b21"
+    },
+    {
+      "path": "src/events/durable/MemoryOutboxStore.js",
+      "bytes": 8592,
+      "mode": "0644",
+      "sha256": "22450cb8348e6f1d4da57f2c17658901e795f2512ef51cdd842c62be977aab66"
+    },
+    {
+      "path": "src/events/durable/OutboxPublisher.js",
+      "bytes": 6576,
+      "mode": "0644",
+      "sha256": "c3045ca2619be8c38e88f4e8cb3a5c1ddf0285edeb1364d0c65f906db0ff715e"
+    },
+    {
+      "path": "src/events/errors/EventError.js",
+      "bytes": 2319,
+      "mode": "0644",
+      "sha256": "bbfbe30f8acc567e0bd33ecd557dd43ce17cf8f2f1876c6b49dc963d35d54366"
+    },
+    {
+      "path": "src/events/errors/index.js",
+      "bytes": 47,
+      "mode": "0644",
+      "sha256": "9f50ecaed09b4fa73bbb259a83e26b45fa143a7500e1909e45ec3390ec7d31fe"
+    },
+    {
+      "path": "src/events/Event.js",
+      "bytes": 1372,
+      "mode": "0644",
+      "sha256": "1374c9dea827695187738fecb4d6335a8b4dec81d4ac9b136b9bf63046c879f2"
+    },
+    {
+      "path": "src/events/EventDispatcher.js",
+      "bytes": 1358,
+      "mode": "0644",
+      "sha256": "e915a166bb6a34ff8635ab9aee6acbc35dac0d960347a80d397f61b68e3c86d8"
+    },
+    {
+      "path": "src/events/EventMetrics.js",
+      "bytes": 1749,
+      "mode": "0644",
+      "sha256": "0711af6f7db739be00ef478e27fd4566fc2977f3818544275da1456aba8ff87f"
+    },
+    {
+      "path": "src/events/EventName.js",
+      "bytes": 1830,
+      "mode": "0644",
+      "sha256": "af18354844296596664418136cc6430b98304de8e5d0d1fdea4ecda8db921c44"
+    },
+    {
+      "path": "src/events/EventRegistry.js",
+      "bytes": 4923,
+      "mode": "0644",
+      "sha256": "d8283a5a2324fda66afae7628fcf0264b2754305d76c35fd10888c4b187edc9b"
+    },
+    {
+      "path": "src/events/foundation/EventConfiguration.js",
+      "bytes": 115,
+      "mode": "0644",
+      "sha256": "6b41248ef5f85c818f573edb5a00c551c3f6d9b879db42b50a7eb5bd343545a9"
+    },
+    {
+      "path": "src/events/history/EventJournal.js",
+      "bytes": 10457,
+      "mode": "0644",
+      "sha256": "23cba1285b6fca479ee1c899922d3a807eed4d1cdf7aae25d718f01de0763271"
+    },
+    {
+      "path": "src/events/history/index.js",
+      "bytes": 82,
+      "mode": "0644",
+      "sha256": "2d9bc946e9e098e5d8a31270cdfcd2f0ee5c4ebb8dd6929811ef119abf430b95"
+    },
+    {
+      "path": "src/events/history/RingBuffer.js",
+      "bytes": 2312,
+      "mode": "0644",
+      "sha256": "9cfd278210eceb9ada4adc99d0ddc040f38fface992911c74695e32358a94c9a"
+    },
+    {
+      "path": "src/events/index.js",
+      "bytes": 5504,
+      "mode": "0644",
+      "sha256": "9078022dd898d4c2c554cee901049e1a80c95d7426133fcc6e93e0f912e5429f"
+    },
+    {
+      "path": "src/events/integrations/EventServiceProvider.js",
+      "bytes": 20991,
+      "mode": "0644",
+      "sha256": "08cb95334acaeadb7e0c02e889b475bc4f0fc66d67fb22a4f51badf7359e362e"
+    },
+    {
+      "path": "src/events/integrations/index.js",
+      "bytes": 57,
+      "mode": "0644",
+      "sha256": "622b7b99ac8872105bccca12afe8e3500ade4079db1d0bcbccd8dd3ecd630849"
+    },
+    {
+      "path": "src/events/observability/EventDiagnostics.js",
+      "bytes": 4432,
+      "mode": "0644",
+      "sha256": "dac92f2b196320268a6e61f4b1c6882a1f9a477f4d7b83f5b34a55f8c9ebb74b"
+    },
+    {
+      "path": "src/events/observability/EventHealth.js",
+      "bytes": 3630,
+      "mode": "0644",
+      "sha256": "0a2a567c45a0f078bbbd65f76394647b238de8225b13a8f0fabb0afafef128c7"
+    },
+    {
+      "path": "src/events/observability/EventMetricsStore.js",
+      "bytes": 3865,
+      "mode": "0644",
+      "sha256": "240ed4b621615bc7f738d0cf1e2d4ad5529c621b850d861f889e94e699fc1459"
+    },
+    {
+      "path": "src/events/observability/EventRedactor.js",
+      "bytes": 4649,
+      "mode": "0644",
+      "sha256": "7f21ddc52ccf3f05ce3806b22d30382ab15ff5cb25edfc008369c05ec4644f04"
+    },
+    {
+      "path": "src/events/observability/index.js",
+      "bytes": 205,
+      "mode": "0644",
+      "sha256": "15e824daf906254babfdf69cc388bdc3c14181fea9e2ff9abdb37622f677490a"
+    },
+    {
+      "path": "src/events/observability/PrometheusFormatter.js",
+      "bytes": 1475,
+      "mode": "0644",
+      "sha256": "c7bb5e9b9981527c404e3e3eea59b080de7436f3f3d89d8585849183f0376c6c"
+    },
+    {
+      "path": "src/events/ProtocolEvent.js",
+      "bytes": 1140,
+      "mode": "0644",
+      "sha256": "d49b5c22df7b08b1a129abcc8359bbed91f4c4ae341ce44a4177b06774a29007"
+    },
+    {
+      "path": "src/events/queue/EventJobQueue.js",
+      "bytes": 14815,
+      "mode": "0644",
+      "sha256": "87f3b225cccdab045f6176581041360b842bfcc854c00816ef11a7448049213b"
+    },
+    {
+      "path": "src/events/queue/EventScheduler.js",
+      "bytes": 6965,
+      "mode": "0644",
+      "sha256": "a06c228c51ea456ef1a368c965aa6ba905f478c7c6e3d31aa4b53411efdc794f"
+    },
+    {
+      "path": "src/events/queue/index.js",
+      "bytes": 87,
+      "mode": "0644",
+      "sha256": "4fc01c876928394175f9f2ca4114cda5a6b03cce649dd26b5b8535773d36053b"
+    },
+    {
+      "path": "src/events/RedisEventBridge.js",
+      "bytes": 34585,
+      "mode": "0644",
+      "sha256": "308330850839f41f5241d75254165f5275a5d1d389311b6cd0f8778eefa06d29"
+    },
+    {
+      "path": "src/events/scheduling/DeferredEventScheduler.js",
+      "bytes": 9266,
+      "mode": "0644",
+      "sha256": "8ac4e7f9fd838400fa35ee9c2408ded4aa53419022a8e3feeb8fd0fedade5917"
+    },
+    {
+      "path": "src/events/scheduling/index.js",
+      "bytes": 59,
+      "mode": "0644",
+      "sha256": "65c5ceb39291907b9900033e6b51c84468b31a30028fb6ad9c179bb3cd3daea8"
+    },
+    {
+      "path": "src/events/security/EventSecurityPolicy.js",
+      "bytes": 4485,
+      "mode": "0644",
+      "sha256": "91b95f790a012878fff181d8c10745303479bc88bf5bcb1b240fa598f7e2e2bd"
+    },
+    {
+      "path": "src/events/security/index.js",
+      "bytes": 56,
+      "mode": "0644",
+      "sha256": "6baec4638116d4a76ea8b84d071d3be8af094a0c1a093ef3107deaf51384451d"
+    },
+    {
+      "path": "src/events/serialization/EventCodecRegistry.js",
+      "bytes": 2862,
+      "mode": "0644",
+      "sha256": "8281e7c5857f03ce1ef272612bfcc71b2f0eda2b184674fedb753871c52cdbb3"
+    },
+    {
+      "path": "src/events/serialization/EventEnvelope.js",
+      "bytes": 11745,
+      "mode": "0644",
+      "sha256": "58efe781633eea119282b4ce570200aa4606100fa2f644521b97bf994842d4f8"
+    },
+    {
+      "path": "src/events/serialization/index.js",
+      "bytes": 127,
+      "mode": "0644",
+      "sha256": "9590daff85b3899d137a73c454c63dea2956c79332505adcf4cc41aee4f433b0"
+    },
+    {
+      "path": "src/events/serialization/SafeJsonCodec.js",
+      "bytes": 9286,
+      "mode": "0644",
+      "sha256": "f8048bb9a5b2277a32a62d15aa1fe54af412ca128338090cbce66267cba7e262"
+    },
+    {
+      "path": "src/events/sourcing/AggregateRoot.js",
+      "bytes": 2684,
+      "mode": "0644",
+      "sha256": "2b2b0c67a751c06646267ce3920c7963c1c619b4f49d54869c20c2e1d554a646"
+    },
+    {
+      "path": "src/events/sourcing/index.js",
+      "bytes": 129,
+      "mode": "0644",
+      "sha256": "13845431b6a101abf40ff1ab9b561b25e6c0a4da9327ad98e367f86a444cf58e"
+    },
+    {
+      "path": "src/events/sourcing/MemoryEventStore.js",
+      "bytes": 9897,
+      "mode": "0644",
+      "sha256": "a3dd0e28c5c20f40d65ec4af7b6e82585c8e0776770573f98857a11bc49fdeef"
+    },
+    {
+      "path": "src/events/sourcing/ProjectionManager.js",
+      "bytes": 4705,
+      "mode": "0644",
+      "sha256": "f463fc91394fd9c34985a32f86683ce59643f78804d9515dd0746bde39c7b1b3"
+    },
+    {
+      "path": "src/events/support/async.js",
+      "bytes": 1637,
+      "mode": "0644",
+      "sha256": "146e4da216f69c753c355705c77887735a5434c9c79d42b04b856070dcdcaa1d"
+    },
+    {
+      "path": "src/events/support/glob.js",
+      "bytes": 2798,
+      "mode": "0644",
+      "sha256": "0a51fe1faaa1f779d34c76c92f63f0ee85405b11b7f89671d9f70a4fcee112ce"
+    },
+    {
+      "path": "src/events/support/logger.js",
+      "bytes": 528,
+      "mode": "0644",
+      "sha256": "c5475276b40d089a672c3aed07dea9ef25534ff06654d41161a3908f96b0ef13"
+    },
+    {
+      "path": "src/events/support/size.js",
+      "bytes": 3247,
+      "mode": "0644",
+      "sha256": "fada80b465d392a917333748ff6d92ec74db1ed81e52ef3473a72a187b3d9b8d"
+    },
+    {
+      "path": "src/events/testing/EventAssertions.js",
+      "bytes": 2347,
+      "mode": "0644",
+      "sha256": "4fda4579f2272144050c107126128df5424209d8bb95f67173cdabb90e1f0748"
+    },
+    {
+      "path": "src/events/testing/EventRecorder.js",
+      "bytes": 2648,
+      "mode": "0644",
+      "sha256": "7e644b7f0e904f077dd5f8a9e5bb17172dfeb15447cef0d9e13b32b771296218"
+    },
+    {
+      "path": "src/events/testing/FakeEventBus.js",
+      "bytes": 2522,
+      "mode": "0644",
+      "sha256": "3a702b223d9332903bb75f16a703f3b651d8a6502a86d05e17ed34bbb66b3b9b"
+    },
+    {
+      "path": "src/events/testing/index.js",
+      "bytes": 200,
+      "mode": "0644",
+      "sha256": "68c972b97746451fcc540a7e54b11cc3e5c24d7c532e5b33ff861d16a8001267"
+    },
+    {
+      "path": "src/events/testing/ManualClock.js",
+      "bytes": 351,
+      "mode": "0644",
+      "sha256": "50c9bd91b5909dc7343969784f9443f88ef616f04eeb6da78562c15a274f0785"
+    },
+    {
+      "path": "src/events/testing/MemoryEventTransport.js",
+      "bytes": 2201,
+      "mode": "0644",
+      "sha256": "1e40dda4dc59f7906081827ba80018e954e182ab3137b24d13c352100d2f4cbb"
+    },
+    {
+      "path": "src/events/workflows/index.js",
+      "bytes": 93,
+      "mode": "0644",
+      "sha256": "855aea8190539c4ad60f8aec5e15d1bbc178cd7eed5d5e96980b56f01fbfa9a7"
+    },
+    {
+      "path": "src/events/workflows/MemoryWorkflowStore.js",
+      "bytes": 1819,
+      "mode": "0644",
+      "sha256": "66181b0b0114f663ffbf238b4b6e39f405f755f80d9c8cdb521dc89e49ac0a02"
+    },
+    {
+      "path": "src/events/workflows/WorkflowEngine.js",
+      "bytes": 8805,
+      "mode": "0644",
+      "sha256": "8d5dc838fc73bbb2f0561a00f488c8831c488cdbe72f03bf5402c051549b4964"
+    },
+    {
+      "path": "src/foundation/providers/EventServiceProvider.js",
+      "bytes": 187,
+      "mode": "0644",
+      "sha256": "2fee1d2c3665ad0253610bafe4a3ef23e7e1bdba10e665d3b6ac40c25d98870e"
+    },
+    {
+      "path": "tests/contract/outbox-admission.test.js",
+      "bytes": 1481,
+      "mode": "0644",
+      "sha256": "ad1616d7d0f0eff5999ff1edc29a76b3e9750050e76b9db5814a5017c3596064"
+    },
+    {
+      "path": "tests/contract/package-exports.test.js",
+      "bytes": 2453,
+      "mode": "0644",
+      "sha256": "1db8425163729a4fde866b88f4393ab2141ea5f88a5636187a3d233db6107b72"
+    },
+    {
+      "path": "tests/contract/public-surface.test.js",
+      "bytes": 949,
+      "mode": "0644",
+      "sha256": "6fa81118069bd556a6d3f487898bdae14dd4a9c71bfbcf223bc0f3f98bb5fa4d"
+    },
+    {
+      "path": "tests/events/bounds-observability.test.js",
+      "bytes": 3719,
+      "mode": "0644",
+      "sha256": "32a5ceaa6e262ad5d054814045ca0e24ce6b4930cb64e38022e264d7b045a5ca"
+    },
+    {
+      "path": "tests/events/bridge.test.js",
+      "bytes": 8767,
+      "mode": "0644",
+      "sha256": "e961507fa0139d816e81cd6ba7a28830780fcace925dbbd9f894181cdc46bad7"
+    },
+    {
+      "path": "tests/events/compatibility.test.js",
+      "bytes": 4077,
+      "mode": "0644",
+      "sha256": "01a7bd39f0ca02f35fd580c604a846e95ccd146149eed74ac493bdab1778bebf"
+    },
+    {
+      "path": "tests/events/contracts-durable.test.js",
+      "bytes": 5104,
+      "mode": "0644",
+      "sha256": "95b9fe75ed5d16b075512eb3d7f48bc347a4a2145c9f565afdb4d16c56d7b28d"
+    },
+    {
+      "path": "tests/events/enterprise-dispatch.test.js",
+      "bytes": 7136,
+      "mode": "0644",
+      "sha256": "1931f67ab2866dc0a04eb701886f23fcdca048aa26f92f2278b0fd92ca0465f2"
+    },
+    {
+      "path": "tests/events/hardening-sourcing.test.js",
+      "bytes": 5737,
+      "mode": "0644",
+      "sha256": "aa45d33eb8e667ac34d3f2d1f4a99bbe28c7c7e5d6335a7ff8dc1da46d48c93e"
+    },
+    {
+      "path": "tests/events/once-replay.test.js",
+      "bytes": 2558,
+      "mode": "0644",
+      "sha256": "aa736244cd221be72bd19c31c9b20665b80195d83241106368036138077590af"
+    },
+    {
+      "path": "tests/events/queue-workflow-provider.test.js",
+      "bytes": 7657,
+      "mode": "0644",
+      "sha256": "71c64d7f68aae206e2f823cd413c50cbcae49e5b04c7a7c3b6190696b7a81502"
+    },
+    {
+      "path": "tests/fixtures/redis-stub.js",
+      "bytes": 2537,
+      "mode": "0644",
+      "sha256": "a20f758eb28886ea461190c5b127e5f2c157b9f04db57a3ee3c1b7caac2d44e6"
+    },
+    {
+      "path": "tests/fixtures/v1-public-manifest.json",
+      "bytes": 895,
+      "mode": "0644",
+      "sha256": "66ba19c1ba7ec7ada34edc7f66ffa312b51aa5802304d939ac86def310411980"
+    },
+    {
+      "path": "tests/types/consumer.ts",
+      "bytes": 2786,
+      "mode": "0644",
+      "sha256": "5b22498c78322b079d813a36c6633db45e96720579751a79dfb71ae55ea344e9"
+    },
+    {
+      "path": "tools/build-manifest.js",
+      "bytes": 1645,
+      "mode": "0755",
+      "sha256": "482a3a7118a7ead99d87abf76113e3d40216d9c19679ee3f847b3001e6514552"
+    },
+    {
+      "path": "tools/check-compatibility.js",
+      "bytes": 1627,
+      "mode": "0755",
+      "sha256": "40682ed03c23bb6864fa46492ee2d8d6a908b81389731678ad7ef5e7297da2bc"
+    },
+    {
+      "path": "tools/check-exports.js",
+      "bytes": 1824,
+      "mode": "0755",
+      "sha256": "501fa091bc822efe685fa5cebaeebecc0765b9ddbfb153a9f907e4d974e63e5c"
+    },
+    {
+      "path": "tools/check-package-consumer.js",
+      "bytes": 2802,
+      "mode": "0755",
+      "sha256": "41dcda4297e922b90bff918df6c7a54eac9e38d035bf5e95cbf62b9f28827e0f"
+    },
+    {
+      "path": "tools/check-source.js",
+      "bytes": 2684,
+      "mode": "0755",
+      "sha256": "ab345b2d6fe89806608786e50d7ed840d449ed3038c4064b948664355c18663a"
+    },
+    {
+      "path": "tools/check-types.js",
+      "bytes": 384,
+      "mode": "0755",
+      "sha256": "1c741eb0b939073e41ea979223834b4549aac8476a5dc337da670c3897e1f12f"
+    },
+    {
+      "path": "tools/check-zero-deps.js",
+      "bytes": 548,
+      "mode": "0755",
+      "sha256": "c2330dbad1761728f367f2d7d17c580c15e022b33e0bcb713ed9886f5c60f588"
+    },
+    {
+      "path": "tools/run-tests.js",
+      "bytes": 961,
+      "mode": "0755",
+      "sha256": "e5a915cd998b6983b3c7c52508a93f0744627be9687f700b88ba4a28787eb52d"
+    },
+    {
+      "path": "tsconfig.types.json",
+      "bytes": 2383,
+      "mode": "0644",
+      "sha256": "ed2631057fefc08c600ec8b46b2afc2a7c95f1a2181c843c885ccd23d58c14a4"
+    },
+    {
+      "path": "types/bridge.d.ts",
+      "bytes": 147,
+      "mode": "0644",
+      "sha256": "672192837ae12e1fe30c55f555d6eb7c682d2ac847a9a88e0b51af861cf211e2"
+    },
+    {
+      "path": "types/broadcastable.d.ts",
+      "bytes": 127,
+      "mode": "0644",
+      "sha256": "f473227fd6868b5d85a76189d7cafde616270b1c6021f30afd25bfe1f7c66f41"
+    },
+    {
+      "path": "types/broadcasting.d.ts",
+      "bytes": 62,
+      "mode": "0644",
+      "sha256": "805a54da88829fab1db97be1d81385b9cb95780e0441799efe2566f7540aa230"
+    },
+    {
+      "path": "types/config.d.ts",
+      "bytes": 1046,
+      "mode": "0644",
+      "sha256": "d6b480271df084a091d93680cbba100b8990c7f87f53b2b578563e7c7c0f214c"
+    },
+    {
+      "path": "types/console.d.ts",
+      "bytes": 242,
+      "mode": "0644",
+      "sha256": "be4121c41fe7c07f5fca65c33b7c326e49686175be36eb83d253f1938e24af6f"
+    },
+    {
+      "path": "types/context.d.ts",
+      "bytes": 48,
+      "mode": "0644",
+      "sha256": "ef1af3f4ba342bf2521111d94ceada60c5bae3304261d6bcbbe4e7afde3554d9"
+    },
+    {
+      "path": "types/contracts.d.ts",
+      "bytes": 50,
+      "mode": "0644",
+      "sha256": "bb3702ccdb1f72c984d5895528b352994dae7cc4d5f3f21655c7efdd65437715"
+    },
+    {
+      "path": "types/core.d.ts",
+      "bytes": 250,
+      "mode": "0644",
+      "sha256": "c78abc6aebd8192c23404a1058331422f71c4b074a6884b53bf35bfa65a298e3"
+    },
+    {
+      "path": "types/dispatcher.d.ts",
+      "bytes": 267,
+      "mode": "0644",
+      "sha256": "ecf2acc29bf57253540a665d6f89a0159e8a35b27f65ca46035b45b3e15bf010"
+    },
+    {
+      "path": "types/durable.d.ts",
+      "bytes": 96,
+      "mode": "0644",
+      "sha256": "ce29f9c46a6a80eb75385dcb63d782104b9bb042f43d3a48747ba08b995b0c12"
+    },
+    {
+      "path": "types/errors.d.ts",
+      "bytes": 202,
+      "mode": "0644",
+      "sha256": "c7ce6bd0da9262a766c7c30f4b52fb3357c3dc24134e6a1be122104921e95ea4"
+    },
+    {
+      "path": "types/event-metrics.d.ts",
+      "bytes": 68,
+      "mode": "0644",
+      "sha256": "6f59c033cdff44e4c0025de884af2f40db5cb2526bbf368b7a6b788ab2e03ce2"
+    },
+    {
+      "path": "types/event-name.d.ts",
+      "bytes": 182,
+      "mode": "0644",
+      "sha256": "9c9ecf8394b6fc800d17118485678953478ca0f8e04d4256fa7674182ca6dcf4"
+    },
+    {
+      "path": "types/event-registry.d.ts",
+      "bytes": 70,
+      "mode": "0644",
+      "sha256": "e50513f82d01f9c5bdf7c7bea8da63e7e79a7101d073a898f8394d56f6ca5270"
+    },
+    {
+      "path": "types/event.d.ts",
+      "bytes": 54,
+      "mode": "0644",
+      "sha256": "6755573ed810e968a4ab14170367f994af0e68ffffa85e25491199c03b7427d3"
+    },
+    {
+      "path": "types/history.d.ts",
+      "bytes": 43,
+      "mode": "0644",
+      "sha256": "e8ec12fad09373b4a06b3dce7f8b88fdbb2cd2a1c3f513e12dbd9c58d38e6457"
+    },
+    {
+      "path": "types/index.d.ts",
+      "bytes": 37704,
+      "mode": "0644",
+      "sha256": "8f28a4c33cbc3566cfb788cf45225cb3549c427a27139832ef3adbb5f5c7f3b2"
+    },
+    {
+      "path": "types/legacy.d.ts",
+      "bytes": 74,
+      "mode": "0644",
+      "sha256": "daaf60f475bf7c573e22e7e7011774387aebdbced15128db5ca140a28563a0f0"
+    },
+    {
+      "path": "types/observability.d.ts",
+      "bytes": 153,
+      "mode": "0644",
+      "sha256": "6ee510c12d48ac17c6e97d8132eaf621009760aa98bb7746a0abc2c41936f149"
+    },
+    {
+      "path": "types/protocol-event.d.ts",
+      "bytes": 70,
+      "mode": "0644",
+      "sha256": "0e1b997ca109d4b81c1abf6b926338d0adfa06b87449c6259cf42ef50601514d"
+    },
+    {
+      "path": "types/provider.d.ts",
+      "bytes": 84,
+      "mode": "0644",
+      "sha256": "63a03191826b0364c10005bd3bc2d3048fc20780dd1aad701c33b1600897179b"
+    },
+    {
+      "path": "types/queue.d.ts",
+      "bytes": 84,
+      "mode": "0644",
+      "sha256": "42ab8828273b34c6ddc96d29aff6dcbb423c363774bcd583e85e82bf1ad20613"
+    },
+    {
+      "path": "types/redis-event-bridge.d.ts",
+      "bytes": 76,
+      "mode": "0644",
+      "sha256": "49984c9ce757483c07265bd72d8faebf43e07d245917ffd3449a83828f16f522"
+    },
+    {
+      "path": "types/scheduling.d.ts",
+      "bytes": 53,
+      "mode": "0644",
+      "sha256": "ea58d17a927b7c1ab7b73d4039b5d14a9f6deca390b851223c96d3e64fd5235d"
+    },
+    {
+      "path": "types/security.d.ts",
+      "bytes": 50,
+      "mode": "0644",
+      "sha256": "302019a2b3cf8061b9e7f9ea0202a2351940bc077763ec7249f2cc41d3bd1b94"
+    },
+    {
+      "path": "types/serialization.d.ts",
+      "bytes": 142,
+      "mode": "0644",
+      "sha256": "97daa95d9a02c788a97dc4958ed32b3d1ed6f5bef69d5263048c1246cd0b0cc3"
+    },
+    {
+      "path": "types/sourcing.d.ts",
+      "bytes": 138,
+      "mode": "0644",
+      "sha256": "7b52eef742fd45b31ad81116423a631509be859ed7f6be2414ee352eaa9f2848"
+    },
+    {
+      "path": "types/testing.d.ts",
+      "bytes": 110,
+      "mode": "0644",
+      "sha256": "8373d705cc5704dd99f0244d176c11378094b4e5ef755c86699b4111c9dba57e"
+    },
+    {
+      "path": "types/workflows.d.ts",
+      "bytes": 66,
+      "mode": "0644",
+      "sha256": "a4437fc54008c78d0941d5f1349be7f2551d3482457b904d17d42d2b667f93c6"
+    },
+    {
+      "path": "UPGRADE.md",
+      "bytes": 2420,
+      "mode": "0644",
+      "sha256": "020adb041094fbc2123b91179e90346eaab8c2a0a1277b95a7feadbcacc4e84d"
+    },
+    {
+      "path": "validation-doctor.json",
+      "bytes": 3659,
+      "mode": "0644",
+      "sha256": "f7a6e4aadb71c0671b2c5387c2989bcb6f00840f872aeb5a51ebc2a38eebf35f"
+    }
+  ]
+}

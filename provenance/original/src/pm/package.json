@@ -1,0 +1,64 @@
+{
+  "name": "rawnode-pm",
+  "version": "0.1.0",
+  "description": "RawNode-aware zero-dependency process supervisor, runtime control plane, observability system, and development watcher",
+  "keywords": [
+    "rawnode",
+    "process-manager",
+    "supervisor",
+    "cluster",
+    "monitoring",
+    "zero-dependency"
+  ],
+  "homepage": "https://rawnode.org",
+  "license": "MIT",
+  "author": "RawNode",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bin": {
+    "rawnode-pm": "./bin/rawnode-pm.js",
+    "rnpm": "./bin/rawnode-pm.js"
+  },
+  "main": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./runtime": {
+      "types": "./types/index.d.ts",
+      "import": "./src/runtime/index.js"
+    },
+    "./integration/rawnode": {
+      "types": "./types/index.d.ts",
+      "import": "./src/integrations/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "config",
+    "docs",
+    "src",
+    "types",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "tools-check.js",
+    "tools-check-types.js",
+    "tsconfig.types.json"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check": "node ./tools-check.js",
+    "prepack": "npm run check && npm test && npm run check:types",
+    "doctor": "node ./bin/rawnode-pm.js doctor --json",
+    "check:types": "node ./tools-check-types.js"
+  },
+  "dependencies": {},
+  "optionalDependencies": {},
+  "peerDependencies": {}
+}

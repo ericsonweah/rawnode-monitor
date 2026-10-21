@@ -1,0 +1,25 @@
+✔ concurrent starts and closes settle once and terminal restart is explicit (67.68693ms)
+✔ closing idle runtime releases an already used pipeline (7.503763ms)
+✔ close wins race with blocked startup without later resurrection (26.210034ms)
+✔ pre-abort avoids callback and active abort settles ignoring callbacks (0.949187ms)
+✔ slow collection is coalesced and close cancels it (22.043366ms)
+✔ health distinguishes readiness, liveness, degraded and timeout (13.83353ms)
+✔ resource replace/unregister cleans health checks (1.392486ms)
+✔ public telemetry redacts payload context metadata span and diagnostics (17.671796ms)
+✔ untrusted signal kind and fake byte sizes cannot bypass bounds (6.267526ms)
+✔ serializer bounds serialized bytes, cycles, hostile getters, prototype input (0.99559ms)
+✔ PM bridge disposes direct, runtime and adapter owners idempotently (1.386802ms)
+✔ Studio authorizer uses socket, denies cross origin even with custom auth (2.932265ms)
+✔ Studio closes listeners and slow clients and rejects streams after close (6.047926ms)
+✔ Studio assets are packaged and reject unknown/prototype paths (5.243895ms)
+✔ preparsed and raw bodies obey request limits (8.398107ms)
+✔ synthetic custom callbacks support timeout and reject after close (101.833856ms)
+✔ memory store retention stays bounded (1.19573ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1014.96924

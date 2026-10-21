@@ -1,0 +1,58 @@
+✔ failed contender preserves owner lock, PID and live control socket (307.398641ms)
+✔ exclusive lock has one concurrent owner and nonowner release is harmless (42.286299ms)
+✔ control server refuses foreign regular file and does not remove it (4.013531ms)
+✔ start/close are shared operations and repeated close waits for completion (107.671954ms)
+✔ close interrupts readiness and queued reload/scale cannot spawn after close (195.531828ms)
+✔ serialized start stop restart races settle with one owned worker (722.739632ms)
+✔ external process ignoring SIGTERM is killed within configured bound (111.725828ms)
+✔ runtime response cannot satisfy another process request identity (2.958584ms)
+✔ runtime and adapter unregister and repeated lifecycle calls are bounded (82.061789ms)
+✔ hanging injected callback times out and signal listeners are removed (122.125105ms)
+✔ manifest cwd, env isolation, endpoint and signal validation (6.870615ms)
+✔ service definitions reject directives and escape expansions without installing (5.947428ms)
+✔ writer failure rejects without unhandled stream error and existing permissions stay intact (71.45759ms)
+✔ split secrets are redacted in logs; oversized unterminated lines are bounded (286.848707ms)
+✔ state encryption fails closed without key and rejects plaintext downgrade (23.816087ms)
+✔ readiness probes use task-owned loopback server and cancellation closes TCP (54.787727ms)
+✔ control request backlog is bounded and invalid token never invokes handler (9.456408ms)
+✔ cluster driver scales and performs readiness-gated rolling reload (1329.334514ms)
+✔ control server authenticates requests and streams events (256.826499ms)
+✔ RawNode integrator applies exact anchors, creates templates, and remains idempotent (357.869161ms)
+✔ state machine enforces lifecycle transitions (3.070832ms)
+✔ restart policy quarantines after bounded failures (0.708912ms)
+✔ management HTTP server exposes redacted public health and authenticated operations (769.21415ms)
+✔ ProcessDefinition validates and persists only explicit environment overrides (263.743773ms)
+✔ ProcessDefinition rejects unsafe names and invalid scale mode (2.307245ms)
+✔ process manager provides authenticated control, encrypted save, and resurrection (1309.670577ms)
+✔ process manager rolls back lock, PID, sockets, and timers after startup failure (152.266022ms)
+✔ closing unstarted manager leaves owner state bytes unchanged (537.609125ms)
+✔ manager close interrupts resurrection readiness rather than awaiting deadline (261.537751ms)
+✔ supervisor close attempts and awaits every record after a cleanup error (144.406187ms)
+✔ desired-state saves serialize snapshot and commit order (82.473384ms)
+✔ HTTP management close bounds a never-settling command handler (1080.016879ms)
+✔ failed rolling replacement leaves old cluster generation serving (309.50685ms)
+✔ external spawn failure never becomes ready (6.583762ms)
+✔ CLI rejects unknown and missing-argument commands without creating state (937.161227ms)
+✔ bounded realtime delivery drops when an adapter is already pending (25.754356ms)
+✔ quoted multiword secrets and positional secret flags are redacted (1.329281ms)
+✔ failed foreground daemon startup restores process signal listeners (56.157931ms)
+✔ log close awaits a previously started detach and its final pipe tail (26.079878ms)
+✔ log close settles both stream writers when one close fails (32.723269ms)
+{
+  "ok": true
+}
+✔ CLI preserves scale --instances syntax through authenticated task-owned control (60.083187ms)
+✔ audit trail redacts secrets, stays private, and rotates at a bounded size (106.096263ms)
+✔ startup generator emits hardened systemd and launchd definitions (4.498788ms)
+✔ state store encrypts desired state and restores it (122.005913ms)
+✔ supervisor starts, observes, diagnoses, and gracefully stops a fork worker (874.930044ms)
+✔ supervisor crash policy eventually quarantines an always-crashing process (874.069886ms)
+✔ watch manager coalesces filesystem changes with polling fallback (308.501968ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 47
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4477.474051

@@ -1,0 +1,696 @@
+[
+  {
+    "id": "rawnode-events@2.0.0",
+    "name": "rawnode-events",
+    "version": "2.0.0",
+    "size": 129235,
+    "unpackedSize": 531640,
+    "shasum": "4f226026337c50c9e8873c4197f3e5b0a129f320",
+    "integrity": "sha512-CYHequWg+3TEutZsURnfWpTzeq0Ip9PW9QF8k6DsxqSmi1s6V4wgoX8U5AgRZ1rJaZy0JSTx/z9h9VgTSyqrEg==",
+    "filename": "rawnode-events-2.0.0.tgz",
+    "files": [
+      {
+        "path": "ARCHITECTURE.md",
+        "size": 15253,
+        "mode": 420
+      },
+      {
+        "path": "CHANGELOG.md",
+        "size": 1549,
+        "mode": 420
+      },
+      {
+        "path": "COMPATIBILITY.md",
+        "size": 6495,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 1064,
+        "mode": 420
+      },
+      {
+        "path": "MANIFEST.json",
+        "size": 30529,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 16914,
+        "mode": 420
+      },
+      {
+        "path": "SECURITY.md",
+        "size": 10546,
+        "mode": 420
+      },
+      {
+        "path": "UPGRADE.md",
+        "size": 2420,
+        "mode": 420
+      },
+      {
+        "path": "bin/rawnode-events.js",
+        "size": 365,
+        "mode": 493
+      },
+      {
+        "path": "config/events.js",
+        "size": 7822,
+        "mode": 420
+      },
+      {
+        "path": "docs/configuration.md",
+        "size": 1583,
+        "mode": 420
+      },
+      {
+        "path": "docs/delivery-semantics.md",
+        "size": 1159,
+        "mode": 420
+      },
+      {
+        "path": "docs/operations.md",
+        "size": 1554,
+        "mode": 420
+      },
+      {
+        "path": "index.js",
+        "size": 102,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 5707,
+        "mode": 420
+      },
+      {
+        "path": "src/events/AdvancedEventDispatcher.js",
+        "size": 60645,
+        "mode": 420
+      },
+      {
+        "path": "src/events/bridge/BridgeStateMachine.js",
+        "size": 1219,
+        "mode": 420
+      },
+      {
+        "path": "src/events/bridge/index.js",
+        "size": 232,
+        "mode": 420
+      },
+      {
+        "path": "src/events/bridge/PublishQueue.js",
+        "size": 3301,
+        "mode": 420
+      },
+      {
+        "path": "src/events/bridge/RedisStreamTransport.js",
+        "size": 12717,
+        "mode": 420
+      },
+      {
+        "path": "src/events/bridge/SeenMessageWindow.js",
+        "size": 1995,
+        "mode": 420
+      },
+      {
+        "path": "src/events/Broadcastable.js",
+        "size": 777,
+        "mode": 420
+      },
+      {
+        "path": "src/events/broadcasting/BroadcastManager.js",
+        "size": 7427,
+        "mode": 420
+      },
+      {
+        "path": "src/events/broadcasting/index.js",
+        "size": 53,
+        "mode": 420
+      },
+      {
+        "path": "src/events/config/EventConfiguration.js",
+        "size": 8894,
+        "mode": 420
+      },
+      {
+        "path": "src/events/config/index.js",
+        "size": 55,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/EventCommands.js",
+        "size": 7664,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/EventsBenchCommand.js",
+        "size": 1179,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/EventsDoctorCommand.js",
+        "size": 1600,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/EventsInspectCommand.js",
+        "size": 599,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/EventsListCommand.js",
+        "size": 625,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/EventsStatsCommand.js",
+        "size": 541,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/index.js",
+        "size": 76,
+        "mode": 420
+      },
+      {
+        "path": "src/events/console/run.js",
+        "size": 5997,
+        "mode": 420
+      },
+      {
+        "path": "src/events/context/EventContext.js",
+        "size": 2071,
+        "mode": 420
+      },
+      {
+        "path": "src/events/context/EventContextManager.js",
+        "size": 1826,
+        "mode": 420
+      },
+      {
+        "path": "src/events/context/index.js",
+        "size": 91,
+        "mode": 420
+      },
+      {
+        "path": "src/events/contracts/EventSchemaRegistry.js",
+        "size": 9994,
+        "mode": 420
+      },
+      {
+        "path": "src/events/contracts/index.js",
+        "size": 56,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/AsyncEventIterator.js",
+        "size": 2517,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/DispatchReport.js",
+        "size": 1411,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/index.js",
+        "size": 284,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/ListenerBuilder.js",
+        "size": 540,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/ListenerHandle.js",
+        "size": 2017,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/ListenerRegistry.js",
+        "size": 12514,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/ListenerScope.js",
+        "size": 1712,
+        "mode": 420
+      },
+      {
+        "path": "src/events/core/SubscriptionBuilder.js",
+        "size": 1898,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durability/EventOutbox.js",
+        "size": 110,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durability/index.js",
+        "size": 123,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durability/MemoryOutboxStore.js",
+        "size": 122,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durability/OutboxPublisher.js",
+        "size": 118,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durable/EventOutbox.js",
+        "size": 2476,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durable/index.js",
+        "size": 165,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durable/MemoryEventInbox.js",
+        "size": 2363,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durable/MemoryOutboxStore.js",
+        "size": 8592,
+        "mode": 420
+      },
+      {
+        "path": "src/events/durable/OutboxPublisher.js",
+        "size": 6576,
+        "mode": 420
+      },
+      {
+        "path": "src/events/errors/EventError.js",
+        "size": 2319,
+        "mode": 420
+      },
+      {
+        "path": "src/events/errors/index.js",
+        "size": 47,
+        "mode": 420
+      },
+      {
+        "path": "src/events/Event.js",
+        "size": 1372,
+        "mode": 420
+      },
+      {
+        "path": "src/events/EventDispatcher.js",
+        "size": 1358,
+        "mode": 420
+      },
+      {
+        "path": "src/events/EventMetrics.js",
+        "size": 1749,
+        "mode": 420
+      },
+      {
+        "path": "src/events/EventName.js",
+        "size": 1830,
+        "mode": 420
+      },
+      {
+        "path": "src/events/EventRegistry.js",
+        "size": 4923,
+        "mode": 420
+      },
+      {
+        "path": "src/events/foundation/EventConfiguration.js",
+        "size": 115,
+        "mode": 420
+      },
+      {
+        "path": "src/events/history/EventJournal.js",
+        "size": 10457,
+        "mode": 420
+      },
+      {
+        "path": "src/events/history/index.js",
+        "size": 82,
+        "mode": 420
+      },
+      {
+        "path": "src/events/history/RingBuffer.js",
+        "size": 2312,
+        "mode": 420
+      },
+      {
+        "path": "src/events/index.js",
+        "size": 5504,
+        "mode": 420
+      },
+      {
+        "path": "src/events/integrations/EventServiceProvider.js",
+        "size": 20991,
+        "mode": 420
+      },
+      {
+        "path": "src/events/integrations/index.js",
+        "size": 57,
+        "mode": 420
+      },
+      {
+        "path": "src/events/observability/EventDiagnostics.js",
+        "size": 4432,
+        "mode": 420
+      },
+      {
+        "path": "src/events/observability/EventHealth.js",
+        "size": 3630,
+        "mode": 420
+      },
+      {
+        "path": "src/events/observability/EventMetricsStore.js",
+        "size": 3865,
+        "mode": 420
+      },
+      {
+        "path": "src/events/observability/EventRedactor.js",
+        "size": 4649,
+        "mode": 420
+      },
+      {
+        "path": "src/events/observability/index.js",
+        "size": 205,
+        "mode": 420
+      },
+      {
+        "path": "src/events/observability/PrometheusFormatter.js",
+        "size": 1475,
+        "mode": 420
+      },
+      {
+        "path": "src/events/ProtocolEvent.js",
+        "size": 1140,
+        "mode": 420
+      },
+      {
+        "path": "src/events/queue/EventJobQueue.js",
+        "size": 14815,
+        "mode": 420
+      },
+      {
+        "path": "src/events/queue/EventScheduler.js",
+        "size": 6965,
+        "mode": 420
+      },
+      {
+        "path": "src/events/queue/index.js",
+        "size": 87,
+        "mode": 420
+      },
+      {
+        "path": "src/events/RedisEventBridge.js",
+        "size": 34585,
+        "mode": 420
+      },
+      {
+        "path": "src/events/scheduling/DeferredEventScheduler.js",
+        "size": 9266,
+        "mode": 420
+      },
+      {
+        "path": "src/events/scheduling/index.js",
+        "size": 59,
+        "mode": 420
+      },
+      {
+        "path": "src/events/security/EventSecurityPolicy.js",
+        "size": 4485,
+        "mode": 420
+      },
+      {
+        "path": "src/events/security/index.js",
+        "size": 56,
+        "mode": 420
+      },
+      {
+        "path": "src/events/serialization/EventCodecRegistry.js",
+        "size": 2862,
+        "mode": 420
+      },
+      {
+        "path": "src/events/serialization/EventEnvelope.js",
+        "size": 11745,
+        "mode": 420
+      },
+      {
+        "path": "src/events/serialization/index.js",
+        "size": 127,
+        "mode": 420
+      },
+      {
+        "path": "src/events/serialization/SafeJsonCodec.js",
+        "size": 9286,
+        "mode": 420
+      },
+      {
+        "path": "src/events/sourcing/AggregateRoot.js",
+        "size": 2684,
+        "mode": 420
+      },
+      {
+        "path": "src/events/sourcing/index.js",
+        "size": 129,
+        "mode": 420
+      },
+      {
+        "path": "src/events/sourcing/MemoryEventStore.js",
+        "size": 9897,
+        "mode": 420
+      },
+      {
+        "path": "src/events/sourcing/ProjectionManager.js",
+        "size": 4705,
+        "mode": 420
+      },
+      {
+        "path": "src/events/support/async.js",
+        "size": 1637,
+        "mode": 420
+      },
+      {
+        "path": "src/events/support/glob.js",
+        "size": 2798,
+        "mode": 420
+      },
+      {
+        "path": "src/events/support/logger.js",
+        "size": 528,
+        "mode": 420
+      },
+      {
+        "path": "src/events/support/size.js",
+        "size": 3247,
+        "mode": 420
+      },
+      {
+        "path": "src/events/testing/EventAssertions.js",
+        "size": 2347,
+        "mode": 420
+      },
+      {
+        "path": "src/events/testing/EventRecorder.js",
+        "size": 2648,
+        "mode": 420
+      },
+      {
+        "path": "src/events/testing/FakeEventBus.js",
+        "size": 2522,
+        "mode": 420
+      },
+      {
+        "path": "src/events/testing/index.js",
+        "size": 200,
+        "mode": 420
+      },
+      {
+        "path": "src/events/testing/ManualClock.js",
+        "size": 351,
+        "mode": 420
+      },
+      {
+        "path": "src/events/testing/MemoryEventTransport.js",
+        "size": 2201,
+        "mode": 420
+      },
+      {
+        "path": "src/events/workflows/index.js",
+        "size": 93,
+        "mode": 420
+      },
+      {
+        "path": "src/events/workflows/MemoryWorkflowStore.js",
+        "size": 1819,
+        "mode": 420
+      },
+      {
+        "path": "src/events/workflows/WorkflowEngine.js",
+        "size": 8805,
+        "mode": 420
+      },
+      {
+        "path": "src/foundation/providers/EventServiceProvider.js",
+        "size": 187,
+        "mode": 420
+      },
+      {
+        "path": "types/bridge.d.ts",
+        "size": 147,
+        "mode": 420
+      },
+      {
+        "path": "types/broadcastable.d.ts",
+        "size": 127,
+        "mode": 420
+      },
+      {
+        "path": "types/broadcasting.d.ts",
+        "size": 62,
+        "mode": 420
+      },
+      {
+        "path": "types/config.d.ts",
+        "size": 1046,
+        "mode": 420
+      },
+      {
+        "path": "types/console.d.ts",
+        "size": 242,
+        "mode": 420
+      },
+      {
+        "path": "types/context.d.ts",
+        "size": 48,
+        "mode": 420
+      },
+      {
+        "path": "types/contracts.d.ts",
+        "size": 50,
+        "mode": 420
+      },
+      {
+        "path": "types/core.d.ts",
+        "size": 250,
+        "mode": 420
+      },
+      {
+        "path": "types/dispatcher.d.ts",
+        "size": 267,
+        "mode": 420
+      },
+      {
+        "path": "types/durable.d.ts",
+        "size": 96,
+        "mode": 420
+      },
+      {
+        "path": "types/errors.d.ts",
+        "size": 202,
+        "mode": 420
+      },
+      {
+        "path": "types/event-metrics.d.ts",
+        "size": 68,
+        "mode": 420
+      },
+      {
+        "path": "types/event-name.d.ts",
+        "size": 182,
+        "mode": 420
+      },
+      {
+        "path": "types/event-registry.d.ts",
+        "size": 70,
+        "mode": 420
+      },
+      {
+        "path": "types/event.d.ts",
+        "size": 54,
+        "mode": 420
+      },
+      {
+        "path": "types/history.d.ts",
+        "size": 43,
+        "mode": 420
+      },
+      {
+        "path": "types/index.d.ts",
+        "size": 37704,
+        "mode": 420
+      },
+      {
+        "path": "types/legacy.d.ts",
+        "size": 74,
+        "mode": 420
+      },
+      {
+        "path": "types/observability.d.ts",
+        "size": 153,
+        "mode": 420
+      },
+      {
+        "path": "types/protocol-event.d.ts",
+        "size": 70,
+        "mode": 420
+      },
+      {
+        "path": "types/provider.d.ts",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "types/queue.d.ts",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "types/redis-event-bridge.d.ts",
+        "size": 76,
+        "mode": 420
+      },
+      {
+        "path": "types/scheduling.d.ts",
+        "size": 53,
+        "mode": 420
+      },
+      {
+        "path": "types/security.d.ts",
+        "size": 50,
+        "mode": 420
+      },
+      {
+        "path": "types/serialization.d.ts",
+        "size": 142,
+        "mode": 420
+      },
+      {
+        "path": "types/sourcing.d.ts",
+        "size": 138,
+        "mode": 420
+      },
+      {
+        "path": "types/testing.d.ts",
+        "size": 110,
+        "mode": 420
+      },
+      {
+        "path": "types/workflows.d.ts",
+        "size": 66,
+        "mode": 420
+      }
+    ],
+    "entryCount": 136,
+    "bundled": []
+  }
+]

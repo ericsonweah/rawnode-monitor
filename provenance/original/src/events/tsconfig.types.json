@@ -1,0 +1,98 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "allowJs": false,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "rawnode-events": [
+        "./types/index.d.ts"
+      ],
+      "rawnode-events/bridge": [
+        "./types/bridge.d.ts"
+      ],
+      "rawnode-events/durable": [
+        "./types/durable.d.ts"
+      ],
+      "rawnode-events/durability": [
+        "./types/durable.d.ts"
+      ],
+      "rawnode-events/queue": [
+        "./types/queue.d.ts"
+      ],
+      "rawnode-events/workflows": [
+        "./types/workflows.d.ts"
+      ],
+      "rawnode-events/sourcing": [
+        "./types/sourcing.d.ts"
+      ],
+      "rawnode-events/testing": [
+        "./types/testing.d.ts"
+      ],
+      "rawnode-events/contracts": [
+        "./types/contracts.d.ts"
+      ],
+      "rawnode-events/observability": [
+        "./types/observability.d.ts"
+      ],
+      "rawnode-events/serialization": [
+        "./types/serialization.d.ts"
+      ],
+      "rawnode-events/provider": [
+        "./types/provider.d.ts"
+      ],
+      "rawnode-events/console": [
+        "./types/console.d.ts"
+      ],
+      "rawnode-events/config": [
+        "./types/config.d.ts"
+      ],
+      "rawnode-events/dispatcher": [
+        "./types/dispatcher.d.ts"
+      ],
+      "rawnode-events/legacy": [
+        "./types/legacy.d.ts"
+      ],
+      "rawnode-events/AdvancedEventDispatcher.js": [
+        "./types/dispatcher.d.ts"
+      ],
+      "rawnode-events/EventDispatcher.js": [
+        "./types/legacy.d.ts"
+      ],
+      "rawnode-events/Event.js": [
+        "./types/event.d.ts"
+      ],
+      "rawnode-events/EventName.js": [
+        "./types/event-name.d.ts"
+      ],
+      "rawnode-events/EventRegistry.js": [
+        "./types/event-registry.d.ts"
+      ],
+      "rawnode-events/EventMetrics.js": [
+        "./types/event-metrics.d.ts"
+      ],
+      "rawnode-events/RedisEventBridge.js": [
+        "./types/redis-event-bridge.d.ts"
+      ],
+      "rawnode-events/Broadcastable.js": [
+        "./types/broadcastable.d.ts"
+      ],
+      "rawnode-events/ProtocolEvent.js": [
+        "./types/protocol-event.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "types/**/*.d.ts",
+    "tests/types/**/*.ts"
+  ]
+}

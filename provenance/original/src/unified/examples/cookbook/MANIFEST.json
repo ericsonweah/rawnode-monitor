@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "fileCount": 29,
+  "javascriptFiles": 24,
+  "hashAlgorithm": "sha256",
+  "files": [
+    {
+      "path": "01-minimal-http/server.js",
+      "bytes": 453,
+      "sha256": "26b98f390223431ceaabf40e708b419124396d83865d745f14bbb1f8bea146e5"
+    },
+    {
+      "path": "02-basic-all-protocols/server.js",
+      "bytes": 1637,
+      "sha256": "98faff4684f2085ccb02dbb82d52801f53515565fd731d29c8950650a7504b1b"
+    },
+    {
+      "path": "03-listen-callback/server.js",
+      "bytes": 901,
+      "sha256": "b16f309865b6a117487e8d94103da243efb481de8e512a8051d68e6bed77359d"
+    },
+    {
+      "path": "04-http/server.js",
+      "bytes": 2349,
+      "sha256": "d9542d318ac61d1a98137f7c405fc6b870934710ad7750dca96229741332fd88"
+    },
+    {
+      "path": "05-websocket/browser-client.js",
+      "bytes": 1239,
+      "sha256": "ce04377a30d54d4a4172f1c2001b8244f7e8523a5322162cf268ba64db147b49"
+    },
+    {
+      "path": "05-websocket/server.js",
+      "bytes": 2070,
+      "sha256": "6d89f34270dd6e079be598eb0452cc119b915e6df5dd47e9abc749e8c1ddb032"
+    },
+    {
+      "path": "06-tcp/client.js",
+      "bytes": 1193,
+      "sha256": "e62b351d952d7000f5d0fad5f042a3b27ded9d5d92e9bd3909bfe5aab87cafab"
+    },
+    {
+      "path": "06-tcp/server.js",
+      "bytes": 1915,
+      "sha256": "bf03b3a5b92123b24129f202c250b63fb139390a987631b955673422219717cb"
+    },
+    {
+      "path": "07-udp/client.js",
+      "bytes": 1009,
+      "sha256": "fb79d11bd7bd22f8c13cce77b07d2ad270918bd2178d608ad71a3734036f1a9d"
+    },
+    {
+      "path": "07-udp/server.js",
+      "bytes": 1785,
+      "sha256": "be8098e027496626c0bf4095a7cfe5b07dadb12ad6b1f0e5faaabcebb7ff5793"
+    },
+    {
+      "path": "08-combined/browser-ws-client.js",
+      "bytes": 360,
+      "sha256": "288a1421894a6f5c911f91637677bf0db89488a6ccf060f26500cd986ea7556b"
+    },
+    {
+      "path": "08-combined/server.js",
+      "bytes": 1052,
+      "sha256": "8aff0f6620e91aa7b7873f545bb48bb38e243604053ea893f66ddde38f8e4db2"
+    },
+    {
+      "path": "08-combined/tcp-client.js",
+      "bytes": 289,
+      "sha256": "b44bdc7622faab187d95ee74183a8cd04da94ab22312b5b4a55604073dfcdcb1"
+    },
+    {
+      "path": "08-combined/udp-client.js",
+      "bytes": 421,
+      "sha256": "65269f4802dff3d8383dc463341aa11f30bd5fd1a248bddf5cfad61d95e853d8"
+    },
+    {
+      "path": "09-observability-and-drain/server.js",
+      "bytes": 2064,
+      "sha256": "775a61b74344b4a85c51ccf1634e6251e2b768cb844809a9877863434fc5cd83"
+    },
+    {
+      "path": "10-lifecycle-plugin/server.js",
+      "bytes": 1294,
+      "sha256": "91c13296eb237931c58b8e945a790dbaac4fc42895ca7288ee26bfdf02f098ee"
+    },
+    {
+      "path": "11-optional-protocol/server.js",
+      "bytes": 958,
+      "sha256": "ebda88d06ca193c4a8a176bbd5415a8a1c9bb20dedaff7ee506647ff518711e3"
+    },
+    {
+      "path": "12-production/.env.example",
+      "bytes": 550,
+      "sha256": "e0c219f86bbad6cbbca488c5fdd03435ae6ec5f5a8138f5d38ccc470e9923a15"
+    },
+    {
+      "path": "12-production/server.js",
+      "bytes": 6533,
+      "sha256": "ebfa2448d2e8e8ad7c3b60477f4e4b9da703c62b0f7ddb0c7a957d7a4a802731"
+    },
+    {
+      "path": "13-enterprise-tls/.env.example",
+      "bytes": 434,
+      "sha256": "17990d39df97bf226957c07346c30d0e16d07cf57b66f4e419181898b2e8c2ef"
+    },
+    {
+      "path": "13-enterprise-tls/server.js",
+      "bytes": 2451,
+      "sha256": "071f5bdeeeb64a978738b5d34583e42156e9281cfbcd5e7c8ff8ec35d3654db9"
+    },
+    {
+      "path": "13-enterprise-tls/tcp-client.js",
+      "bytes": 683,
+      "sha256": "97e2f800fcbf1172202d29730474777732d3adcf41aba25056d4d47e2f146e6a"
+    },
+    {
+      "path": "14-foundation-provider/.env.example",
+      "bytes": 1375,
+      "sha256": "c5ed2d903bf9146bbd0cef3a63d2f7abd8eb825fa7db1ae4a3f36d4b65433b3b"
+    },
+    {
+      "path": "14-foundation-provider/AppProtocolServiceProvider.js",
+      "bytes": 1481,
+      "sha256": "711e059b304c6971b753bfab449a25974d82fa8f68c64444c5ede6833c07bb3a"
+    },
+    {
+      "path": "14-foundation-provider/inspect-runtime.js",
+      "bytes": 788,
+      "sha256": "47e9737fa4177ee4ff75f44bdcb527d7f390721a41e8abf0489bf7e31f694b5b"
+    },
+    {
+      "path": "15-proxy-protocol/server.js",
+      "bytes": 889,
+      "sha256": "95f4d38fa42b9f5c5bb27fdf4855d7ae4e5db6a0a7a51e18578bfc959afcd017"
+    },
+    {
+      "path": "16-profile-and-protocol-matrix/examples.js",
+      "bytes": 992,
+      "sha256": "7eb48d07fe3ce14e51cbc288de74d73f35817f59ff7d735a71d241401a297bf1"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4466,
+      "sha256": "94b11d6075035573e77868cddd12b862902e90c6738df4bf1e781316eff5c75b"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 1197,
+      "sha256": "522317f2fd3e7f906d8970cd9abfbfa7802f7103c532f2de6f93e4e6af20bfa7"
+    }
+  ]
+}

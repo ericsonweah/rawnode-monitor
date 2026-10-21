@@ -1,0 +1,4 @@
+node scripts/reject-publication.mjs
+Exit status: 1 (expected)
+Publication blocked: candidate requires explicit owner release, version and license decisions.
+No publish command invoked.
