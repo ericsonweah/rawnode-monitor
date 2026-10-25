@@ -1,0 +1,315 @@
+{
+  "session": "final-token-05",
+  "status": "PASS",
+  "scope": "Selected native synthetic host-session/bearer mode observations",
+  "artifact": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "files": 177
+  },
+  "input": {
+    "session": "final-token-05",
+    "mode": "token",
+    "url": "http://127.0.0.1:62270/monitor",
+    "controlUrl": "http://127.0.0.1:62270/qualification/control",
+    "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "pid": 257,
+    "node": "v24.21.0",
+    "execPath": "/usr/local/bin/node",
+    "files": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    "baseline": {
+      "mutations": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    "ttlMs": 900000
+  },
+  "log": {
+    "path": "final-token-05.jsonl",
+    "sha256": "45cca61b747166c57a7fa7875345600bb8a09b565d8c3bc608f84e59fab62923",
+    "lines": 152,
+    "startedAt": "2026-10-25T14:27:53.285Z",
+    "finishedAt": "2026-10-25T14:34:02.700Z"
+  },
+  "harness": {
+    "path": "scripts/native-browser-fixture-v4.mjs",
+    "sha256": "186fef4752b8c688b740d150903205847467bc03770cf11911facae71327f072",
+    "packagedRuntimeEdited": false
+  },
+  "nativeNote": {
+    "path": "token05-native-observations.md",
+    "sha256": "3479a68a9f2c2997e3e5bf5e1f9d35878ced624b866951a0fbc346e0c94b8214",
+    "type": "Authored native transcript/user-reported context, distinct from raw server/browser events."
+  },
+  "subcases": [
+    {
+      "id": "native-host-session-bootstrap",
+      "status": "PASS",
+      "lines": [
+        2,
+        6,
+        7
+      ],
+      "statusCode": 401,
+      "responseStatusEvidence": "Authored native observation note; raw request log captures method/path and session booleans, not GET response status.",
+      "nativeNote": "token05-native-observations.md",
+      "scope": "Protected shell denied before the synthetic host-session form; the same browser then loads protected shell/assets with the host session."
+    },
+    {
+      "id": "native-bearer-entry",
+      "status": "PASS",
+      "lines": [
+        11,
+        16,
+        24
+      ],
+      "nativeNote": "token05-native-observations.md",
+      "scope": "Native token modal/entry is transcript-observed; raw requests change from no bearer to bearer plus session and actual Overview data renders."
+    },
+    {
+      "id": "native-token-polling-selection",
+      "status": "PASS",
+      "lines": [
+        24,
+        127,
+        139,
+        142
+      ],
+      "streamRequestCount": 0,
+      "serverStreamClients": 0,
+      "scope": "Token-required browser mode selects polling with no native EventSource request. Polling progress is assessed separately."
+    },
+    {
+      "id": "visible-bounded-polling-progress",
+      "status": "PASS",
+      "windows": [
+        {
+          "status": "BLOCKED",
+          "markerLine": 39,
+          "observationLine": 42,
+          "beforeVisibility": "hidden",
+          "afterVisibility": "hidden",
+          "requestedDurationMs": 5000,
+          "elapsedMs": 5087,
+          "requestDelta": 0,
+          "mutationDelta": 0,
+          "actualReads": [],
+          "intervalsMs": [],
+          "reason": "Preserved incomplete visibility window; actual request progress, if present, is still useful partial evidence."
+        },
+        {
+          "status": "BLOCKED",
+          "markerLine": 94,
+          "observationLine": 102,
+          "beforeVisibility": "visible",
+          "afterVisibility": "hidden",
+          "requestedDurationMs": 5000,
+          "elapsedMs": 5008,
+          "requestDelta": 5,
+          "mutationDelta": 0,
+          "actualReads": [
+            {
+              "line": 95,
+              "at": "2026-10-25T14:32:06.466Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 96,
+              "at": "2026-10-25T14:32:07.470Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 97,
+              "at": "2026-10-25T14:32:08.474Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 98,
+              "at": "2026-10-25T14:32:09.478Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 99,
+              "at": "2026-10-25T14:32:10.482Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            }
+          ],
+          "intervalsMs": [
+            1004,
+            1004,
+            1004,
+            1004
+          ],
+          "reason": "Preserved incomplete visibility window; actual request progress, if present, is still useful partial evidence."
+        },
+        {
+          "status": "PASS",
+          "markerLine": 114,
+          "observationLine": 122,
+          "beforeVisibility": "visible",
+          "afterVisibility": "visible",
+          "requestedDurationMs": 5000,
+          "elapsedMs": 5008,
+          "requestDelta": 5,
+          "mutationDelta": 0,
+          "actualReads": [
+            {
+              "line": 115,
+              "at": "2026-10-25T14:32:22.282Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 116,
+              "at": "2026-10-25T14:32:23.286Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 117,
+              "at": "2026-10-25T14:32:24.289Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 118,
+              "at": "2026-10-25T14:32:25.294Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            },
+            {
+              "line": 119,
+              "at": "2026-10-25T14:32:26.297Z",
+              "path": "/monitor/api/overview",
+              "hasBearer": true,
+              "hasSession": true
+            }
+          ],
+          "intervalsMs": [
+            1004,
+            1003,
+            1005,
+            1003
+          ],
+          "reason": "Bounded visible window with repeated authorized reads and no mutations."
+        }
+      ],
+      "actor": "First automated window; two later native operator clicks reported by user/root. Actual start/end markers and requests are independently recorded.",
+      "scope": "Observed five-second authorized polling progress, not exact timer cardinality or a universal timing/performance guarantee."
+    },
+    {
+      "id": "browser-storage-observations",
+      "status": "PASS",
+      "lines": [
+        24,
+        127,
+        139,
+        142,
+        146
+      ],
+      "bearerLiteralAbsentFromLog": true,
+      "scope": "Storage key lists were empty in recorded native observations. The separate host session uses an HttpOnly cookie; this is not a claim of no browser state or total memory erasure."
+    },
+    {
+      "id": "reload-loses-bearer",
+      "status": "PASS",
+      "lines": [
+        128,
+        132,
+        133
+      ],
+      "nativeNote": "token05-native-observations.md",
+      "scope": "Reload retains the host session but its first API request has no bearer; native transcript records fresh token requirement and deliberate reentry before a later bearer-bearing read."
+    },
+    {
+      "id": "diagnostic-resume-presentation",
+      "status": "PASS",
+      "lines": [
+        139,
+        140,
+        142
+      ],
+      "scope": "This later identified native session captures full diagnostics, Resume read, and cleared/refreshed diagnostics presentation; local01 remains incomplete on this exact subcase."
+    },
+    {
+      "id": "native-unmount",
+      "status": "PASS",
+      "lines": [
+        146
+      ],
+      "scope": "No exposed mounted handle after native Unmount and no stream client in polling mode."
+    },
+    {
+      "id": "fixture-close",
+      "status": "PASS",
+      "lines": [
+        151,
+        152
+      ],
+      "server": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 0,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "reason": "stdin",
+      "listening": false,
+      "exitCode": 0,
+      "exitEvidence": "Parent execution result; raw JSONL independently captures server teardown."
+    }
+  ],
+  "environment": {
+    "observedDate": "2026-10-25",
+    "method": "Independent read-only /usr/libexec/PlistBuddy metadata queries; no browser process launch",
+    "Safari": {
+      "plist": "/Applications/Safari.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "27.0",
+      "CFBundleVersion": "20625.1.29.18.28",
+      "queryExit": 0
+    },
+    "Chrome": {
+      "plist": "/Applications/Google Chrome.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "155.0.8059.85",
+      "queryExit": 0
+    },
+    "os": {
+      "name": "macOS",
+      "version": "15.8.1",
+      "build": "24H32",
+      "architecture": "x86_64",
+      "source": "../runtime/platform.json"
+    },
+    "nativeControlMechanism": "cua native application accessibility/keyboard controls; coordinates failed in some retained attempts",
+    "standaloneScreenshots": "Native API screenshots were visually reviewed in the conversation; no standalone screenshot files were available. Authored notes are distinct from raw JSONL."
+  },
+  "limitations": [
+    "All three polling windows are retained; hidden/mixed visibility windows are not upgraded to full passes.",
+    "Browser request logs omit GET response status; native denial/reentry statements have explicitly authored transcript attribution.",
+    "Storage key observations and source review are not a complete browser memory audit."
+  ]
+}

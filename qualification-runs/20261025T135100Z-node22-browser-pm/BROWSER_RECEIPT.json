@@ -1,0 +1,1136 @@
+{
+  "status": "PASS",
+  "functionalStatus": "PASS",
+  "windowCleanup": {
+    "status": "PASS",
+    "priorStatus": "BLOCKED",
+    "scope": "Closure of only the dedicated task-owned native browser windows",
+    "serverCleanup": "All five final native fixtures recorded close reason stdin, listening false, clients 0 and signal listeners 0; parent reports natural exit 0. Owned-port verification is separate.",
+    "lastAction": "Parent sent Command-W after final-token-05 native Unmount.",
+    "verificationFailure": "Three subsequent native controller attempts timed out, including after kernel reset. Surface inventory listed apps without a reliable task-window closure observation.",
+    "inferenceLimit": "This proves neither successful window cleanup nor an open window. Functional acceptance and server cleanup remain separate.",
+    "operatorRequest": "Close only named task test windows; preserve personal browser windows and processes.",
+    "operatorConfirmationReceived": true,
+    "operatorConfirmation": "Named task windows are closed",
+    "verificationMode": "Operator-attested closure of the named task windows; independent native-controller confirmation remains unavailable",
+    "independentNativeConfirmation": false,
+    "namedScope": [
+      "diagnostic-01",
+      "diagnostic-safari-02",
+      "final-local-01",
+      "final-local-02",
+      "final-local-03",
+      "final-local-04",
+      "final-token-05"
+    ],
+    "noBroaderClaim": "No claim that all Safari/Chrome windows or application processes were closed; no personal browser state was targeted.",
+    "source": "Root native-controller execution report, retained in conversation; not a raw native snapshot export."
+  },
+  "serverCleanupEvidence": {
+    "path": "browser/cleanup.json",
+    "result": {
+      "at": "2026-10-25T14:35:58.998Z",
+      "node": "v24.21.0",
+      "execPath": "/usr/local/bin/node",
+      "results": [
+        {
+          "session": "diagnostic-01",
+          "pid": 62797,
+          "port": 58376,
+          "closedAt": "2026-10-25T14:01:56.850Z",
+          "closed": {
+            "at": "2026-10-25T14:01:56.850Z",
+            "session": "diagnostic-01",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 0,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 0,
+              "alertState": "firing",
+              "incidentState": "open"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        },
+        {
+          "session": "diagnostic-safari-02",
+          "pid": 71964,
+          "port": 58923,
+          "closedAt": "2026-10-25T14:05:11.360Z",
+          "closed": {
+            "at": "2026-10-25T14:05:11.360Z",
+            "session": "diagnostic-safari-02",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 0,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 0,
+              "alertState": "firing",
+              "incidentState": "open"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        },
+        {
+          "session": "final-local-01",
+          "pid": 76882,
+          "port": 59601,
+          "closedAt": "2026-10-25T14:16:12.765Z",
+          "closed": {
+            "at": "2026-10-25T14:16:12.765Z",
+            "session": "final-local-01",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 3,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 1,
+              "alertState": "firing",
+              "incidentState": "acknowledged"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        },
+        {
+          "session": "final-local-02",
+          "pid": 96415,
+          "port": 61942,
+          "closedAt": "2026-10-25T14:19:36.147Z",
+          "closed": {
+            "at": "2026-10-25T14:19:36.147Z",
+            "session": "final-local-02",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 0,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 0,
+              "alertState": "firing",
+              "incidentState": "open"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        },
+        {
+          "session": "final-local-03",
+          "pid": 98923,
+          "port": 62049,
+          "closedAt": "2026-10-25T14:23:17.790Z",
+          "closed": {
+            "at": "2026-10-25T14:23:17.790Z",
+            "session": "final-local-03",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 1,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 0,
+              "alertState": "firing",
+              "incidentState": "resolved"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        },
+        {
+          "session": "final-local-04",
+          "pid": 99566,
+          "port": 62198,
+          "closedAt": "2026-10-25T14:34:43.001Z",
+          "closed": {
+            "at": "2026-10-25T14:34:43.001Z",
+            "session": "final-local-04",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 0,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 0,
+              "alertState": "firing",
+              "incidentState": "open"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        },
+        {
+          "session": "final-token-05",
+          "pid": 257,
+          "port": 62270,
+          "closedAt": "2026-10-25T14:34:02.700Z",
+          "closed": {
+            "at": "2026-10-25T14:34:02.700Z",
+            "session": "final-token-05",
+            "kind": "closed",
+            "reason": "stdin",
+            "server": {
+              "mutations": 0,
+              "clients": 0,
+              "signalListeners": 0,
+              "silences": 0,
+              "alertState": "firing",
+              "incidentState": "open"
+            },
+            "listening": false
+          },
+          "connection": "ECONNREFUSED"
+        }
+      ],
+      "portsRefused": true,
+      "processExits": {
+        "source": "Parent exec write_stdin tool outputs; all seven supported close commands returned exit_code 0",
+        "code": 0,
+        "signalsSent": false
+      },
+      "browserWindows": {
+        "status": "operator-confirmed",
+        "scope": "Named task windows only; unrelated browser windows/processes were borrowed and left alone",
+        "statement": "Named task windows are closed",
+        "independentControllerConfirmation": false,
+        "reason": "Native Safari controller timed out after close and after one kernel reconnect; application-only inventory did not include windows"
+      }
+    }
+  },
+  "finalizedAt": "2026-10-25T14:38:29.185Z",
+  "scope": "Case-by-case native Safari qualification on the same final artifact, with tokenless and synthetic host-session/bearer modes. Distinct sessions and external harness revisions remain attributed; this is not an invented single-session pass. Named window closure is operator-attested; owned loopback port closure is independently verified.",
+  "artifact": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "files": 177
+  },
+  "environment": {
+    "observedDate": "2026-10-25",
+    "method": "Independent read-only /usr/libexec/PlistBuddy metadata queries; no browser process launch",
+    "Safari": {
+      "plist": "/Applications/Safari.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "27.0",
+      "CFBundleVersion": "20625.1.29.18.28",
+      "queryExit": 0
+    },
+    "Chrome": {
+      "plist": "/Applications/Google Chrome.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "155.0.8059.85",
+      "queryExit": 0
+    },
+    "os": {
+      "name": "macOS",
+      "version": "15.8.1",
+      "build": "24H32",
+      "architecture": "x86_64",
+      "source": "../runtime/platform.json"
+    },
+    "nativeControlMechanism": "cua native application accessibility/keyboard controls; coordinates failed in some retained attempts",
+    "standaloneScreenshots": "Native API screenshots were visually reviewed in the conversation; no standalone screenshot files were available. Authored notes are distinct from raw JSONL."
+  },
+  "sessionReceipts": [
+    {
+      "session": "final-local-01",
+      "path": "browser/local01-receipt.json",
+      "selectedSubcaseStatus": "BLOCKED",
+      "harness": {
+        "path": "scripts/native-browser-fixture-v1.mjs",
+        "sha256": "919db429c3c359975b087e525867a6ab46c03ada6aac085a07a0b38a65d95ebc",
+        "delegatesNativePromptUnchanged": true,
+        "suppliedPromptAnswers": false,
+        "instrumentationChanges": [
+          "unique title",
+          "no-store response headers",
+          "appended fixture-only controls and observations",
+          "bounded independent server mutation/state receipts"
+        ],
+        "packagedRuntimeEdited": false
+      },
+      "log": {
+        "path": "final-local-01.jsonl",
+        "sha256": "cdf670e0eaeeceef3218ec0ae3d49b4fca58e435da343b786ef2528d708f388a",
+        "bytes": 84100,
+        "lines": 190,
+        "firstAt": "2026-10-25T14:05:13.022Z",
+        "lastAt": "2026-10-25T14:16:12.765Z"
+      }
+    },
+    {
+      "session": "final-local-02",
+      "path": "browser/local02-receipt.json",
+      "selectedSubcaseStatus": "PASS",
+      "harness": {
+        "path": "scripts/native-browser-fixture-v3.mjs",
+        "sha256": "1f7efb71c45439f23e69d2cbd8cf36e8b8f4318e257d52322194ad5fda9d55d4",
+        "packagedRuntimeEdited": false
+      },
+      "log": {
+        "path": "final-local-02.jsonl",
+        "sha256": "313a1e68594187571a4b1421312ad89f469608f642c1231da81221d3265733e6",
+        "lines": 59,
+        "startedAt": "2026-10-25T14:16:14.016Z",
+        "finishedAt": "2026-10-25T14:19:36.147Z"
+      }
+    },
+    {
+      "session": "final-local-03",
+      "path": "browser/local03-receipt.json",
+      "selectedSubcaseStatus": "PASS",
+      "harness": {
+        "path": "scripts/native-browser-fixture-v3.mjs",
+        "sha256": "1f7efb71c45439f23e69d2cbd8cf36e8b8f4318e257d52322194ad5fda9d55d4",
+        "packagedRuntimeEdited": false
+      },
+      "log": {
+        "path": "final-local-03.jsonl",
+        "sha256": "b4bba60f9d0655c29e37e61b259e4aa8d91fb12a90fde4303bc6fd567026ae8d",
+        "lines": 64,
+        "startedAt": "2026-10-25T14:19:37.581Z",
+        "finishedAt": "2026-10-25T14:23:17.790Z"
+      }
+    },
+    {
+      "session": "final-local-04",
+      "path": "browser/local04-receipt.json",
+      "selectedSubcaseStatus": "PASS",
+      "harness": {
+        "path": "scripts/native-browser-fixture-v4.mjs",
+        "sha256": "186fef4752b8c688b740d150903205847467bc03770cf11911facae71327f072",
+        "packagedRuntimeEdited": false
+      },
+      "log": {
+        "path": "final-local-04.jsonl",
+        "sha256": "4681a56fad2abe393b63ada7f76f5999e082d6238182a77269b9c7530b446c39",
+        "lines": 119,
+        "startedAt": "2026-10-25T14:23:19.144Z",
+        "finishedAt": "2026-10-25T14:34:43.001Z"
+      }
+    },
+    {
+      "session": "final-token-05",
+      "path": "browser/token05-receipt.json",
+      "selectedSubcaseStatus": "PASS",
+      "harness": {
+        "path": "scripts/native-browser-fixture-v4.mjs",
+        "sha256": "186fef4752b8c688b740d150903205847467bc03770cf11911facae71327f072",
+        "packagedRuntimeEdited": false
+      },
+      "log": {
+        "path": "final-token-05.jsonl",
+        "sha256": "45cca61b747166c57a7fa7875345600bb8a09b565d8c3bc608f84e59fab62923",
+        "lines": 152,
+        "startedAt": "2026-10-25T14:27:53.285Z",
+        "finishedAt": "2026-10-25T14:34:02.700Z"
+      }
+    }
+  ],
+  "requiredGates": [
+    {
+      "id": "native-cancel-rule-three-sessions",
+      "requirement": "Prompt §5–6: three bounded fresh-session repetitions; null Cancel sends no mutation",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "local01-cancel-rule",
+          "status": "PASS",
+          "lines": [
+            10,
+            13,
+            15
+          ]
+        },
+        {
+          "session": "local02",
+          "caseId": "cancel-rule",
+          "status": "PASS",
+          "lines": [
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "session": "local03",
+          "caseId": "cancel-rule",
+          "status": "PASS",
+          "lines": [
+            15,
+            17,
+            19
+          ]
+        }
+      ],
+      "distinctFinalArtifactSessions": 3
+    },
+    {
+      "id": "native-cancel-duration-three-sessions",
+      "requirement": "Prompt §5–6: three bounded fresh-session repetitions; null Cancel sends no mutation",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "local01-cancel-duration",
+          "status": "PASS",
+          "lines": [
+            17,
+            19,
+            21,
+            23
+          ]
+        },
+        {
+          "session": "local02",
+          "caseId": "cancel-duration",
+          "status": "PASS",
+          "lines": [
+            17,
+            19,
+            21,
+            23
+          ]
+        },
+        {
+          "session": "local03",
+          "caseId": "cancel-duration",
+          "status": "PASS",
+          "lines": [
+            21,
+            23,
+            25,
+            27
+          ]
+        }
+      ],
+      "distinctFinalArtifactSessions": 3
+    },
+    {
+      "id": "native-cancel-reason-three-sessions",
+      "requirement": "Prompt §5–6: three bounded fresh-session repetitions; null Cancel sends no mutation",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "local01-cancel-reason",
+          "status": "PASS",
+          "lines": [
+            25,
+            27,
+            29,
+            31,
+            33
+          ]
+        },
+        {
+          "session": "local02",
+          "caseId": "cancel-reason",
+          "status": "PASS",
+          "lines": [
+            25,
+            27,
+            29,
+            31,
+            33
+          ]
+        },
+        {
+          "session": "local03",
+          "caseId": "cancel-reason",
+          "status": "PASS",
+          "lines": [
+            29,
+            31,
+            33,
+            35,
+            37
+          ]
+        }
+      ],
+      "distinctFinalArtifactSessions": 3
+    },
+    {
+      "id": "native-cancel-resolution-three-clean-sessions",
+      "requirement": "Prompt §5–6: clean native Resolution Cancel controls",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local02",
+          "caseId": "cancel-resolution",
+          "status": "PASS",
+          "lines": [
+            35,
+            40,
+            42
+          ]
+        },
+        {
+          "session": "local03",
+          "caseId": "cancel-resolution",
+          "status": "PASS",
+          "lines": [
+            40,
+            42,
+            44
+          ]
+        },
+        {
+          "session": "local04",
+          "caseId": "cancel-resolution",
+          "status": "PASS",
+          "lines": [
+            11,
+            13,
+            15
+          ]
+        }
+      ],
+      "distinctFinalArtifactSessions": 3,
+      "earlierAttempt": "local01 retains an accidental acknowledge mutation and a narrower successful cancellation; it is not counted as a clean case."
+    },
+    {
+      "id": "eleven-existing-views",
+      "requirement": "Prompt §6: existing Studio views",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "eleven-main-views",
+          "status": "PASS",
+          "lines": null
+        }
+      ]
+    },
+    {
+      "id": "trace-detail-redaction-and-resume",
+      "requirement": "Prompt §6: real trace details, safe rendering and explicit refresh resume",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local02",
+          "caseId": "trace-detail-redaction",
+          "status": "PASS",
+          "lines": [
+            46,
+            48
+          ]
+        },
+        {
+          "session": "local02",
+          "caseId": "trace-resume-presentation",
+          "status": "PASS",
+          "lines": [
+            50,
+            51,
+            53
+          ]
+        }
+      ],
+      "earlierAttempt": "local01 failed native trace targeting remains preserved; local02 keyboard control succeeded on unchanged packaged bytes."
+    },
+    {
+      "id": "diagnostics-full-inspection",
+      "requirement": "Prompt §6: diagnostic view, full snapshot inspection and Resume presentation",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "diagnostic-full-inspection",
+          "status": "PASS",
+          "lines": [
+            90,
+            92
+          ]
+        },
+        {
+          "session": "token05",
+          "caseId": "diagnostic-resume-presentation",
+          "status": "PASS",
+          "lines": [
+            139,
+            140,
+            142
+          ]
+        }
+      ],
+      "earlierAttempt": "local01 captured only Resume request; token05 later captures the actual before/after presentation on the same packaged bytes."
+    },
+    {
+      "id": "deliberate-all-rules-silence",
+      "requirement": "Prompt §6: empty rule submission remains distinct from null cancellation",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "deliberate-empty-rule-all-rules-silence",
+          "status": "PASS",
+          "lines": [
+            143,
+            145,
+            147,
+            149,
+            152
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invalid-duration-and-visible-failure",
+      "requirement": "Prompt §6: input rejection and visible failed mutations with state controls",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "invalid-zero-duration-rejection",
+          "status": "PASS",
+          "lines": [
+            155,
+            157,
+            159,
+            161
+          ]
+        },
+        {
+          "session": "local01",
+          "caseId": "invalid-duration-visible-feedback",
+          "status": "PASS",
+          "lines": null
+        },
+        {
+          "session": "local01",
+          "caseId": "forced-mutation-failure-state",
+          "status": "PASS",
+          "lines": [
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175
+          ]
+        },
+        {
+          "session": "local01",
+          "caseId": "forced-mutation-failure-visible-feedback",
+          "status": "PASS",
+          "lines": null
+        }
+      ]
+    },
+    {
+      "id": "intentional-incident-resolution",
+      "requirement": "Prompt §6: deliberate valid synthetic action",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local03",
+          "caseId": "intentional-incident-resolution",
+          "status": "PASS",
+          "lines": [
+            55,
+            57,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "id": "native-tokenless-sse-reconnection",
+      "requirement": "Prompt §6: EventSource reconnect in a supported mode",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "native-tokenless-sse-reconnection",
+          "status": "PASS",
+          "lines": [
+            125,
+            127,
+            128,
+            130
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pending-navigation-and-destroy",
+      "requirement": "Prompt §6–7: actual browser pending operations and stale completion suppression",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local04",
+          "caseId": "pending-navigation",
+          "status": "PASS",
+          "lines": [
+            21,
+            22,
+            26
+          ]
+        },
+        {
+          "session": "local04",
+          "caseId": "pending-destroy",
+          "status": "PASS",
+          "lines": [
+            36,
+            40
+          ]
+        }
+      ],
+      "limit": "External native-clicked controls invoke the actual packaged public client. This is not a DOM model or proof of arbitrary injected callback cancellation."
+    },
+    {
+      "id": "repeated-mount-and-stream-ownership",
+      "requirement": "Prompt §6: repeated mount/destroy ownership",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "cycle-twenty-completion",
+          "status": "PASS",
+          "lines": null
+        },
+        {
+          "session": "local01",
+          "caseId": "cycle-stream-client-ownership",
+          "status": "PASS",
+          "lines": [
+            140
+          ]
+        }
+      ],
+      "limit": "Native completion text and one settled server stream client; no claim of an exact global browser timer/listener census."
+    },
+    {
+      "id": "narrow-layout-sample",
+      "requirement": "Prompt §6: proportionate narrow-layout usability",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local04",
+          "caseId": "narrow-css-viewport",
+          "status": "PASS",
+          "lines": [
+            59,
+            64
+          ]
+        }
+      ],
+      "limit": "457px CSS viewport samples of overview/alerts and native navigation; not all devices/views or a full accessibility audit."
+    },
+    {
+      "id": "protected-session-native-bootstrap",
+      "requirement": "Prompt §6: protected shell/assets require authenticated host bootstrap before bearer UI entry",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "token05",
+          "caseId": "native-host-session-bootstrap",
+          "status": "PASS",
+          "lines": [
+            2,
+            6,
+            7
+          ]
+        },
+        {
+          "session": "token05",
+          "caseId": "native-bearer-entry",
+          "status": "PASS",
+          "lines": [
+            11,
+            16,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "id": "native-token-polling-mode",
+      "requirement": "Prompt §6: native authenticated mode uses in-memory bearer polling, not token URLs/EventSource",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "token05",
+          "caseId": "native-token-polling-selection",
+          "status": "PASS",
+          "lines": [
+            24,
+            127,
+            139,
+            142
+          ]
+        },
+        {
+          "session": "token05",
+          "caseId": "visible-bounded-polling-progress",
+          "status": "PASS",
+          "lines": null
+        }
+      ]
+    },
+    {
+      "id": "native-token-storage-and-reload",
+      "requirement": "Prompt §6: token remains memory-only and new page needs fresh bearer authorization",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "token05",
+          "caseId": "browser-storage-observations",
+          "status": "PASS",
+          "lines": [
+            24,
+            127,
+            139,
+            142,
+            146
+          ]
+        },
+        {
+          "session": "token05",
+          "caseId": "reload-loses-bearer",
+          "status": "PASS",
+          "lines": [
+            128,
+            132,
+            133
+          ]
+        }
+      ]
+    },
+    {
+      "id": "captured-rendering-runtime-errors",
+      "requirement": "Prompt §6: safe synthetic rendering and captured browser error/CSP observations",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "synthetic-html-rendering",
+          "status": "PASS",
+          "lines": null
+        },
+        {
+          "session": "local01",
+          "caseId": "captured-client-errors",
+          "status": "PASS",
+          "lines": null
+        }
+      ],
+      "limit": "Bounded instrumented runtime/CSP events and selected synthetic payloads; not a full DevTools/network or universal secret-detection audit."
+    },
+    {
+      "id": "all-final-fixtures-closed",
+      "requirement": "Prompt §3,5,6: owned fixture cleanup",
+      "mandatory": true,
+      "status": "PASS",
+      "sources": [
+        {
+          "session": "local01",
+          "caseId": "fixture-close",
+          "status": "PASS",
+          "lines": [
+            189,
+            190
+          ]
+        },
+        {
+          "session": "local02",
+          "caseId": "fixture-close",
+          "status": "PASS",
+          "lines": [
+            58,
+            59
+          ]
+        },
+        {
+          "session": "local03",
+          "caseId": "fixture-close",
+          "status": "PASS",
+          "lines": [
+            63,
+            64
+          ]
+        },
+        {
+          "session": "local04",
+          "caseId": "fixture-close",
+          "status": "PASS",
+          "lines": [
+            118,
+            119
+          ]
+        },
+        {
+          "session": "token05",
+          "caseId": "fixture-close",
+          "status": "PASS",
+          "lines": [
+            151,
+            152
+          ]
+        }
+      ],
+      "independentOwnedPortEvidence": {
+        "path": "browser/cleanup.json",
+        "refusedPorts": 7,
+        "result": "PASS"
+      }
+    },
+    {
+      "id": "owned-browser-window-cleanup",
+      "requirement": "Prompt §3,5,6: close dedicated task windows without touching personal sessions",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "browser/window-cleanup.json",
+      "verificationMode": "Operator-attested closure of the named task windows; independent native-controller confirmation remains unavailable",
+      "independentNativeConfirmation": false,
+      "operatorConfirmation": "Named task windows are closed"
+    }
+  ],
+  "retainedFailures": [
+    {
+      "session": "final-local-01",
+      "classification": "Native controller action-targeting failure",
+      "case": "resolution-case-targeting",
+      "outcome": "Synthetic acknowledge succeeded before later native resolution Cancel. Preserved and excluded from clean resolution repetition count.",
+      "packageDefectEstablished": false
+    },
+    {
+      "session": "final-local-01",
+      "classification": "Native trace targeting inconclusive",
+      "outcome": "Cell click/Return did not open details; coordinate attempt noWindowsAvailable. Later keyboard trace detail observation is separate.",
+      "packageDefectEstablished": false
+    }
+  ],
+  "controllerDiagnosis": {
+    "source": "browser/CONTROLLER_DIAGNOSIS.md, BROWSER_PLAN.md, diagnostic JSONL and authored native notes",
+    "Chrome": "Guest target errors -10005/changed selected application; Incognito plain HTML/js reached the local server, but native page control was unusable. No Monitor defect was established by that plain-control failure.",
+    "Safari": "Separate plain-control session recorded ordinary click plus native null, empty and synthetic-string results. Fresh final-artifact sessions then completed native dialogs and controls. Occasional target/coordinate and hidden-visibility limitations remain explicit.",
+    "diagnosticSessions": [
+      {
+        "session": "diagnostic-01",
+        "log": "browser/diagnostic-01.jsonl",
+        "sha256": "57c12c3afa785c794e7b0c25a118bfda21868c14cc2895f5914d99a8a0b53e8d",
+        "artifact": "dca28f380bd64355aa4f3b3fffc2c6ce3593cfe1b5c88ce8affce3ff7232061a",
+        "last": {
+          "at": "2026-10-25T14:01:56.850Z",
+          "session": "diagnostic-01",
+          "kind": "closed",
+          "reason": "stdin",
+          "server": {
+            "mutations": 0,
+            "clients": 0,
+            "signalListeners": 0,
+            "silences": 0,
+            "alertState": "firing",
+            "incidentState": "open"
+          },
+          "listening": false
+        },
+        "browserEvents": []
+      },
+      {
+        "session": "diagnostic-safari-02",
+        "log": "browser/diagnostic-safari-02.jsonl",
+        "sha256": "e56e68f92b88317a73bd47cb2e66d0840767be77e20f9df09fa9e4ec974fd17e",
+        "artifact": "dca28f380bd64355aa4f3b3fffc2c6ce3593cfe1b5c88ce8affce3ff7232061a",
+        "last": {
+          "at": "2026-10-25T14:05:11.360Z",
+          "session": "diagnostic-safari-02",
+          "kind": "closed",
+          "reason": "stdin",
+          "server": {
+            "mutations": 0,
+            "clients": 0,
+            "signalListeners": 0,
+            "silences": 0,
+            "alertState": "firing",
+            "incidentState": "open"
+          },
+          "listening": false
+        },
+        "browserEvents": [
+          {
+            "kind": "intent",
+            "case": "diagnostic-cancel"
+          },
+          {
+            "kind": "ordinary-click"
+          },
+          {
+            "kind": "control-prompt",
+            "result": null
+          },
+          {
+            "kind": "control-prompt",
+            "result": ""
+          },
+          {
+            "kind": "control-prompt",
+            "result": "synthetic-native-control"
+          }
+        ]
+      }
+    ],
+    "diagnosticArtifactIsFinal": false,
+    "finalBrowserServerAssetsUnchangedFromDiagnostics": "The four recorded fixture/client/style/page source hashes match final inputs; diagnostics only qualify controller availability, not final Studio acceptance."
+  },
+  "instrumentationEvolution": [
+    "v1: delegated real prompts, bounded observations, mutation/state receipts; used by local01.",
+    "v2/v3: external protected-mode ordering and absolute-form pathname defects reproduced and corrected; past failed HTTP attempts retained; local02/03 use v3. Local native prompt behavior unchanged.",
+    "v4: adds native-clicked bounded public-client lifecycle, polling and status controls; local04/token05. Packaged Studio files and native prompt delegation unchanged."
+  ],
+  "secondaryObservations": {
+    "exactGlobalTimerCardinality": {
+      "status": "UNRUN",
+      "mandatory": false,
+      "reason": "Not inferred from polling booleans, static screenshots or counters; no new universal census requirement is imposed."
+    },
+    "local04VisiblePollingWindow": {
+      "status": "UNRUN",
+      "mandatory": false,
+      "reason": "Local04 visibility observations are retained; the selected protected-token polling window is separately evaluated in token05."
+    },
+    "keyboardAndFocus": {
+      "status": "PASS",
+      "scope": "Native keyboard prompt entry/Cancel and parent-observed keyboard trace activation; not a full tab-order, focus-restoration or assistive-technology audit."
+    },
+    "standaloneScreenshots": {
+      "status": "NOT APPLICABLE",
+      "reason": "Native API visual observations are retained in the conversation, not exported screenshot files; no fabricated artifact."
+    }
+  },
+  "remainingMandatory": [],
+  "handoff": "BROWSER_HANDOFF.md",
+  "fingerprints": [
+    {
+      "path": "browser/local01-receipt.json",
+      "sha256": "8fb6c4d281a51596bac9f279618cdf838118ad24ca37ac0f6638b2ed580365a7"
+    },
+    {
+      "path": "browser/local02-receipt.json",
+      "sha256": "31a4cb508a87c722c46bf0776ab477e077a895ac3883aada4c4260c68bf0d0cb"
+    },
+    {
+      "path": "browser/local03-receipt.json",
+      "sha256": "b893437c0535fb2a95c20f706641197630241ea4a75ec14dc5ba8a471577c83a"
+    },
+    {
+      "path": "browser/local04-receipt.json",
+      "sha256": "6bb616a6d08b9152518bdfacd408678abfad3c05d0b9c2bdf5fc19e3de1761b8"
+    },
+    {
+      "path": "browser/token05-receipt.json",
+      "sha256": "5549665f0d4c6786343b80eaa62f82f522b085b1872ff521ad792230098c0215"
+    },
+    {
+      "path": "browser/environment.json",
+      "sha256": "53b2a42d9acb1abacecfbecf7b2dd75cf5691322c987061c4dd98ffcdc2992f2"
+    },
+    {
+      "path": "browser/local01-native-observations.md",
+      "sha256": "ea0a63aa606d48ed8698c41209047410439c0a0f266598725917bb1d65b8669f"
+    },
+    {
+      "path": "browser/token05-native-observations.md",
+      "sha256": "3479a68a9f2c2997e3e5bf5e1f9d35878ced624b866951a0fbc346e0c94b8214"
+    },
+    {
+      "path": "browser/window-cleanup.json",
+      "sha256": "5556285666815ad0cfa3130825b4a7aafb15015386a9652ed9774bbd0083fbd0"
+    },
+    {
+      "path": "browser/cleanup.json",
+      "sha256": "210a1f4120088b581fd3ba6f369bbd7e897643d5d89de86267ec0c06b2e99e96"
+    },
+    {
+      "path": "browser/CONTROLLER_DIAGNOSIS.md",
+      "sha256": "a56971187465f5a2ae0883250ed5522a42432fb20acb3d6a6d03fa57492814f5"
+    },
+    {
+      "path": "browser/TOKEN_WRAPPER_REVIEW.md",
+      "sha256": "f030018c722654c686b9c5dbeab969a85f29ddbd9b3f01894d7280afc68479aa"
+    },
+    {
+      "path": "browser/LIFECYCLE_CONTROLS.md",
+      "sha256": "ab850933d39cf7a832c40e324a4a65b4708c7d97b69cf117c824d27e133552ba"
+    },
+    {
+      "path": "BROWSER_PLAN.md",
+      "sha256": "8ae26330f0c84d13cab9a0d3177663ade378498e45732e7af1d1eee85c01431f"
+    },
+    {
+      "path": "browser/final-local-01.jsonl",
+      "sha256": "cdf670e0eaeeceef3218ec0ae3d49b4fca58e435da343b786ef2528d708f388a"
+    },
+    {
+      "path": "browser/final-local-02.jsonl",
+      "sha256": "313a1e68594187571a4b1421312ad89f469608f642c1231da81221d3265733e6"
+    },
+    {
+      "path": "browser/final-local-03.jsonl",
+      "sha256": "b4bba60f9d0655c29e37e61b259e4aa8d91fb12a90fde4303bc6fd567026ae8d"
+    },
+    {
+      "path": "browser/final-local-04.jsonl",
+      "sha256": "4681a56fad2abe393b63ada7f76f5999e082d6238182a77269b9c7530b446c39"
+    },
+    {
+      "path": "browser/final-token-05.jsonl",
+      "sha256": "45cca61b747166c57a7fa7875345600bb8a09b565d8c3bc608f84e59fab62923"
+    },
+    {
+      "path": "scripts/native-browser-fixture-v1.mjs",
+      "sha256": "919db429c3c359975b087e525867a6ab46c03ada6aac085a07a0b38a65d95ebc"
+    },
+    {
+      "path": "scripts/native-browser-fixture-v2.mjs",
+      "sha256": "a0392899723cbf8334497272bbdcbc307f5af788dbed566693023d50e2ca2499"
+    },
+    {
+      "path": "scripts/native-browser-fixture-v3.mjs",
+      "sha256": "1f7efb71c45439f23e69d2cbd8cf36e8b8f4318e257d52322194ad5fda9d55d4"
+    },
+    {
+      "path": "scripts/native-browser-fixture-v4.mjs",
+      "sha256": "186fef4752b8c688b740d150903205847467bc03770cf11911facae71327f072"
+    }
+  ],
+  "boundaries": [
+    "No package runtime edit was made to accommodate native controls, hidden visibility, token bootstrap or outer timeouts.",
+    "No bearer was moved into URLs or persistent browser storage; selected logs retain only boolean header/session presence and storage key lists.",
+    "HTTP security/protocol probes, modeled DOM tests and native observations remain separate evidence categories.",
+    "No remote service, production monitoring, daemon registration, publication or second browser-engine acceptance is implied."
+  ]
+}

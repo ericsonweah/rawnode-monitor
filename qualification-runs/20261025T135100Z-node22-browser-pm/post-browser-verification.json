@@ -1,0 +1,287 @@
+{
+  "status": "PASS",
+  "startedAt": "2026-10-25T14:35:16.132Z",
+  "finishedAt": "2026-10-25T14:35:18.364Z",
+  "command": [
+    "/usr/local/bin/node",
+    "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/scripts/post-browser-verification.mjs"
+  ],
+  "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+  "runtime": "v24.21.0",
+  "harnessSha256": "ad20ee04d27f1cc662df9cc14a3a4c1bff03954251fb3159baee896060369e77",
+  "archive": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "bytes": 214938,
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615"
+  },
+  "repeat": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/repeat/rawnode-monitor-1.0.0.tgz",
+    "bytes": 214938,
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615"
+  },
+  "baselineArchive": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-25/artifacts/rawnode-monitor-1.0.0.tgz",
+    "bytes": 209613,
+    "sha256": "69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7"
+  },
+  "pm": {
+    "path": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz",
+    "bytes": 94194,
+    "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f"
+  },
+  "protectedFileHashesUnchanged": 1530,
+  "originalFilesIncluded": 866,
+  "historicalCandidateFilesPreviouslyVerified": 169,
+  "packages": [
+    {
+      "name": "source",
+      "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+      "files": 177,
+      "completeHashesAndModesMatchArchive": true
+    },
+    {
+      "name": "node24Extracted",
+      "path": "/private/tmp/rawnode-monitor-qualification-INTlq3/extracted/node_modules/@rawnode/monitor",
+      "files": 177,
+      "completeHashesAndModesMatchArchive": true
+    },
+    {
+      "name": "node24Installed",
+      "path": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+      "files": 177,
+      "completeHashesAndModesMatchArchive": true
+    },
+    {
+      "name": "node22Extracted",
+      "path": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted/node_modules/@rawnode/monitor",
+      "files": 177,
+      "completeHashesAndModesMatchArchive": true
+    },
+    {
+      "name": "node22Installed",
+      "path": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor",
+      "files": 177,
+      "completeHashesAndModesMatchArchive": true
+    }
+  ],
+  "changesFromOctober25": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 3148,
+      "sha256": "5953c1fa3f7c4312ff4b5d1b12f7bc467bb44d6df6ca777d20adb5e7026c1b5e",
+      "mode": 420,
+      "beforeSha256": "e18a890186e64d355e715c484226dc917b55088699e32a2d28d690ba401c5545"
+    },
+    {
+      "path": "docs/MIGRATION.md",
+      "bytes": 5986,
+      "sha256": "1703c13300e1d4abdb72c92e3821ae55edb2c4772a8018c245a5e92e42f95b98",
+      "mode": 420,
+      "beforeSha256": "9c130a7304fa2fa6ea055236bee38eec33d447764548cb659189ae264289838d"
+    },
+    {
+      "path": "docs/PUBLICATION.md",
+      "bytes": 3678,
+      "sha256": "33d5a1f9a9eab37e13e53140746befc0fcb276b78ef4541147019ffad9fb4e84",
+      "mode": 420,
+      "beforeSha256": "65510e99c6ba15e6f5e3f1bc5e45d5c1355f6232cca68dbb7ad867d383468349"
+    },
+    {
+      "path": "docs/VALIDATION.md",
+      "bytes": 7213,
+      "sha256": "9d7be99eaff40eeca2110d2450239bd3deedf4cc7cb080316acaba817225681f",
+      "mode": 420,
+      "beforeSha256": "799bdd3e5d0853a0885cdcf488d2834e7f8d5f918ca63dd46fdb20ea083e662f"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "mode": 420,
+      "beforeSha256": "102953b6ddad0f77a92c7ad766c210f1e2f5c664c2a58d63145d51135cd3e4a1"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 2343,
+      "sha256": "a393783af35c1af96f4f828073175525e7f29d5e7ffb06217aa2068c0cde9564",
+      "mode": 420,
+      "beforeSha256": "4442cbcfc30d3683a655af3b3fc3766bea554091e1bb47fd3c0b742cba2a95b2"
+    },
+    {
+      "path": "package.json",
+      "bytes": 3953,
+      "sha256": "f40b53fdfcdc1a12682669d3b40fa014ac76eb229469a898b4d35fe77b131018",
+      "mode": 420,
+      "beforeSha256": "1b0a016de40ecb17b074c462b07a47e9ca44a9d166f3c8784e0d4acf44f88c4a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4334,
+      "sha256": "0c64c4744928eb71d357c30a7cf0b6a78643387ffbf7d9da48ef6c454331fcb5",
+      "mode": 420,
+      "beforeSha256": "9a0d43fdc457ac15aaa9ac080816cd09430e1d7cc68334a6d1faaea392e7afe3"
+    },
+    {
+      "path": "scripts/reject-publication.mjs",
+      "bytes": 152,
+      "sha256": "54268daf806a81d227889a736a0e366b85c800e38af2ff3b517d43c5abc82798",
+      "mode": 420,
+      "beforeSha256": "60a20200b1b229b190b15a6580f522c2765843fe361ad0e1bec96d3dbdf1594d"
+    },
+    {
+      "path": "test/studio-actions.test.mjs",
+      "bytes": 13602,
+      "sha256": "8db2c46e5b11a0893688d90e68d716ec3b0c7b3a4bba360b4e7376d6e7a85a9c",
+      "mode": 420,
+      "beforeSha256": "718d0bc0b3d9dc408a4edebafccbf52f84a700824d49dbb40feacf880a44993b"
+    }
+  ],
+  "sevenRegressionsUnchanged": true,
+  "reviewPatchAppliedToFreshBaselineMatchesFinal": true,
+  "patch": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/changes-from-oct25.patch",
+    "bytes": 34225,
+    "sha256": "8bb02ece8f404bd8f4f3f336a994f4cd39aa945848aeced4f1cf97ad6779ba0d"
+  },
+  "sourceFingerprint": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/source-final.json",
+    "bytes": 31041,
+    "sha256": "e20d19ca746d3c75abbeae27ac5f60a54aab467d141e62e799553f3bb01e1c96"
+  },
+  "git": {
+    "head": "884a4974ba14d15a21ed4014bbe004ebf95384a7\n",
+    "branch": "master\n",
+    "index": "",
+    "status": " M package/CHANGELOG.md\n M package/LICENSE\n M package/NOTICE.md\n M package/README.md\n M package/docs/API.md\n M package/docs/CONFIGURATION.md\n M package/docs/LIFECYCLE.md\n M package/docs/MIGRATION.md\n M package/docs/PUBLICATION.md\n M package/docs/SECURITY.md\n M package/docs/STUDIO.md\n M package/docs/VALIDATION.md\n M package/package.json\n M package/resources/assets/js/monitor/studio.js\n M package/scripts/reject-publication.mjs\n M package/src/exporters/HttpJsonExporter.js\n M package/src/studio/MonitorStudioController.js\n M package/src/studio/MonitorStudioPage.js\n M package/src/studio/MonitorStudioRateLimiter.js\n M package/test/exports-types.mts\n M package/test/studio-actions.test.mjs\n M package/test/studio-security-regression.test.mjs\n M package/types/index.d.ts\n?? package/test/readiness-http-delivery.test.mjs\n?? package/test/studio-boundaries.test.mjs\n?? qualification-runs/\n?? rawnode-monitor-node22-browser-pm-qualification-codex-prompt.md\n?? readiness-2026-10-24/\n?? readiness-2026-10-25/\n"
+  },
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:16.952Z",
+      "milliseconds": 35,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:16.987Z",
+      "milliseconds": 17,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--binary"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:17.004Z",
+      "milliseconds": 27,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:17.031Z",
+      "milliseconds": 200,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:17.231Z",
+      "milliseconds": 435,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "tar",
+        "-tzf",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:17.667Z",
+      "milliseconds": 23,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "tar",
+        "-xzf",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+        "-C",
+        "/var/folders/40/vbyqdlc14vv7612wv0pr64t00000gn/T/monitor-post-browser-audit-raOttC"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:17.690Z",
+      "milliseconds": 60,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "tar",
+        "-xzf",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-25/artifacts/rawnode-monitor-1.0.0.tgz",
+        "-C",
+        "/var/folders/40/vbyqdlc14vv7612wv0pr64t00000gn/T/monitor-post-browser-audit-raOttC/baseline-patch"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:35:18.164Z",
+      "milliseconds": 83,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "command": [
+        "patch",
+        "-p1",
+        "--batch",
+        "-i",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/changes-from-oct25.patch"
+      ],
+      "cwd": "/var/folders/40/vbyqdlc14vv7612wv0pr64t00000gn/T/monitor-post-browser-audit-raOttC/baseline-patch",
+      "startedAt": "2026-10-25T14:35:18.247Z",
+      "milliseconds": 22,
+      "exit": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "historicalAndEarlierFinalReceiptsNotOverwritten": true,
+  "temporaryAuditExtractionAndPatchCopyRemoved": true,
+  "browserOutcome": "This receipt verifies post-browser artifact/preservation state only. Native browser assertions and fixture cleanup belong to the separately finalized browser receipt.",
+  "scope": "No package mutation, repack, npm installation, suite rerun, service, daemon, remote operation, existing-process enumeration or signal is performed by this audit."
+}

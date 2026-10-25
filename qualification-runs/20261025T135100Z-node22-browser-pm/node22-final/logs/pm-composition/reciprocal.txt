@@ -1,0 +1,36 @@
+TAP version 13
+# Subtest: exact final Monitor and accepted PM archive pins
+ok 1 - exact final Monitor and accepted PM archive pins
+  ---
+  duration_ms: 7.56844
+  ...
+# Subtest: fresh installed Monitor bridge attach/query/redacted diagnostics/detach: direct
+ok 2 - fresh installed Monitor bridge attach/query/redacted diagnostics/detach: direct
+  ---
+  duration_ms: 108.282226
+  ...
+# Subtest: fresh installed Monitor bridge attach/query/redacted diagnostics/detach: runtime
+ok 3 - fresh installed Monitor bridge attach/query/redacted diagnostics/detach: runtime
+  ---
+  duration_ms: 55.870163
+  ...
+# Subtest: fresh installed Monitor bridge attach/query/redacted diagnostics/detach: adapter
+ok 4 - fresh installed Monitor bridge attach/query/redacted diagnostics/detach: adapter
+  ---
+  duration_ms: 60.263036
+  ...
+# {"taskOwnedChild":{"pid":80387,"execPath":"/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node","node":"v22.0.0"},"exitCode":0,"signal":null,"naturalExit":{"code":0,"monitorClosed":true,"runtimeClosed":true,"bridgeStarted":false,"ownedMonitorTimers":0},"pendingRuntimeRequests":0}
+# Subtest: fresh installed Monitor health, metrics and redacted diagnostics traverse actual PM child IPC and shutdown
+ok 5 - fresh installed Monitor health, metrics and redacted diagnostics traverse actual PM child IPC and shutdown
+  ---
+  duration_ms: 378.396732
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2168.406369

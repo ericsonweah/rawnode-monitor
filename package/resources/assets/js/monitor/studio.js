@@ -22,7 +22,7 @@ const config = Object.freeze({
   tokenRequired: app?.dataset?.tokenRequired === 'true',
 });
 const prefix = String(config.prefix).replace(/\/$/, '');
-const state = { view: location.hash.slice(1) || 'overview', token: '', data: new Map(), connected: false, timer: null, stream: null };
+const state = { view: location.hash.slice(1) || 'overview', token: '', data: new Map(), connected: false, timer: null, stream: null, inspecting: false };
 const main = document.querySelector('#rn-main');
 const toastNode = document.querySelector('#rn-toast');
 const authModal = document.querySelector('#rn-auth');
@@ -86,6 +86,12 @@ function bindAction(button, task, refresh = true) {
   }, { signal: active.signal });
 }
 
+function showInspection(selector, title, content) {
+  state.inspecting = true;
+  document.querySelector(selector).innerHTML = `<div class="rn-toolbar"><span role="status">Live refresh paused while inspecting.</span><button id="rn-resume-live">Resume live updates</button></div>${panel(title, content)}`;
+  document.querySelector('#rn-resume-live').addEventListener('click', () => render(state.view), { signal: renderAbort.signal });
+}
+
 async function loadOverview() { const data = await api('/api/overview'); state.data.set('overview', data); return data; }
 async function renderOverview() {
   const d = await loadOverview();
@@ -133,7 +139,7 @@ async function renderTraces() {
 }
 function traceTable(rows) { return table([{label:'Operation',render:r=>`<button class="rn-link rn-trace-open" data-trace="${escape(r.traceId)}"><strong>${escape(r.name)}</strong></button><small>${escape(r.traceId.slice(0,16))}…</small>`},{label:'Kind',render:r=>badge(r.kind,'neutral')},{label:'Status',render:r=>badge(r.status?.code||'unset',r.status?.code==='error'?'critical':'healthy')},{label:'Duration',render:r=>duration(r.durationMs)},{label:'Started',render:r=>age(Number(BigInt(r.startTimeUnixNano)/1000000n))}],rows,'No sampled spans found.'); }
 function bindTraceRows() { document.querySelectorAll('.rn-trace-open').forEach(button => bindAction(button, (signal) => showTrace(button.dataset.trace, signal), false)); }
-async function showTrace(id, signal) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`, { signal }); const max=Math.max(...spans.map(s=>s.durationMs||0),1); document.querySelector('#rn-trace-detail').innerHTML=panel(`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><progress class="rn-bar" aria-label="Relative span duration" max="${max}" value="${Math.max(0,span.durationMs||0)}"></progress>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
+async function showTrace(id, signal) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`, { signal }); const max=Math.max(...spans.map(s=>s.durationMs||0),1); showInspection('#rn-trace-detail',`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><progress class="rn-bar" aria-label="Relative span duration" max="${max}" value="${Math.max(0,span.durationMs||0)}"></progress>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
 
 async function renderResources() { const d=await api('/api/resources'); const latest=d.latest||{}; main.innerHTML=`${heading('Resources','Health and native metrics from RawNode modules.')}${Object.keys(latest).length?Object.entries(latest).map(([name,value])=>panel(name,`<div class="rn-resource-head">${badge(value.error?'unhealthy':value.health?.ok===false?'unhealthy':'healthy',value.error||value.health?.ok===false?'critical':'healthy')}<span>${duration(value.durationMs)}</span></div>${json(value)}`)).join(''):'<div class="rn-empty">No resource snapshots yet.</div>'}`; }
 
@@ -167,7 +173,7 @@ async function renderIncidents(){const d=await api('/api/incidents?limit=250');m
 function incidentActions(r){return `<button class="rn-incident-view" data-id="${escape(r.id)}">View</button> ${r.state==='open'?`<button class="rn-incident-ack" data-id="${escape(r.id)}">Acknowledge</button>`:''} ${!['resolved','closed'].includes(r.state)?`<button class="rn-incident-resolve" data-id="${escape(r.id)}">Resolve</button>`:''}`;}
 function bindIncidentActions(rows) {
   const byId = new Map(rows.map(row => [row.id, row]));
-  document.querySelectorAll('.rn-incident-view').forEach(button => button.addEventListener('click', () => { const row = byId.get(button.dataset.id); document.querySelector('#rn-incident-detail').innerHTML = panel(row.title, `${row.runbookDefinition ? `<div class="rn-runbook"><h3>${escape(row.runbookDefinition.title)}</h3><p>${escape(row.runbookDefinition.description)}</p><ol>${row.runbookDefinition.steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>` : ''}${json(row)}`); }, { signal: renderAbort.signal }));
+  document.querySelectorAll('.rn-incident-view').forEach(button => button.addEventListener('click', () => { const row = byId.get(button.dataset.id); showInspection('#rn-incident-detail', row.title, `${row.runbookDefinition ? `<div class="rn-runbook"><h3>${escape(row.runbookDefinition.title)}</h3><p>${escape(row.runbookDefinition.description)}</p><ol>${row.runbookDefinition.steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>` : ''}${json(row)}`); }, { signal: renderAbort.signal }));
   document.querySelectorAll('.rn-incident-ack').forEach(button => bindAction(button, async (signal) => {
     await api(`/api/incidents/${encodeURIComponent(button.dataset.id)}/acknowledge`, { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: '{}' });
     return 'Incident acknowledged.';
@@ -182,7 +188,7 @@ function bindIncidentActions(rows) {
 
 async function renderFleet(){const d=await api('/api/fleet');main.innerHTML=`${heading('Fleet','Cross-process and cross-host runtime membership.')}${panel('Topology',renderTopology(d.topology))}${panel('Instances',table([{label:'Service',render:r=>`<strong>${escape(r.service||'unknown')}</strong><small>${escape(r.instanceId)}</small>`},{label:'State',render:r=>badge(r.state||'unknown',r.health?.ok===false?'critical':'healthy')},{label:'Host / PID',render:r=>`${escape(r.host||'—')} / ${escape(r.pid||'—')}`},{label:'Region',render:r=>escape(r.region||'—')},{label:'Version',render:r=>escape(r.version||'—')},{label:'Last seen',render:r=>age(r.lastSeenAt)}],d.instances||[]))}`;}
 async function renderDeployments(){const d=await api('/api/deployments?limit=250');main.innerHTML=`${heading('Deployments','Release markers correlated with operational changes.')}${panel('Timeline',table([{label:'Version',render:r=>`<strong>${escape(r.version||'—')}</strong><small>${escape(r.commit||r.buildId||r.id)}</small>`},{label:'Status',render:r=>badge(r.status,r.status==='failed'?'critical':r.status==='rolled_back'?'warning':'healthy')},{label:'Strategy',render:r=>escape(r.strategy||'—')},{label:'Actor',render:r=>escape(r.actor||'—')},{label:'Time',render:r=>age(r.deployedAt)}],d||[]))}`;}
-async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;bindAction(document.querySelector('#rn-bundle'),async(signal)=>{const result=await api('/api/diagnostics/bundle',{method:'POST',signal,headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});return `Bundle created: ${result.filename}`;},false);bindAction(document.querySelector('#rn-full-diag'),async(signal)=>{const d=await api('/api/diagnostics?signals=0',{signal});document.querySelector('#rn-diagnostics-full').innerHTML=panel('Runtime diagnostics',json(d));},false);}
+async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;bindAction(document.querySelector('#rn-bundle'),async(signal)=>{const result=await api('/api/diagnostics/bundle',{method:'POST',signal,headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});return `Bundle created: ${result.filename}`;},false);bindAction(document.querySelector('#rn-full-diag'),async(signal)=>{const d=await api('/api/diagnostics?signals=0',{signal});showInspection('#rn-diagnostics-full','Runtime diagnostics',json(d));},false);}
 
 const renderers={overview:renderOverview,health:renderHealth,metrics:renderMetrics,traces:renderTraces,resources:renderResources,alerts:renderAlerts,slos:renderSlos,incidents:renderIncidents,fleet:renderFleet,deployments:renderDeployments,diagnostics:renderDiagnostics};
 async function render(view=state.view){
@@ -190,7 +196,7 @@ async function render(view=state.view){
   if (!Object.hasOwn(renderers, view)) view = 'overview';
   renderAbort.abort(); renderAbort = new AbortController();
   const active = renderAbort;
-  state.view=view;location.hash=view;
+  state.view=view;state.inspecting=false;location.hash=view;
   document.querySelectorAll('#rn-nav button').forEach(button=>button.classList.toggle('active',button.dataset.view===view));
   app.setAttribute('aria-busy','true');
   main.innerHTML='<section class="rn-loading"><div class="rn-spinner"></div><p>Loading…</p></section>';
@@ -214,14 +220,19 @@ function connectStream(){
   }catch{setConnected(false);}
 }
 function setConnected(value){state.connected=value;document.querySelector('#rn-live-dot').classList.toggle('connected',value);if(!value)document.querySelector('#rn-state').textContent='Polling';}
-function scheduleRefresh(){clearTimeout(state._refresh);state._refresh=setTimeout(()=>render(state.view),500);}
-function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(document.visibilityState==='visible'&&app.getAttribute('aria-busy')!=='true'&&pendingActions===0)render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
+function canAutoRefresh() {
+  if (destroyed || document.visibilityState !== 'visible' || app.getAttribute('aria-busy') === 'true' || pendingActions > 0 || state.inspecting) return false;
+  if (main.querySelectorAll('details[open]').length) return false;
+  return !Array.from(main.querySelectorAll('input, select, textarea, summary')).some(field => field === ownerDocument.activeElement || String(field.value || '') !== '');
+}
+function scheduleRefresh(){clearTimeout(state._refresh);state._refresh=setTimeout(()=>{if(canAutoRefresh())render(state.view);},500);}
+function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(canAutoRefresh())render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
 
 document.querySelector('#rn-nav').addEventListener('click',(event)=>{const button=event.target.closest('button[data-view]');if(button)render(button.dataset.view);},{signal:events.signal});
 document.querySelector('#rn-refresh').addEventListener('click',()=>render(state.view),{signal:events.signal});
 document.querySelector('#rn-auth-form').addEventListener('submit',(event)=>{event.preventDefault();state.token=tokenInput.value;authModal.hidden=true;connectStream();render(state.view);},{signal:events.signal});
 window.addEventListener('hashchange',()=>{const view=location.hash.slice(1)||'overview';if(view!==state.view)render(view);},{signal:events.signal});
-ownerDocument.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')render(state.view);},{signal:events.signal});
+ownerDocument.addEventListener('visibilitychange',()=>{if(canAutoRefresh())render(state.view);},{signal:events.signal});
 const handle = Object.freeze({
   refresh: () => render(state.view),
   navigate: (view) => render(view),

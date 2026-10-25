@@ -1,0 +1,18 @@
+Observed command output consolidated from the tool transcript.
+Command: npm run build && npm run prepublishOnly
+Cwd: package/
+Combined exit: 1 (expected guard refusal; build succeeded before the && continuation)
+Unrelated login-shell initialization output omitted.
+
+> @rawnode/monitor@1.0.0 build
+> node scripts/check.mjs
+
+{"ok":true,"checkedJavaScript":112,"exports":29,"node":"v24.21.0"}
+
+> @rawnode/monitor@1.0.0 prepublishOnly
+> node scripts/reject-publication.mjs
+
+Publication blocked: candidate requires explicit owner release authorization and final public-version approval.
+
+git diff --check: exit 0.
+Final-archive commands and machine-captured logs are recorded independently by the distribution lane.

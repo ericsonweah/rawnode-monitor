@@ -1,0 +1,254 @@
+{
+  "session": "final-local-04",
+  "status": "PASS",
+  "scope": "Selected session subcases only, not a full Studio acceptance pass; optional observations keep their individual status",
+  "analyzedAt": "2026-10-25T14:35:57.816Z",
+  "artifact": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "files": 177
+  },
+  "input": {
+    "session": "final-local-04",
+    "mode": "local",
+    "url": "http://127.0.0.1:62198/monitor",
+    "controlUrl": "http://127.0.0.1:62198/qualification/control",
+    "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "pid": 99566,
+    "node": "v24.21.0",
+    "execPath": "/usr/local/bin/node",
+    "files": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    "baseline": {
+      "mutations": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    "ttlMs": 900000
+  },
+  "log": {
+    "path": "final-local-04.jsonl",
+    "sha256": "4681a56fad2abe393b63ada7f76f5999e082d6238182a77269b9c7530b446c39",
+    "lines": 119,
+    "startedAt": "2026-10-25T14:23:19.144Z",
+    "finishedAt": "2026-10-25T14:34:43.001Z"
+  },
+  "harness": {
+    "path": "scripts/native-browser-fixture-v4.mjs",
+    "sha256": "186fef4752b8c688b740d150903205847467bc03770cf11911facae71327f072",
+    "packagedRuntimeEdited": false
+  },
+  "environment": {
+    "observedDate": "2026-10-25",
+    "method": "Independent read-only /usr/libexec/PlistBuddy metadata queries; no browser process launch",
+    "Safari": {
+      "plist": "/Applications/Safari.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "27.0",
+      "CFBundleVersion": "20625.1.29.18.28",
+      "queryExit": 0
+    },
+    "Chrome": {
+      "plist": "/Applications/Google Chrome.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "155.0.8059.85",
+      "queryExit": 0
+    },
+    "os": {
+      "name": "macOS",
+      "version": "15.8.1",
+      "build": "24H32",
+      "architecture": "x86_64",
+      "source": "../runtime/platform.json"
+    },
+    "nativeControlMechanism": "cua native application accessibility/keyboard controls; coordinates failed in some retained attempts",
+    "standaloneScreenshots": "Native API screenshots were visually reviewed in the conversation; no standalone screenshot files were available. Authored notes are distinct from raw JSONL."
+  },
+  "subcases": [
+    {
+      "id": "cancel-resolution",
+      "status": "PASS",
+      "evidenceType": "delegated native prompt and independent server request/state receipts",
+      "lines": [
+        11,
+        13,
+        15
+      ],
+      "promptResults": [
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "cleanCase": true
+    },
+    {
+      "id": "pending-navigation",
+      "status": "PASS",
+      "lines": [
+        21,
+        22,
+        26
+      ],
+      "evidenceType": "native-clicked external control executes the actual packaged public browser client; not a DOM model",
+      "fixtureDelayMs": 500,
+      "elapsedMs": 790,
+      "settlement": {
+        "timedOut": false,
+        "results": [
+          {
+            "status": "fulfilled"
+          },
+          {
+            "status": "fulfilled"
+          }
+        ]
+      },
+      "admittedPaths": [
+        {
+          "at": "2026-10-25T14:24:16.255Z",
+          "path": "/monitor/api/health"
+        },
+        {
+          "at": "2026-10-25T14:24:16.262Z",
+          "path": "/monitor/api/traces"
+        }
+      ],
+      "finalClient": {
+        "destroyed": false,
+        "view": "traces",
+        "connected": true,
+        "streaming": true,
+        "polling": true
+      },
+      "visibility": "hidden",
+      "finalServer": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "scope": "Immediate health-to-traces navigation settles on traces after both actual requests arrived; old view does not replace the final view."
+    },
+    {
+      "id": "pending-destroy",
+      "status": "PASS",
+      "lines": [
+        36,
+        40
+      ],
+      "evidenceType": "native-clicked external control executes the actual packaged public browser client; not a DOM model",
+      "fixtureDelayMs": 500,
+      "elapsedMs": 683,
+      "settlement": {
+        "timedOut": false,
+        "results": [
+          {
+            "status": "fulfilled"
+          }
+        ]
+      },
+      "admittedPaths": [
+        {
+          "at": "2026-10-25T14:24:30.557Z",
+          "path": "/monitor/api/health"
+        }
+      ],
+      "finalClient": {
+        "destroyed": true,
+        "view": "health",
+        "connected": true,
+        "streaming": false,
+        "polling": false
+      },
+      "visibility": "hidden",
+      "finalServer": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "scope": "Destroy during an admitted delayed health request leaves the DOM unchanged after settlement, releases stream ownership and reports polling false."
+    },
+    {
+      "id": "narrow-css-viewport",
+      "status": "PASS",
+      "lines": [
+        59,
+        64
+      ],
+      "observations": [
+        {
+          "width": 457,
+          "documentWidth": 457,
+          "view": "overview"
+        },
+        {
+          "width": 457,
+          "documentWidth": 457,
+          "view": "alerts"
+        }
+      ],
+      "scope": "Observed narrow CSS viewport has no document horizontal overflow; native accessibility navigation is parent-observed. Not a full mobile/accessibility audit."
+    },
+    {
+      "id": "visible-polling-progress",
+      "status": "UNRUN",
+      "mandatoryInThisSession": false,
+      "lines": [],
+      "observations": [],
+      "reason": "No bounded visible poll-window with request progress is recorded here; the separately selected token05 mode carries the required native polling-progress gate. Hidden pages intentionally defer automatic refresh.",
+      "limit": "Request progress and polling booleans do not establish exact timer or concurrent-request cardinality."
+    },
+    {
+      "id": "fixture-close",
+      "status": "PASS",
+      "lines": [
+        118,
+        119
+      ],
+      "reason": "stdin",
+      "listening": false,
+      "server": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 0,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "exitCode": 0,
+      "exitEvidence": "Parent execution result; server close independently captured in raw JSONL."
+    }
+  ],
+  "mutations": [],
+  "limitations": [
+    "No earlier failure or partial receipt is overwritten.",
+    "Native screenshots were reviewed in the conversation; no standalone screenshot export is claimed.",
+    "This is local tokenless mode; token/session mode has separate evidence."
+  ]
+}

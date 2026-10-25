@@ -1,0 +1,99 @@
+[
+  {
+    "leg": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:54:32.258Z",
+    "milliseconds": 13057,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:54:45.319Z",
+    "milliseconds": 2781,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "basic",
+    "command": [
+      "node",
+      "examples/basic.mjs"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:54:48.101Z",
+    "milliseconds": 991,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "test/types.mts"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:54:49.094Z",
+    "milliseconds": 1824,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types-all",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "test/exports-types.mts"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:54:50.918Z",
+    "milliseconds": 1364,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "guard",
+    "command": [
+      "npm",
+      "run",
+      "prepublishOnly"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:54:52.283Z",
+    "milliseconds": 357,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 1
+  }
+]

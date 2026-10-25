@@ -1,0 +1,595 @@
+{
+  "sha256": "dabc48241a20067dd7c69a6139258e27524c5136db5400579fa876b08c0e4593",
+  "kind": "bounded synthetic microbenchmark; no universal latency or production-load claim",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz",
+    "logicalCpus": 12,
+    "totalMemory": 34359738368
+  },
+  "settings": {
+    "operations": 20000,
+    "labels": {
+      "route": "/fixture/:id",
+      "method": "GET"
+    },
+    "sampleRate": 0.1,
+    "parentBased": false,
+    "sinkDelayMs": 2,
+    "batchSize": 128,
+    "maxItems": 512,
+    "maxInFlightBatches": 1,
+    "overflow": "drop-oldest",
+    "gc": "explicit --expose-gc between legs",
+    "allocation": "V8 sampled allocation at 32768-byte interval, including collected objects; estimate includes harness overhead and perturbs timing"
+  },
+  "checksum": 0,
+  "trials": [
+    {
+      "enabled": false,
+      "operations": 20000,
+      "workloadMs": 22.66368699999998,
+      "throughputPerSecond": 882468.9469105365,
+      "cpuMs": {
+        "user": 30.57,
+        "system": 0.679
+      },
+      "memory": {
+        "initial": {
+          "rss": 109899776,
+          "heapTotal": 47230976,
+          "heapUsed": 10215464,
+          "external": 4191519,
+          "arrayBuffers": 212111
+        },
+        "afterWork": {
+          "rss": 110301184,
+          "heapTotal": 45395968,
+          "heapUsed": 10124016,
+          "external": 4191519,
+          "arrayBuffers": 212111
+        },
+        "afterCleanup": {
+          "rss": 110452736,
+          "heapTotal": 45395968,
+          "heapUsed": 10116912,
+          "external": 4191519,
+          "arrayBuffers": 212111
+        },
+        "rssTrend": [
+          109899776,
+          109899776,
+          109899776,
+          109899776,
+          109899776,
+          109903872,
+          109903872,
+          109903872,
+          109903872,
+          109903872
+        ],
+        "heapUsedChange": -91448,
+        "sampledAllocatedBytes": 1212976
+      },
+      "eventLoopMs": {
+        "mean": 1.2014933333333333,
+        "p99": 4.956159,
+        "max": 4.956159
+      },
+      "drainAndCloseMs": 0.0006680000000187647,
+      "acceptedBySink": 0,
+      "cleanup": null
+    },
+    {
+      "enabled": true,
+      "operations": 20000,
+      "workloadMs": 628.533827,
+      "throughputPerSecond": 31820.085317381017,
+      "cpuMs": {
+        "user": 705.286,
+        "system": 17.122
+      },
+      "memory": {
+        "initial": {
+          "rss": 110493696,
+          "heapTotal": 45658112,
+          "heapUsed": 10507376,
+          "external": 4191519,
+          "arrayBuffers": 212111
+        },
+        "afterWork": {
+          "rss": 119476224,
+          "heapTotal": 50638848,
+          "heapUsed": 11101256,
+          "external": 4191519,
+          "arrayBuffers": 212111
+        },
+        "afterCleanup": {
+          "rss": 118956032,
+          "heapTotal": 47230976,
+          "heapUsed": 10331304,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "rssTrend": [
+          110493696,
+          111517696,
+          111853568,
+          113897472,
+          114761728,
+          115134464,
+          115482624,
+          115761152,
+          116293632,
+          116838400
+        ],
+        "heapUsedChange": 593880,
+        "sampledAllocatedBytes": 294830464
+      },
+      "eventLoopMs": {
+        "mean": 3.958567619047619,
+        "p99": 6.385663,
+        "max": 17.891327
+      },
+      "drainAndCloseMs": 6.358129999999846,
+      "acceptedBySink": 3283,
+      "runtimeStats": {
+        "admitted": 3283,
+        "rejected": 0,
+        "disabled": 0,
+        "emitted": {
+          "metrics": 1,
+          "resource": 1,
+          "health": 1,
+          "deployment": 1,
+          "event": 1251,
+          "span": 2028
+        },
+        "collections": 2,
+        "collectionErrors": 0,
+        "starts": 1,
+        "closes": 1
+      },
+      "pipeline": {
+        "running": false,
+        "closing": false,
+        "closed": true,
+        "scheduled": false,
+        "inFlight": 0,
+        "queue": {
+          "length": 0,
+          "bytes": 0,
+          "maxItems": 512,
+          "maxBytes": 2097152,
+          "maxSignalBytes": 2097152,
+          "maxWaiters": 100000,
+          "waiters": 0,
+          "overflow": "drop-oldest",
+          "closed": true,
+          "stats": {
+            "admitted": 3283,
+            "shifted": 3283,
+            "blocked": 0,
+            "waitTimeouts": 0,
+            "waiterLimit": 0,
+            "droppedNew": 0,
+            "droppedOldest": 0,
+            "rejected": 0,
+            "oversized": 0,
+            "highWaterItems": 53,
+            "highWaterBytes": 62629,
+            "highWaterWaiters": 0
+          }
+        },
+        "sinks": [
+          {
+            "name": "store",
+            "required": false,
+            "signals": null,
+            "maxAttempts": 3,
+            "timeoutMs": 5000,
+            "pendingWrites": 0,
+            "pendingLifecycle": []
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "batches": 86,
+          "signals": 3283,
+          "sinkWrites": 3283,
+          "sinkErrors": 0,
+          "sinkRetries": 0,
+          "failedBatches": 0,
+          "failedSignals": 0,
+          "dropped": 0,
+          "flushes": 2,
+          "maxBatchMs": 17.985051999999996
+        }
+      },
+      "cleanup": {
+        "closed": true,
+        "ownedTimers": 0
+      }
+    },
+    {
+      "enabled": false,
+      "operations": 20000,
+      "workloadMs": 22.344119999999975,
+      "throughputPerSecond": 895090.0729140383,
+      "cpuMs": {
+        "user": 30.657,
+        "system": 0.743
+      },
+      "memory": {
+        "initial": {
+          "rss": 119357440,
+          "heapTotal": 46968832,
+          "heapUsed": 8923664,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterWork": {
+          "rss": 119439360,
+          "heapTotal": 45920256,
+          "heapUsed": 8881888,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterCleanup": {
+          "rss": 120647680,
+          "heapTotal": 45920256,
+          "heapUsed": 8835440,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "rssTrend": [
+          119357440,
+          119357440,
+          119357440,
+          119386112,
+          119386112,
+          119386112,
+          119386112,
+          119386112,
+          119418880,
+          119435264
+        ],
+        "heapUsedChange": -41776,
+        "sampledAllocatedBytes": 1246216
+      },
+      "eventLoopMs": {
+        "mean": 1.250464,
+        "p99": 5.468159,
+        "max": 5.468159
+      },
+      "drainAndCloseMs": 0.0007319999999708671,
+      "acceptedBySink": 0,
+      "cleanup": null
+    },
+    {
+      "enabled": true,
+      "operations": 20000,
+      "workloadMs": 705.1828030000001,
+      "throughputPerSecond": 28361.440345561,
+      "cpuMs": {
+        "user": 772.975,
+        "system": 26.838
+      },
+      "memory": {
+        "initial": {
+          "rss": 121057280,
+          "heapTotal": 46182400,
+          "heapUsed": 9234752,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterWork": {
+          "rss": 149176320,
+          "heapTotal": 82628608,
+          "heapUsed": 11081440,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterCleanup": {
+          "rss": 148647936,
+          "heapTotal": 81047552,
+          "heapUsed": 10400416,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "rssTrend": [
+          121057280,
+          121180160,
+          121446400,
+          121647104,
+          122384384,
+          122974208,
+          122974208,
+          123703296,
+          133734400,
+          144719872
+        ],
+        "heapUsedChange": 1846688,
+        "sampledAllocatedBytes": 291674904
+      },
+      "eventLoopMs": {
+        "mean": 4.436105253012048,
+        "p99": 9.314303,
+        "max": 15.589375
+      },
+      "drainAndCloseMs": 5.047956999999769,
+      "acceptedBySink": 3294,
+      "runtimeStats": {
+        "admitted": 3294,
+        "rejected": 0,
+        "disabled": 0,
+        "emitted": {
+          "metrics": 1,
+          "resource": 1,
+          "health": 1,
+          "deployment": 1,
+          "event": 1251,
+          "span": 2039
+        },
+        "collections": 2,
+        "collectionErrors": 0,
+        "starts": 1,
+        "closes": 1
+      },
+      "pipeline": {
+        "running": false,
+        "closing": false,
+        "closed": true,
+        "scheduled": false,
+        "inFlight": 0,
+        "queue": {
+          "length": 0,
+          "bytes": 0,
+          "maxItems": 512,
+          "maxBytes": 2097152,
+          "maxSignalBytes": 2097152,
+          "maxWaiters": 100000,
+          "waiters": 0,
+          "overflow": "drop-oldest",
+          "closed": true,
+          "stats": {
+            "admitted": 3294,
+            "shifted": 3294,
+            "blocked": 0,
+            "waitTimeouts": 0,
+            "waiterLimit": 0,
+            "droppedNew": 0,
+            "droppedOldest": 0,
+            "rejected": 0,
+            "oversized": 0,
+            "highWaterItems": 55,
+            "highWaterBytes": 54147,
+            "highWaterWaiters": 0
+          }
+        },
+        "sinks": [
+          {
+            "name": "store",
+            "required": false,
+            "signals": null,
+            "maxAttempts": 3,
+            "timeoutMs": 5000,
+            "pendingWrites": 0,
+            "pendingLifecycle": []
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "batches": 84,
+          "signals": 3294,
+          "sinkWrites": 3294,
+          "sinkErrors": 0,
+          "sinkRetries": 0,
+          "failedBatches": 0,
+          "failedSignals": 0,
+          "dropped": 0,
+          "flushes": 2,
+          "maxBatchMs": 9.484342000000197
+        }
+      },
+      "cleanup": {
+        "closed": true,
+        "ownedTimers": 0
+      }
+    },
+    {
+      "enabled": false,
+      "operations": 20000,
+      "workloadMs": 22.027753000000303,
+      "throughputPerSecond": 907945.5357974881,
+      "cpuMs": {
+        "user": 28.384,
+        "system": 0.862
+      },
+      "memory": {
+        "initial": {
+          "rss": 148721664,
+          "heapTotal": 80523264,
+          "heapUsed": 9010944,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterWork": {
+          "rss": 149807104,
+          "heapTotal": 79212544,
+          "heapUsed": 8969904,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterCleanup": {
+          "rss": 150249472,
+          "heapTotal": 79474688,
+          "heapUsed": 8914064,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "rssTrend": [
+          148721664,
+          148721664,
+          148721664,
+          148721664,
+          148721664,
+          148721664,
+          149004288,
+          149094400,
+          149573632,
+          149803008
+        ],
+        "heapUsedChange": -41040,
+        "sampledAllocatedBytes": 1409616
+      },
+      "eventLoopMs": {
+        "mean": 1.2539045161290323,
+        "p99": 5.074943,
+        "max": 5.074943
+      },
+      "drainAndCloseMs": 0.0006140000000414148,
+      "acceptedBySink": 0,
+      "cleanup": null
+    },
+    {
+      "enabled": true,
+      "operations": 20000,
+      "workloadMs": 668.489478,
+      "throughputPerSecond": 29918.197156724735,
+      "cpuMs": {
+        "user": 737.482,
+        "system": 16.421
+      },
+      "memory": {
+        "initial": {
+          "rss": 150511616,
+          "heapTotal": 79998976,
+          "heapUsed": 9302320,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterWork": {
+          "rss": 154198016,
+          "heapTotal": 82358272,
+          "heapUsed": 11178264,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "afterCleanup": {
+          "rss": 153681920,
+          "heapTotal": 81047552,
+          "heapUsed": 10458120,
+          "external": 4186209,
+          "arrayBuffers": 212111
+        },
+        "rssTrend": [
+          150511616,
+          150966272,
+          151830528,
+          151908352,
+          152227840,
+          152387584,
+          152387584,
+          152428544,
+          152428544,
+          152813568
+        ],
+        "heapUsedChange": 1875944,
+        "sampledAllocatedBytes": 289630200
+      },
+      "eventLoopMs": {
+        "mean": 4.186082874251497,
+        "p99": 7.643135,
+        "max": 13.664255
+      },
+      "drainAndCloseMs": 5.599825999999666,
+      "acceptedBySink": 3207,
+      "runtimeStats": {
+        "admitted": 3207,
+        "rejected": 0,
+        "disabled": 0,
+        "emitted": {
+          "metrics": 1,
+          "resource": 1,
+          "health": 1,
+          "deployment": 1,
+          "event": 1251,
+          "span": 1952
+        },
+        "collections": 2,
+        "collectionErrors": 0,
+        "starts": 1,
+        "closes": 1
+      },
+      "pipeline": {
+        "running": false,
+        "closing": false,
+        "closed": true,
+        "scheduled": false,
+        "inFlight": 0,
+        "queue": {
+          "length": 0,
+          "bytes": 0,
+          "maxItems": 512,
+          "maxBytes": 2097152,
+          "maxSignalBytes": 2097152,
+          "maxWaiters": 100000,
+          "waiters": 0,
+          "overflow": "drop-oldest",
+          "closed": true,
+          "stats": {
+            "admitted": 3207,
+            "shifted": 3207,
+            "blocked": 0,
+            "waitTimeouts": 0,
+            "waiterLimit": 0,
+            "droppedNew": 0,
+            "droppedOldest": 0,
+            "rejected": 0,
+            "oversized": 0,
+            "highWaterItems": 52,
+            "highWaterBytes": 57330,
+            "highWaterWaiters": 0
+          }
+        },
+        "sinks": [
+          {
+            "name": "store",
+            "required": false,
+            "signals": null,
+            "maxAttempts": 3,
+            "timeoutMs": 5000,
+            "pendingWrites": 0,
+            "pendingLifecycle": []
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "batches": 85,
+          "signals": 3207,
+          "sinkWrites": 3207,
+          "sinkErrors": 0,
+          "sinkRetries": 0,
+          "failedBatches": 0,
+          "failedSignals": 0,
+          "dropped": 0,
+          "flushes": 2,
+          "maxBatchMs": 8.451673999999912
+        }
+      },
+      "cleanup": {
+        "closed": true,
+        "ownedTimers": 0
+      }
+    }
+  ],
+  "command": [
+    "node",
+    "--expose-gc",
+    "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/scripts/overhead.mjs",
+    "/private/tmp/rawnode-monitor-readiness-VjwMGj/installed"
+  ]
+}

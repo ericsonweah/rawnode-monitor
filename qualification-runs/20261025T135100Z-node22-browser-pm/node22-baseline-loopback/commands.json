@@ -1,0 +1,68 @@
+{
+  "startedAt": "2026-10-25T13:54:49.722Z",
+  "runtime": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "runtimeVersion": "v22.0.0",
+  "npmCli": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+  "npmVersion": "10.5.1",
+  "compiler": "/usr/local/lib/node_modules/typescript/bin/tsc",
+  "compilerVersion": "Version 5.9.3",
+  "compilerRuntime": "v22.0.0",
+  "platform": "darwin",
+  "arch": "x64",
+  "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+  "manifest": {
+    "name": "@rawnode/monitor",
+    "version": "1.0.0",
+    "engines": {
+      "node": ">=22"
+    }
+  },
+  "packageManifestSha256": "1b0a016de40ecb17b074c462b07a47e9ca44a9d166f3c8784e0d4acf44f88c4a",
+  "selectedFiles": [
+    "adversarial-pipeline-metrics.test.mjs",
+    "adversarial-plugins.test.mjs",
+    "adversarial-retention-synthetics.test.mjs",
+    "adversarial-synthetic-http.test.mjs",
+    "alert-lifecycle.test.mjs",
+    "capabilities.test.mjs",
+    "contracts-hardening.test.mjs",
+    "readiness-http-delivery.test.mjs",
+    "readiness-lifecycle.test.mjs",
+    "runtime.test.mjs",
+    "studio-actions.test.mjs",
+    "studio-boundaries.test.mjs",
+    "studio-http.test.mjs",
+    "studio-modeled.test.mjs",
+    "studio-security-regression.test.mjs"
+  ],
+  "commands": [
+    {
+      "leg": "test",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "--offline",
+        "test"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:54:49.724Z",
+      "milliseconds": 2704,
+      "exit": 1,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 0,
+      "counts": {
+        "tests": 97,
+        "suites": 0,
+        "pass": 95,
+        "fail": 2,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "summaryValid": false
+    }
+  ],
+  "ok": false,
+  "finishedAt": "2026-10-25T13:54:52.434Z"
+}

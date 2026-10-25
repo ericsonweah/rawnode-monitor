@@ -1,0 +1,15 @@
+[
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "started": "2026-10-24T08:50:34.728Z",
+    "milliseconds": 2449,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 0
+  }
+]

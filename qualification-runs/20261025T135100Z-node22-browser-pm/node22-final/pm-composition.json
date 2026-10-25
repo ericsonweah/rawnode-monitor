@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "node": "v22.0.0",
+  "monitor": {
+    "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "name": "@rawnode/monitor",
+    "version": "1.0.0"
+  },
+  "pm": {
+    "archive": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz",
+    "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+    "bytes": 94194,
+    "name": "@rawnode/pm",
+    "version": "0.1.0",
+    "engines": {
+      "node": ">=20.19.0"
+    }
+  },
+  "consumer": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+  "fixture": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/composition",
+  "monitorPackageUnchangedByPmInstall": true,
+  "monitorMatchesExactExtraction": true,
+  "shapes": [
+    "direct",
+    "runtime",
+    "adapter",
+    "RuntimeAgent"
+  ],
+  "reciprocal": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "realChildIpc": true,
+    "naturalChildExit": true,
+    "childBinaryIdentityChecked": true,
+    "borrowedPmResourcePreserved": true
+  },
+  "returnedAndDiskDiagnosticRedaction": true,
+  "processListenerCountsUnchanged": true,
+  "pairedStrictTypes": true,
+  "fixtureSources": [
+    {
+      "path": "scripts/pm-composition-direct.mjs",
+      "sha256": "a5e762d0eeb9c0b99c2854e218ac4e9cbb6a8471a9f464cdd02392e7c3e3ca25"
+    },
+    {
+      "path": "scripts/pm-composition.test.mjs",
+      "sha256": "e8b525b151ee0fabb97526051f969e5caee8b098364af4fbc5fdc565e5b228b2"
+    },
+    {
+      "path": "scripts/pm-worker.mjs",
+      "sha256": "568ce8f0902f6e11b4194561502bbb00bfa3feb2d825d3bd0c1537220cd5592d"
+    },
+    {
+      "path": "scripts/pm-consumer.mts",
+      "sha256": "6b330ed332145f6ed8d218b1c6dfbbb7ac68b71fa9f61e56832aa168a13e2953"
+    }
+  ],
+  "scope": "Fresh installed exact Monitor archive and accepted PM archive. Synthetic telemetry only; one task-owned PM child, no daemon, live backend, app or sibling edits.",
+  "historicalAttribution": "PM 47 native/47 packed tests remain historical PM-lane results and were not rerun or counted as Monitor tests.",
+  "commands": "logs/pm-composition/commands.json"
+}

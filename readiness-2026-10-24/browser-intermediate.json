@@ -1,0 +1,33 @@
+{
+  "archiveSha256": "dabc48241a20067dd7c69a6139258e27524c5136db5400579fa876b08c0e4593",
+  "browser": "Chrome 155.0.0.0 (User-Agent; full version to record separately)",
+  "platform": "macOS 15.8.1 Intel",
+  "executed": [
+    "All 11 navigation views rendered",
+    "Trace detail showed redacted token and literal HTML-like names",
+    "Cancel rule-ID, duration, reason each dismissed via native Chrome dialog; final fixture counters mutationRequests0/silences0/alertState firing/incidentState open",
+    "Initial console errors/warnings empty"
+  ],
+  "defect": {
+    "observed": "Trace detail disappears after next one-second polling render",
+    "presentSnapshotTime": "02:57:35",
+    "absentSnapshotTime": "02:57:39",
+    "resolution": "Preserve inspection with explicit resume; final replacement artifact verified separately"
+  },
+  "tooling": [
+    "Automation navigation sent Sec-Fetch-Site cross-site and correctly received403",
+    "Native address-bar navigation sent none and accepted",
+    "Transient CDP Page.getFrameTree timeouts and native reload recovery",
+    "CDP prompt tracking remained stale after native dialog dismissal; final dialog scenarios use native Chrome controls"
+  ],
+  "stateAfterCancellations": {
+    "requests": 173,
+    "mutationRequests": 0,
+    "clients": 1,
+    "signalListeners": 1,
+    "silences": 0,
+    "alertState": "firing",
+    "incidentState": "open"
+  },
+  "fixtureClosed": true
+}

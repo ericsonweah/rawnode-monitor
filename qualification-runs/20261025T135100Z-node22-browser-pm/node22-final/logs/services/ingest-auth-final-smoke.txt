@@ -1,0 +1,1 @@
+{"status":"passed","checks":19,"sha256":"a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615","evidence":"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/ingest-auth-final-smoke.json"}

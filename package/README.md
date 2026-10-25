@@ -1,6 +1,6 @@
 # @rawnode/monitor
 
-Private standalone preparation of RawNode Monitor, owned by First Principle Lab LLC. Version **1.0.0 is provisional**, retained from the source `MONITOR_VERSION`. Node.js 22 or newer, ESM, zero runtime/dev/peer/optional dependencies. The package starts no listener, process manager, daemon, exporter, or timer merely by importing it.
+Private standalone preparation of RawNode Monitor, owned by FIRST PRINCIPLE LAB, LLC and licensed under Apache-2.0 for the current owner-controlled original material. Version **1.0.0 is provisional**, retained from the source `MONITOR_VERSION`. Node.js 22 or newer, ESM, zero runtime/dev/peer/optional dependencies. The package starts no listener, process manager, daemon, exporter, or timer merely by importing it.
 
 ```js
 import { MonitorRuntime } from '@rawnode/monitor';
@@ -51,4 +51,4 @@ await bridge.close();
 
 Run `npm run build`, `npm test`, `node examples/basic.mjs`, and `npm pack --offline`. No install is needed. Type validation uses optional, already installed `tsc`; it is not a package dependency. `examples/studio-fixture.mjs` creates only a task-owned ephemeral 127.0.0.1 server using synthetic data; send `close` to stdin or let its 15-minute TTL expire. It is a development fixture, not a production server.
 
-See [configuration](docs/CONFIGURATION.md), [API](docs/API.md), [lifecycle](docs/LIFECYCLE.md), [security](docs/SECURITY.md), [Studio browser checklist](docs/STUDIO.md), [migration and compatibility](docs/MIGRATION.md), [release procedure](docs/PUBLICATION.md), and [validation](docs/VALIDATION.md). The complete source/provenance archive preserves originals and hashes. `private: true` and a rejecting publication lifecycle guard remain enabled. License provenance is unresolved; see [NOTICE](NOTICE.md).
+See [configuration](docs/CONFIGURATION.md), [API](docs/API.md), [lifecycle](docs/LIFECYCLE.md), [security](docs/SECURITY.md), [Studio browser checklist](docs/STUDIO.md), [migration and compatibility](docs/MIGRATION.md), [release procedure](docs/PUBLICATION.md), and [validation](docs/VALIDATION.md). The complete source/provenance archive preserves originals and hashes. `private: true` and a rejecting publication lifecycle guard remain enabled. The supplied Apache-2.0 decision and historical ISC/UNLICENSED provenance are distinguished in [NOTICE](NOTICE.md); the full terms are in [LICENSE](LICENSE).

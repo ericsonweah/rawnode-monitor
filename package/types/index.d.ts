@@ -101,6 +101,8 @@ export class MetricRegistry {
   timer(name: string, options?: Record<string, unknown>): Timer;
   observableGauge(name: string, callback: (...args: unknown[]) => unknown, options?: Record<string, unknown>): ObservableGauge;
   get(name: string): MetricInstrument | null;
+  has(name: string): boolean;
+  names(): string[];
   collect(context?: unknown): Promise<unknown>;
   snapshot(options?: Record<string, unknown>): unknown;
   freeze(): this;
@@ -186,6 +188,7 @@ export class SyntheticCheck {
 export class SyntheticMonitor extends MonitorEventEmitter {
   constructor(options?: Record<string, unknown>);
   register(check: SyntheticCheck | Record<string, unknown>, options?: Record<string, unknown>): SyntheticCheck;
+  unregister(id: string): boolean;
   run(id: string | SyntheticCheck, options?: Record<string, unknown>): Promise<unknown>;
   runAll(options?: Record<string, unknown>): Promise<unknown[]>;
   start(options?: Record<string, unknown>): this;
@@ -243,7 +246,7 @@ export class MonitorRuntime extends MonitorEventEmitter {
   collectMetrics(options?: Record<string, unknown>): Promise<unknown>;
   collectResources(options?: Record<string, unknown>): Promise<unknown>;
   registerResource(name: string, resource: unknown, options?: Record<string, unknown>): unknown;
-  registerHealth(name: string, check: unknown, options?: Record<string, unknown>): unknown;
+  registerHealth(name: string, check: HealthCheck, options?: Record<string, unknown>): () => boolean;
   registerAlert(rule: unknown, options?: Record<string, unknown>): unknown;
   registerSlo(definition: unknown, options?: Record<string, unknown>): unknown;
   registerRunbook(runbook: unknown, options?: Record<string, unknown>): unknown;
@@ -341,7 +344,11 @@ export const EventNotificationChannel: any;
 export const ExporterRegistry: any;
 export const FakeMonitorClock: any;
 export const FleetRegistry: any;
-export interface HealthReport { ok: boolean; ready: boolean; live: boolean; status: string; timestamp: number; checks: ReadonlyArray<Record<string, unknown>>; }
+export interface HealthReport {
+  ok: boolean; ready: boolean; live: boolean; status: string; timestamp: number; durationMs: number;
+  counts: Readonly<{ total: number; healthy: number; degraded: number; unhealthy: number; skipped: number }>;
+  checks: ReadonlyArray<Record<string, unknown>>;
+}
 export type HealthCheck = (context: {signal: AbortSignal; name: string; kind: string; [key:string]:unknown}) => unknown | Promise<unknown>;
 export class HealthRegistry extends MonitorEventEmitter {
  constructor(options?: Record<string, unknown>); register(name:string,check:HealthCheck,options?:Record<string,unknown>):()=>boolean;

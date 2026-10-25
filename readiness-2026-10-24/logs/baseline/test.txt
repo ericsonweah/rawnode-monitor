@@ -1,0 +1,256 @@
+
+> @rawnode/monitor@1.0.0 test
+> node --test --test-timeout=20000 test/*.test.mjs
+
+✔ metric reset/remove releases ownership without corrupting replacements (4.635855ms)
+✔ aggregate policy reserves an overflow slot and respects both series bounds (3.2138ms)
+✔ observable callback deadline does not launch overlapping stuck collectors or accept late observations (22.118275ms)
+✔ stalled sink writes are bounded and a following sink remains usable (64.563177ms)
+✔ pipeline close is idempotent and finalizes despite required stalled lifecycle callback (13.988454ms)
+✔ flush cancellation reaches cooperative sinks and shutdown clears queued references (20.695879ms)
+✔ required sinks cannot acknowledge incomplete delivery as a success (2.797381ms)
+✔ pre-cancelled admission never retains a queue value (0.661811ms)
+✔ repeated flushes cannot accumulate unresolved sink lifecycle calls (11.569211ms)
+✔ close invalidates a pending setup and cannot resurrect plugin start (15.268419ms)
+✔ close invalidates a pending start and startup calls are idempotent (2.945418ms)
+✔ plugin callback deadlines isolate failures and repeated hooks cannot accumulate stuck work (68.025802ms)
+✔ once hooks run once across concurrent invoke calls and hook admission is bounded (2.665741ms)
+✔ failed required close still finalizes manager and drops pending notifications (13.853505ms)
+✔ configured span cap controls actual retained spans (8.524224ms)
+✔ pruning removes expired records from every index and reuses ring capacity (1.05549ms)
+✔ read paths enforce elapsed span retention without a timer (1.048907ms)
+✔ durability requires a full acknowledged write and optional partial stores report failure (3.572708ms)
+✔ unregister aborts the current check and late completion cannot restore state or scheduling (18.522636ms)
+✔ replacement preserves its new timer when an older scheduled run settles (3.680131ms)
+✔ non-cooperative checks retain their concurrency slot and waiting runs are bounded (19.248378ms)
+✖ real loopback cross-origin redirects strip sensitive headers and 303 removes body headers (26.689145ms)
+✖ real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding (13.834232ms)
+✔ modeled HTTPS response rejects downgrade before a second request (9.77615ms)
+✔ optional notification failures remain isolated without an error listener and required failures reject (9.059091ms)
+✔ notification deadlines retain stuck callback ownership and close bounds channel cleanup (32.674924ms)
+✔ closing an active notification aborts its signal and settles the caller before a late result (3.543201ms)
+✔ caller cancellation cannot skip owned notification or alert cleanup (1.647157ms)
+✔ a failed alert context does not strand evaluation ownership (4.675264ms)
+✔ alert deadlines avoid overlapping a stalled rule while healthy rules remain usable (13.914104ms)
+✔ retired or closed alert evaluations cannot notify or open incidents (2.511585ms)
+✔ close during a pending notification does not start a later incident or accept notification accounting (3.199243ms)
+✔ injected event/protocol bridges detach explicit subscriptions (57.403877ms)
+✔ readiness lifecycle and manager replacement ownership (54.878505ms)
+✔ alerts and SLO definition calculations preserve capability (1.381834ms)
+✔ HMAC accepts exact bytes and rejects changed/expired signatures (1.450862ms)
+✔ late injected Redis lease acquisition cannot restart timers after close (1.383838ms)
+✔ stuck health and resource callbacks are not relaunched (13.90685ms)
+✔ queue overflow, cancellation and close release memory (1.550186ms)
+✔ task-local file storage persists/query and diagnostics reject traversal (63.498532ms)
+✔ ratio sampling uses the full 52-bit suffix range at deterministic boundaries (2.718168ms)
+✔ bound context overrides its creation scope and preserves receiver, arguments and async propagation (2.725241ms)
+✔ remote context parsing ignores malformed baggage keys and preserves valid propagation and parent sampling (5.661829ms)
+✔ HTTP middleware uses route templates and a single unmatched label for request-specific paths (59.574593ms)
+✔ timer and span elapsed duration stay monotonic when the wall clock moves backwards (2.414192ms)
+✔ resource replacement invalidates cached state and suppresses retired collection events (2.92715ms)
+✔ late Redis subscribe and ready completion cannot resurrect a closed bridge (2.359393ms)
+✔ cluster envelopes reject invalid, expired, wrong-namespace and tampered authentication fields (2.098456ms)
+✔ replaced health checks discard old cached results and retain registration identity (10.641143ms)
+✔ a critical unhealthy replacement controls ordinary readiness immediately (1.243145ms)
+✔ late old health callback cannot populate a replacement cache (2.256704ms)
+✖ HTTP exporter close cancels retry backoff without admitting another request (19.447914ms)
+✖ HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks (2.904852ms)
+✖ HTTP exporter close during compression prevents the continuation from opening a request (6.111395ms)
+✖ HTTP exporter close aborts an active request and releases owned sockets (1.46504ms)
+✖ HTTP exporter still retries and acknowledges ordinary requests before close (1.142919ms)
+✖ runtime-owned HTTP exporter remains terminal when runtime closes during a request (1.16631ms)
+✔ JSONL close closes admission synchronously and drains writes deferred in initialization (50.041783ms)
+✔ JSONL flush includes writes admitted before initialization starts (5.021674ms)
+✔ concurrent starts and closes settle once and terminal restart is explicit (80.313294ms)
+✔ closing idle runtime releases an already used pipeline (8.77259ms)
+✔ close wins race with blocked startup without later resurrection (26.17497ms)
+✔ pre-abort avoids callback and active abort settles ignoring callbacks (0.852164ms)
+✔ slow collection is coalesced and close cancels it (26.856067ms)
+✔ health distinguishes readiness, liveness, degraded and timeout (12.642909ms)
+✔ resource replace/unregister cleans health checks (0.913981ms)
+✔ public telemetry redacts payload context metadata span and diagnostics (21.741444ms)
+✔ untrusted signal kind and fake byte sizes cannot bypass bounds (6.494383ms)
+✔ serializer bounds serialized bytes, cycles, hostile getters, prototype input (0.95618ms)
+✔ PM bridge disposes direct, runtime and adapter owners idempotently (0.873618ms)
+✔ Studio authorizer uses socket, denies cross origin even with custom auth (0.971336ms)
+✔ Studio closes listeners and slow clients and rejects streams after close (10.047233ms)
+✔ Studio assets are packaged and reject unknown/prototype paths (6.714286ms)
+✔ preparsed and raw bodies obey request limits (7.498063ms)
+✔ synthetic custom callbacks support timeout and reject after close (101.901226ms)
+✔ memory store retention stays bounded (1.027725ms)
+✔ modeled actions: cancelling each silence prompt or incident resolution sends no mutation (164.799328ms)
+✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (14.874216ms)
+✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (13.09451ms)
+✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1105.600096ms)
+✖ actual loopback HTTP serves packaged Studio and all read views safely (95.360938ms)
+✖ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (27.200559ms)
+✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1261.326934ms)
+✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (7.457448ms)
+✖ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (65.608672ms)
+✖ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (25.475053ms)
+ℹ tests 86
+ℹ suites 0
+ℹ pass 74
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1810.42946
+
+✖ failing tests:
+
+test at test/adversarial-synthetic-http.test.mjs:14:1
+✖ real loopback cross-origin redirects strip sensitive headers and 303 removes body headers (26.689145ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/adversarial-synthetic-http.test.mjs:34:1
+✖ real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding (13.834232ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/readiness-lifecycle.test.mjs:80:1
+✖ HTTP exporter close cancels retry backoff without admitting another request (19.447914ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/readiness-lifecycle.test.mjs:104:1
+✖ HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks (2.904852ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/readiness-lifecycle.test.mjs:130:1
+✖ HTTP exporter close during compression prevents the continuation from opening a request (6.111395ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/readiness-lifecycle.test.mjs:148:1
+✖ HTTP exporter close aborts an active request and releases owned sockets (1.46504ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/readiness-lifecycle.test.mjs:174:1
+✖ HTTP exporter still retries and acknowledges ordinary requests before close (1.142919ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/readiness-lifecycle.test.mjs:187:1
+✖ runtime-owned HTTP exporter remains terminal when runtime closes during a request (1.16631ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/studio-http.test.mjs:4:1
+✖ actual loopback HTTP serves packaged Studio and all read views safely (95.360938ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/studio-http.test.mjs:16:1
+✖ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (27.200559ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/studio-security-regression.test.mjs:18:1
+✖ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (65.608672ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at test/studio-security-regression.test.mjs:42:1
+✖ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (25.475053ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }

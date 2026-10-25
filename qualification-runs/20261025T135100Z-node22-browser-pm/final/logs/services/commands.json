@@ -1,0 +1,47 @@
+[
+  {
+    "name": "run-pm-composition",
+    "command": [
+      "/usr/local/bin/node",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/scripts/run-pm-composition.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "harnessSha256": "00ebdc236ae5f4c5584963468dcbeaab84a4822221a84d53ffa9f326a43b23d4",
+    "node": "v24.21.0",
+    "archiveSha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "started": "2026-10-25T14:05:12.145Z",
+    "milliseconds": 4689,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "name": "studio-final-smoke",
+    "command": [
+      "/usr/local/bin/node",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/scripts/studio-final-smoke.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "harnessSha256": "8eb9de00791452f81ea6e4aa3640dcb1641dd383cf2a51b297d3f68976741b5b",
+    "node": "v24.21.0",
+    "archiveSha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "started": "2026-10-25T14:05:16.836Z",
+    "milliseconds": 1053,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "name": "ingest-auth-final-smoke",
+    "command": [
+      "/usr/local/bin/node",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/scripts/ingest-auth-final-smoke.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "harnessSha256": "331a33bf8beaee563d7ff8199ece19637f21fa64e70ce290d3d046085e319bbb",
+    "node": "v24.21.0",
+    "archiveSha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "started": "2026-10-25T14:05:17.892Z",
+    "milliseconds": 514,
+    "exit": 0,
+    "timedOut": false
+  }
+]

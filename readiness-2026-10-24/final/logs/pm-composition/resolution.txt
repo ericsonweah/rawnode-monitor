@@ -1,0 +1,4 @@
+@rawnode/monitor file:///private/tmp/rawnode-monitor-readiness-PtwdKY/installed/node_modules/@rawnode/monitor/src/index.js
+@rawnode/monitor/integrations file:///private/tmp/rawnode-monitor-readiness-PtwdKY/installed/node_modules/@rawnode/monitor/src/integrations/index.js
+@rawnode/pm file:///private/tmp/rawnode-monitor-readiness-PtwdKY/installed/node_modules/@rawnode/pm/src/index.js
+@rawnode/pm/runtime file:///private/tmp/rawnode-monitor-readiness-PtwdKY/installed/node_modules/@rawnode/pm/src/runtime/index.js

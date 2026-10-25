@@ -1,0 +1,24 @@
+✔ HTTP acknowledgement timeout reports uncertain delivery without repeating the request (115.486093ms)
+✔ a failed split export does not make the pipeline replay its acknowledged prefix (16.77403ms)
+✔ a truncated HTTP acknowledgement reports uncertainty without replaying accepted telemetry (4.116118ms)
+✔ a reset after sending the HTTP payload is not evidence that delivery failed (2.773343ms)
+✔ HTTP timeout bounds the whole request even while acknowledgement bytes keep arriving (102.000735ms)
+✔ replaced health checks discard old cached results and retain registration identity (4.180139ms)
+✔ a critical unhealthy replacement controls ordinary readiness immediately (0.712632ms)
+✔ late old health callback cannot populate a replacement cache (0.926182ms)
+✔ HTTP exporter close cancels retry backoff without admitting another request (26.335393ms)
+✔ HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks (3.923882ms)
+✔ HTTP exporter close during compression prevents the continuation from opening a request (2.973298ms)
+✔ HTTP exporter close aborts an active request and releases owned sockets (3.080441ms)
+✔ HTTP exporter still retries and acknowledges ordinary requests before close (4.347661ms)
+✔ runtime-owned HTTP exporter remains terminal when runtime closes during a request (29.695225ms)
+✔ JSONL close closes admission synchronously and drains writes deferred in initialization (8.522363ms)
+✔ JSONL flush includes writes admitted before initialization starts (5.173689ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 464.626658

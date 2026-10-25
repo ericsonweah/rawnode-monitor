@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile, readdir, mkdtemp } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import path from 'node:path';
+const root=process.cwd(), run=path.resolve('qualification-runs/20261025T135100Z-node22-browser-pm');
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const command=(cmd,args)=>{const r=spawnSync(cmd,args,{encoding:'utf8',timeout:30000});assert.equal(r.status,0,r.stderr);return {command:[cmd,...args],exit:r.status,stdout:r.stdout,stderr:r.stderr};};
+const git={head:command('git',['rev-parse','HEAD']),branch:command('git',['branch','--show-current']),remote:command('git',['remote','-v']),status:command('git',['status','--short']),index:command('git',['diff','--cached','--binary'])};
+const archive=path.resolve('readiness-2026-10-25/artifacts/rawnode-monitor-1.0.0.tgz'),bytes=await readFile(archive);
+assert.equal(hash(bytes),'69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7');assert.equal(bytes.length,209613);
+const destination=await mkdtemp('/private/tmp/monitor-qualification-baseline-');command('tar',['-xzf',archive,'-C',destination]);
+const prior=JSON.parse(await readFile('readiness-2026-10-25/distribution.json'));
+const rows=[],changes=[];
+for(const entry of prior.inventory){const source=await readFile(path.join('package',entry.path));const packed=await readFile(path.join(destination,'package',entry.path));assert.equal(hash(packed),entry.sha256);assert.equal(packed.length,entry.bytes);const row={path:entry.path,bytes:source.length,sha256:hash(source),baselineSha256:entry.sha256};rows.push(row);if(!source.equals(packed))changes.push(entry.path);}
+const manifest=JSON.parse(await readFile(path.join(destination,'package/package.json')));
+const pmArchive='/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz';const pmBytes=await readFile(pmArchive);assert.equal(pmBytes.length,94194);assert.equal(hash(pmBytes),'0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f');
+const pmManifest=JSON.parse(command('tar',['-xOf',pmArchive,'package/package.json']).stdout);
+const receipt={at:new Date().toISOString(),root,git,archive:{path:archive,sha256:hash(bytes),bytes:bytes.length,packedFiles:prior.packedFiles,integrity:prior.pack.integrity},extraction:path.join(destination,'package'),manifest,packageSource:rows,differencesFromOct25Archive:changes,pm:{path:pmArchive,bytes:pmBytes.length,sha256:hash(pmBytes),manifest:pmManifest},historicalResults:JSON.parse(await readFile('readiness-2026-10-25/final-verification.json')),tools:[command('node',['--version']),command('npm',['--version']),command('tsc',['--version']),command('python3',['--version']),command('sw_vers',[])]};
+await writeFile(path.join(run,'baseline.json'),JSON.stringify(receipt,null,2)+'\n');await writeFile(path.join(run,'observed-worktree.patch'),command('git',['diff','--binary']).stdout);
+console.log(JSON.stringify({archive:receipt.archive,changes,head:git.head.stdout.trim(),indexEmpty:!git.index.stdout,pmEngines:pmManifest.engines,extraction:receipt.extraction}));

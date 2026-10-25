@@ -1,0 +1,15 @@
+{
+  "status": "SUPERSEDED_CLOSING_MANIFEST",
+  "at": "2026-10-25T14:41:33.559040+00:00",
+  "supersededManifest": {
+    "path": "closing-artifacts.json",
+    "sha256": "f165bec8b76dc74f1996d93be4b1be458a9b111470d0e7fe468a51bfdcb7b862"
+  },
+  "reason": "After the first closing manifest and successful rehash, the browser reviewer clarified one BROWSER_HANDOFF.md sentence from fully visible-window to visible-to-visible observation gate, avoiding an unsupported continuous visibility claim. Earlier manifest and summary remain unchanged.",
+  "changedFile": {
+    "path": "BROWSER_HANDOFF.md",
+    "sha256": "cd2251bdb84411eb8887c89eee0b12a25c6e5a5fba4d25f5fdfd4cc1e9018fc8"
+  },
+  "nextManifest": "closing-artifacts-02.json",
+  "packageOrBrowserReceiptChanged": false
+}

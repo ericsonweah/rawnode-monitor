@@ -1,0 +1,9 @@
+{
+  "observedDate": "2026-10-25",
+  "method": "Independent read-only /usr/libexec/PlistBuddy metadata queries; no browser process launch",
+  "Safari": { "plist": "/Applications/Safari.app/Contents/Info.plist", "CFBundleShortVersionString": "27.0", "CFBundleVersion": "20625.1.29.18.28", "queryExit": 0 },
+  "Chrome": { "plist": "/Applications/Google Chrome.app/Contents/Info.plist", "CFBundleShortVersionString": "155.0.8059.85", "queryExit": 0 },
+  "os": { "name": "macOS", "version": "15.8.1", "build": "24H32", "architecture": "x86_64", "source": "../runtime/platform.json" },
+  "nativeControlMechanism": "cua native application accessibility/keyboard controls; coordinates failed in some retained attempts",
+  "standaloneScreenshots": "Native API screenshots were visually reviewed in the conversation; no standalone screenshot files were available. Authored notes are distinct from raw JSONL."
+}

@@ -1,0 +1,115 @@
+{
+  "scope": "HTTP serving and JavaScript syntax only. No browser execution, DOM model, native interaction or lifecycle/polling acceptance.",
+  "session": "lifecycle-controls-http-01",
+  "startedAt": "2026-10-25T14:22:34.205Z",
+  "command": [
+    "/usr/local/bin/node",
+    "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/scripts/lifecycle-controls-http-probe.mjs",
+    "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor"
+  ],
+  "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+  "runtime": {
+    "node": "v24.21.0",
+    "executable": "/usr/local/bin/node",
+    "platform": "darwin",
+    "arch": "x64"
+  },
+  "archive": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615"
+  },
+  "packageRoot": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+  "fixtureScriptSha256": "186fef4752b8c688b740d150903205847467bc03770cf11911facae71327f072",
+  "probeScriptSha256": "8096bd1a02ee455388b6edd18ac96255d9351806d8d1fb3e7068b76255e2cbf9",
+  "cleanup": {
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "listenerClosed": true,
+    "listenerProbeCode": "ECONNREFUSED",
+    "closedReceipt": {
+      "at": "2026-10-25T14:22:34.694Z",
+      "session": "lifecycle-controls-http-01",
+      "kind": "closed",
+      "reason": "stdin",
+      "server": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 0,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "listening": false
+    }
+  },
+  "fixture": {
+    "session": "lifecycle-controls-http-01",
+    "mode": "local",
+    "url": "http://127.0.0.1:62161/monitor",
+    "controlUrl": "http://127.0.0.1:62161/qualification/control",
+    "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "pid": 99397,
+    "node": "v24.21.0",
+    "execPath": "/usr/local/bin/node",
+    "files": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    "baseline": {
+      "mutations": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    "ttlMs": 900000
+  },
+  "servedModule": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/browser/lifecycle-controls-http/served-fixture-client.mjs",
+    "bytes": 10468,
+    "sha256": "4fa3ced9f3ba388aec576cf1265d60c5e6a03d7ff4d822f001563a0b7a4dcddb",
+    "contentType": "application/javascript",
+    "syntax": {
+      "command": [
+        "/usr/local/bin/node",
+        "--check",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/browser/lifecycle-controls-http/served-fixture-client.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    }
+  },
+  "packagedClient": {
+    "servedSha256": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+    "installedSha256": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef"
+  },
+  "labels": [
+    {
+      "label": "Observe delayed health to traces",
+      "present": true
+    },
+    {
+      "label": "Observe destroy during delayed health",
+      "present": true
+    },
+    {
+      "label": "Observe polling for five seconds",
+      "present": true
+    },
+    {
+      "label": "Record status and focus",
+      "present": true
+    }
+  ],
+  "stderr": "",
+  "finishedAt": "2026-10-25T14:22:34.713Z",
+  "outcome": "PASS"
+}

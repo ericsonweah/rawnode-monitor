@@ -26,6 +26,7 @@ export class MonitorStudioRateLimiter {
       const retryAfterMs = Math.ceil((deficit / this.refillPerSecond) * 1_000);
       this.stats.rejected++;
       this.buckets.set(id, bucket);
+      if (this.buckets.size > this.maxKeys) this._evictOldest();
       return Object.freeze({ ok: false, remaining: Math.floor(bucket.tokens), retryAfterMs, resetAt: now + retryAfterMs });
     }
 

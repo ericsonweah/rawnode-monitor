@@ -219,6 +219,7 @@ The table enumerates every source default; effective profiles can override these
 - `alerts.callbackTimeoutMs`: context/leader/rule/notification/incident callback wait, 5000 ms by default (1–300000). Direct `AlertEngine` options also support this control. `evaluate({timeoutMs,signal})` bounds context/rule waits; transition callbacks retain the engine default.
 - Direct `NotificationRouter` options `callbackTimeoutMs` (5000 ms, 1–300000) and `maxPendingCallbacks` (1000, 1–100000) bound channel waits and unresolved physical sends. `notify({…}, {timeoutMs,signal})` can override a send deadline. Close timeout bounds owned cleanup; caller cancellation does not skip its attempt.
 - `studio.maxClients`: at most 100 SSE clients unless explicitly set. `assetsRoot` is a route-registration option, not the service root.
+- `exporters.http.timeoutMs` and the inherited HTTP behavior of the OTLP-JSON exporter bound each HTTP request attempt by elapsed time, including socket queueing and response reads. They are not a total deadline across serialization, compression, retries and split chunks.
 - Metric label names longer than 128 bytes are discarded. Label values, count, series and instruments use their configured limits.
 
 ## Injected services and transport contracts

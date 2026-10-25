@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-10-25T13:52:25.035301+00:00",
+  "downloadURL": "https://nodejs.org/dist/v22.0.0/node-v22.0.0-darwin-x64.tar.gz",
+  "checksumURL": "https://nodejs.org/dist/v22.0.0/SHASUMS256.txt",
+  "archive": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64.tar.gz",
+  "bytes": 47012327,
+  "sha256": "422a3887ff5418f0a4552d89cf99346ab8ab51bb5d384660baa88b8444d2c111",
+  "publishedChecksumMatches": true,
+  "signatureVerified": false,
+  "node": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "version": "v22.0.0",
+  "binarySha256": "7bf07129d8283073d722ff32070b2976c6e00c9690ffea54d6266d811f1b843e",
+  "globalInstallChanged": false,
+  "initialDownloadAttempt": {
+    "exit": 6,
+    "reason": "restricted sandbox DNS could not resolve nodejs.org"
+  },
+  "approvedDownloadExit": 0,
+  "checksumDownloadExit": 0,
+  "officialCliDocumentation": "https://nodejs.org/download/release/v22.0.0/docs/api/cli.html"
+}

@@ -1,0 +1,81 @@
+{
+  "evidenceKind": "Structured summary of tool-observed investigation commands; original focused command output was shown in the session, not saved as a standalone log",
+  "node": "v24.21.0",
+  "npm": "11.19.0",
+  "baselineRevision": "884a4974ba14d15a21ed4014bbe004ebf95384a7",
+  "workingDirectory": "package/",
+  "reviewLeadD": {
+    "disposition": "already addressed in baseline",
+    "verified": [
+      "close during retry backoff admits no further request",
+      "close between split chunks preserves acknowledged accounting",
+      "close during compression prevents request admission",
+      "active requests abort and owned sockets close",
+      "ordinary pre-close retry still succeeds",
+      "runtime-owned exporter close remains terminal"
+    ]
+  },
+  "adjacentJsonlCloseRace": {
+    "disposition": "already addressed in baseline",
+    "verified": [
+      "close stops admission synchronously and drains writes deferred in initialization across kinds",
+      "flush includes previously admitted writes before initialization begins"
+    ]
+  },
+  "observedCommands": [
+    {
+      "command": ["node", "--test", "test/readiness-lifecycle.test.mjs"],
+      "environment": "initial sandbox",
+      "exit": 1,
+      "counts": { "tests": 11, "pass": 5, "fail": 6, "cancelled": 0, "skipped": 0 },
+      "error": "Six task-owned HTTP fixtures failed to listen with EPERM on 127.0.0.1; health and JSONL cases passed"
+    },
+    {
+      "command": ["node", "--test", "test/readiness-lifecycle.test.mjs"],
+      "environment": "escalated for task-owned loopback listeners",
+      "exit": 0,
+      "counts": { "tests": 11, "pass": 11, "fail": 0, "cancelled": 0, "skipped": 0 }
+    },
+    {
+      "command": ["node", "--test", "test/readiness-http-delivery.test.mjs"],
+      "phase": "new regressions before exporter changes",
+      "environment": "escalated for task-owned loopback listeners",
+      "exit": 1,
+      "counts": { "tests": 2, "pass": 0, "fail": 2, "cancelled": 0, "skipped": 0 },
+      "failures": [
+        {
+          "test": "HTTP acknowledgement timeout reports uncertain delivery without repeating the request",
+          "observed": "MONITOR_EXPORT_TIMEOUT had retryable true; assertion expected false",
+          "assertion": "true !== false",
+          "note": "The first assertion failed before request-count checks; no standalone request-count result was recorded for this failed run"
+        },
+        {
+          "test": "a failed split export does not make the pipeline replay its acknowledged prefix",
+          "expectedReceivedIds": ["acknowledged", "unacknowledged"],
+          "observedReceivedIds": ["acknowledged", "unacknowledged", "acknowledged", "unacknowledged", "acknowledged", "unacknowledged"]
+        }
+      ]
+    },
+    {
+      "command": ["node", "--test", "test/readiness-http-delivery.test.mjs", "test/readiness-lifecycle.test.mjs"],
+      "phase": "focused verification after repair",
+      "environment": "escalated for task-owned loopback listeners",
+      "exit": 0,
+      "counts": { "tests": 13, "pass": 13, "fail": 0, "cancelled": 0, "skipped": 0 },
+      "verifiedRequestCounts": { "uncertainTimeout": 1, "failedSplit": 2, "pipelineRetriesAfterAcknowledgedPrefix": 0 }
+    }
+  ],
+  "repairs": [
+    "HTTP acknowledgement timeout is nonretryable and reports details.delivery as unknown",
+    "Per-export progress tracks acknowledged chunks, including recursive splits; a later failure reports acknowledgedSignals and unacknowledgedSignals and disables default whole-export retries",
+    "Original cause and available code/status survive partial-delivery reporting; OtlpJsonExporter inherits the policy"
+  ],
+  "files": ["package/src/exporters/HttpJsonExporter.js", "package/test/readiness-http-delivery.test.mjs"],
+  "finalArchiveVerification": "See final/consumer-checks.json and final/final-verification.json for the complete final native, extracted and installed suites bound to the final archive hash",
+  "limits": [
+    "A 2xx response acknowledges a chunk; it does not establish durable persistence",
+    "Unacknowledged or aborted telemetry may already have reached the receiver",
+    "Existing response-aborted and socket-error retry policy remains; this is not exactly-once delivery",
+    "Custom pipeline retryWhen callbacks can deliberately override the default nonretryable policy"
+  ]
+}

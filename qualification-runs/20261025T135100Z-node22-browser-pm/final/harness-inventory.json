@@ -1,0 +1,74 @@
+{
+  "files": [
+    {
+      "path": "scripts/archive-inventory.py",
+      "bytes": 675,
+      "sha256": "967db97f2dba7a01b85e11c5609e961cbb09268f495bd6084636e75e8453e030"
+    },
+    {
+      "path": "scripts/audit-final.mjs",
+      "bytes": 16906,
+      "sha256": "87defbd879181e34e7ccb9989d6efb566cfe7610a39e012cb10df85b569ca86f"
+    },
+    {
+      "path": "scripts/audit-inputs.mjs",
+      "bytes": 2503,
+      "sha256": "96e76864b4a879a8b9f20daaa7e322571d2334dcb4ea582d3db46864a90d5e73"
+    },
+    {
+      "path": "scripts/distribution.mjs",
+      "bytes": 11649,
+      "sha256": "98d6eeebade30d316fb53b1a53b1d67bcc384bf2881526f72872e8219c9ef62a"
+    },
+    {
+      "path": "scripts/final-consumers.mjs",
+      "bytes": 2364,
+      "sha256": "261a6a82c0f065b4d6c5e748eccd17d16af5ed1c1cbcb3795ff87b2691681b7d"
+    },
+    {
+      "path": "scripts/ingest-auth-final-smoke.mjs",
+      "bytes": 10403,
+      "sha256": "331a33bf8beaee563d7ff8199ece19637f21fa64e70ce290d3d046085e319bbb"
+    },
+    {
+      "path": "scripts/pm-composition-direct.mjs",
+      "bytes": 3660,
+      "sha256": "a5e762d0eeb9c0b99c2854e218ac4e9cbb6a8471a9f464cdd02392e7c3e3ca25"
+    },
+    {
+      "path": "scripts/pm-composition.test.mjs",
+      "bytes": 6406,
+      "sha256": "e8b525b151ee0fabb97526051f969e5caee8b098364af4fbc5fdc565e5b228b2"
+    },
+    {
+      "path": "scripts/pm-consumer.mts",
+      "bytes": 854,
+      "sha256": "6b330ed332145f6ed8d218b1c6dfbbb7ac68b71fa9f61e56832aa168a13e2953"
+    },
+    {
+      "path": "scripts/pm-worker.mjs",
+      "bytes": 2233,
+      "sha256": "568ce8f0902f6e11b4194561502bbb00bfa3feb2d825d3bd0c1537220cd5592d"
+    },
+    {
+      "path": "scripts/run-checks.mjs",
+      "bytes": 3338,
+      "sha256": "303e1998519ec2813b6b2774e8f41729a34df1886815711c9f8cdfc6f2f00f30"
+    },
+    {
+      "path": "scripts/run-pm-composition.mjs",
+      "bytes": 8013,
+      "sha256": "00ebdc236ae5f4c5584963468dcbeaab84a4822221a84d53ffa9f326a43b23d4"
+    },
+    {
+      "path": "scripts/run-services.mjs",
+      "bytes": 1995,
+      "sha256": "c37a189e138c0c1523a4a0921d427054ad86e270d841214ae7b74d5e861deed7"
+    },
+    {
+      "path": "scripts/studio-final-smoke.mjs",
+      "bytes": 10643,
+      "sha256": "8eb9de00791452f81ea6e4aa3640dcb1641dd383cf2a51b297d3f68976741b5b"
+    }
+  ]
+}

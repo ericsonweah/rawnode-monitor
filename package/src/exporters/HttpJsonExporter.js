@@ -59,7 +59,25 @@ export class HttpJsonExporter {
       this._assertOpen(signal);
       const chunks = partitionSignals(signals, this.maxBatchSignals, this.maxPayloadBytes);
       if (chunks.length > 1) this.stats.splitBatches += chunks.length - 1;
-      for (const chunk of chunks) await this._exportChunk(chunk, { ...options, signal });
+      const delivery = { acknowledgedSignals: 0 };
+      try {
+        for (const chunk of chunks) await this._exportChunk(chunk, { ...options, signal }, delivery);
+      } catch (cause) {
+        if (!delivery.acknowledgedSignals) throw cause;
+        // A caller retrying the whole export would repeat its acknowledged
+        // prefix. Keep per-operation progress separate from concurrent exports.
+        throw Object.assign(new Error(cause?.message || 'Monitor HTTP export stopped after partial acknowledgement.', { cause }), {
+          name: cause?.name || 'Error',
+          code: cause?.code || 'MONITOR_EXPORT_PARTIAL_DELIVERY',
+          statusCode: cause?.statusCode,
+          retryable: false,
+          details: {
+            ...cause?.details,
+            acknowledgedSignals: delivery.acknowledgedSignals,
+            unacknowledgedSignals: signals.length - delivery.acknowledgedSignals,
+          },
+        });
+      }
       return true;
     });
     this.pending.add(operation);
@@ -72,7 +90,7 @@ export class HttpJsonExporter {
     signal?.throwIfAborted?.();
   }
 
-  async _exportChunk(signals, options) {
+  async _exportChunk(signals, options, delivery) {
     this._assertOpen(options.signal);
     let body;
     try { body = Buffer.from(JSON.stringify(this.format(signals, options))); }
@@ -87,8 +105,8 @@ export class HttpJsonExporter {
       if (signals.length > 1) {
         const middle = Math.ceil(signals.length / 2);
         this.stats.splitBatches++;
-        await this._exportChunk(signals.slice(0, middle), options);
-        await this._exportChunk(signals.slice(middle), options);
+        await this._exportChunk(signals.slice(0, middle), options, delivery);
+        await this._exportChunk(signals.slice(middle), options, delivery);
         return;
       }
       this.stats.oversizedSignals++;
@@ -138,6 +156,7 @@ export class HttpJsonExporter {
 
     this.stats.batches++;
     this.stats.signals += signals.length;
+    delivery.acknowledgedSignals += signals.length;
     this.stats.bytes += payload.length;
     this.stats.uncompressedBytes += body.length;
   }
@@ -148,9 +167,11 @@ export class HttpJsonExporter {
     return new Promise((resolve, reject) => {
       let settled = false;
       let abortHandler = null;
+      let timer;
       const finish = (error, value) => {
         if (settled) return;
         settled = true;
+        clearTimeout(timer);
         if (abortHandler) signal?.removeEventListener?.('abort', abortHandler);
         if (error) reject(error);
         else resolve(value);
@@ -177,16 +198,24 @@ export class HttpJsonExporter {
             response.destroy(error);
           }
         });
-        response.once('aborted', () => finish(Object.assign(new Error('Monitor exporter response was aborted.'), { code: 'MONITOR_EXPORT_RESPONSE_ABORTED', retryable: true })));
-        response.once('error', (error) => finish(error));
+        response.once('aborted', () => finish(uncertainDelivery(Object.assign(new Error('Monitor exporter response was aborted.'), { code: 'MONITOR_EXPORT_RESPONSE_ABORTED' }))));
+        response.once('error', (error) => finish(uncertainDelivery(error)));
         response.once('end', () => {
           const statusCode = Number(response.statusCode || 0);
           this.stats.responses[statusCode] = (this.stats.responses[statusCode] || 0) + 1;
           finish(null, { statusCode, bytes });
         });
       });
-      request.setTimeout(this.timeoutMs, () => request.destroy(Object.assign(new Error(`Monitor HTTP export exceeded ${this.timeoutMs}ms.`), { code: 'MONITOR_EXPORT_TIMEOUT', retryable: true })));
-      request.once('error', (error) => finish(error));
+      // Socket inactivity is not a request deadline: queued sockets and a
+      // trickling response must also settle within the configured wait.
+      timer = setTimeout(() => {
+        const error = uncertainDelivery(Object.assign(new Error(`Monitor HTTP export exceeded ${this.timeoutMs}ms.`), { code: 'MONITOR_EXPORT_TIMEOUT' }));
+        request.destroy(error);
+        finish(error);
+      }, this.timeoutMs);
+      // Once the payload has been handed to the transport, a reset does not
+      // establish that the receiver failed to accept it.
+      request.once('error', (error) => finish(request.writableFinished ? uncertainDelivery(error) : error));
       if (signal) {
         abortHandler = () => {
           const error = signal.reason instanceof Error
@@ -222,6 +251,16 @@ export class HttpJsonExporter {
       stats: Object.freeze({ ...this.stats, responses: Object.freeze({ ...this.stats.responses }) }),
     });
   }
+}
+
+function uncertainDelivery(cause) {
+  return Object.assign(new Error(cause?.message || 'Monitor HTTP delivery could not be acknowledged.', { cause }), {
+    name: cause?.name || 'Error',
+    code: cause?.code,
+    statusCode: cause?.statusCode,
+    retryable: false,
+    details: { ...cause?.details, delivery: 'unknown' },
+  });
 }
 
 function partitionSignals(signals, maxSignals, maxBytes) {

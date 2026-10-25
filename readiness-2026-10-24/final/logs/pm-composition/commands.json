@@ -1,0 +1,106 @@
+[
+  {
+    "leg": "npm-version",
+    "command": [
+      "npm",
+      "--version"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed",
+    "started": "2026-10-24T09:01:31.481Z",
+    "milliseconds": 204,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "typescript-version",
+    "command": [
+      "tsc",
+      "--version"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed",
+    "started": "2026-10-24T09:01:31.687Z",
+    "milliseconds": 168,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "install-pm",
+    "command": [
+      "npm",
+      "install",
+      "--offline",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "--package-lock=false",
+      "--cache",
+      "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed/.composition-npm-cache",
+      "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed",
+    "started": "2026-10-24T09:01:31.856Z",
+    "milliseconds": 1166,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "resolution",
+    "command": [
+      "/usr/local/bin/node",
+      "--input-type=module",
+      "-e",
+      "import {fileURLToPath} from 'node:url'; import path from 'node:path'; const root=process.cwd(); for(const name of ['@rawnode/monitor','@rawnode/monitor/integrations','@rawnode/pm','@rawnode/pm/runtime']) { const url=import.meta.resolve(name); if(!fileURLToPath(url).startsWith(path.join(root,'node_modules')+path.sep)) throw Error('Unexpected resolution: '+url); console.log(name+' '+url); }"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed",
+    "started": "2026-10-24T09:01:33.227Z",
+    "milliseconds": 109,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "direct",
+    "command": [
+      "/usr/local/bin/node",
+      "pm-composition-direct.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed/composition",
+    "started": "2026-10-24T09:01:33.337Z",
+    "milliseconds": 539,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "reciprocal",
+    "command": [
+      "/usr/local/bin/node",
+      "--test",
+      "--test-timeout=15000",
+      "pm-composition.test.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed/composition",
+    "started": "2026-10-24T09:01:33.878Z",
+    "milliseconds": 1190,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "paired-types",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "pm-consumer.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-PtwdKY/installed/composition",
+    "started": "2026-10-24T09:01:35.069Z",
+    "milliseconds": 2164,
+    "exit": 0,
+    "timedOut": false
+  }
+]

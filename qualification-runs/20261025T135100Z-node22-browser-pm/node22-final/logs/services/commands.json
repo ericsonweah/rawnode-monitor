@@ -1,0 +1,47 @@
+[
+  {
+    "name": "run-pm-composition",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/scripts/run-pm-composition.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "harnessSha256": "95670d0db5310332f474af7213c981e08d427bd8e4f93ed4feae1d0deb136b19",
+    "node": "v22.0.0",
+    "archiveSha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "started": "2026-10-25T14:07:07.508Z",
+    "milliseconds": 7452,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "name": "studio-final-smoke",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/scripts/studio-final-smoke.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "harnessSha256": "8eb9de00791452f81ea6e4aa3640dcb1641dd383cf2a51b297d3f68976741b5b",
+    "node": "v22.0.0",
+    "archiveSha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "started": "2026-10-25T14:07:14.963Z",
+    "milliseconds": 1037,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "name": "ingest-auth-final-smoke",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/scripts/ingest-auth-final-smoke.mjs"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "harnessSha256": "331a33bf8beaee563d7ff8199ece19637f21fa64e70ce290d3d046085e319bbb",
+    "node": "v22.0.0",
+    "archiveSha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "started": "2026-10-25T14:07:16.001Z",
+    "milliseconds": 496,
+    "exit": 0,
+    "timedOut": false
+  }
+]

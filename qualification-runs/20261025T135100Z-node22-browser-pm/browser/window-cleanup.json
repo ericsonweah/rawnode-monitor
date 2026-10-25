@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "priorStatus": "BLOCKED",
+  "scope": "Closure of only the dedicated task-owned native browser windows",
+  "serverCleanup": "All five final native fixtures recorded close reason stdin, listening false, clients 0 and signal listeners 0; parent reports natural exit 0. Owned-port verification is separate.",
+  "lastAction": "Parent sent Command-W after final-token-05 native Unmount.",
+  "verificationFailure": "Three subsequent native controller attempts timed out, including after kernel reset. Surface inventory listed apps without a reliable task-window closure observation.",
+  "inferenceLimit": "This proves neither successful window cleanup nor an open window. Functional acceptance and server cleanup remain separate.",
+  "operatorRequest": "Close only named task test windows; preserve personal browser windows and processes.",
+  "operatorConfirmationReceived": true,
+  "operatorConfirmation": "Named task windows are closed",
+  "verificationMode": "Operator-attested closure of the named task windows; independent native-controller confirmation remains unavailable",
+  "independentNativeConfirmation": false,
+  "namedScope": ["diagnostic-01", "diagnostic-safari-02", "final-local-01", "final-local-02", "final-local-03", "final-local-04", "final-token-05"],
+  "noBroaderClaim": "No claim that all Safari/Chrome windows or application processes were closed; no personal browser state was targeted.",
+  "source": "Root native-controller execution report, retained in conversation; not a raw native snapshot export."
+}

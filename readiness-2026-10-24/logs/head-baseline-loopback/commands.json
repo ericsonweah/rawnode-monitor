@@ -1,0 +1,15 @@
+[
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/private/tmp/monitor-head-baseline-tOgYMm/package",
+    "started": "2026-10-24T08:55:08.917Z",
+    "milliseconds": 2389,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  }
+]

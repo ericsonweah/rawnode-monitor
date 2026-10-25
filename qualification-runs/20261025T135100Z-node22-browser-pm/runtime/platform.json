@@ -1,0 +1,18 @@
+{
+  "os": "macOS",
+  "version": "15.8.1",
+  "build": "24H32",
+  "unameMachine": "x86_64",
+  "nodePlatform": "darwin",
+  "nodeArch": "x64",
+  "qualificationEnvironment": "Existing macOS host; no additional VM/container or remote runner started by this lane",
+  "virtualization": "Not independently established; no all-platform claim",
+  "architectureProbe": {
+    "command": ["/usr/sbin/sysctl", "-n", "hw.machine", "hw.optional.arm64", "sysctl.proc_translated"],
+    "restrictedExit": 1,
+    "restrictedError": "Operation not permitted",
+    "approvedExit": 2,
+    "stdout": "x86_64\n",
+    "stderr": "sysctl: unknown oid 'hw.optional.arm64'\nsysctl: unknown oid 'sysctl.proc_translated'\n"
+  }
+}

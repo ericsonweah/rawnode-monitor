@@ -1,0 +1,40 @@
+{
+  "node": "v22.0.0",
+  "executable": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "native": {
+    "null": {
+      "ok": true
+    },
+    "undefined": {
+      "ok": true
+    }
+  },
+  "mocked": {
+    "null": {
+      "ok": false,
+      "name": "TypeError",
+      "message": "Cannot read properties of null (reading 'priorityQueuePosition')"
+    },
+    "undefined": {
+      "ok": false,
+      "name": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'priorityQueuePosition')"
+    }
+  },
+  "compatibleAdapter": {
+    "null": {
+      "ok": true
+    },
+    "undefined": {
+      "ok": true
+    }
+  },
+  "control": {
+    "activeTicks": 3,
+    "cancelledTicks": 0,
+    "cancellationRetained": true,
+    "schedulingRetained": true
+  }
+}
+(node:60600) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

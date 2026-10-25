@@ -1,0 +1,60 @@
+{
+  "ok": true,
+  "node": "v24.21.0",
+  "monitor": {
+    "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-25/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7",
+    "bytes": 209613,
+    "name": "@rawnode/monitor",
+    "version": "1.0.0"
+  },
+  "pm": {
+    "archive": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz",
+    "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+    "bytes": 94194,
+    "name": "@rawnode/pm",
+    "version": "0.1.0"
+  },
+  "consumer": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed",
+  "fixture": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/composition",
+  "monitorPackageUnchangedByPmInstall": true,
+  "monitorMatchesExactExtraction": true,
+  "shapes": [
+    "direct",
+    "runtime",
+    "adapter",
+    "RuntimeAgent"
+  ],
+  "reciprocal": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "realChildIpc": true
+  },
+  "returnedAndDiskDiagnosticRedaction": true,
+  "processListenerCountsUnchanged": true,
+  "pairedStrictTypes": true,
+  "fixtureSources": [
+    {
+      "path": "scripts/pm-composition-direct.mjs",
+      "sha256": "b40f6ba63c2963fb124bca0412e4c4d37c25b13d6471482742ec1df147930048"
+    },
+    {
+      "path": "scripts/pm-composition.test.mjs",
+      "sha256": "1d633f868dd4c91eb5a75bba88dab5b396b0a717f959f4e6917db0e238341acd"
+    },
+    {
+      "path": "scripts/pm-worker.mjs",
+      "sha256": "74b5bb0720983b27cf9ce3e3b75bf457f9f06500345259312aeb18852dac3ba7"
+    },
+    {
+      "path": "scripts/pm-consumer.mts",
+      "sha256": "6b330ed332145f6ed8d218b1c6dfbbb7ac68b71fa9f61e56832aa168a13e2953"
+    }
+  ],
+  "scope": "Fresh installed exact Monitor archive and accepted PM archive. Synthetic telemetry only; one task-owned PM child, no daemon, live backend, app or sibling edits.",
+  "historicalAttribution": "PM 47 native/47 packed tests remain historical PM-lane results and were not rerun or counted as Monitor tests.",
+  "commands": "logs/pm-composition/commands.json"
+}

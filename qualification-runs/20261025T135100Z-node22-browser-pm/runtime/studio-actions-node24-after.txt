@@ -1,0 +1,14 @@
+✔ modeled actions: cancelling each silence prompt or incident resolution sends no mutation (92.364789ms)
+✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (13.219584ms)
+✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (8.981291ms)
+✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1102.885151ms)
+✔ modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed (29.778877ms)
+✔ modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it (4.194336ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1397.376683

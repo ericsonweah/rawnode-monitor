@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+assert.equal(process.version, 'v22.0.0');
+const run = fileURLToPath(new URL('../', import.meta.url));
+const task = path.join(run, 'node22-final');
+const distribution = JSON.parse(await readFile(path.join(task, 'distribution.json')));
+const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+assert.equal(hash(await readFile(distribution.archive)), distribution.sha256);
+const source = path.resolve('package');
+const sourceChecks = JSON.parse(await readFile(path.join(run, 'node22-source-after/commands.json')));
+assert.equal(sourceChecks.cwd, source); assert.equal(sourceChecks.runtimeVersion, process.version); assert.equal(sourceChecks.ok, true);
+assert.equal(sourceChecks.packageManifestSha256, hash(await readFile(path.join(source, 'package.json'))));
+for (const entry of distribution.inventory) assert.equal(hash(await readFile(path.join(source, entry.path))), entry.sha256, `Source changed since final pack: ${entry.path}`);
+await mkdir(path.join(task, 'logs'), { recursive: true });
+const results = [{ name: 'source', commandReceipt: path.join(run, 'node22-source-after/commands.json'), allSourceFilesMatchFinalArtifact: true, result: sourceChecks }];
+for (const [name, consumer] of Object.entries({ extracted: distribution.extracted, installed: distribution.installed })) {
+  const args = [path.join(run, 'scripts/runtime-checks.mjs'), process.execPath, consumer.package, path.join(task, 'logs', name)];
+  const started = Date.now();
+  const child = spawn(process.execPath, args, { stdio: ['ignore', 'pipe', 'pipe'], detached: true });
+  let output = '', timedOut = false;
+  child.stdout.on('data', data => { output += data; }); child.stderr.on('data', data => { output += data; });
+  const timer = setTimeout(() => { timedOut = true; try { process.kill(-child.pid, 'SIGTERM'); } catch {} }, 180_000);
+  const { exit, signal } = await new Promise(resolve => { child.once('error', error => { output += String(error); resolve({ exit: null, signal: null }); }); child.once('exit', (exit, signal) => resolve({ exit, signal })); });
+  clearTimeout(timer);
+  const record = { name, command: [process.execPath, ...args], cwd: process.cwd(), startedAt: new Date(started).toISOString(), milliseconds: Date.now() - started, exit, signal, timedOut, commandReceipt: path.join(task, 'logs', name, 'commands.json') };
+  await writeFile(path.join(task, 'logs', name + '-runner.txt'), output);
+  results.push(record);
+  await writeFile(path.join(task, 'consumer-checks.json'), JSON.stringify({ node: process.version, execPath: process.execPath, sha256: distribution.sha256, results }, null, 2) + '\n');
+  console.log(JSON.stringify({ ...record, tail: output.slice(-1000) }));
+  assert.equal(exit, 0, name); assert.equal(timedOut, false, name);
+  const checks = JSON.parse(await readFile(record.commandReceipt));
+  assert.equal(checks.ok, true);
+  assert.equal(checks.runtimeVersion, process.version);
+  assert.deepEqual(checks.commands.find(row => row.leg === 'test').counts, { tests: 97, suites: 0, pass: 97, fail: 0, cancelled: 0, skipped: 0, todo: 0 });
+}
+assert.equal(hash(await readFile(distribution.archive)), distribution.sha256);

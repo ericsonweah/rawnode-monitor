@@ -1,0 +1,42 @@
+TAP version 13
+# Subtest: modeled actions: cancelling each silence prompt or incident resolution sends no mutation
+ok 1 - modeled actions: cancelling each silence prompt or incident resolution sends no mutation
+  ---
+  duration_ms: 235.322854
+  ...
+# Subtest: modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible
+ok 2 - modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible
+  ---
+  duration_ms: 16.123949
+  ...
+# Subtest: modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback
+ok 3 - modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback
+  ---
+  duration_ms: 12.715034
+  ...
+# (node:62154) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: modeled actions: navigation releases polling ownership even when an injected mutation never settles
+ok 4 - modeled actions: navigation releases polling ownership even when an injected mutation never settles
+  ---
+  duration_ms: 1103.13588
+  ...
+# Subtest: modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed
+ok 5 - modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed
+  ---
+  duration_ms: 106.549031
+  ...
+# Subtest: modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it
+ok 6 - modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it
+  ---
+  duration_ms: 7.763986
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1711.176338

@@ -49,3 +49,17 @@ test('actual HTTP: ingestion failures and custom authorizer exceptions cross the
   fixture.studio.authorizer.authorize = () => { throw controlledError({ password: 'fixture-secret-authorizer' }); };
   const auth = await safeFailure(await fetch(`${fixture.url}/api/overview`)); assert.equal(auth.details.password, '[REDACTED]');
 });
+
+test('actual HTTP: Prometheus and stream admission failures preserve safe status and redacted JSON', async t => {
+  const fixture = await createStudioFixture(); t.after(() => fixture.close());
+  const details = { token: 'fixture-secret-route', count: 8n }; details.self = details;
+  const fail = () => { throw controlledError(details, 503); };
+  fixture.monitor.prometheus = fail;
+  fixture.studio.stream = fail;
+  for (const route of ['prometheus', 'stream']) {
+    const error = await safeFailure(await fetch(`${fixture.url}/api/${route}`), { status: 503 });
+    assert.equal(error.details.token, '[REDACTED]');
+    assert.equal(error.details.count, '8');
+    assert.equal(error.details.self, '[Circular]');
+  }
+});

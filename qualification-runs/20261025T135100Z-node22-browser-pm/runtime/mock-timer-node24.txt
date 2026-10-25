@@ -1,0 +1,34 @@
+{
+  "node": "v24.21.0",
+  "executable": "/usr/local/bin/node",
+  "native": {
+    "null": {
+      "ok": true
+    },
+    "undefined": {
+      "ok": true
+    }
+  },
+  "mocked": {
+    "null": {
+      "ok": true
+    },
+    "undefined": {
+      "ok": true
+    }
+  },
+  "compatibleAdapter": {
+    "null": {
+      "ok": true
+    },
+    "undefined": {
+      "ok": true
+    }
+  },
+  "control": {
+    "activeTicks": 3,
+    "cancelledTicks": 0,
+    "cancellationRetained": true,
+    "schedulingRetained": true
+  }
+}

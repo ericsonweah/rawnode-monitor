@@ -1,0 +1,74 @@
+{
+  "sha256": "dabc48241a20067dd7c69a6139258e27524c5136db5400579fa876b08c0e4593",
+  "overhead": {
+    "exit": 0,
+    "command": [
+      "node",
+      "--expose-gc",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/scripts/overhead.mjs",
+      "/private/tmp/rawnode-monitor-readiness-VjwMGj/installed"
+    ]
+  },
+  "results": [
+    {
+      "name": "native",
+      "command": [
+        "/usr/local/bin/node",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/scripts/run-checks.mjs",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/logs/final-native",
+        "build",
+        "test",
+        "basic",
+        "types",
+        "types-all",
+        "guard"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "milliseconds": 21128,
+      "exit": 0,
+      "stdout": "{\"leg\":\"build\",\"command\":[\"npm\",\"run\",\"build\"],\"cwd\":\"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package\",\"started\":\"2026-10-24T08:55:25.061Z\",\"milliseconds\":10055,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\\n> @rawnode/monitor@1.0.0 build\\n> node scripts/check.mjs\\n\\n{\\\"ok\\\":true,\\\"checkedJavaScript\\\":112,\\\"exports\\\":29,\\\"node\\\":\\\"v24.21.0\\\"}\\n\"}\n{\"leg\":\"test\",\"command\":[\"npm\",\"test\"],\"cwd\":\"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package\",\"started\":\"2026-10-24T08:55:35.119Z\",\"milliseconds\":2819,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"led actions: cancelling each silence prompt or incident resolution sends no mutation (446.834274ms)\\n✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (14.800951ms)\\n✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (10.364359ms)\\n✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1102.200497ms)\\n✔ actual loopback HTTP serves packaged Studio and all read views safely (269.014951ms)\\n✔ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (64.869883ms)\\n✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1376.089493ms)\\n✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (5.552401ms)\\n✔ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (178.371235ms)\\n✔ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (84.118046ms)\\nℹ tests 88\\nℹ suites 0\\nℹ pass 88\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 0\\nℹ todo 0\\nℹ duration_ms 2371.400156\\n\"}\n{\"leg\":\"basic\",\"command\":[\"node\",\"examples/basic.mjs\"],\"cwd\":\"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package\",\"started\":\"2026-10-24T08:55:37.939Z\",\"milliseconds\":318,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"{\\\"ready\\\":true,\\\"state\\\":\\\"running\\\"}\\n\"}\n{\"leg\":\"types\",\"command\":[\"tsc\",\"--noEmit\",\"--strict\",\"--module\",\"nodenext\",\"--moduleResolution\",\"nodenext\",\"--target\",\"es2022\",\"test/types.mts\"],\"cwd\":\"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package\",\"started\":\"2026-10-24T08:55:38.258Z\",\"milliseconds\":3073,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\"}\n{\"leg\":\"types-all\",\"command\":[\"tsc\",\"--noEmit\",\"--strict\",\"--module\",\"nodenext\",\"--moduleResolution\",\"nodenext\",\"--target\",\"es2022\",\"--resolveJsonModule\",\"test/exports-types.mts\"],\"cwd\":\"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package\",\"started\":\"2026-10-24T08:55:41.332Z\",\"milliseconds\":3476,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\"}\n{\"leg\":\"guard\",\"command\":[\"npm\",\"run\",\"prepublishOnly\"],\"cwd\":\"/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package\",\"started\":\"2026-10-24T08:55:44.810Z\",\"milliseconds\":1239,\"exit\":1,\"timedOut\":false,\"expectedExit\":1,\"tail\":\"\\n> @rawnode/monitor@1.0.0 prepublishOnly\\n> node scripts/reject-publication.mjs\\n\\nPublication blocked: candidate requires explicit owner release, version and license decisions.\\n\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "extracted",
+      "command": [
+        "/usr/local/bin/node",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/scripts/run-checks.mjs",
+        "/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/logs/final-extracted",
+        "build",
+        "test",
+        "basic",
+        "types",
+        "types-all",
+        "guard"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "milliseconds": 16612,
+      "exit": 0,
+      "stdout": "{\"leg\":\"build\",\"command\":[\"npm\",\"run\",\"build\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:55:46.515Z\",\"milliseconds\":10052,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\\n> @rawnode/monitor@1.0.0 build\\n> node scripts/check.mjs\\n\\n{\\\"ok\\\":true,\\\"checkedJavaScript\\\":112,\\\"exports\\\":29,\\\"node\\\":\\\"v24.21.0\\\"}\\n\"}\n{\"leg\":\"test\",\"command\":[\"npm\",\"test\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:55:56.570Z\",\"milliseconds\":2520,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"odeled actions: cancelling each silence prompt or incident resolution sends no mutation (162.562983ms)\\n✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (14.75036ms)\\n✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (9.514782ms)\\n✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1102.024616ms)\\n✔ actual loopback HTTP serves packaged Studio and all read views safely (201.165591ms)\\n✔ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (47.547418ms)\\n✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1327.89143ms)\\n✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (6.881612ms)\\n✔ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (136.767417ms)\\n✔ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (38.226034ms)\\nℹ tests 88\\nℹ suites 0\\nℹ pass 88\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 0\\nℹ todo 0\\nℹ duration_ms 2139.576044\\n\"}\n{\"leg\":\"basic\",\"command\":[\"node\",\"examples/basic.mjs\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:55:59.091Z\",\"milliseconds\":261,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"{\\\"ready\\\":true,\\\"state\\\":\\\"running\\\"}\\n\"}\n{\"leg\":\"types\",\"command\":[\"tsc\",\"--noEmit\",\"--strict\",\"--module\",\"nodenext\",\"--moduleResolution\",\"nodenext\",\"--target\",\"es2022\",\"test/types.mts\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:55:59.352Z\",\"milliseconds\":1288,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\"}\n{\"leg\":\"types-all\",\"command\":[\"tsc\",\"--noEmit\",\"--strict\",\"--module\",\"nodenext\",\"--moduleResolution\",\"nodenext\",\"--target\",\"es2022\",\"--resolveJsonModule\",\"test/exports-types.mts\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:00.640Z\",\"milliseconds\":1663,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\"}\n{\"leg\":\"guard\",\"command\":[\"npm\",\"run\",\"prepublishOnly\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/extracted/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:02.304Z\",\"milliseconds\":420,\"exit\":1,\"timedOut\":false,\"expectedExit\":1,\"tail\":\"\\n> @rawnode/monitor@1.0.0 prepublishOnly\\n> node scripts/reject-publication.mjs\\n\\nPublication blocked: candidate requires explicit owner release, version and license decisions.\\n\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed",
+      "command": [
+        "/usr/local/bin/node",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/scripts/run-checks.mjs",
+        "/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/logs/final-installed",
+        "build",
+        "test",
+        "basic",
+        "types",
+        "types-all",
+        "guard"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "milliseconds": 17470,
+      "exit": 0,
+      "stdout": "{\"leg\":\"build\",\"command\":[\"npm\",\"run\",\"build\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:02.835Z\",\"milliseconds\":11648,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\\n> @rawnode/monitor@1.0.0 build\\n> node scripts/check.mjs\\n\\n{\\\"ok\\\":true,\\\"checkedJavaScript\\\":112,\\\"exports\\\":29,\\\"node\\\":\\\"v24.21.0\\\"}\\n\"}\n{\"leg\":\"test\",\"command\":[\"npm\",\"test\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:14.487Z\",\"milliseconds\":2492,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"deled actions: cancelling each silence prompt or incident resolution sends no mutation (230.923432ms)\\n✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (14.626731ms)\\n✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (9.444262ms)\\n✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1102.573435ms)\\n✔ actual loopback HTTP serves packaged Studio and all read views safely (201.068554ms)\\n✔ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (53.649225ms)\\n✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1311.39944ms)\\n✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (5.566777ms)\\n✔ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (139.609919ms)\\n✔ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (46.574029ms)\\nℹ tests 88\\nℹ suites 0\\nℹ pass 88\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 0\\nℹ todo 0\\nℹ duration_ms 1948.121022\\n\"}\n{\"leg\":\"basic\",\"command\":[\"node\",\"examples/basic.mjs\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:16.980Z\",\"milliseconds\":275,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"{\\\"ready\\\":true,\\\"state\\\":\\\"running\\\"}\\n\"}\n{\"leg\":\"types\",\"command\":[\"tsc\",\"--noEmit\",\"--strict\",\"--module\",\"nodenext\",\"--moduleResolution\",\"nodenext\",\"--target\",\"es2022\",\"test/types.mts\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:17.256Z\",\"milliseconds\":1283,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\"}\n{\"leg\":\"types-all\",\"command\":[\"tsc\",\"--noEmit\",\"--strict\",\"--module\",\"nodenext\",\"--moduleResolution\",\"nodenext\",\"--target\",\"es2022\",\"--resolveJsonModule\",\"test/exports-types.mts\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:18.540Z\",\"milliseconds\":1281,\"exit\":0,\"timedOut\":false,\"expectedExit\":0,\"tail\":\"\"}\n{\"leg\":\"guard\",\"command\":[\"npm\",\"run\",\"prepublishOnly\"],\"cwd\":\"/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/node_modules/@rawnode/monitor\",\"started\":\"2026-10-24T08:56:19.821Z\",\"milliseconds\":375,\"exit\":1,\"timedOut\":false,\"expectedExit\":1,\"tail\":\"\\n> @rawnode/monitor@1.0.0 prepublishOnly\\n> node scripts/reject-publication.mjs\\n\\nPublication blocked: candidate requires explicit owner release, version and license decisions.\\n\"}\n",
+      "stderr": ""
+    }
+  ]
+}

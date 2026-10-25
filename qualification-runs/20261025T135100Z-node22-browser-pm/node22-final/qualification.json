@@ -1,0 +1,322 @@
+{
+  "status": "PASS",
+  "observedAt": "2026-10-25T14:07:34.018Z",
+  "runtime": "v22.0.0",
+  "execPath": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "compiler": {
+    "path": "/usr/local/lib/node_modules/typescript/bin/tsc",
+    "version": "5.9.3",
+    "executionRuntime": "v22.0.0"
+  },
+  "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+  "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+  "bytes": 214938,
+  "files": 177,
+  "originalOctober25ArchiveUnchanged": "69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7",
+  "checks": {
+    "source": {
+      "status": "PASS",
+      "receipt": "node22-source-after/commands.json",
+      "runtime": "v22.0.0",
+      "npm": "10.5.1",
+      "compiler": "Version 5.9.3",
+      "compilerRuntime": "v22.0.0",
+      "selectedFiles": 15,
+      "testCounts": {
+        "tests": 97,
+        "suites": 0,
+        "pass": 97,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "gates": [
+        {
+          "name": "build",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "test",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "basic",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "types",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "types-all",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "guard",
+          "exit": 1,
+          "expectedExit": 1,
+          "timedOut": false
+        }
+      ]
+    },
+    "extracted": {
+      "status": "PASS",
+      "receipt": "node22-final/logs/extracted/commands.json",
+      "runtime": "v22.0.0",
+      "npm": "10.5.1",
+      "compiler": "Version 5.9.3",
+      "compilerRuntime": "v22.0.0",
+      "selectedFiles": 15,
+      "testCounts": {
+        "tests": 97,
+        "suites": 0,
+        "pass": 97,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "gates": [
+        {
+          "name": "build",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "test",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "basic",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "types",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "types-all",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "guard",
+          "exit": 1,
+          "expectedExit": 1,
+          "timedOut": false
+        }
+      ]
+    },
+    "installed": {
+      "status": "PASS",
+      "receipt": "node22-final/logs/installed/commands.json",
+      "runtime": "v22.0.0",
+      "npm": "10.5.1",
+      "compiler": "Version 5.9.3",
+      "compilerRuntime": "v22.0.0",
+      "selectedFiles": 15,
+      "testCounts": {
+        "tests": 97,
+        "suites": 0,
+        "pass": 97,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "gates": [
+        {
+          "name": "build",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "test",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "basic",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "types",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "types-all",
+          "exit": 0,
+          "expectedExit": 0,
+          "timedOut": false
+        },
+        {
+          "name": "guard",
+          "exit": 1,
+          "expectedExit": 1,
+          "timedOut": false
+        }
+      ]
+    }
+  },
+  "verifiedPackages": [
+    {
+      "name": "source",
+      "packageRoot": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+      "files": 177,
+      "archiveHashesMatch": true
+    },
+    {
+      "name": "extracted",
+      "packageRoot": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted/node_modules/@rawnode/monitor",
+      "files": 177,
+      "archiveHashesMatch": true
+    },
+    {
+      "name": "installed",
+      "packageRoot": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor",
+      "files": 177,
+      "archiveHashesMatch": true
+    }
+  ],
+  "publicEntries": {
+    "entries": 29,
+    "executable": 28,
+    "rootNames": 189,
+    "extracted": true,
+    "installed": true,
+    "domFreeStudioImport": true,
+    "privateDeepImportRejected": true
+  },
+  "strictOutsidePackageTypeConsumers": {
+    "extracted": true,
+    "installed": true,
+    "skipLibCheck": false
+  },
+  "pm": {
+    "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+    "bytes": 94194,
+    "engines": {
+      "node": ">=20.19.0"
+    },
+    "reciprocal": {
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "realChildIpc": true,
+      "naturalChildExit": true,
+      "childBinaryIdentityChecked": true,
+      "borrowedPmResourcePreserved": true
+    },
+    "directShapes": [
+      "direct",
+      "runtime",
+      "adapter",
+      "RuntimeAgent"
+    ],
+    "diagnosticRedaction": true,
+    "monitorUnchanged": true
+  },
+  "http": {
+    "status": "passed",
+    "checks": 33
+  },
+  "authenticationAndIngestion": {
+    "status": "passed",
+    "checks": 19
+  },
+  "cleanup": {
+    "serviceWatchdogsFired": false,
+    "allNativeSuitesExitedNaturally": true,
+    "realPmChildExitedNaturally": true,
+    "finalPackagesUnmodified": true,
+    "temporaryConsumersRetainedForReview": true,
+    "runtimeRetainedInTaskTemporaryDirectory": true
+  },
+  "harness": [
+    {
+      "path": "scripts/runtime-checks.mjs",
+      "sha256": "ac2fadf4c5a05f96fb41b410ca4e7192fb195777c92a6553f76244e532bdffac"
+    },
+    {
+      "path": "scripts/mock-timer-probe.mjs",
+      "sha256": "4b75d608ac186d79fb82b1e59be3a4e6d254a3c11f6430bb80d0bc969aabba59"
+    },
+    {
+      "path": "scripts/node22-consumers.mjs",
+      "sha256": "3d039530987018e98b2c757964ef278d2c32d764864d0b7c3261dd7450b51e57"
+    },
+    {
+      "path": "scripts/node22-final-checks.mjs",
+      "sha256": "da4e8b948923dd037fd5aafbbd99eded73045de3b3b6b6ccdef59d9613677bfe"
+    },
+    {
+      "path": "scripts/audit-node22.mjs",
+      "sha256": "f86f945067e99aebe1cf9ca0fbe522618e89903b9ad10cbd9435dc59f2edabf4"
+    },
+    {
+      "path": "node22-final/scripts/ingest-auth-final-smoke.mjs",
+      "sha256": "331a33bf8beaee563d7ff8199ece19637f21fa64e70ce290d3d046085e319bbb"
+    },
+    {
+      "path": "node22-final/scripts/pm-composition-direct.mjs",
+      "sha256": "a5e762d0eeb9c0b99c2854e218ac4e9cbb6a8471a9f464cdd02392e7c3e3ca25"
+    },
+    {
+      "path": "node22-final/scripts/pm-composition.test.mjs",
+      "sha256": "e8b525b151ee0fabb97526051f969e5caee8b098364af4fbc5fdc565e5b228b2"
+    },
+    {
+      "path": "node22-final/scripts/pm-consumer.mts",
+      "sha256": "6b330ed332145f6ed8d218b1c6dfbbb7ac68b71fa9f61e56832aa168a13e2953"
+    },
+    {
+      "path": "node22-final/scripts/pm-worker.mjs",
+      "sha256": "568ce8f0902f6e11b4194561502bbb00bfa3feb2d825d3bd0c1537220cd5592d"
+    },
+    {
+      "path": "node22-final/scripts/run-pm-composition.mjs",
+      "sha256": "95670d0db5310332f474af7213c981e08d427bd8e4f93ed4feae1d0deb136b19"
+    },
+    {
+      "path": "node22-final/scripts/run-services.mjs",
+      "sha256": "c37a189e138c0c1523a4a0921d427054ad86e270d841214ae7b74d5e861deed7"
+    },
+    {
+      "path": "node22-final/scripts/studio-final-smoke.mjs",
+      "sha256": "8eb9de00791452f81ea6e4aa3640dcb1641dd383cf2a51b297d3f68976741b5b"
+    }
+  ],
+  "limitations": [
+    "Native browser interaction is a separate incomplete gate; these HTTP/SSE and DOM-free imports do not replace it.",
+    "Local macOS x64 results do not qualify other operating systems or external services.",
+    "Node 22.0.0 floor compatibility is not a security-maintenance recommendation.",
+    "97 tests are the same distinct cases executed in source, extraction, and installation, not 291 distinct regressions."
+  ]
+}

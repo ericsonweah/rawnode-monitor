@@ -1,0 +1,209 @@
+{
+  "ok": true,
+  "runtime": "v22.0.0",
+  "execPath": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+  "files": 177,
+  "extracted": {
+    "consumer": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted",
+    "package": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted/node_modules/@rawnode/monitor"
+  },
+  "installed": {
+    "consumer": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+    "package": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor"
+  },
+  "commands": [
+    {
+      "name": "extract",
+      "command": [
+        "/usr/bin/tar",
+        "-xzf",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+        "--strip-components=1",
+        "-C",
+        "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted/node_modules/@rawnode/monitor"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C",
+      "startedAt": "2026-10-25T14:00:11.369Z",
+      "milliseconds": 74,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "npm-version",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "--version"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C",
+      "startedAt": "2026-10-25T14:00:11.448Z",
+      "milliseconds": 443,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "typescript-version",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--version"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C",
+      "startedAt": "2026-10-25T14:00:11.893Z",
+      "milliseconds": 855,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "install",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "install",
+        "--offline",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "--package-lock=false",
+        "--save-exact",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+      "startedAt": "2026-10-25T14:00:12.750Z",
+      "milliseconds": 2319,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "extracted-imports",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "imports.mjs"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted",
+      "startedAt": "2026-10-25T14:00:15.307Z",
+      "milliseconds": 435,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "extracted-types.mts",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--skipLibCheck",
+        "false",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "--resolveJsonModule",
+        "types.mts"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted",
+      "startedAt": "2026-10-25T14:00:15.745Z",
+      "milliseconds": 2859,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "extracted-exports-types.mts",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--skipLibCheck",
+        "false",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "--resolveJsonModule",
+        "exports-types.mts"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted",
+      "startedAt": "2026-10-25T14:00:18.606Z",
+      "milliseconds": 3432,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "installed-imports",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "imports.mjs"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+      "startedAt": "2026-10-25T14:00:22.039Z",
+      "milliseconds": 304,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "installed-types.mts",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--skipLibCheck",
+        "false",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "--resolveJsonModule",
+        "types.mts"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+      "startedAt": "2026-10-25T14:00:22.345Z",
+      "milliseconds": 2615,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    },
+    {
+      "name": "installed-exports-types.mts",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--skipLibCheck",
+        "false",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "--resolveJsonModule",
+        "exports-types.mts"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+      "startedAt": "2026-10-25T14:00:24.962Z",
+      "milliseconds": 1957,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@11.19.0
+2 info using node@v24.21.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/private/tmp/rawnode-monitor-readiness-VjwMGj/installed/.npmrc
+5 silly config load:file:/Users/ericsonweah/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install /Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/artifacts/rawnode-monitor-1.0.0.tgz
+8 verbose argv "install" "--offline" "--ignore-scripts" "--no-audit" "--no-fund" "--package-lock" "false" "--save-exact" "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/artifacts/rawnode-monitor-1.0.0.tgz"
+9 verbose logfile logs-max:10 dir:/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/npm-cache/_logs/2026-10-24T08_54_57_368Z-
+10 verbose logfile /Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/npm-cache/_logs/2026-10-24T08_54_57_368Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest @rawnode/monitor@file:../../../../Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/artifacts/rawnode-monitor-1.0.0.tgz
+15 silly placeDep ROOT @rawnode/monitor@1.0.0 OK for:  want: file:../../../../Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/artifacts/rawnode-monitor-1.0.0.tgz
+16 silly reify moves {}
+17 http cache @rawnode/monitor@file:/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/artifacts/rawnode-monitor-1.0.0.tgz 1ms (cache hit)
+18 silly ADD node_modules/@rawnode/monitor
+19 verbose cwd /private/tmp/rawnode-monitor-readiness-VjwMGj/installed
+20 verbose os Darwin 24.6.0
+21 verbose node v24.21.0
+22 verbose npm  v11.19.0
+23 verbose exit 0
+24 info ok

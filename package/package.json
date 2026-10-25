@@ -4,8 +4,12 @@
   "description": "Dependency-free embeddable RawNode observability and optional Monitor Studio",
   "type": "module",
   "private": true,
-  "license": "UNLICENSED",
-  "author": "First Principle Lab LLC",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "FIRST PRINCIPLE LAB, LLC",
+    "email": "rawnode@firstprinciplelab.com",
+    "url": "https://firstprinciplelab.com"
+  },
   "engines": {
     "node": ">=22"
   },

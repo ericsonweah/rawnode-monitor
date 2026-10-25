@@ -1,0 +1,89 @@
+{
+  "base": "884a4974ba14d15a21ed4014bbe004ebf95384a7",
+  "files": [
+    {
+      "path": "package/CHANGELOG.md",
+      "status": "modified",
+      "bytes": 2048,
+      "sha256": "47a1fbf01053785321d93e7b645c4de5cd9cbf849dbd161e43b6bd19d30dca64"
+    },
+    {
+      "path": "package/docs/API.md",
+      "status": "modified",
+      "bytes": 34738,
+      "sha256": "c1622c1ff29bb9bb61f94e5b96c831b635083f8037c1bfa41dc2e62002206a86"
+    },
+    {
+      "path": "package/docs/LIFECYCLE.md",
+      "status": "modified",
+      "bytes": 5759,
+      "sha256": "8e6133e77227f9e8a595d224164153025f028c4c0a7f17eb5c650a6266f30b19"
+    },
+    {
+      "path": "package/docs/MIGRATION.md",
+      "status": "modified",
+      "bytes": 4781,
+      "sha256": "6126d33c87865b2f849cea1ca7ce9358c1dc4735699d7724740586ea07daab7c"
+    },
+    {
+      "path": "package/docs/PUBLICATION.md",
+      "status": "modified",
+      "bytes": 3102,
+      "sha256": "632a8ad1d97d4f1a692be0431e1fbf0021ea26815e09fb95a3790abb74df4e0b"
+    },
+    {
+      "path": "package/docs/STUDIO.md",
+      "status": "modified",
+      "bytes": 5900,
+      "sha256": "61ca885b9d23a4c923fa21d1604a094f3858ec7621113975d0fbc4ea2b20c6fa"
+    },
+    {
+      "path": "package/docs/VALIDATION.md",
+      "status": "modified",
+      "bytes": 5904,
+      "sha256": "dcc9001dd903b3692d0b0891f7d0096900fa1b2246d1e38673a84d9200d47fe6"
+    },
+    {
+      "path": "package/resources/assets/js/monitor/studio.js",
+      "status": "modified",
+      "bytes": 30831,
+      "sha256": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef"
+    },
+    {
+      "path": "package/src/exporters/HttpJsonExporter.js",
+      "status": "modified",
+      "bytes": 11681,
+      "sha256": "243f19ba5ec6512887d8534fe62c2d22ecb603018677de249c1fea9e17b82599"
+    },
+    {
+      "path": "package/src/studio/MonitorStudioPage.js",
+      "status": "modified",
+      "bytes": 3146,
+      "sha256": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    {
+      "path": "package/test/exports-types.mts",
+      "status": "modified",
+      "bytes": 5524,
+      "sha256": "6ce3809fdf734d806e9e8d43970312521c626169ac3f194cb8d00727b68d53b6"
+    },
+    {
+      "path": "package/test/readiness-http-delivery.test.mjs",
+      "status": "added",
+      "bytes": 2831,
+      "sha256": "702d71a293ff2da55e898d3b0a1b8d62939329396698a0307c18129d2bc2ee25"
+    },
+    {
+      "path": "package/test/studio-actions.test.mjs",
+      "status": "modified",
+      "bytes": 13123,
+      "sha256": "718d0bc0b3d9dc408a4edebafccbf52f84a700824d49dbb40feacf880a44993b"
+    },
+    {
+      "path": "package/types/index.d.ts",
+      "status": "modified",
+      "bytes": 29088,
+      "sha256": "d100b467b0a345331204b912da6ba1365ce05ab95eade5ef3d336b17d1521038"
+    }
+  ]
+}

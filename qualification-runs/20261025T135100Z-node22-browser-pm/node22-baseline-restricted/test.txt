@@ -1,0 +1,695 @@
+
+> @rawnode/monitor@1.0.0 test
+> node --test --test-timeout=20000 test/*.test.mjs
+
+TAP version 13
+# Subtest: metric reset/remove releases ownership without corrupting replacements
+ok 1 - metric reset/remove releases ownership without corrupting replacements
+  ---
+  duration_ms: 11.244878
+  ...
+# Subtest: aggregate policy reserves an overflow slot and respects both series bounds
+ok 2 - aggregate policy reserves an overflow slot and respects both series bounds
+  ---
+  duration_ms: 5.41357
+  ...
+# Subtest: observable callback deadline does not launch overlapping stuck collectors or accept late observations
+ok 3 - observable callback deadline does not launch overlapping stuck collectors or accept late observations
+  ---
+  duration_ms: 20.308141
+  ...
+# Subtest: stalled sink writes are bounded and a following sink remains usable
+ok 4 - stalled sink writes are bounded and a following sink remains usable
+  ---
+  duration_ms: 60.740135
+  ...
+# Subtest: pipeline close is idempotent and finalizes despite required stalled lifecycle callback
+ok 5 - pipeline close is idempotent and finalizes despite required stalled lifecycle callback
+  ---
+  duration_ms: 13.235117
+  ...
+# Subtest: flush cancellation reaches cooperative sinks and shutdown clears queued references
+ok 6 - flush cancellation reaches cooperative sinks and shutdown clears queued references
+  ---
+  duration_ms: 18.027049
+  ...
+# Subtest: required sinks cannot acknowledge incomplete delivery as a success
+ok 7 - required sinks cannot acknowledge incomplete delivery as a success
+  ---
+  duration_ms: 2.599032
+  ...
+# Subtest: pre-cancelled admission never retains a queue value
+ok 8 - pre-cancelled admission never retains a queue value
+  ---
+  duration_ms: 0.624312
+  ...
+# Subtest: repeated flushes cannot accumulate unresolved sink lifecycle calls
+ok 9 - repeated flushes cannot accumulate unresolved sink lifecycle calls
+  ---
+  duration_ms: 13.523933
+  ...
+# Subtest: close invalidates a pending setup and cannot resurrect plugin start
+ok 10 - close invalidates a pending setup and cannot resurrect plugin start
+  ---
+  duration_ms: 29.452187
+  ...
+# Subtest: close invalidates a pending start and startup calls are idempotent
+ok 11 - close invalidates a pending start and startup calls are idempotent
+  ---
+  duration_ms: 1.81714
+  ...
+# Subtest: plugin callback deadlines isolate failures and repeated hooks cannot accumulate stuck work
+ok 12 - plugin callback deadlines isolate failures and repeated hooks cannot accumulate stuck work
+  ---
+  duration_ms: 60.785825
+  ...
+# Subtest: once hooks run once across concurrent invoke calls and hook admission is bounded
+ok 13 - once hooks run once across concurrent invoke calls and hook admission is bounded
+  ---
+  duration_ms: 3.368384
+  ...
+# Subtest: failed required close still finalizes manager and drops pending notifications
+ok 14 - failed required close still finalizes manager and drops pending notifications
+  ---
+  duration_ms: 12.557453
+  ...
+# Subtest: configured span cap controls actual retained spans
+ok 15 - configured span cap controls actual retained spans
+  ---
+  duration_ms: 7.839277
+  ...
+# Subtest: pruning removes expired records from every index and reuses ring capacity
+ok 16 - pruning removes expired records from every index and reuses ring capacity
+  ---
+  duration_ms: 0.983292
+  ...
+# Subtest: read paths enforce elapsed span retention without a timer
+ok 17 - read paths enforce elapsed span retention without a timer
+  ---
+  duration_ms: 0.673038
+  ...
+# Subtest: durability requires a full acknowledged write and optional partial stores report failure
+ok 18 - durability requires a full acknowledged write and optional partial stores report failure
+  ---
+  duration_ms: 3.274249
+  ...
+# Subtest: unregister aborts the current check and late completion cannot restore state or scheduling
+ok 19 - unregister aborts the current check and late completion cannot restore state or scheduling
+  ---
+  duration_ms: 15.967571
+  ...
+# Subtest: replacement preserves its new timer when an older scheduled run settles
+ok 20 - replacement preserves its new timer when an older scheduled run settles
+  ---
+  duration_ms: 2.553155
+  ...
+# Subtest: non-cooperative checks retain their concurrency slot and waiting runs are bounded
+ok 21 - non-cooperative checks retain their concurrency slot and waiting runs are bounded
+  ---
+  duration_ms: 19.753703
+  ...
+# Subtest: real loopback cross-origin redirects strip sensitive headers and 303 removes body headers
+not ok 22 - real loopback cross-origin redirects strip sensitive headers and 303 removes body headers
+  ---
+  duration_ms: 16.707163
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/adversarial-synthetic-http.test.mjs:14:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding
+not ok 23 - real loopback synthetic redirects reject unsafe URLs and cross-origin body forwarding
+  ---
+  duration_ms: 2.978938
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/adversarial-synthetic-http.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: modeled HTTPS response rejects downgrade before a second request
+ok 24 - modeled HTTPS response rejects downgrade before a second request
+  ---
+  duration_ms: 7.488694
+  ...
+# Subtest: optional notification failures remain isolated without an error listener and required failures reject
+ok 25 - optional notification failures remain isolated without an error listener and required failures reject
+  ---
+  duration_ms: 10.121688
+  ...
+# Subtest: notification deadlines retain stuck callback ownership and close bounds channel cleanup
+ok 26 - notification deadlines retain stuck callback ownership and close bounds channel cleanup
+  ---
+  duration_ms: 24.739224
+  ...
+# Subtest: closing an active notification aborts its signal and settles the caller before a late result
+ok 27 - closing an active notification aborts its signal and settles the caller before a late result
+  ---
+  duration_ms: 2.902786
+  ...
+# Subtest: caller cancellation cannot skip owned notification or alert cleanup
+ok 28 - caller cancellation cannot skip owned notification or alert cleanup
+  ---
+  duration_ms: 1.41366
+  ...
+# Subtest: a failed alert context does not strand evaluation ownership
+ok 29 - a failed alert context does not strand evaluation ownership
+  ---
+  duration_ms: 3.815008
+  ...
+# Subtest: alert deadlines avoid overlapping a stalled rule while healthy rules remain usable
+ok 30 - alert deadlines avoid overlapping a stalled rule while healthy rules remain usable
+  ---
+  duration_ms: 16.583733
+  ...
+# Subtest: retired or closed alert evaluations cannot notify or open incidents
+ok 31 - retired or closed alert evaluations cannot notify or open incidents
+  ---
+  duration_ms: 2.338274
+  ...
+# Subtest: close during a pending notification does not start a later incident or accept notification accounting
+ok 32 - close during a pending notification does not start a later incident or accept notification accounting
+  ---
+  duration_ms: 2.408064
+  ...
+# Subtest: injected event/protocol bridges detach explicit subscriptions
+ok 33 - injected event/protocol bridges detach explicit subscriptions
+  ---
+  duration_ms: 54.403732
+  ...
+# Subtest: readiness lifecycle and manager replacement ownership
+ok 34 - readiness lifecycle and manager replacement ownership
+  ---
+  duration_ms: 54.176101
+  ...
+# Subtest: alerts and SLO definition calculations preserve capability
+ok 35 - alerts and SLO definition calculations preserve capability
+  ---
+  duration_ms: 0.921361
+  ...
+# Subtest: HMAC accepts exact bytes and rejects changed/expired signatures
+ok 36 - HMAC accepts exact bytes and rejects changed/expired signatures
+  ---
+  duration_ms: 0.823549
+  ...
+# Subtest: late injected Redis lease acquisition cannot restart timers after close
+ok 37 - late injected Redis lease acquisition cannot restart timers after close
+  ---
+  duration_ms: 1.067798
+  ...
+# Subtest: stuck health and resource callbacks are not relaunched
+ok 38 - stuck health and resource callbacks are not relaunched
+  ---
+  duration_ms: 18.565225
+  ...
+# Subtest: queue overflow, cancellation and close release memory
+ok 39 - queue overflow, cancellation and close release memory
+  ---
+  duration_ms: 1.940081
+  ...
+# Subtest: task-local file storage persists/query and diagnostics reject traversal
+ok 40 - task-local file storage persists/query and diagnostics reject traversal
+  ---
+  duration_ms: 71.745088
+  ...
+# Subtest: ratio sampling uses the full 52-bit suffix range at deterministic boundaries
+ok 41 - ratio sampling uses the full 52-bit suffix range at deterministic boundaries
+  ---
+  duration_ms: 3.663156
+  ...
+# Subtest: bound context overrides its creation scope and preserves receiver, arguments and async propagation
+ok 42 - bound context overrides its creation scope and preserves receiver, arguments and async propagation
+  ---
+  duration_ms: 3.045206
+  ...
+# Subtest: remote context parsing ignores malformed baggage keys and preserves valid propagation and parent sampling
+ok 43 - remote context parsing ignores malformed baggage keys and preserves valid propagation and parent sampling
+  ---
+  duration_ms: 4.141453
+  ...
+# Subtest: HTTP middleware uses route templates and a single unmatched label for request-specific paths
+ok 44 - HTTP middleware uses route templates and a single unmatched label for request-specific paths
+  ---
+  duration_ms: 59.309416
+  ...
+# Subtest: timer and span elapsed duration stay monotonic when the wall clock moves backwards
+ok 45 - timer and span elapsed duration stay monotonic when the wall clock moves backwards
+  ---
+  duration_ms: 1.772241
+  ...
+# Subtest: resource replacement invalidates cached state and suppresses retired collection events
+ok 46 - resource replacement invalidates cached state and suppresses retired collection events
+  ---
+  duration_ms: 4.024834
+  ...
+# Subtest: late Redis subscribe and ready completion cannot resurrect a closed bridge
+ok 47 - late Redis subscribe and ready completion cannot resurrect a closed bridge
+  ---
+  duration_ms: 2.080309
+  ...
+# Subtest: cluster envelopes reject invalid, expired, wrong-namespace and tampered authentication fields
+ok 48 - cluster envelopes reject invalid, expired, wrong-namespace and tampered authentication fields
+  ---
+  duration_ms: 2.266522
+  ...
+# Subtest: HTTP acknowledgement timeout reports uncertain delivery without repeating the request
+not ok 49 - HTTP acknowledgement timeout reports uncertain delivery without repeating the request
+  ---
+  duration_ms: 13.515314
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-http-delivery.test.mjs:20:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: a failed split export does not make the pipeline replay its acknowledged prefix
+not ok 50 - a failed split export does not make the pipeline replay its acknowledged prefix
+  ---
+  duration_ms: 2.467847
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-http-delivery.test.mjs:37:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: a truncated HTTP acknowledgement reports uncertainty without replaying accepted telemetry
+not ok 51 - a truncated HTTP acknowledgement reports uncertainty without replaying accepted telemetry
+  ---
+  duration_ms: 0.982899
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-http-delivery.test.mjs:63:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: a reset after sending the HTTP payload is not evidence that delivery failed
+not ok 52 - a reset after sending the HTTP payload is not evidence that delivery failed
+  ---
+  duration_ms: 0.93439
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-http-delivery.test.mjs:84:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: HTTP timeout bounds the whole request even while acknowledgement bytes keep arriving
+not ok 53 - HTTP timeout bounds the whole request even while acknowledgement bytes keep arriving
+  ---
+  duration_ms: 1.838334
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-http-delivery.test.mjs:104:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: replaced health checks discard old cached results and retain registration identity
+ok 54 - replaced health checks discard old cached results and retain registration identity
+  ---
+  duration_ms: 11.587902
+  ...
+# Subtest: a critical unhealthy replacement controls ordinary readiness immediately
+ok 55 - a critical unhealthy replacement controls ordinary readiness immediately
+  ---
+  duration_ms: 1.315608
+  ...
+# Subtest: late old health callback cannot populate a replacement cache
+ok 56 - late old health callback cannot populate a replacement cache
+  ---
+  duration_ms: 2.186016
+  ...
+# Subtest: HTTP exporter close cancels retry backoff without admitting another request
+not ok 57 - HTTP exporter close cancels retry backoff without admitting another request
+  ---
+  duration_ms: 8.827112
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-lifecycle.test.mjs:80:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks
+not ok 58 - HTTP exporter close between split chunks preserves acknowledged accounting and stops later chunks
+  ---
+  duration_ms: 2.771717
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-lifecycle.test.mjs:104:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: HTTP exporter close during compression prevents the continuation from opening a request
+not ok 59 - HTTP exporter close during compression prevents the continuation from opening a request
+  ---
+  duration_ms: 1.140112
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-lifecycle.test.mjs:130:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: HTTP exporter close aborts an active request and releases owned sockets
+not ok 60 - HTTP exporter close aborts an active request and releases owned sockets
+  ---
+  duration_ms: 1.313035
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-lifecycle.test.mjs:148:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: HTTP exporter still retries and acknowledges ordinary requests before close
+not ok 61 - HTTP exporter still retries and acknowledges ordinary requests before close
+  ---
+  duration_ms: 1.410429
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-lifecycle.test.mjs:174:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: runtime-owned HTTP exporter remains terminal when runtime closes during a request
+not ok 62 - runtime-owned HTTP exporter remains terminal when runtime closes during a request
+  ---
+  duration_ms: 2.085298
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/readiness-lifecycle.test.mjs:187:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: JSONL close closes admission synchronously and drains writes deferred in initialization
+ok 63 - JSONL close closes admission synchronously and drains writes deferred in initialization
+  ---
+  duration_ms: 34.528284
+  ...
+# Subtest: JSONL flush includes writes admitted before initialization starts
+ok 64 - JSONL flush includes writes admitted before initialization starts
+  ---
+  duration_ms: 5.317392
+  ...
+# Subtest: concurrent starts and closes settle once and terminal restart is explicit
+ok 65 - concurrent starts and closes settle once and terminal restart is explicit
+  ---
+  duration_ms: 82.889146
+  ...
+# Subtest: closing idle runtime releases an already used pipeline
+ok 66 - closing idle runtime releases an already used pipeline
+  ---
+  duration_ms: 7.887936
+  ...
+# Subtest: close wins race with blocked startup without later resurrection
+ok 67 - close wins race with blocked startup without later resurrection
+  ---
+  duration_ms: 30.384623
+  ...
+# Subtest: pre-abort avoids callback and active abort settles ignoring callbacks
+ok 68 - pre-abort avoids callback and active abort settles ignoring callbacks
+  ---
+  duration_ms: 1.013448
+  ...
+# Subtest: slow collection is coalesced and close cancels it
+ok 69 - slow collection is coalesced and close cancels it
+  ---
+  duration_ms: 31.465243
+  ...
+# Subtest: health distinguishes readiness, liveness, degraded and timeout
+ok 70 - health distinguishes readiness, liveness, degraded and timeout
+  ---
+  duration_ms: 12.35546
+  ...
+# Subtest: resource replace/unregister cleans health checks
+ok 71 - resource replace/unregister cleans health checks
+  ---
+  duration_ms: 1.126236
+  ...
+# Subtest: public telemetry redacts payload context metadata span and diagnostics
+ok 72 - public telemetry redacts payload context metadata span and diagnostics
+  ---
+  duration_ms: 27.171547
+  ...
+# Subtest: untrusted signal kind and fake byte sizes cannot bypass bounds
+ok 73 - untrusted signal kind and fake byte sizes cannot bypass bounds
+  ---
+  duration_ms: 6.312997
+  ...
+# Subtest: serializer bounds serialized bytes, cycles, hostile getters, prototype input
+ok 74 - serializer bounds serialized bytes, cycles, hostile getters, prototype input
+  ---
+  duration_ms: 1.589244
+  ...
+# Subtest: PM bridge disposes direct, runtime and adapter owners idempotently
+ok 75 - PM bridge disposes direct, runtime and adapter owners idempotently
+  ---
+  duration_ms: 0.687845
+  ...
+# Subtest: Studio authorizer uses socket, denies cross origin even with custom auth
+ok 76 - Studio authorizer uses socket, denies cross origin even with custom auth
+  ---
+  duration_ms: 1.287143
+  ...
+# Subtest: Studio closes listeners and slow clients and rejects streams after close
+ok 77 - Studio closes listeners and slow clients and rejects streams after close
+  ---
+  duration_ms: 8.76232
+  ...
+# Subtest: Studio assets are packaged and reject unknown/prototype paths
+ok 78 - Studio assets are packaged and reject unknown/prototype paths
+  ---
+  duration_ms: 7.481452
+  ...
+# Subtest: preparsed and raw bodies obey request limits
+ok 79 - preparsed and raw bodies obey request limits
+  ---
+  duration_ms: 13.521048
+  ...
+# Subtest: synthetic custom callbacks support timeout and reject after close
+ok 80 - synthetic custom callbacks support timeout and reject after close
+  ---
+  duration_ms: 102.80809
+  ...
+# Subtest: memory store retention stays bounded
+ok 81 - memory store retention stays bounded
+  ---
+  duration_ms: 1.015053
+  ...
+# Subtest: modeled actions: cancelling each silence prompt or incident resolution sends no mutation
+ok 82 - modeled actions: cancelling each silence prompt or incident resolution sends no mutation
+  ---
+  duration_ms: 223.462497
+  ...
+# Subtest: modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible
+ok 83 - modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible
+  ---
+  duration_ms: 14.581167
+  ...
+# Subtest: modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback
+ok 84 - modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback
+  ---
+  duration_ms: 13.54678
+  ...
+# (node:55970) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: modeled actions: navigation releases polling ownership even when an injected mutation never settles
+ok 85 - modeled actions: navigation releases polling ownership even when an injected mutation never settles
+  ---
+  duration_ms: 1103.477013
+  ...
+# Subtest: modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed
+not ok 86 - modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed
+  ---
+  duration_ms: 1.774717
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-actions.test.mjs:113:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'priorityQueuePosition')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    #clearTimer (node:internal/test_runner/mock/mock_timers:304:15)
+    startPolling (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/resources/assets/js/monitor/studio.js:229:25)
+    mountMonitorStudio (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/resources/assets/js/monitor/studio.js:252:17)
+    mount (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-actions.test.mjs:58:62)
+    TestContext.<anonymous> (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-actions.test.mjs:121:26)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:735:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:449:18)
+    Test.postRun (node:internal/test_runner/test:842:19)
+    Test.run (node:internal/test_runner/test:777:12)
+  ...
+# Subtest: modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it
+not ok 87 - modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it
+  ---
+  duration_ms: 0.690793
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-actions.test.mjs:137:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'priorityQueuePosition')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    #clearTimer (node:internal/test_runner/mock/mock_timers:304:15)
+    startPolling (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/resources/assets/js/monitor/studio.js:229:25)
+    mountMonitorStudio (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/resources/assets/js/monitor/studio.js:252:17)
+    mount (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-actions.test.mjs:58:62)
+    TestContext.<anonymous> (file:///private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-actions.test.mjs:140:24)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:735:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:449:18)
+    Test.postRun (node:internal/test_runner/test:842:19)
+    Test.run (node:internal/test_runner/test:777:12)
+  ...
+# Subtest: Studio rate limiter bounds client keys for rejected and accepted admissions
+ok 88 - Studio rate limiter bounds client keys for rejected and accepted admissions
+  ---
+  duration_ms: 4.113804
+  ...
+# Subtest: Studio non-JSON route failures use the same bounded redaction before response admission
+ok 89 - Studio non-JSON route failures use the same bounded redaction before response admission
+  ---
+  duration_ms: 33.610794
+  ...
+# Subtest: Studio stream capacity and close reject with a safe response and preserve owned client cleanup
+ok 90 - Studio stream capacity and close reject with a safe response and preserve owned client cleanup
+  ---
+  duration_ms: 11.017523
+  ...
+# Subtest: actual loopback HTTP serves packaged Studio and all read views safely
+not ok 91 - actual loopback HTTP serves packaged Studio and all read views safely
+  ---
+  duration_ms: 64.892663
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-http.test.mjs:4:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization
+not ok 92 - actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization
+  ---
+  duration_ms: 21.148767
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-http.test.mjs:16:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: modeled DOM: repeated mount/unmount owns one stream and cancels pending requests
+ok 93 - modeled DOM: repeated mount/unmount owns one stream and cancels pending requests
+  ---
+  duration_ms: 1226.981294
+  ...
+# Subtest: modeled DOM: empty, escaped error, recovery and stale response cancellation
+ok 94 - modeled DOM: empty, escaped error, recovery and stale response cancellation
+  ---
+  duration_ms: 7.092231
+  ...
+# Subtest: actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details
+not ok 95 - actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details
+  ---
+  duration_ms: 63.42507
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-security-regression.test.mjs:18:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary
+not ok 96 - actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary
+  ---
+  duration_ms: 20.575465
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-security-regression.test.mjs:42:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+# Subtest: actual HTTP: Prometheus and stream admission failures preserve safe status and redacted JSON
+not ok 97 - actual HTTP: Prometheus and stream admission failures preserve safe status and redacted JSON
+  ---
+  duration_ms: 18.141225
+  location: '/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor/test/studio-security-regression.test.mjs:53:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1881:21)
+    listenInCluster (node:net:1946:12)
+    doListen (node:net:2116:7)
+    process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+  ...
+1..97
+# tests 97
+# suites 0
+# pass 77
+# fail 20
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1887.769501

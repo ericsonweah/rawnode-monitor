@@ -1,0 +1,180 @@
+{
+  "observedAt": "2026-10-25T11:33:08.111Z",
+  "historical": {
+    "archive": "artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad",
+    "bytes": 184659,
+    "sourceHashes": 866,
+    "candidateHashes": 169,
+    "logs": {
+      "evidence/full-native-tests.txt": {
+        "tests": 52,
+        "pass": 52,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "evidence/packed-tests.txt": {
+        "tests": 52,
+        "pass": 52,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "readiness-2026-10-25/logs/baseline/test.txt": {
+        "tests": 90,
+        "pass": 76,
+        "fail": 14,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "readiness-2026-10-25/logs/baseline-loopback/test.txt": {
+        "tests": 90,
+        "pass": 90,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    "notes": [
+      "Historical consumers used extraction, not npm install.",
+      "Historical HTTP and modeled DOM do not establish browser acceptance.",
+      "PM reciprocal five cases/real child IPC and 47 native/packed tests were attributed to PM lane."
+    ],
+    "summary": {
+      "package": "@rawnode/monitor",
+      "version": "1.0.0",
+      "status": "private candidate; publication blocked",
+      "owner": "First Principle Lab LLC",
+      "environment": {
+        "platform": "macOS-15.7.9-x86_64-i386-64bit",
+        "node": "v24.21.0",
+        "npm": "11.19.0",
+        "typescript": "Version 5.9.3"
+      },
+      "passed": {
+        "native_tests": 52,
+        "independent_adversarial_tests": 24,
+        "exact_packed_tests": 52,
+        "esm_export_entries": 28,
+        "javascript_files": 112,
+        "typescript_consumer": true,
+        "packed_types": true,
+        "source_hashes_unchanged": 866,
+        "exact_pm_runtime_composition": true,
+        "exact_pm_paired_types": true,
+        "pm_lane_exact_composition_tests": 5
+      },
+      "packed": {
+        "filename": "rawnode-monitor-1.0.0.tgz",
+        "sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad",
+        "bytes": 184659
+      },
+      "real_integration": [
+        "task-owned 127.0.0.1 Studio HTTP routes/assets",
+        "task-owned loopback synthetic redirects",
+        "exact PM adapter and RuntimeAgent bridge composition with final verified package pins",
+        "PM lane: real task-owned child IPC carries Monitor snapshots and shuts down gracefully"
+      ],
+      "modeled": [
+        "Studio DOM lifecycle, empty/error/recovery",
+        "PM resource adapter",
+        "HTTPS downgrade",
+        "span retention clock advance"
+      ],
+      "unverified": [
+        "actual browser render/reconnect/accessibility",
+        "Events exact composition: Library download failed after one supported retry",
+        "prepared Unified/Logger",
+        "Node 22 and other platforms",
+        "live Redis/RawMongo/OTLP/StatsD",
+        "full Framework boot"
+      ],
+      "remaining_release_decisions": [
+        "license provenance: root ISC declaration, empty LICENSE",
+        "final namespace and version approval",
+        "real-browser acceptance",
+        "supported runtime matrix"
+      ],
+      "prohibited_actions_performed": false,
+      "library": {
+        "status": "blocked",
+        "error": "Library prepare_uploads is not available",
+        "library_file_id": null,
+        "version": null,
+        "file_id": null,
+        "route_switched": false
+      },
+      "composition_authorization": "Parent explicitly permits same-Mac read-only exact artifact sharing with hash verification; no Library transfer workaround.",
+      "pm_composition": {
+        "pm": {
+          "package": "@rawnode/pm",
+          "version": "0.1.0",
+          "filename": "rawnode-pm-0.1.0.tgz",
+          "bytes": 94194,
+          "sha256": "0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f",
+          "source": "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz",
+          "authorization": "Parent approved read-only same-Mac exact artifact sharing with hash verification."
+        },
+        "monitor_sha256": "b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad",
+        "local_results": "pm-composition.json",
+        "local_typecheck": "pm-types.txt",
+        "pm_reciprocal_status": "passed replacement-pin rerun; copied output and replacement-pin harness inspected",
+        "pm_reciprocal_tests": 5,
+        "status": "replacement exact pin passed local reciprocal runtime and strict paired type checks",
+        "pm_native_tests": 47,
+        "pm_packed_tests": 47,
+        "focused_independent_review": "passed; pm-reciprocal/adversarial-r6-resolution.md"
+      },
+      "historical_compositions": [
+        {
+          "pm_sha256": "f7e512c44ea88587f71f8e6303e8ebeb70f243a05ba9695e16b595f360730769",
+          "local_runtime": true,
+          "local_types": true,
+          "pm_lane_tests": 5,
+          "pm_lane_real_child_ipc": true
+        },
+        {
+          "pm_sha256": "340b2fa87b9ba4a1f18631f75af1c9d056f0e1b1df590f012a8eb6eb435aed33",
+          "local_runtime": true,
+          "local_types": true,
+          "pm_lane_tests": 5,
+          "status": "withdrawn after PM log shutdown defect found; historical pass does not cover defect"
+        }
+      ],
+      "evidence_archive_revision": 2,
+      "supersedes_zip_sha256": "e5080a29cfaa52e6ad4c0dd8071c02d8c0e9f10cee5ec8bed59775a00e03e8c4"
+    }
+  },
+  "currentBaseline": {
+    "scope": "Inherited dirty working tree at HEAD 884a497; not a clean HEAD baseline.",
+    "commands": "logs/baseline/commands.json",
+    "loopbackRerun": "logs/baseline-loopback/commands.json",
+    "sandboxFailure": "14 test failures due to 127.0.0.1 listen EPERM; escalated task-loopback rerun all90 passed",
+    "node": "v24.21.0",
+    "npm": "11.19.0",
+    "typescript": "5.9.3"
+  },
+  "runtimeDiscovery": {
+    "node22": "Not available at inspected PATH/nvm/nodebrew/fnm/volta/Homebrew locations. rg of /private/tmp and TMPDIR returned no binary paths, exit2 due to inaccessible subdirectories; no complete-machine absence claim.",
+    "chromeBundle": {
+      "version": "155.0.8059.85",
+      "build": "8059.85",
+      "method": "/usr/libexec/PlistBuddy CFBundleShortVersionString/CFBundleVersion /Applications/Google Chrome.app/Contents/Info.plist"
+    }
+  },
+  "declarations": {
+    "coverage": "Baseline strict consumer plus all29 manifest entries and runtime-matching metric/health/synthetic/envelope/span/tracer calls; no new mismatch confirmed by this lane.",
+    "limitations": "Advanced extension types intentionally remain broad; compilation does not establish runtime interoperability."
+  },
+  "reviewCoverage": [
+    "Metrics cardinality/reset/global/per-instrument caps and normalization; monotonic timers/spans, sampling/context and bounded histories tested.",
+    "Queue waiters, cancellation, required/optional/partial sinks, timeout no-replay, file init/drain and retention have focused existing regressions.",
+    "Plugins, notifications, resources, synthetic replacement, Redis late subscribe and finite fleet envelope checks present.",
+    "Independent lifecycle and Studio lanes review concrete edge defects."
+  ]
+}

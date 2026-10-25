@@ -1,0 +1,25 @@
+{
+  "session": "token-http-review-03",
+  "mode": "token",
+  "url": "http://127.0.0.1:60130/monitor",
+  "controlUrl": "http://127.0.0.1:60130/qualification/control",
+  "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+  "pid": 82690,
+  "node": "v24.21.0",
+  "execPath": "/usr/local/bin/node",
+  "files": {
+    "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+    "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+    "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+    "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+  },
+  "baseline": {
+    "mutations": 0,
+    "clients": 0,
+    "signalListeners": 1,
+    "silences": 0,
+    "alertState": "firing",
+    "incidentState": "open"
+  },
+  "ttlMs": 900000
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-25",
+  "scope": "Read-only available-runtime discovery; no global install or existing runtime modification",
+  "retained": {
+    "execPath": "/usr/local/bin/node",
+    "realpath": "/usr/local/bin/node",
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "x64"
+  },
+  "availableManagerDirectories": [
+    "/Users/ericsonweah/.nvm/versions/node/v24.21.0",
+    "/usr/local/Cellar/node/26.10.0_1"
+  ],
+  "node22InitiallyFound": false,
+  "discoveryLimit": "Initial read-only inspection of standard runtime managers and accessible temporary caches found no Node 22 binary; missing or inaccessible paths are not proof of global absence.",
+  "node26Executed": false,
+  "additionalNode22Patch": "Not required for a native/mock fixture defect with controls and passing exact floor execution",
+  "node22Setup": "Explicitly approved official 22.0.0 Darwin x64 tarball download into task-owned /private/tmp, published SHA-256 verified; see node22-input.json",
+  "compiler": "/usr/local/lib/node_modules/typescript/bin/tsc",
+  "compilerVersion": "5.9.3",
+  "compilerExecutionRuntime": "Node 22.0.0 in the Node 22 lane",
+  "python": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+  "pythonScope": "Existing tool, used for input receipt/checksum bookkeeping; not a runtime or compiler substitute"
+}

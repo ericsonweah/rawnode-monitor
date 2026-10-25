@@ -1,0 +1,4048 @@
+{
+  "startedAt": "2026-10-25T14:07:15.216Z",
+  "node": "v22.0.0",
+  "platform": "darwin",
+  "arch": "x64",
+  "distributionReceipt": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/distribution.json",
+  "distribution": {
+    "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "package": "@rawnode/monitor",
+    "version": "1.0.0",
+    "packedFiles": 177,
+    "node": "v22.0.0",
+    "execPath": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+    "platform": "darwin",
+    "arch": "x64",
+    "tooling": {
+      "node": {
+        "executable": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "version": "v22.0.0"
+      },
+      "npm": {
+        "executable": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "version": "10.5.1",
+        "executionRuntime": "v22.0.0"
+      },
+      "tsc": {
+        "executable": "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "version": "Version 5.9.3",
+        "executionRuntime": "v22.0.0"
+      }
+    },
+    "pack": {
+      "id": "@rawnode/monitor@1.0.0",
+      "name": "@rawnode/monitor",
+      "version": "1.0.0",
+      "size": 214938,
+      "unpackedSize": 853210,
+      "shasum": "4eef499c1c4dbb1588ef4a0d9801a0a275888db4",
+      "integrity": "sha512-1XPwK9xCIHMXLFf8cop68VJ7do+o9yf4Ak7NF3J0fTjqnAhlZ6o3pmFJyRnkcG7O4/KvzM5kZvm2z33n+Q9zJw==",
+      "filename": "rawnode-monitor-1.0.0.tgz",
+      "files": [
+        {
+          "path": "CHANGELOG.md",
+          "size": 3148,
+          "mode": 420
+        },
+        {
+          "path": "LICENSE",
+          "size": 11358,
+          "mode": 420
+        },
+        {
+          "path": "NOTICE.md",
+          "size": 2343,
+          "mode": 420
+        },
+        {
+          "path": "README.md",
+          "size": 4334,
+          "mode": 420
+        },
+        {
+          "path": "config/monitor.js",
+          "size": 15100,
+          "mode": 420
+        },
+        {
+          "path": "docs/api-manifest.json",
+          "size": 15473,
+          "mode": 420
+        },
+        {
+          "path": "docs/API.md",
+          "size": 34738,
+          "mode": 420
+        },
+        {
+          "path": "docs/CONFIGURATION.md",
+          "size": 11551,
+          "mode": 420
+        },
+        {
+          "path": "docs/LIFECYCLE.md",
+          "size": 6353,
+          "mode": 420
+        },
+        {
+          "path": "docs/MIGRATION.md",
+          "size": 5986,
+          "mode": 420
+        },
+        {
+          "path": "docs/PUBLICATION.md",
+          "size": 3678,
+          "mode": 420
+        },
+        {
+          "path": "docs/SECURITY.md",
+          "size": 4472,
+          "mode": 420
+        },
+        {
+          "path": "docs/STUDIO.md",
+          "size": 6199,
+          "mode": 420
+        },
+        {
+          "path": "docs/VALIDATION.md",
+          "size": 7213,
+          "mode": 420
+        },
+        {
+          "path": "examples/basic.mjs",
+          "size": 621,
+          "mode": 420
+        },
+        {
+          "path": "examples/studio-fixture.mjs",
+          "size": 7167,
+          "mode": 420
+        },
+        {
+          "path": "package.json",
+          "size": 3953,
+          "mode": 420
+        },
+        {
+          "path": "resources/assets/css/monitor/studio.css",
+          "size": 10436,
+          "mode": 420
+        },
+        {
+          "path": "resources/assets/js/monitor/studio.js",
+          "size": 30831,
+          "mode": 420
+        },
+        {
+          "path": "scripts/check.mjs",
+          "size": 1839,
+          "mode": 420
+        },
+        {
+          "path": "scripts/generate-reference.mjs",
+          "size": 8522,
+          "mode": 420
+        },
+        {
+          "path": "scripts/reject-publication.mjs",
+          "size": 152,
+          "mode": 420
+        },
+        {
+          "path": "src/alerts/AlertEngine.js",
+          "size": 11917,
+          "mode": 420
+        },
+        {
+          "path": "src/alerts/AlertRule.js",
+          "size": 7039,
+          "mode": 420
+        },
+        {
+          "path": "src/alerts/index.js",
+          "size": 158,
+          "mode": 420
+        },
+        {
+          "path": "src/alerts/NotificationRouter.js",
+          "size": 5457,
+          "mode": 420
+        },
+        {
+          "path": "src/alerts/SilenceManager.js",
+          "size": 1993,
+          "mode": 420
+        },
+        {
+          "path": "src/analysis/AnomalyDetector.js",
+          "size": 11222,
+          "mode": 420
+        },
+        {
+          "path": "src/analysis/CorrelationEngine.js",
+          "size": 5621,
+          "mode": 420
+        },
+        {
+          "path": "src/analysis/index.js",
+          "size": 167,
+          "mode": 420
+        },
+        {
+          "path": "src/analysis/LeakDetector.js",
+          "size": 8115,
+          "mode": 420
+        },
+        {
+          "path": "src/analysis/StreamingBaseline.js",
+          "size": 5131,
+          "mode": 420
+        },
+        {
+          "path": "src/cluster/FleetRegistry.js",
+          "size": 4107,
+          "mode": 420
+        },
+        {
+          "path": "src/cluster/index.js",
+          "size": 170,
+          "mode": 420
+        },
+        {
+          "path": "src/cluster/LeaderLease.js",
+          "size": 4451,
+          "mode": 420
+        },
+        {
+          "path": "src/cluster/MonitorClusterEnvelope.js",
+          "size": 2724,
+          "mode": 420
+        },
+        {
+          "path": "src/cluster/RedisMonitorBridge.js",
+          "size": 4025,
+          "mode": 420
+        },
+        {
+          "path": "src/compatibility/CompatibilityProfile.js",
+          "size": 2761,
+          "mode": 420
+        },
+        {
+          "path": "src/config/MonitorConfiguration.js",
+          "size": 27208,
+          "mode": 420
+        },
+        {
+          "path": "src/console/index.js",
+          "size": 52,
+          "mode": 420
+        },
+        {
+          "path": "src/console/MonitorCommands.js",
+          "size": 12780,
+          "mode": 420
+        },
+        {
+          "path": "src/constants.js",
+          "size": 1855,
+          "mode": 420
+        },
+        {
+          "path": "src/core/index.js",
+          "size": 137,
+          "mode": 420
+        },
+        {
+          "path": "src/core/MonitorContextManager.js",
+          "size": 3237,
+          "mode": 420
+        },
+        {
+          "path": "src/core/MonitorLifecycle.js",
+          "size": 2277,
+          "mode": 420
+        },
+        {
+          "path": "src/core/TelemetryEnvelope.js",
+          "size": 1968,
+          "mode": 420
+        },
+        {
+          "path": "src/deployments/DeploymentRegistry.js",
+          "size": 2835,
+          "mode": 420
+        },
+        {
+          "path": "src/deployments/index.js",
+          "size": 55,
+          "mode": 420
+        },
+        {
+          "path": "src/diagnostics/DiagnosticBundleBuilder.js",
+          "size": 2555,
+          "mode": 420
+        },
+        {
+          "path": "src/diagnostics/index.js",
+          "size": 96,
+          "mode": 420
+        },
+        {
+          "path": "src/diagnostics/MonitorDoctor.js",
+          "size": 3750,
+          "mode": 420
+        },
+        {
+          "path": "src/errors.js",
+          "size": 2481,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/CallbackExporter.js",
+          "size": 786,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/EventExporter.js",
+          "size": 1010,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/ExporterRegistry.js",
+          "size": 3101,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/HttpJsonExporter.js",
+          "size": 12299,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/index.js",
+          "size": 243,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/OtlpJsonExporter.js",
+          "size": 4540,
+          "mode": 420
+        },
+        {
+          "path": "src/exporters/StatsdExporter.js",
+          "size": 2690,
+          "mode": 420
+        },
+        {
+          "path": "src/health/HealthRegistry.js",
+          "size": 7746,
+          "mode": 420
+        },
+        {
+          "path": "src/health/index.js",
+          "size": 51,
+          "mode": 420
+        },
+        {
+          "path": "src/incidents/IncidentManager.js",
+          "size": 7327,
+          "mode": 420
+        },
+        {
+          "path": "src/incidents/index.js",
+          "size": 90,
+          "mode": 420
+        },
+        {
+          "path": "src/incidents/RunbookRegistry.js",
+          "size": 1215,
+          "mode": 420
+        },
+        {
+          "path": "src/index.js",
+          "size": 1245,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/EventMonitorBridge.js",
+          "size": 3317,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/HttpMonitorMiddleware.js",
+          "size": 5997,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/index.js",
+          "size": 392,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/LoggerMonitorBridge.js",
+          "size": 1276,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/MonitorFetch.js",
+          "size": 2345,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/MonitorLogTransport.js",
+          "size": 1750,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/OperationInstrumentor.js",
+          "size": 3329,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/PMMonitorBridge.js",
+          "size": 1159,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/ProtocolMonitorBridge.js",
+          "size": 2223,
+          "mode": 420
+        },
+        {
+          "path": "src/integrations/RawNodeIntegrationManager.js",
+          "size": 3120,
+          "mode": 420
+        },
+        {
+          "path": "src/metrics/index.js",
+          "size": 163,
+          "mode": 420
+        },
+        {
+          "path": "src/metrics/Instruments.js",
+          "size": 15009,
+          "mode": 420
+        },
+        {
+          "path": "src/metrics/MetricHistory.js",
+          "size": 1359,
+          "mode": 420
+        },
+        {
+          "path": "src/metrics/MetricRegistry.js",
+          "size": 6257,
+          "mode": 420
+        },
+        {
+          "path": "src/metrics/PrometheusFormatter.js",
+          "size": 2410,
+          "mode": 420
+        },
+        {
+          "path": "src/MonitorManager.js",
+          "size": 2131,
+          "mode": 420
+        },
+        {
+          "path": "src/MonitorRuntime.js",
+          "size": 49241,
+          "mode": 420
+        },
+        {
+          "path": "src/pipeline/BoundedSignalQueue.js",
+          "size": 8033,
+          "mode": 420
+        },
+        {
+          "path": "src/pipeline/index.js",
+          "size": 92,
+          "mode": 420
+        },
+        {
+          "path": "src/pipeline/SignalPipeline.js",
+          "size": 15771,
+          "mode": 420
+        },
+        {
+          "path": "src/plugins/index.js",
+          "size": 57,
+          "mode": 420
+        },
+        {
+          "path": "src/plugins/MonitorPluginManager.js",
+          "size": 19225,
+          "mode": 420
+        },
+        {
+          "path": "src/provider/MonitorServiceProvider.js",
+          "size": 10648,
+          "mode": 420
+        },
+        {
+          "path": "src/query/index.js",
+          "size": 55,
+          "mode": 420
+        },
+        {
+          "path": "src/query/MonitorQueryEngine.js",
+          "size": 5739,
+          "mode": 420
+        },
+        {
+          "path": "src/resources/index.js",
+          "size": 98,
+          "mode": 420
+        },
+        {
+          "path": "src/resources/RawNodeResourceCatalog.js",
+          "size": 3614,
+          "mode": 420
+        },
+        {
+          "path": "src/resources/ResourceRegistry.js",
+          "size": 8264,
+          "mode": 420
+        },
+        {
+          "path": "src/security/index.js",
+          "size": 145,
+          "mode": 420
+        },
+        {
+          "path": "src/security/SafeTelemetrySerializer.js",
+          "size": 5799,
+          "mode": 420
+        },
+        {
+          "path": "src/security/TelemetryAuthenticator.js",
+          "size": 1936,
+          "mode": 420
+        },
+        {
+          "path": "src/security/TelemetryRedactor.js",
+          "size": 3480,
+          "mode": 420
+        },
+        {
+          "path": "src/slo/index.js",
+          "size": 84,
+          "mode": 420
+        },
+        {
+          "path": "src/slo/SloDefinition.js",
+          "size": 3949,
+          "mode": 420
+        },
+        {
+          "path": "src/slo/SloRegistry.js",
+          "size": 5925,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/CompositeTelemetryStore.js",
+          "size": 7807,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/createTelemetryStore.js",
+          "size": 3199,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/index.js",
+          "size": 313,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/JsonlTelemetryStore.js",
+          "size": 11282,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/MemoryTelemetryStore.js",
+          "size": 4319,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/NoopTelemetryStore.js",
+          "size": 481,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/RawMongoTelemetryStore.js",
+          "size": 6830,
+          "mode": 420
+        },
+        {
+          "path": "src/storage/RetentionManager.js",
+          "size": 1131,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/index.js",
+          "size": 328,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/MonitorStudioAssets.js",
+          "size": 1346,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/MonitorStudioAuthorizer.js",
+          "size": 3990,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/MonitorStudioController.js",
+          "size": 10787,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/MonitorStudioManager.js",
+          "size": 11668,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/MonitorStudioPage.js",
+          "size": 3146,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/MonitorStudioRateLimiter.js",
+          "size": 2880,
+          "mode": 420
+        },
+        {
+          "path": "src/studio/registerMonitorStudioRoutes.js",
+          "size": 3446,
+          "mode": 420
+        },
+        {
+          "path": "src/support.js",
+          "size": 12748,
+          "mode": 420
+        },
+        {
+          "path": "src/synthetics/index.js",
+          "size": 90,
+          "mode": 420
+        },
+        {
+          "path": "src/synthetics/SyntheticCheck.js",
+          "size": 2711,
+          "mode": 420
+        },
+        {
+          "path": "src/synthetics/SyntheticMonitor.js",
+          "size": 22839,
+          "mode": 420
+        },
+        {
+          "path": "src/system/index.js",
+          "size": 105,
+          "mode": 420
+        },
+        {
+          "path": "src/system/ProcessMetricsCollector.js",
+          "size": 10098,
+          "mode": 420
+        },
+        {
+          "path": "src/system/SystemMetricsCollector.js",
+          "size": 646,
+          "mode": 420
+        },
+        {
+          "path": "src/testing/index.js",
+          "size": 52,
+          "mode": 420
+        },
+        {
+          "path": "src/testing/MonitorRecorder.js",
+          "size": 1799,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/index.js",
+          "size": 217,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/InMemorySpanStore.js",
+          "size": 4430,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/Sampler.js",
+          "size": 1947,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/SignalSpanProcessor.js",
+          "size": 760,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/Span.js",
+          "size": 5388,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/TraceContext.js",
+          "size": 5305,
+          "mode": 420
+        },
+        {
+          "path": "src/tracing/Tracer.js",
+          "size": 5639,
+          "mode": 420
+        },
+        {
+          "path": "test/adversarial-pipeline-metrics.test.mjs",
+          "size": 6596,
+          "mode": 420
+        },
+        {
+          "path": "test/adversarial-plugins.test.mjs",
+          "size": 4322,
+          "mode": 420
+        },
+        {
+          "path": "test/adversarial-retention-synthetics.test.mjs",
+          "size": 5986,
+          "mode": 420
+        },
+        {
+          "path": "test/adversarial-synthetic-http.test.mjs",
+          "size": 4282,
+          "mode": 420
+        },
+        {
+          "path": "test/alert-lifecycle.test.mjs",
+          "size": 6807,
+          "mode": 420
+        },
+        {
+          "path": "test/capabilities.test.mjs",
+          "size": 4522,
+          "mode": 420
+        },
+        {
+          "path": "test/contracts-hardening.test.mjs",
+          "size": 8327,
+          "mode": 420
+        },
+        {
+          "path": "test/exports-types.mts",
+          "size": 5524,
+          "mode": 420
+        },
+        {
+          "path": "test/readiness-http-delivery.test.mjs",
+          "size": 6041,
+          "mode": 420
+        },
+        {
+          "path": "test/readiness-lifecycle.test.mjs",
+          "size": 11946,
+          "mode": 420
+        },
+        {
+          "path": "test/runtime.test.mjs",
+          "size": 8673,
+          "mode": 420
+        },
+        {
+          "path": "test/studio-actions.test.mjs",
+          "size": 13602,
+          "mode": 420
+        },
+        {
+          "path": "test/studio-boundaries.test.mjs",
+          "size": 4634,
+          "mode": 420
+        },
+        {
+          "path": "test/studio-http.test.mjs",
+          "size": 3414,
+          "mode": 420
+        },
+        {
+          "path": "test/studio-modeled.test.mjs",
+          "size": 2849,
+          "mode": 420
+        },
+        {
+          "path": "test/studio-security-regression.test.mjs",
+          "size": 4579,
+          "mode": 420
+        },
+        {
+          "path": "test/types.mts",
+          "size": 1525,
+          "mode": 420
+        },
+        {
+          "path": "types/alerts.d.ts",
+          "size": 203,
+          "mode": 420
+        },
+        {
+          "path": "types/analysis.d.ts",
+          "size": 98,
+          "mode": 420
+        },
+        {
+          "path": "types/cluster.d.ts",
+          "size": 151,
+          "mode": 420
+        },
+        {
+          "path": "types/config.d.ts",
+          "size": 133,
+          "mode": 420
+        },
+        {
+          "path": "types/console.d.ts",
+          "size": 476,
+          "mode": 420
+        },
+        {
+          "path": "types/core.d.ts",
+          "size": 136,
+          "mode": 420
+        },
+        {
+          "path": "types/deployments.d.ts",
+          "size": 49,
+          "mode": 420
+        },
+        {
+          "path": "types/diagnostics.d.ts",
+          "size": 69,
+          "mode": 420
+        },
+        {
+          "path": "types/exporters.d.ts",
+          "size": 148,
+          "mode": 420
+        },
+        {
+          "path": "types/health.d.ts",
+          "size": 45,
+          "mode": 420
+        },
+        {
+          "path": "types/incidents.d.ts",
+          "size": 63,
+          "mode": 420
+        },
+        {
+          "path": "types/index.d.ts",
+          "size": 29088,
+          "mode": 420
+        },
+        {
+          "path": "types/integrations.d.ts",
+          "size": 281,
+          "mode": 420
+        },
+        {
+          "path": "types/metrics.d.ts",
+          "size": 160,
+          "mode": 420
+        },
+        {
+          "path": "types/pipeline.d.ts",
+          "size": 65,
+          "mode": 420
+        },
+        {
+          "path": "types/plugins.d.ts",
+          "size": 51,
+          "mode": 420
+        },
+        {
+          "path": "types/provider.d.ts",
+          "size": 518,
+          "mode": 420
+        },
+        {
+          "path": "types/query.d.ts",
+          "size": 49,
+          "mode": 420
+        },
+        {
+          "path": "types/resources.d.ts",
+          "size": 97,
+          "mode": 420
+        },
+        {
+          "path": "types/security.d.ts",
+          "size": 97,
+          "mode": 420
+        },
+        {
+          "path": "types/slo.d.ts",
+          "size": 57,
+          "mode": 420
+        },
+        {
+          "path": "types/storage.d.ts",
+          "size": 181,
+          "mode": 420
+        },
+        {
+          "path": "types/studio-client.d.ts",
+          "size": 381,
+          "mode": 420
+        },
+        {
+          "path": "types/studio.d.ts",
+          "size": 202,
+          "mode": 420
+        },
+        {
+          "path": "types/synthetics.d.ts",
+          "size": 63,
+          "mode": 420
+        },
+        {
+          "path": "types/system.d.ts",
+          "size": 78,
+          "mode": 420
+        },
+        {
+          "path": "types/testing.d.ts",
+          "size": 64,
+          "mode": 420
+        },
+        {
+          "path": "types/tracing.d.ts",
+          "size": 305,
+          "mode": 420
+        }
+      ],
+      "entryCount": 177,
+      "bundled": []
+    },
+    "extracted": {
+      "consumer": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted",
+      "package": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted/node_modules/@rawnode/monitor"
+    },
+    "installed": {
+      "consumer": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+      "package": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor"
+    },
+    "inventory": [
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 3148,
+        "sha256": "5953c1fa3f7c4312ff4b5d1b12f7bc467bb44d6df6ca777d20adb5e7026c1b5e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "LICENSE",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "NOTICE.md",
+        "bytes": 2343,
+        "sha256": "a393783af35c1af96f4f828073175525e7f29d5e7ffb06217aa2068c0cde9564",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "README.md",
+        "bytes": 4334,
+        "sha256": "0c64c4744928eb71d357c30a7cf0b6a78643387ffbf7d9da48ef6c454331fcb5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "config/monitor.js",
+        "bytes": 15100,
+        "sha256": "e21f02ae7cad0d16cac35478bf11970a7d036e20acb7b908232d38aee19dd136",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/api-manifest.json",
+        "bytes": 15473,
+        "sha256": "2c8ee2d63292d5cee9de3e9b7ee3556c69607349c992d12ca0eb9978245cf8a5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/API.md",
+        "bytes": 34738,
+        "sha256": "c1622c1ff29bb9bb61f94e5b96c831b635083f8037c1bfa41dc2e62002206a86",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/CONFIGURATION.md",
+        "bytes": 11551,
+        "sha256": "b14f2f7f35f5827766bcdc1eb54fae7f288574cd904491b30c4051ee6af40d58",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/LIFECYCLE.md",
+        "bytes": 6353,
+        "sha256": "65594dc1070bf19cbbbabb9df46e618bf4473ee8e10703e427afdbe95595527e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/MIGRATION.md",
+        "bytes": 5986,
+        "sha256": "1703c13300e1d4abdb72c92e3821ae55edb2c4772a8018c245a5e92e42f95b98",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/PUBLICATION.md",
+        "bytes": 3678,
+        "sha256": "33d5a1f9a9eab37e13e53140746befc0fcb276b78ef4541147019ffad9fb4e84",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/SECURITY.md",
+        "bytes": 4472,
+        "sha256": "6952cdbab2c4f026e1ddc568c2519b68070703ef3350a915a1fd7debf7c8c708",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/STUDIO.md",
+        "bytes": 6199,
+        "sha256": "633629efe445ccdff113bd046dab3a6155424dffb375e641aea4a7388258484a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "docs/VALIDATION.md",
+        "bytes": 7213,
+        "sha256": "9d7be99eaff40eeca2110d2450239bd3deedf4cc7cb080316acaba817225681f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "examples/basic.mjs",
+        "bytes": 621,
+        "sha256": "2e14b04eb6c0e2d02b1b68a6ba87c1009efc834ca189ca44b567b4d200e79bcb",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "examples/studio-fixture.mjs",
+        "bytes": 7167,
+        "sha256": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "package.json",
+        "bytes": 3953,
+        "sha256": "f40b53fdfcdc1a12682669d3b40fa014ac76eb229469a898b4d35fe77b131018",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "resources/assets/css/monitor/studio.css",
+        "bytes": 10436,
+        "sha256": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "resources/assets/js/monitor/studio.js",
+        "bytes": 30831,
+        "sha256": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "scripts/check.mjs",
+        "bytes": 1839,
+        "sha256": "95e9e9c356b459f378df67d6603b71fccbcc211699276fc5459606d60e82be83",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "scripts/generate-reference.mjs",
+        "bytes": 8522,
+        "sha256": "9eac172599d9cad55f5147549fae113c9550ff6e83ae99191d5e2206959e2db2",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "scripts/reject-publication.mjs",
+        "bytes": 152,
+        "sha256": "54268daf806a81d227889a736a0e366b85c800e38af2ff3b517d43c5abc82798",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/alerts/AlertEngine.js",
+        "bytes": 11917,
+        "sha256": "3ef5603672200f87323d23de70850947ae7a5000f9ed5c5498eaff90ec857c8a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/alerts/AlertRule.js",
+        "bytes": 7039,
+        "sha256": "e39591020e92a12b30ac9892f8166dc38524fa4fe3582e3c4bca1f2858915c04",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/alerts/index.js",
+        "bytes": 158,
+        "sha256": "3e01f1d0596b1b17ca8c0a9fee5f9c49863d455ec1605a5d57277e465810a24e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/alerts/NotificationRouter.js",
+        "bytes": 5457,
+        "sha256": "1f42be4b23ba7e75385c9eb16621d9f3f0297b02ce7b4292186bc412b118cee9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/alerts/SilenceManager.js",
+        "bytes": 1993,
+        "sha256": "afdf7c95e1958289baec05f2f95423be8e475591076dd82c33a477a30574640b",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/analysis/AnomalyDetector.js",
+        "bytes": 11222,
+        "sha256": "806621ba62d09e91ab25fb264961106a116c3af1e1540324d1623b4256bfe40c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/analysis/CorrelationEngine.js",
+        "bytes": 5621,
+        "sha256": "7865dc69a652437c49eba1518834460dc901a5f3310132318dc674d418d5a561",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/analysis/index.js",
+        "bytes": 167,
+        "sha256": "f5ef946f1a1fc324d584a0bf54e68f6bc5249ef0e9c6c404f9b314c24c3ee86a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/analysis/LeakDetector.js",
+        "bytes": 8115,
+        "sha256": "a74a4614762806b33c49ac8715428c6d5902a879f8ac468c7e7485eef8b60d2e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/analysis/StreamingBaseline.js",
+        "bytes": 5131,
+        "sha256": "c3eda66a4a9a85a9207859267be472000aace95a1960ce97c64989293fa84ad0",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/cluster/FleetRegistry.js",
+        "bytes": 4107,
+        "sha256": "ef7925c76262d4d3581ff7cfbe4965bd3902ff10edcf1c39694e7613dfcf7a88",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/cluster/index.js",
+        "bytes": 170,
+        "sha256": "9cef57dec3d3e12b68733a1c8052de7dc833e14e70b0b66e99fcc5c3a5b1e1dc",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/cluster/LeaderLease.js",
+        "bytes": 4451,
+        "sha256": "0929b4a6a732c7ac3f0c73d93216ebb2283ea6bb5a8b6e2c68287f14be0ea05e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/cluster/MonitorClusterEnvelope.js",
+        "bytes": 2724,
+        "sha256": "08a0cc9ed0a7663a96cf603a1c38b4fe800a2858bd34aa0efa767ef6dedc6ba9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/cluster/RedisMonitorBridge.js",
+        "bytes": 4025,
+        "sha256": "2a2785003cf5c168009a941b045850ded96936f70bc0ed5f960fa76471a787d7",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/compatibility/CompatibilityProfile.js",
+        "bytes": 2761,
+        "sha256": "cc319cd4071aa4d3506b1013bb261eca83f33d657dca24fb687e216583d56f5a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/config/MonitorConfiguration.js",
+        "bytes": 27208,
+        "sha256": "a8d7374c0e3fad385be52f2e1e90ef528b386c2c570b3ac1d83ed5c0e6acd957",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/console/index.js",
+        "bytes": 52,
+        "sha256": "e357ace6006ccbd81d1b3907d19db32f1de3169d67aebb8c67fce11dbff05f92",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/console/MonitorCommands.js",
+        "bytes": 12780,
+        "sha256": "715516c8b9de0ea94ac830569484260e726a1035bebeac1b2c5e13f99e9f821d",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/constants.js",
+        "bytes": 1855,
+        "sha256": "37f28885e7d3d5c442da2d9b7cd1809c558d0af8994f2e28119dd76ea6ce2a28",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/core/index.js",
+        "bytes": 137,
+        "sha256": "2c49d3f52f04773c2feff222aa84e2434bf203eb3dfa7a4e6e9179cc498347f2",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/core/MonitorContextManager.js",
+        "bytes": 3237,
+        "sha256": "d166da5bb8063b593751d0cb4cbecee9888a6efb6324c7b9bda676088cd0abfa",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/core/MonitorLifecycle.js",
+        "bytes": 2277,
+        "sha256": "0f0679cef1ff6011770f23812db0e2bb050ce4a13b160598647861ad110f5473",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/core/TelemetryEnvelope.js",
+        "bytes": 1968,
+        "sha256": "c631adec1406689dea3ae8193ad48a621b46b3a14b2cc2f2b2ab5c603bce3887",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/deployments/DeploymentRegistry.js",
+        "bytes": 2835,
+        "sha256": "1cb20c4d2d9f3102f7b20e4639b7ca40ee3b09fa18539e71d6794a2a3c8d8b8a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/deployments/index.js",
+        "bytes": 55,
+        "sha256": "5cf6559610f294b0a102a6a300821ea6ba94f1a6770103c32a147f215f2b853f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/diagnostics/DiagnosticBundleBuilder.js",
+        "bytes": 2555,
+        "sha256": "2e986f744df65bb756827d689c181e611c5a6e7e66606b7ed71c8befb0f4b2c1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/diagnostics/index.js",
+        "bytes": 96,
+        "sha256": "b1558a5545cf7716da4e4e7f70b9214838552a15201fe3214e5668598c3e8c3a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/diagnostics/MonitorDoctor.js",
+        "bytes": 3750,
+        "sha256": "5e967b5679d3dac0f5e9ba0b70cd3d38a38c3541705c1e592048f07657c486ea",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/errors.js",
+        "bytes": 2481,
+        "sha256": "5d36e9736bf7607c86ef4f2156f817232611c8eadd16eaf71478a22a81ef268c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/CallbackExporter.js",
+        "bytes": 786,
+        "sha256": "c27419f06e8bd8549e818a71bac3b1729c2fe568304f26044749acdaf5af4c65",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/EventExporter.js",
+        "bytes": 1010,
+        "sha256": "7d6a0ed9b1b782b7bd8af6419c9e05ca88ebf5fbeeadf64d8647e0402b3f4150",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/ExporterRegistry.js",
+        "bytes": 3101,
+        "sha256": "7d1a6cfb66a33d78ae05b9e88994fe8332c79e0b2569f85ab4ce5bf423a09ae4",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/HttpJsonExporter.js",
+        "bytes": 12299,
+        "sha256": "0d29a80c3bd7e6f0345b94a6f14656de48770ccff13a530b72634ef2e427faf0",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/index.js",
+        "bytes": 243,
+        "sha256": "a0449a760222a21fce652e692d48abfea1aafc71f9afafbbd48feb8d110f32c3",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/OtlpJsonExporter.js",
+        "bytes": 4540,
+        "sha256": "fc880699a8a16ac16f24d7023ad043c5fedda565333a73eeac90a1014a6d8edf",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/exporters/StatsdExporter.js",
+        "bytes": 2690,
+        "sha256": "44f5932653769222c23986221d1e7b059f3c68c27a7a8301d52a3e1386e73486",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/health/HealthRegistry.js",
+        "bytes": 7746,
+        "sha256": "fd118aa589e1c8b5f0b23280c50e26f62204fd17f20e223dec75eb929e2b88c9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/health/index.js",
+        "bytes": 51,
+        "sha256": "a3a96f8a19ce9875b742935747fade8537fa1ab6357599202233b1aedcb16ee1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/incidents/IncidentManager.js",
+        "bytes": 7327,
+        "sha256": "eb33028fc755735d93a676793a13d0ece48009b15f665322bf514c38fcbf7da7",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/incidents/index.js",
+        "bytes": 90,
+        "sha256": "cefb2bb2f5ef28107594405fca985d18f48df10db31468ea71ba205620cdbf39",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/incidents/RunbookRegistry.js",
+        "bytes": 1215,
+        "sha256": "2295bda83b036625ee1fd9ad6c6f5f984802c7fc098085a5796a5eeb2e1169c5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/index.js",
+        "bytes": 1245,
+        "sha256": "a5fb776e15c0f77af4fd90b262e353e595aff711f2f254d43e974adddd227a15",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/EventMonitorBridge.js",
+        "bytes": 3317,
+        "sha256": "e0171f8b722eccac7c23a90b5b073c0d544fd12e704926121231ac4ac49535de",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/HttpMonitorMiddleware.js",
+        "bytes": 5997,
+        "sha256": "5ea1a34a78e28fcbe0c08f01fe0dd35414328853a3dd8ef74edb87d5d179f8b8",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/index.js",
+        "bytes": 392,
+        "sha256": "e1d3bd7fda16e446144cc0082985a0d3193770eef0d4d973f4e607078940d3cf",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/LoggerMonitorBridge.js",
+        "bytes": 1276,
+        "sha256": "0d64f50591d9ee8612229e46f2014209872a12f0466e30581cb387125f8d6b47",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/MonitorFetch.js",
+        "bytes": 2345,
+        "sha256": "02ee284b7baa32dd2fa165864e9b8c412912b79488b0eca4ae0706350ac0131e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/MonitorLogTransport.js",
+        "bytes": 1750,
+        "sha256": "25121968f2c06651c944611c5d98c0c4f762783eb815d8ce2e6da1f5b28d26ad",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/OperationInstrumentor.js",
+        "bytes": 3329,
+        "sha256": "25a8fa628a1a5c734e9e96b86d4191c67da57ad17974139b6e9474f0631abb16",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/PMMonitorBridge.js",
+        "bytes": 1159,
+        "sha256": "1befa7c7078a2f5e4988f95dc42b63378e355e1070631e9c12780c42fee26203",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/ProtocolMonitorBridge.js",
+        "bytes": 2223,
+        "sha256": "864643fefd1ab7b34cee534cf1bd94bd2f265d81b2225d56d1164e4bbf33f42b",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/integrations/RawNodeIntegrationManager.js",
+        "bytes": 3120,
+        "sha256": "8db564259efc2bf5e3386143f419ca076345e8748c5b47185b82955d8179753a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/metrics/index.js",
+        "bytes": 163,
+        "sha256": "43fa0977454eefedbfdb3257cc59d6eb8dacc45d2c9bd1494f5db16b95d81c37",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/metrics/Instruments.js",
+        "bytes": 15009,
+        "sha256": "cd2627a92246e65a66956d7a35a12e86f5fb3441cfa791710baa770b6e47b847",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/metrics/MetricHistory.js",
+        "bytes": 1359,
+        "sha256": "f96487ebfc995d7ba1de72f1a0c8509d4363d620641de202d6e230d7cfc05c32",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/metrics/MetricRegistry.js",
+        "bytes": 6257,
+        "sha256": "a42c092a952776f21727a0ac5ee2a83d2d70f09a3efad1f2b83f0900afc532b7",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/metrics/PrometheusFormatter.js",
+        "bytes": 2410,
+        "sha256": "246f254782e00d1d6846f8d7429edcc225a6b8f69628da6d3b8fb4dff2d0e548",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/MonitorManager.js",
+        "bytes": 2131,
+        "sha256": "5a9adf7603179a7e0c7f0efd988c2478f56b1861d8558f911f07037d7238289f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/MonitorRuntime.js",
+        "bytes": 49241,
+        "sha256": "90358aab423ca46028f7acd0b817c2c3f95187be36de9d23304721793a93f35c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/pipeline/BoundedSignalQueue.js",
+        "bytes": 8033,
+        "sha256": "18ea26cea32f8025827f58534392d29e2385f2644af75841305371c9fce6451a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/pipeline/index.js",
+        "bytes": 92,
+        "sha256": "4ee02acb52a6606c29f4f2a9a025b2281933a1fdd4fa33823e5abe20db617db1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/pipeline/SignalPipeline.js",
+        "bytes": 15771,
+        "sha256": "c90d8ae8deb8a6d749393392d97835b71192fbe72614597978e9180d15a5a6a1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/plugins/index.js",
+        "bytes": 57,
+        "sha256": "03fdee86ff793b42360009881cd8403fe2f21f154bc3779683ab521cce2e6230",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/plugins/MonitorPluginManager.js",
+        "bytes": 19225,
+        "sha256": "bd0f321182e482d399f735b6a11d2736138e41e6d928a429dd06e0b42224499c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/provider/MonitorServiceProvider.js",
+        "bytes": 10648,
+        "sha256": "3860f8da8dd81b4d096b8278d982bb76b7d0a963b51677d0af9d7b923d65d990",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/query/index.js",
+        "bytes": 55,
+        "sha256": "96ea0307db04d291f10722511f40f79d27d47eeca7b85e309fa4dd5d433880af",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/query/MonitorQueryEngine.js",
+        "bytes": 5739,
+        "sha256": "3f05641af5feb542ff4c69b27d5ffde4d7a8f5f48a8c8b007df07ad67aec0575",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/resources/index.js",
+        "bytes": 98,
+        "sha256": "e1e9f570573322f280b31d18561b4ac86b558b79c3056a701329c44d1460ac6e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/resources/RawNodeResourceCatalog.js",
+        "bytes": 3614,
+        "sha256": "4b86a803eea67e4a0eca5b1dc68cec04d345231b875c08e2660025ed7bf73fa5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/resources/ResourceRegistry.js",
+        "bytes": 8264,
+        "sha256": "311ac012a77a05d5deaf85a482c7d6e6fa974155c220dc496a40055ad7dc255f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/security/index.js",
+        "bytes": 145,
+        "sha256": "d82c4967bcd334a69ace36aa1d49e8cb73f1b3d2ecb8fc52ef208ba53a354529",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/security/SafeTelemetrySerializer.js",
+        "bytes": 5799,
+        "sha256": "b893e1a126dd2ed56c89e810355caa97f23b85ee9682f7d0dbaee55ebb7b20cd",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/security/TelemetryAuthenticator.js",
+        "bytes": 1936,
+        "sha256": "40ae3306efcfca4805b08c32bd7f450ea4de4235c30d005293e34e10c8b64cf5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/security/TelemetryRedactor.js",
+        "bytes": 3480,
+        "sha256": "55c8300b594e5e70342ed23dc671d0c15d33512572d72ee24ef1b3118234be9f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/slo/index.js",
+        "bytes": 84,
+        "sha256": "d341e83dcdc288e798d6c1524fceb4e2b2a383566cde011f073b41da2c2efe6a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/slo/SloDefinition.js",
+        "bytes": 3949,
+        "sha256": "27b2f9e700b8d9f4c56cadfc3ef58c135aac624846d72876fb111d199589a2f7",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/slo/SloRegistry.js",
+        "bytes": 5925,
+        "sha256": "becdc79334a4831e5d365715a2551e485b4defaee7de9d2e4f4bb951b4a18eca",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/CompositeTelemetryStore.js",
+        "bytes": 7807,
+        "sha256": "31f0451502215fcdea6ce5df97ce34b25ccfd8dd2da0471f1b16942bac29fbc5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/createTelemetryStore.js",
+        "bytes": 3199,
+        "sha256": "a1e8624a8e3ae373a85c65653dc9f9594e7faf18a3fccc707da8462dfa7b2436",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/index.js",
+        "bytes": 313,
+        "sha256": "eadb0b18d5672be7c24892dbdd28bddf9b812b709302f49819da658d1f24bfd5",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/JsonlTelemetryStore.js",
+        "bytes": 11282,
+        "sha256": "c42f78edaee4705fe06d79f49b15c3bd61444a6c60888121c6e3a2a82fbf5b76",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/MemoryTelemetryStore.js",
+        "bytes": 4319,
+        "sha256": "45fd197d61f857f53b4c22441f098c12edf244145c10b70b5912c11c97c85596",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/NoopTelemetryStore.js",
+        "bytes": 481,
+        "sha256": "4750942c4e0a531005b8a474cbc3f3b959f57d036db7e54b5473b26d110c8814",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/RawMongoTelemetryStore.js",
+        "bytes": 6830,
+        "sha256": "eae53989aaebbdbc1305d85070b140fd9f816816b5e42d1a9133fec7b2cf4b24",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/storage/RetentionManager.js",
+        "bytes": 1131,
+        "sha256": "21982490d7fe32996d0dbccf8a4a7c3c244c3a59a0a6c29e6be40e8c83afcc67",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/index.js",
+        "bytes": 328,
+        "sha256": "0cfebba0a2a7b0ffadb00bce4f3fc8048440fc9defa6d5d2c0e587c1e9f1502c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/MonitorStudioAssets.js",
+        "bytes": 1346,
+        "sha256": "e890b90ecfb71b4926be051b1f2165b96e11ad200ea6cbd4a7c3e12c36f548ab",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/MonitorStudioAuthorizer.js",
+        "bytes": 3990,
+        "sha256": "13a2d9f25bb46fcb37fc9c0595e7e0d865b5f05a8b864ec178004c501887ad61",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/MonitorStudioController.js",
+        "bytes": 10787,
+        "sha256": "93f34b27b82867ef27275a47c41365e8d28485470a19e6b5e04504b0ff70b657",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/MonitorStudioManager.js",
+        "bytes": 11668,
+        "sha256": "d93781c388cd40403deb0eab987f00e93bc1025e6ac7dc0216d943f8c88cc5cb",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/MonitorStudioPage.js",
+        "bytes": 3146,
+        "sha256": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/MonitorStudioRateLimiter.js",
+        "bytes": 2880,
+        "sha256": "ed4dadd51000ac1072abc1cf349ec9dd3bd43487ab0f12b15e488fd33da3bfc9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/studio/registerMonitorStudioRoutes.js",
+        "bytes": 3446,
+        "sha256": "6b2374fc0463479cebf9a247c6c290a10eadbd5822d2e47e0621ef5e6cd678fa",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/support.js",
+        "bytes": 12748,
+        "sha256": "ef384af68821b80126507ee8ebb1dd04343579aeffc743ee3e89a9f60ebbfb53",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/synthetics/index.js",
+        "bytes": 90,
+        "sha256": "fcf1033f3c498af83500877edf7ea9020923009a4c5243ae1e445f09c1c625b1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/synthetics/SyntheticCheck.js",
+        "bytes": 2711,
+        "sha256": "076d619d1768d0b160743da96739d78ae2927c797d40aadc7a53ae7c636e7cc3",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/synthetics/SyntheticMonitor.js",
+        "bytes": 22839,
+        "sha256": "1756b300208756468236af13d05d26f231361485e9e95ca3032cb74572849393",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/system/index.js",
+        "bytes": 105,
+        "sha256": "561d42b5884db63fb71e352bb50d081a69a19e2a65c4e2fcb5e71ccfdbcaace9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/system/ProcessMetricsCollector.js",
+        "bytes": 10098,
+        "sha256": "017ef6015250570a0e7ccd76d4ac73e8f38d66fdd28f063dfaecfa952d33baa1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/system/SystemMetricsCollector.js",
+        "bytes": 646,
+        "sha256": "574a0714cf0a20d19f5008a76d4e470dfe5f45454cfc1e1ccc70e22ad49ad3d6",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/testing/index.js",
+        "bytes": 52,
+        "sha256": "ac33c1f0ce60d216af74b2947214e12034305539510734edd1d257941651a99c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/testing/MonitorRecorder.js",
+        "bytes": 1799,
+        "sha256": "ca8639eaa263b067e24027f8d63d5eb021102ad43d20d3aa63c7d18f06e13b5a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/index.js",
+        "bytes": 217,
+        "sha256": "47b82fbb0c112dd0eabfef42f4228c1b0c0811e5d136d23e07d8e32a59e1e0ff",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/InMemorySpanStore.js",
+        "bytes": 4430,
+        "sha256": "a9b8fb612db0d76fe712a7f90cda17c63522fef66fee8813287405cb40545666",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/Sampler.js",
+        "bytes": 1947,
+        "sha256": "c53132d310ad206854d98171265462d3464f2197eba6519e277001ede2339c10",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/SignalSpanProcessor.js",
+        "bytes": 760,
+        "sha256": "b138bafde4976fa86544e90acbc60517689f6c80e2595d2fc8de9537d7802c42",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/Span.js",
+        "bytes": 5388,
+        "sha256": "aba705560edb528bb9c65f1fa31bf157f5f11de1d4def7e919fa16b943705cb1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/TraceContext.js",
+        "bytes": 5305,
+        "sha256": "40e62525d433de02f3263425555a351390496cae8393cdb703c9959bf93015de",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "src/tracing/Tracer.js",
+        "bytes": 5639,
+        "sha256": "84b1489e5a18321ce9378312bacb6cf3f33947b94d6706e3e34de04cbe236a29",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/adversarial-pipeline-metrics.test.mjs",
+        "bytes": 6596,
+        "sha256": "f4230511e0a2e78a14a0bb9c3106ed67c3e64de099dfda7a054285948437d1d8",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/adversarial-plugins.test.mjs",
+        "bytes": 4322,
+        "sha256": "6c5410ae46c979e8d80ce77973b67e4e092f07acc6b7a5e5f03807c4d68de05f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/adversarial-retention-synthetics.test.mjs",
+        "bytes": 5986,
+        "sha256": "4bde1945899bce2ad3d4486360ea7eade199d6b325715bcc836913cc4d905a9e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/adversarial-synthetic-http.test.mjs",
+        "bytes": 4282,
+        "sha256": "3132456870e71a2f6718833968543eba02c2918e541e0999be49e5ec13d67254",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/alert-lifecycle.test.mjs",
+        "bytes": 6807,
+        "sha256": "9f15d82b021feab511c18e89029658d526a1b57b591913c69799ad09e7c472d4",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/capabilities.test.mjs",
+        "bytes": 4522,
+        "sha256": "8dd8b95a7e69a7f38e0267254db3fb70225d381ba05e7c2e6b4efe0cea3cfe78",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/contracts-hardening.test.mjs",
+        "bytes": 8327,
+        "sha256": "ba30d21aa7b51493995dff4e210c69bbe64cd8344263cf545453b13fd79f2eac",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/exports-types.mts",
+        "bytes": 5524,
+        "sha256": "6ce3809fdf734d806e9e8d43970312521c626169ac3f194cb8d00727b68d53b6",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/readiness-http-delivery.test.mjs",
+        "bytes": 6041,
+        "sha256": "d0b9feb15ab1939d009b1db266cf8d8443805d34df59b91adf9ed6b1d4c84279",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/readiness-lifecycle.test.mjs",
+        "bytes": 11946,
+        "sha256": "9f410fdf0afb8d53ac7c6809ba61ab1b94a169d15c22daeaa256772f2c0a4c5e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/runtime.test.mjs",
+        "bytes": 8673,
+        "sha256": "f586042586f2a72d09776f3dc65e4293efc0036fc9f355db9dbf54201fa9e427",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/studio-actions.test.mjs",
+        "bytes": 13602,
+        "sha256": "8db2c46e5b11a0893688d90e68d716ec3b0c7b3a4bba360b4e7376d6e7a85a9c",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/studio-boundaries.test.mjs",
+        "bytes": 4634,
+        "sha256": "329c215ec47a19f0d712d8c1e45b00afcbd5300035e2ab5a43fd1cb06a44f1c9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/studio-http.test.mjs",
+        "bytes": 3414,
+        "sha256": "ed5933ee798f618939fccaedfa1352f7ff0a24fc82a7069aec02f4394548bb04",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/studio-modeled.test.mjs",
+        "bytes": 2849,
+        "sha256": "e75bccdefc2de59927c22a1ad901bb945b41a6f939d5aed64b72d6f17e385c0b",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/studio-security-regression.test.mjs",
+        "bytes": 4579,
+        "sha256": "e3bb27e91b036e1abc5305be644d6b7ce0c862fd08e238c3e79cdb4ba98933c6",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "test/types.mts",
+        "bytes": 1525,
+        "sha256": "bb6b5ed20b3517c4bfb7b0a44cad6ea2e3fd603b0f3a58f1a3c0bb5f1fb5595e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/alerts.d.ts",
+        "bytes": 203,
+        "sha256": "0cc3bffa085735ddb17f72ad89181a08f42f8dda46ec9eba53f0f3a91a9d13a8",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/analysis.d.ts",
+        "bytes": 98,
+        "sha256": "9b6c65ff44a11fe1037c24ce560450076d28da2fd914f9892ff4308248e3ec24",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/cluster.d.ts",
+        "bytes": 151,
+        "sha256": "4c5dcc3b7b962f353cfd7ecbdd819306750a119a18e4d7a98643ced179857a5b",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/config.d.ts",
+        "bytes": 133,
+        "sha256": "ae73b97f590f9c6d9b87b2a3228e4bf6e709a00c4da7da6e879f1ac779a13d9b",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/console.d.ts",
+        "bytes": 476,
+        "sha256": "c2a22a3599a0e811c35e52b30c0a36b7a777636285a4e7261c74a1bc38bdcde3",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/core.d.ts",
+        "bytes": 136,
+        "sha256": "dd0b526613210389e3a6a686f14200c9e929f48e33e1652401b7af242d6ccc9f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/deployments.d.ts",
+        "bytes": 49,
+        "sha256": "e470f088086d88a65fdddb3b085551110ce4dab52cdb6c5014884478668f276b",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/diagnostics.d.ts",
+        "bytes": 69,
+        "sha256": "6b289504296a081606a7e33400b134bc3064464e43f1a294b7b0864015f4a6ae",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/exporters.d.ts",
+        "bytes": 148,
+        "sha256": "9b039bbb7f54eb6e3e6922799b7b5fe5fb67e96879c5bd0584c5163299e452f7",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/health.d.ts",
+        "bytes": 45,
+        "sha256": "b15cb6ad42c683db81eda394a9af24e48ef8b9db87a54d066fe97e8371b90df1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/incidents.d.ts",
+        "bytes": 63,
+        "sha256": "441056935d97c1ffe528c5ef23ec17b432fd3d965f83ad9036bad2e734bf678a",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/index.d.ts",
+        "bytes": 29088,
+        "sha256": "d100b467b0a345331204b912da6ba1365ce05ab95eade5ef3d336b17d1521038",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/integrations.d.ts",
+        "bytes": 281,
+        "sha256": "8526cccd659c5af07cfe4f18a444bffa8cc40ed005a758dde87efdf8a14915a9",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/metrics.d.ts",
+        "bytes": 160,
+        "sha256": "9a1115533d86e78a6e92e2aebf918103045e074e8a1133bfd563881099ffdc82",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/pipeline.d.ts",
+        "bytes": 65,
+        "sha256": "23d4f50096cf9497c7372196b4a66014cbe031317cea04520eb5e6f9e7c440fd",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/plugins.d.ts",
+        "bytes": 51,
+        "sha256": "448f32c25efe9ad2c7c054f507c5eee47ff11ad8d0d2d25bb6482e7060c536c0",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/provider.d.ts",
+        "bytes": 518,
+        "sha256": "cf96ecb1f586287c1968d160b4a4e2a835d43efb9aeab058da097ebc6911ebd1",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/query.d.ts",
+        "bytes": 49,
+        "sha256": "abd7d5934d96204dcbbc754783962950f461a3a3f160e2bc0261e30ecdc51ce8",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/resources.d.ts",
+        "bytes": 97,
+        "sha256": "0d55b3d023ca8a9d7c1cce85408a19272ecaace5ae48c6959f229d14db92200e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/security.d.ts",
+        "bytes": 97,
+        "sha256": "25eb5a7632a50fdaf360eb0996a1aaa479967c2503345a59c1cf414d8151ad70",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/slo.d.ts",
+        "bytes": 57,
+        "sha256": "b331cf634bdc28972ed1251cef8a564f0d278f4ec62d58439ad06daa6027605e",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/storage.d.ts",
+        "bytes": 181,
+        "sha256": "3961577274aa2cdd961be92201a1397df3d16475a014ec77daead52654dfc386",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/studio-client.d.ts",
+        "bytes": 381,
+        "sha256": "2ee7a3e105c81251b9a3a0e45ad789a439c2d48af76355c2b510c997572a490f",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/studio.d.ts",
+        "bytes": 202,
+        "sha256": "4ea1246d28f9755afaf6fdc3259f68f3295788db2851880c925b52d0298c2eba",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/synthetics.d.ts",
+        "bytes": 63,
+        "sha256": "9aa144e32bed25cdb87bc48a0d2c0f5975e46d038a4b6ca86f00c1fc32cca640",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/system.d.ts",
+        "bytes": 78,
+        "sha256": "33aea5a76c1da10559acace82308a2270e6104ccf133563f73b48c51cec170a0",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/testing.d.ts",
+        "bytes": 64,
+        "sha256": "78612371136f3a87b7e480ffb914673d9de2b9cbb69a4d7da16e3bd680257c26",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      },
+      {
+        "path": "types/tracing.d.ts",
+        "bytes": 305,
+        "sha256": "8947cea6621b483f1b15832b064d2aca409db1de4bdf519c52d4551e3aef9606",
+        "modes": {
+          "source": 420,
+          "archive": 420,
+          "extracted": 420,
+          "installed": 420
+        }
+      }
+    ],
+    "repeat": {
+      "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/repeat/rawnode-monitor-1.0.0.tgz",
+      "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+      "bytes": 214938,
+      "exactByteMatch": true,
+      "pack": {
+        "id": "@rawnode/monitor@1.0.0",
+        "name": "@rawnode/monitor",
+        "version": "1.0.0",
+        "size": 214938,
+        "unpackedSize": 853210,
+        "shasum": "4eef499c1c4dbb1588ef4a0d9801a0a275888db4",
+        "integrity": "sha512-1XPwK9xCIHMXLFf8cop68VJ7do+o9yf4Ak7NF3J0fTjqnAhlZ6o3pmFJyRnkcG7O4/KvzM5kZvm2z33n+Q9zJw==",
+        "filename": "rawnode-monitor-1.0.0.tgz",
+        "files": [
+          {
+            "path": "CHANGELOG.md",
+            "size": 3148,
+            "mode": 420
+          },
+          {
+            "path": "LICENSE",
+            "size": 11358,
+            "mode": 420
+          },
+          {
+            "path": "NOTICE.md",
+            "size": 2343,
+            "mode": 420
+          },
+          {
+            "path": "README.md",
+            "size": 4334,
+            "mode": 420
+          },
+          {
+            "path": "config/monitor.js",
+            "size": 15100,
+            "mode": 420
+          },
+          {
+            "path": "docs/api-manifest.json",
+            "size": 15473,
+            "mode": 420
+          },
+          {
+            "path": "docs/API.md",
+            "size": 34738,
+            "mode": 420
+          },
+          {
+            "path": "docs/CONFIGURATION.md",
+            "size": 11551,
+            "mode": 420
+          },
+          {
+            "path": "docs/LIFECYCLE.md",
+            "size": 6353,
+            "mode": 420
+          },
+          {
+            "path": "docs/MIGRATION.md",
+            "size": 5986,
+            "mode": 420
+          },
+          {
+            "path": "docs/PUBLICATION.md",
+            "size": 3678,
+            "mode": 420
+          },
+          {
+            "path": "docs/SECURITY.md",
+            "size": 4472,
+            "mode": 420
+          },
+          {
+            "path": "docs/STUDIO.md",
+            "size": 6199,
+            "mode": 420
+          },
+          {
+            "path": "docs/VALIDATION.md",
+            "size": 7213,
+            "mode": 420
+          },
+          {
+            "path": "examples/basic.mjs",
+            "size": 621,
+            "mode": 420
+          },
+          {
+            "path": "examples/studio-fixture.mjs",
+            "size": 7167,
+            "mode": 420
+          },
+          {
+            "path": "package.json",
+            "size": 3953,
+            "mode": 420
+          },
+          {
+            "path": "resources/assets/css/monitor/studio.css",
+            "size": 10436,
+            "mode": 420
+          },
+          {
+            "path": "resources/assets/js/monitor/studio.js",
+            "size": 30831,
+            "mode": 420
+          },
+          {
+            "path": "scripts/check.mjs",
+            "size": 1839,
+            "mode": 420
+          },
+          {
+            "path": "scripts/generate-reference.mjs",
+            "size": 8522,
+            "mode": 420
+          },
+          {
+            "path": "scripts/reject-publication.mjs",
+            "size": 152,
+            "mode": 420
+          },
+          {
+            "path": "src/alerts/AlertEngine.js",
+            "size": 11917,
+            "mode": 420
+          },
+          {
+            "path": "src/alerts/AlertRule.js",
+            "size": 7039,
+            "mode": 420
+          },
+          {
+            "path": "src/alerts/index.js",
+            "size": 158,
+            "mode": 420
+          },
+          {
+            "path": "src/alerts/NotificationRouter.js",
+            "size": 5457,
+            "mode": 420
+          },
+          {
+            "path": "src/alerts/SilenceManager.js",
+            "size": 1993,
+            "mode": 420
+          },
+          {
+            "path": "src/analysis/AnomalyDetector.js",
+            "size": 11222,
+            "mode": 420
+          },
+          {
+            "path": "src/analysis/CorrelationEngine.js",
+            "size": 5621,
+            "mode": 420
+          },
+          {
+            "path": "src/analysis/index.js",
+            "size": 167,
+            "mode": 420
+          },
+          {
+            "path": "src/analysis/LeakDetector.js",
+            "size": 8115,
+            "mode": 420
+          },
+          {
+            "path": "src/analysis/StreamingBaseline.js",
+            "size": 5131,
+            "mode": 420
+          },
+          {
+            "path": "src/cluster/FleetRegistry.js",
+            "size": 4107,
+            "mode": 420
+          },
+          {
+            "path": "src/cluster/index.js",
+            "size": 170,
+            "mode": 420
+          },
+          {
+            "path": "src/cluster/LeaderLease.js",
+            "size": 4451,
+            "mode": 420
+          },
+          {
+            "path": "src/cluster/MonitorClusterEnvelope.js",
+            "size": 2724,
+            "mode": 420
+          },
+          {
+            "path": "src/cluster/RedisMonitorBridge.js",
+            "size": 4025,
+            "mode": 420
+          },
+          {
+            "path": "src/compatibility/CompatibilityProfile.js",
+            "size": 2761,
+            "mode": 420
+          },
+          {
+            "path": "src/config/MonitorConfiguration.js",
+            "size": 27208,
+            "mode": 420
+          },
+          {
+            "path": "src/console/index.js",
+            "size": 52,
+            "mode": 420
+          },
+          {
+            "path": "src/console/MonitorCommands.js",
+            "size": 12780,
+            "mode": 420
+          },
+          {
+            "path": "src/constants.js",
+            "size": 1855,
+            "mode": 420
+          },
+          {
+            "path": "src/core/index.js",
+            "size": 137,
+            "mode": 420
+          },
+          {
+            "path": "src/core/MonitorContextManager.js",
+            "size": 3237,
+            "mode": 420
+          },
+          {
+            "path": "src/core/MonitorLifecycle.js",
+            "size": 2277,
+            "mode": 420
+          },
+          {
+            "path": "src/core/TelemetryEnvelope.js",
+            "size": 1968,
+            "mode": 420
+          },
+          {
+            "path": "src/deployments/DeploymentRegistry.js",
+            "size": 2835,
+            "mode": 420
+          },
+          {
+            "path": "src/deployments/index.js",
+            "size": 55,
+            "mode": 420
+          },
+          {
+            "path": "src/diagnostics/DiagnosticBundleBuilder.js",
+            "size": 2555,
+            "mode": 420
+          },
+          {
+            "path": "src/diagnostics/index.js",
+            "size": 96,
+            "mode": 420
+          },
+          {
+            "path": "src/diagnostics/MonitorDoctor.js",
+            "size": 3750,
+            "mode": 420
+          },
+          {
+            "path": "src/errors.js",
+            "size": 2481,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/CallbackExporter.js",
+            "size": 786,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/EventExporter.js",
+            "size": 1010,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/ExporterRegistry.js",
+            "size": 3101,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/HttpJsonExporter.js",
+            "size": 12299,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/index.js",
+            "size": 243,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/OtlpJsonExporter.js",
+            "size": 4540,
+            "mode": 420
+          },
+          {
+            "path": "src/exporters/StatsdExporter.js",
+            "size": 2690,
+            "mode": 420
+          },
+          {
+            "path": "src/health/HealthRegistry.js",
+            "size": 7746,
+            "mode": 420
+          },
+          {
+            "path": "src/health/index.js",
+            "size": 51,
+            "mode": 420
+          },
+          {
+            "path": "src/incidents/IncidentManager.js",
+            "size": 7327,
+            "mode": 420
+          },
+          {
+            "path": "src/incidents/index.js",
+            "size": 90,
+            "mode": 420
+          },
+          {
+            "path": "src/incidents/RunbookRegistry.js",
+            "size": 1215,
+            "mode": 420
+          },
+          {
+            "path": "src/index.js",
+            "size": 1245,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/EventMonitorBridge.js",
+            "size": 3317,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/HttpMonitorMiddleware.js",
+            "size": 5997,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/index.js",
+            "size": 392,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/LoggerMonitorBridge.js",
+            "size": 1276,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/MonitorFetch.js",
+            "size": 2345,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/MonitorLogTransport.js",
+            "size": 1750,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/OperationInstrumentor.js",
+            "size": 3329,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/PMMonitorBridge.js",
+            "size": 1159,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/ProtocolMonitorBridge.js",
+            "size": 2223,
+            "mode": 420
+          },
+          {
+            "path": "src/integrations/RawNodeIntegrationManager.js",
+            "size": 3120,
+            "mode": 420
+          },
+          {
+            "path": "src/metrics/index.js",
+            "size": 163,
+            "mode": 420
+          },
+          {
+            "path": "src/metrics/Instruments.js",
+            "size": 15009,
+            "mode": 420
+          },
+          {
+            "path": "src/metrics/MetricHistory.js",
+            "size": 1359,
+            "mode": 420
+          },
+          {
+            "path": "src/metrics/MetricRegistry.js",
+            "size": 6257,
+            "mode": 420
+          },
+          {
+            "path": "src/metrics/PrometheusFormatter.js",
+            "size": 2410,
+            "mode": 420
+          },
+          {
+            "path": "src/MonitorManager.js",
+            "size": 2131,
+            "mode": 420
+          },
+          {
+            "path": "src/MonitorRuntime.js",
+            "size": 49241,
+            "mode": 420
+          },
+          {
+            "path": "src/pipeline/BoundedSignalQueue.js",
+            "size": 8033,
+            "mode": 420
+          },
+          {
+            "path": "src/pipeline/index.js",
+            "size": 92,
+            "mode": 420
+          },
+          {
+            "path": "src/pipeline/SignalPipeline.js",
+            "size": 15771,
+            "mode": 420
+          },
+          {
+            "path": "src/plugins/index.js",
+            "size": 57,
+            "mode": 420
+          },
+          {
+            "path": "src/plugins/MonitorPluginManager.js",
+            "size": 19225,
+            "mode": 420
+          },
+          {
+            "path": "src/provider/MonitorServiceProvider.js",
+            "size": 10648,
+            "mode": 420
+          },
+          {
+            "path": "src/query/index.js",
+            "size": 55,
+            "mode": 420
+          },
+          {
+            "path": "src/query/MonitorQueryEngine.js",
+            "size": 5739,
+            "mode": 420
+          },
+          {
+            "path": "src/resources/index.js",
+            "size": 98,
+            "mode": 420
+          },
+          {
+            "path": "src/resources/RawNodeResourceCatalog.js",
+            "size": 3614,
+            "mode": 420
+          },
+          {
+            "path": "src/resources/ResourceRegistry.js",
+            "size": 8264,
+            "mode": 420
+          },
+          {
+            "path": "src/security/index.js",
+            "size": 145,
+            "mode": 420
+          },
+          {
+            "path": "src/security/SafeTelemetrySerializer.js",
+            "size": 5799,
+            "mode": 420
+          },
+          {
+            "path": "src/security/TelemetryAuthenticator.js",
+            "size": 1936,
+            "mode": 420
+          },
+          {
+            "path": "src/security/TelemetryRedactor.js",
+            "size": 3480,
+            "mode": 420
+          },
+          {
+            "path": "src/slo/index.js",
+            "size": 84,
+            "mode": 420
+          },
+          {
+            "path": "src/slo/SloDefinition.js",
+            "size": 3949,
+            "mode": 420
+          },
+          {
+            "path": "src/slo/SloRegistry.js",
+            "size": 5925,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/CompositeTelemetryStore.js",
+            "size": 7807,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/createTelemetryStore.js",
+            "size": 3199,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/index.js",
+            "size": 313,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/JsonlTelemetryStore.js",
+            "size": 11282,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/MemoryTelemetryStore.js",
+            "size": 4319,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/NoopTelemetryStore.js",
+            "size": 481,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/RawMongoTelemetryStore.js",
+            "size": 6830,
+            "mode": 420
+          },
+          {
+            "path": "src/storage/RetentionManager.js",
+            "size": 1131,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/index.js",
+            "size": 328,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/MonitorStudioAssets.js",
+            "size": 1346,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/MonitorStudioAuthorizer.js",
+            "size": 3990,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/MonitorStudioController.js",
+            "size": 10787,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/MonitorStudioManager.js",
+            "size": 11668,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/MonitorStudioPage.js",
+            "size": 3146,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/MonitorStudioRateLimiter.js",
+            "size": 2880,
+            "mode": 420
+          },
+          {
+            "path": "src/studio/registerMonitorStudioRoutes.js",
+            "size": 3446,
+            "mode": 420
+          },
+          {
+            "path": "src/support.js",
+            "size": 12748,
+            "mode": 420
+          },
+          {
+            "path": "src/synthetics/index.js",
+            "size": 90,
+            "mode": 420
+          },
+          {
+            "path": "src/synthetics/SyntheticCheck.js",
+            "size": 2711,
+            "mode": 420
+          },
+          {
+            "path": "src/synthetics/SyntheticMonitor.js",
+            "size": 22839,
+            "mode": 420
+          },
+          {
+            "path": "src/system/index.js",
+            "size": 105,
+            "mode": 420
+          },
+          {
+            "path": "src/system/ProcessMetricsCollector.js",
+            "size": 10098,
+            "mode": 420
+          },
+          {
+            "path": "src/system/SystemMetricsCollector.js",
+            "size": 646,
+            "mode": 420
+          },
+          {
+            "path": "src/testing/index.js",
+            "size": 52,
+            "mode": 420
+          },
+          {
+            "path": "src/testing/MonitorRecorder.js",
+            "size": 1799,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/index.js",
+            "size": 217,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/InMemorySpanStore.js",
+            "size": 4430,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/Sampler.js",
+            "size": 1947,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/SignalSpanProcessor.js",
+            "size": 760,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/Span.js",
+            "size": 5388,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/TraceContext.js",
+            "size": 5305,
+            "mode": 420
+          },
+          {
+            "path": "src/tracing/Tracer.js",
+            "size": 5639,
+            "mode": 420
+          },
+          {
+            "path": "test/adversarial-pipeline-metrics.test.mjs",
+            "size": 6596,
+            "mode": 420
+          },
+          {
+            "path": "test/adversarial-plugins.test.mjs",
+            "size": 4322,
+            "mode": 420
+          },
+          {
+            "path": "test/adversarial-retention-synthetics.test.mjs",
+            "size": 5986,
+            "mode": 420
+          },
+          {
+            "path": "test/adversarial-synthetic-http.test.mjs",
+            "size": 4282,
+            "mode": 420
+          },
+          {
+            "path": "test/alert-lifecycle.test.mjs",
+            "size": 6807,
+            "mode": 420
+          },
+          {
+            "path": "test/capabilities.test.mjs",
+            "size": 4522,
+            "mode": 420
+          },
+          {
+            "path": "test/contracts-hardening.test.mjs",
+            "size": 8327,
+            "mode": 420
+          },
+          {
+            "path": "test/exports-types.mts",
+            "size": 5524,
+            "mode": 420
+          },
+          {
+            "path": "test/readiness-http-delivery.test.mjs",
+            "size": 6041,
+            "mode": 420
+          },
+          {
+            "path": "test/readiness-lifecycle.test.mjs",
+            "size": 11946,
+            "mode": 420
+          },
+          {
+            "path": "test/runtime.test.mjs",
+            "size": 8673,
+            "mode": 420
+          },
+          {
+            "path": "test/studio-actions.test.mjs",
+            "size": 13602,
+            "mode": 420
+          },
+          {
+            "path": "test/studio-boundaries.test.mjs",
+            "size": 4634,
+            "mode": 420
+          },
+          {
+            "path": "test/studio-http.test.mjs",
+            "size": 3414,
+            "mode": 420
+          },
+          {
+            "path": "test/studio-modeled.test.mjs",
+            "size": 2849,
+            "mode": 420
+          },
+          {
+            "path": "test/studio-security-regression.test.mjs",
+            "size": 4579,
+            "mode": 420
+          },
+          {
+            "path": "test/types.mts",
+            "size": 1525,
+            "mode": 420
+          },
+          {
+            "path": "types/alerts.d.ts",
+            "size": 203,
+            "mode": 420
+          },
+          {
+            "path": "types/analysis.d.ts",
+            "size": 98,
+            "mode": 420
+          },
+          {
+            "path": "types/cluster.d.ts",
+            "size": 151,
+            "mode": 420
+          },
+          {
+            "path": "types/config.d.ts",
+            "size": 133,
+            "mode": 420
+          },
+          {
+            "path": "types/console.d.ts",
+            "size": 476,
+            "mode": 420
+          },
+          {
+            "path": "types/core.d.ts",
+            "size": 136,
+            "mode": 420
+          },
+          {
+            "path": "types/deployments.d.ts",
+            "size": 49,
+            "mode": 420
+          },
+          {
+            "path": "types/diagnostics.d.ts",
+            "size": 69,
+            "mode": 420
+          },
+          {
+            "path": "types/exporters.d.ts",
+            "size": 148,
+            "mode": 420
+          },
+          {
+            "path": "types/health.d.ts",
+            "size": 45,
+            "mode": 420
+          },
+          {
+            "path": "types/incidents.d.ts",
+            "size": 63,
+            "mode": 420
+          },
+          {
+            "path": "types/index.d.ts",
+            "size": 29088,
+            "mode": 420
+          },
+          {
+            "path": "types/integrations.d.ts",
+            "size": 281,
+            "mode": 420
+          },
+          {
+            "path": "types/metrics.d.ts",
+            "size": 160,
+            "mode": 420
+          },
+          {
+            "path": "types/pipeline.d.ts",
+            "size": 65,
+            "mode": 420
+          },
+          {
+            "path": "types/plugins.d.ts",
+            "size": 51,
+            "mode": 420
+          },
+          {
+            "path": "types/provider.d.ts",
+            "size": 518,
+            "mode": 420
+          },
+          {
+            "path": "types/query.d.ts",
+            "size": 49,
+            "mode": 420
+          },
+          {
+            "path": "types/resources.d.ts",
+            "size": 97,
+            "mode": 420
+          },
+          {
+            "path": "types/security.d.ts",
+            "size": 97,
+            "mode": 420
+          },
+          {
+            "path": "types/slo.d.ts",
+            "size": 57,
+            "mode": 420
+          },
+          {
+            "path": "types/storage.d.ts",
+            "size": 181,
+            "mode": 420
+          },
+          {
+            "path": "types/studio-client.d.ts",
+            "size": 381,
+            "mode": 420
+          },
+          {
+            "path": "types/studio.d.ts",
+            "size": 202,
+            "mode": 420
+          },
+          {
+            "path": "types/synthetics.d.ts",
+            "size": 63,
+            "mode": 420
+          },
+          {
+            "path": "types/system.d.ts",
+            "size": 78,
+            "mode": 420
+          },
+          {
+            "path": "types/testing.d.ts",
+            "size": 64,
+            "mode": 420
+          },
+          {
+            "path": "types/tracing.d.ts",
+            "size": 305,
+            "mode": 420
+          }
+        ],
+        "entryCount": 177,
+        "bundled": []
+      }
+    },
+    "npmIsolation": {
+      "config": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/npm-isolation",
+      "offline": true,
+      "installScriptsDisabled": true,
+      "nodeOptionsRemoved": true
+    },
+    "inspection": {
+      "machinePaths": [],
+      "suspiciousImports": [],
+      "credentialPatterns": [],
+      "unexpected": [],
+      "scope": "path/native-import/known-private-key-pattern checks; not a universal secret detector"
+    },
+    "sourceDistributionReceipt": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/distribution.json",
+    "npmCli": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+    "npmVersion": "10.5.1",
+    "compiler": "/usr/local/lib/node_modules/typescript/bin/tsc",
+    "compilerVersion": "Version 5.9.3",
+    "compilerRuntime": "v22.0.0",
+    "consumerPackageFilesVerified": 177,
+    "checkedAgainstFinalArchiveInventory": true,
+    "commands": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/distribution-commands.json",
+    "packingNode": "v24.21.0",
+    "packingExecPath": "/usr/local/bin/node",
+    "packingTooling": {
+      "node": {
+        "executable": "/usr/local/bin/node",
+        "realpath": "/usr/local/bin/node",
+        "version": "v24.21.0"
+      },
+      "npm": {
+        "executable": "/usr/local/bin/npm",
+        "realpath": "/usr/local/lib/node_modules/npm/bin/npm-cli.js",
+        "version": "11.19.0"
+      },
+      "tsc": {
+        "executable": "/usr/local/bin/tsc",
+        "realpath": "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "version": "Version 5.9.3"
+      },
+      "python3": {
+        "executable": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+        "realpath": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+        "version": "Python 3.12.4"
+      }
+    }
+  },
+  "fixturePath": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/examples/studio-fixture.mjs",
+  "scope": "Actual loopback HTTP and SSE protocol; browser execution and native EventSource reconnection remain unverified.",
+  "checks": [
+    {
+      "name": "Synthetic fixture initial operator state",
+      "passed": true,
+      "mode": "seeded",
+      "requests": 0,
+      "mutationRequests": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    {
+      "name": "Packaged shell and escaped identity",
+      "passed": true,
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+    },
+    {
+      "name": "Packaged studio.js",
+      "passed": true,
+      "status": 200,
+      "bytes": 30831
+    },
+    {
+      "name": "Packaged studio.css",
+      "passed": true,
+      "status": 200,
+      "bytes": 10436
+    },
+    {
+      "name": "Portable fixture controls are served",
+      "passed": true,
+      "status": 200,
+      "controls": [
+        "unmount",
+        "mount",
+        "cycle",
+        "empty",
+        "error",
+        "delayed",
+        "recover",
+        "disconnect"
+      ],
+      "execution": "Source/HTTP inspection only; controls were not clicked in a browser."
+    },
+    {
+      "name": "API overview",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API metrics",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API traces",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API signals",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API health",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API resources",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API alerts",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API slos",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API incidents",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API fleet",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API deployments",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API anomalies",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API synthetics",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API diagnostics",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "API doctor",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Trace detail redacts synthetic token",
+      "passed": true,
+      "status": 200,
+      "spans": 1
+    },
+    {
+      "name": "Read origin enforcement",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "name": "Remote ingestion disabled",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "name": "Empty traces mode",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Controlled HTTP failure mode",
+      "passed": true,
+      "status": 503,
+      "note": "Error text contains synthetic HTML for client escaping checks; no browser rendering claim."
+    },
+    {
+      "name": "Delayed HTTP request mode",
+      "passed": true,
+      "status": 200,
+      "elapsedMs": 504.15231800000004
+    },
+    {
+      "name": "HTTP client cancellation",
+      "passed": true,
+      "note": "Abort of a task-owned read request; this is not browser navigation validation."
+    },
+    {
+      "name": "HTTP recovery",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "Actual SSE ready frame",
+      "passed": true,
+      "event": "ready",
+      "state": "running"
+    },
+    {
+      "name": "Actual SSE signal frame",
+      "passed": true,
+      "event": "signal",
+      "kind": "health"
+    },
+    {
+      "name": "SSE server disconnect closes protocol stream and removes client",
+      "passed": true
+    },
+    {
+      "name": "SSE manual reconnect and client cancellation cleanup",
+      "passed": true,
+      "note": "A fresh HTTP stream was opened manually; native EventSource reconnection was not executed."
+    },
+    {
+      "name": "Idempotent fixture close releases server, stream clients, signal listener and runtime timers",
+      "passed": true
+    }
+  ],
+  "beforeClose": {
+    "mode": "seeded",
+    "requests": 26,
+    "mutationRequests": 1,
+    "clients": 0,
+    "signalListeners": 1,
+    "silences": 0,
+    "alertState": "firing",
+    "incidentState": "open"
+  },
+  "status": "passed",
+  "finishedAt": "2026-10-25T14:07:15.984Z",
+  "checkCount": 33
+}

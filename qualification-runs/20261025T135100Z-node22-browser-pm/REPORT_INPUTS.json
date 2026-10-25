@@ -1,0 +1,115 @@
+{
+  "scope": "Immutable completed engineering inputs used for draft report. Active browser receipts excluded until root finalizes browser evidence; this file does not claim final browser completion.",
+  "files": [
+    {
+      "path": "baseline.json",
+      "bytes": 57306,
+      "sha256": "86d77b5f226d8ed180e4aab19df771e0ec4aef9ffd591228c69604d56b12fcbf"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 275838,
+      "sha256": "59eb509a983856229ccd14464198824927c199259d15ce18e4d070aeaed60089"
+    },
+    {
+      "path": "observed-worktree.patch",
+      "bytes": 75735,
+      "sha256": "63c960ee3f40b48ca20e670cd388a2b5b24e85c3bab54e63ccaa504bde0c7693"
+    },
+    {
+      "path": "changes-from-oct25.patch",
+      "bytes": 34225,
+      "sha256": "8bb02ece8f404bd8f4f3f336a994f4cd39aa945848aeced4f1cf97ad6779ba0d"
+    },
+    {
+      "path": "seven-regressions.json",
+      "bytes": 2348,
+      "sha256": "2ea04187803bcc98267742d47be7623aa42588d9043f75875c2fdfa8ea1b0975"
+    },
+    {
+      "path": "final/distribution.json",
+      "bytes": 93039,
+      "sha256": "9740ed2883296d6ef89209403a85bae3df527c5ba4738ac2b8f2ef0249254361"
+    },
+    {
+      "path": "final/source-final.json",
+      "bytes": 31041,
+      "sha256": "e20d19ca746d3c75abbeae27ac5f60a54aab467d141e62e799553f3bb01e1c96"
+    },
+    {
+      "path": "final/harness-inventory.json",
+      "bytes": 2287,
+      "sha256": "9f5d08e30730195e38f6a72b7ae859f5c4939dcbead9ade4c4903a44495fbc38"
+    },
+    {
+      "path": "final/final-verification.json",
+      "bytes": 6373,
+      "sha256": "5179be97a9bfb6eb81ae06e7f739e12788b9e6d159703578b43f8b0d1fe7ecf9"
+    },
+    {
+      "path": "node22-final/qualification.json",
+      "bytes": 8960,
+      "sha256": "9d66f2758a80d3eb3f8bef7c051f7b71801365c8db09bace377b5c406bca6246"
+    },
+    {
+      "path": "node22-final/distribution.json",
+      "bytes": 94897,
+      "sha256": "caa40ddb20f1fbfda96cc1a6cee2362b29f9dad7e5bde83c21b37530969a38a0"
+    },
+    {
+      "path": "license-policy.json",
+      "bytes": 19446,
+      "sha256": "bd3820bb6cafe8ece249b5af197a7fb968da486be279883bec6f3d7a6f6eacac"
+    },
+    {
+      "path": "OWNER_DECISIONS.md",
+      "bytes": 4403,
+      "sha256": "9539348c756eb6a2ec31ec24ade7527eb4441d6ec82b0e324d844b4ba9a89262"
+    },
+    {
+      "path": "SERVICE_SCOPE.md",
+      "bytes": 20398,
+      "sha256": "cbff79c7383adecdea22020238f83c3631d75cbe8c907887b091963a11e73797"
+    },
+    {
+      "path": "OPERATOR_DECISIONS.md",
+      "bytes": 13083,
+      "sha256": "51fb742a9927c80e7aecbb3b40b73d8c5945355432dbcc887b55f4cfbedc3f87"
+    },
+    {
+      "path": "operator-defaults.json",
+      "bytes": 57187,
+      "sha256": "6af18ba6bb9f11e016968c290da1fdaf4579018442b6ade15e223f7c54f557c7"
+    },
+    {
+      "path": "runtime/platform.json",
+      "bytes": 697,
+      "sha256": "c46787752e847de6506826b02e8c650e610adc035abf92206869011161229ae7"
+    },
+    {
+      "path": "runtime/node22-input.json",
+      "bytes": 999,
+      "sha256": "dc40a7aeaa4b7e68fd35a6732927e446403f135c5b323c8a615b371e59b6053b"
+    },
+    {
+      "path": "runtime/MOCK_TIMER_DIAGNOSIS.md",
+      "bytes": 2960,
+      "sha256": "ee806d86495b348953e5bbf5eaeee4175edb138158200f745226e4cf3f2b928f"
+    },
+    {
+      "path": "scripts/baseline.mjs",
+      "bytes": 3164,
+      "sha256": "c5678ed9d397a6131e5fa9f7b92686991876fcc18aa6ef653ccb1f5bf46d8c62"
+    },
+    {
+      "path": "scripts/license-policy.mjs",
+      "bytes": 7080,
+      "sha256": "e1383bb569aa9090cd1d61f56303d799051353d2369567ce76f1f33a67b00fa1"
+    },
+    {
+      "path": "scripts/operator-defaults.mjs",
+      "bytes": 2989,
+      "sha256": "269703cb89e763fda2b289a01d4c10473114dd9c439bbee595035d1e1faae307"
+    }
+  ]
+}

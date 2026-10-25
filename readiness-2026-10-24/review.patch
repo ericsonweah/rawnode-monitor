@@ -1,0 +1,529 @@
+diff --git a/package/CHANGELOG.md b/package/CHANGELOG.md
+index 830a8a6..158a7d9 100644
+--- a/package/CHANGELOG.md
++++ b/package/CHANGELOG.md
+@@ -2,6 +2,8 @@
+ 
+ ## 1.0.0 (private, provisional)
+ 
++October 24 follow-up: prevent automatic HTTP replay after uncertain acknowledgement timeouts and after partial split acknowledgement; report delivery progress without claiming durable receipt. Complete health registration/report, metric discovery and synthetic removal declarations. Label the Studio operator token and authorization dialog. Preserve open trace/incident/diagnostic inspectors and active filters across automatic polling, with an explicit resume control. Fresh archive, browser and consumer evidence is under readiness-2026-10-24.
++
+ Readiness hardening: sanitize Studio failures through the runtime serializer/redactor, cancel operator prompts without mutations, abort stale action ownership, and use CSP-compatible trace progress and labeled filters. Correct health/resource replacement identity, HTTP exporter terminal admission, JSONL initialization/drain accounting, trace ratio/context binding/baggage parsing, unmatched HTTP route labels, alert/notification callback lifecycle, delayed Redis subscription cleanup and finite fleet-envelope timestamps. Strengthen concrete envelope/span/tracer declarations and add an all-entrypoint strict type consumer. Preserve private metadata, unresolved license, ownership and publication rejection. Current archive verification and remaining acceptance gaps are recorded in the repository's readiness-2026-10-21 directory.
+ 
+ Extracted the authoritative Monitor source and actual Studio frontend without modifying the app or sibling candidates. Added standalone exports, package-relative assets, injected provider policy, release guards, examples, native/adversarial tests and API/configuration evidence. Corrected lifecycle races, cancellation, stale subscriptions/series, bounded collector/exporter behavior, retention, durability acknowledgements, synthetic cleanup, untrusted body/envelope handling, redaction, and Studio mount/destroy behavior. See migration and validation documents for behavioral compatibility and remaining gaps.
+diff --git a/package/docs/API.md b/package/docs/API.md
+index 76bebd5..2eb75c0 100644
+--- a/package/docs/API.md
++++ b/package/docs/API.md
+@@ -1296,3 +1296,9 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
+ ## Readiness behavior corrections
+ 
+ Trace ratio sampling compares a 52-bit trace-ID suffix to a matching 52-bit bound; a configured 0.5 no longer admits every suffix. Async context `bind(callback, context)` preserves the requested context across awaits. Malformed percent-encoded baggage keys are ignored. HTTP middleware uses `route: unmatched` when no template/resolver is available, avoiding request-specific series. Health/resource registration replacement, alert/notification callbacks, direct exporter shutdown and admitted file writes follow the ownership rules in LIFECYCLE.md. Concrete `TelemetryEnvelope`, `Tracer` and `Span.end({endTimeUnixNano})` declarations match runtime behavior. Broad advanced extension types remain available.
++
++## October 24 declaration and delivery corrections
++
++`MonitorRuntime.registerHealth(name, check, options)` types the `HealthCheck` callback and returns its registration-bound disposer. `HealthReport` includes the runtime duration and status counts. `MetricRegistry.has()/names()` and `SyntheticMonitor.unregister()` are declared. These expose existing runtime methods without adding exports.
++
++HTTP timeout errors set `retryable:false` and `details.delivery` to `unknown`. Split failures preserve the cause code (or use `MONITOR_EXPORT_PARTIAL_DELIVERY`) and report `details.acknowledgedSignals` / `details.unacknowledgedSignals`; whole-export retry is disabled after an acknowledged prefix. See LIFECYCLE.md for remote-delivery uncertainty.
+diff --git a/package/docs/LIFECYCLE.md b/package/docs/LIFECYCLE.md
+index 7fa4f70..630d6e6 100644
+--- a/package/docs/LIFECYCLE.md
++++ b/package/docs/LIFECYCLE.md
+@@ -14,7 +14,7 @@ Registry definitions and direct low-level objects are trusted application contro
+ 
+ Health replacement invalidates the name's TTL cache. Registration disposers are identity-bound; explicit `unregister(name)` still removes the current registration. An old pending check cannot cache a result for its replacement. Resource replacement clears its latest record and suppresses retired collection events as well as cache updates.
+ 
+-Direct `HttpJsonExporter.close()` closes admission synchronously, aborts active HTTP requests and retry waits, checks compression/split continuations, destroys its owned agent, and waits for admitted exports to settle. A new export after close returns `false`; an interrupted admitted export rejects with `MONITOR_EXPORTER_CLOSED`. Its statistics count acknowledged 2xx chunks. A failed split export can have acknowledged earlier chunks, and an aborted request may already have reached its receiver; shutdown does not undo remote delivery. Runtime cancellation is additional to the exporter's own lifecycle.
++Direct `HttpJsonExporter.close()` closes admission synchronously, aborts active HTTP requests and retry waits, checks compression/split continuations, destroys its owned agent, and waits for admitted exports to settle. A new export after close returns `false`; an interrupted admitted export rejects with `MONITOR_EXPORTER_CLOSED`. Its statistics count acknowledged 2xx chunks. A failed split export can have acknowledged earlier chunks, and an aborted request may already have reached its receiver; shutdown does not undo remote delivery. Runtime cancellation is additional to the exporter's own lifecycle. An HTTP acknowledgement timeout has `retryable:false` and `details.delivery:"unknown"`; it is not automatically replayed. A failed split export reports `details.acknowledgedSignals` and `details.unacknowledgedSignals` and disables whole-export retry so acknowledged chunks are not resent. An unacknowledged signal may already have reached the receiver. Ordinary explicit retryable HTTP failures still use bounded retries; a 2xx acknowledgement does not establish durable persistence.
+ 
+ `JsonlTelemetryStore.writeMany()` registers the full operation before initialization yields. `flush()` waits for operations already admitted when called; it does not exclude later writes. `close()` stops admission immediately and drains all earlier operations across signal kinds. Repeated close shares that drain. Write errors remain observable to the write caller and in store statistics; filesystem operations cannot be forcibly cancelled by the store.
+ 
+diff --git a/package/docs/MIGRATION.md b/package/docs/MIGRATION.md
+index a434653..ce8cee9 100644
+--- a/package/docs/MIGRATION.md
++++ b/package/docs/MIGRATION.md
+@@ -15,3 +15,7 @@ Integration claims distinguish adapter contract tests from exact packed composit
+ The readiness pass corrects ratio sampling and async context binding. Applications may observe fewer spans at fractional sampling rates because the ratio now matches its configured value. HTTP middleware without a route template/resolver reports `unmatched` instead of a request-specific path. Health/resource replacement drops retired cached metadata/results. Studio Cancel performs no operator mutation; an intentional empty silence rule ID still means all rules. Pending exporter delivery rejects on direct close and cannot start later chunks/retries. Accepted file writes drain before close reports completion. Alert/notification callbacks now have bounded waits with documented controls and late-result suppression; non-cooperative external work can remain active.
+ 
+ Declarations now expose the existing runtime `TelemetryEnvelope` class (including `monitorVersion` and nullable metadata), `Tracer` construction/active APIs, and the actual options-object form of `Span.end`. This can reveal consumers that relied on inaccurate prior declarations; runtime symbol names and export-map entries remain unchanged.
++
++The October 24 follow-up stops automatic HTTP replay after an acknowledgement timeout or a failed export with an acknowledged prefix. Callers now receive non-retryable errors with delivery uncertainty/progress details. This trades automatic recovery for avoiding silent duplicate delivery. Health registration/report and metric/synthetic declaration omissions are corrected without changing runtime exports.
++
++Studio pauses automatic refresh during detail inspection and active filter/focus interaction. A visible Resume live updates control, manual Refresh or navigation restores live rendering. This preserves readable snapshots while leaving server state and the mount/destroy contract unchanged.
+diff --git a/package/docs/PUBLICATION.md b/package/docs/PUBLICATION.md
+index 421b01a..2391a4c 100644
+--- a/package/docs/PUBLICATION.md
++++ b/package/docs/PUBLICATION.md
+@@ -2,7 +2,7 @@
+ 
+ This preparation performs no publication, push, tag, deployment, daemon registration or system configuration. The readiness pass uses controlled local offline npm installation of exact archives in fresh temporary consumers, with lifecycle scripts disabled; it adds no dependencies to this candidate. `private:true`, `license:UNLICENSED`, and `prepublishOnly: node scripts/reject-publication.mjs` reject accidental publication. The guard always exits nonzero; there is no environment-variable bypass.
+ 
+-Before a separately approved release, the owner must decide: license grant/provenance, ownership metadata, npm scope control, final version, supported Node majors, remaining real-browser acceptance, and optional integration coverage. Preserve the root ISC declaration and empty LICENSE evidence rather than inventing a license text. First Principle Lab LLC owns RawNode.
++Before a separately approved release, the owner must decide: license grant/provenance, ownership metadata, npm scope control, final version, supported Node majors, the supported browser/assistive-technology acceptance matrix, and optional integration coverage. Preserve the root ISC declaration and empty LICENSE evidence rather than inventing a license text. First Principle Lab LLC owns RawNode.
+ 
+ Local review commands require only Node/npm:
+ 
+@@ -19,4 +19,4 @@ For exact offline consumer review, extract the tgz into a fresh temporary `node_
+ 
+ An approved release would require a new explicit task to remove the candidate barriers and run the owner's release process. Do not run `npm publish` from this candidate. Even `npm publish --dry-run` is unnecessary: test the rejecting guard directly with `npm run prepublishOnly`.
+ 
+-Before any later approved release, record the owner decisions and chosen runtime/browser/integration matrix; complete missing acceptance; update license/version/namespace only under that new authorization; review the diff; repeat native and strict declaration checks; create a new archive outside the packed tree; record its hash and verify fresh extraction and offline installation, every installed export, browser assets/actions, composition and guard behavior; obtain explicit approval of those exact bytes. Any package edit invalidates earlier artifact verification. Only a separately authorized release task may change the publication barriers and execute the owner-approved publication process. Current readiness receipts and the release checklist live outside this package in readiness-2026-10-21/.
++Before any later approved release, record the owner decisions and chosen runtime/browser/integration matrix; complete missing acceptance; update license/version/namespace only under that new authorization; review the diff; repeat native and strict declaration checks; create a new archive outside the packed tree; record its hash and verify fresh extraction and offline installation, every installed export, browser assets/actions, composition and guard behavior; obtain explicit approval of those exact bytes. Any package edit invalidates earlier artifact verification. Only a separately authorized release task may change the publication barriers and execute the owner-approved publication process. Current readiness receipts and the release checklist live outside this package in readiness-2026-10-24/.
+diff --git a/package/docs/STUDIO.md b/package/docs/STUDIO.md
+index 35357da..574e800 100644
+--- a/package/docs/STUDIO.md
++++ b/package/docs/STUDIO.md
+@@ -4,6 +4,8 @@ The authoritative frontend is the supplied local `resources/assets/js/monitor/st
+ 
+ Package assets resolve relative to the package. Supply `assetsRoot` to route registration only when deliberately replacing the asset tree. This differs from the original implicit application-root lookup. `/studio/client` is browser-safe to import without a DOM; it auto-mounts when the standard root is present, and exports `mountMonitorStudio(root, {fetch?, EventSource?})`. The root must contain the markup produced by `renderMonitorStudioPage`. One active root owns one poll timer and at most one EventSource. Replacing/removing a root must call its returned handle's `destroy`.
+ 
++Opening a trace, incident or full diagnostics snapshot pauses automatic refresh for that view, so the inspected content stays readable. The view displays this pause and a **Resume live updates** button. The main **Refresh** button and navigation also clear the inspection and resume updates. Automatic refresh defers while a filter has a value, a form control or details summary in the main content has focus, or a native details section is expanded; clearing/closing those controls allows polling to continue. These are retained snapshots, not continuously updated detail panels. Manual refresh and operator actions remain available, and leaving the view still aborts its pending requests.
++
+ Run `node examples/studio-fixture.mjs` from the extracted package and open the printed URL in a local browser. The fixture controls are test-only; they are not included in the production Studio page. Send `close` to its stdin to stop it. Its TTL is 15 minutes. Do not substitute a real admin application.
+ 
+ Browser acceptance checklist:
+@@ -20,7 +22,10 @@ Browser acceptance checklist:
+ 9. Alerts contains a seeded synthetic firing warning. Cancel the rule-ID, duration and reason prompts separately; compare `/fixture/status` before/after and require unchanged `mutationRequests`, `silences` and `alertState`. Deliberately submitting an empty rule ID means all rules; positive finite duration is required. Complete one intentional silence and inspect it.
+ 10. Incidents contains `fixture-incident`. Cancel resolution and require unchanged mutation count and open state, then deliberately resolve with an optional note. Simulate a failure before a mutation and verify visible escaped feedback. Cancellation cannot undo a mutation already accepted by the server.
+ 11. Use Delay requests 500 ms, then navigate rapidly or unmount while an action/read is pending. The current view must own polling; stale action completion must not change it. An injected non-cooperative operation must not retain the preceding view's polling ownership. Recover restores seeded responses.
++12. Open trace, incident and full diagnostics details, then wait for several polling intervals and leave/return to the browser tab. The inspection and pause message must remain. **Resume live updates**, **Refresh**, or navigation should restore automatic refresh. Focus/type a filter or expand metric/doctor details and verify that polling preserves the control and content until cleared, closed or explicitly refreshed.
+ 
+ Trace timing uses styled native `progress` elements rather than inline width styles, matching the page's `style-src 'self'` CSP. Filters have explicit accessible labels and interactive elements have a visible focus outline; these source changes still require visual and assistive-technology acceptance.
+ 
+-Validation in the current readiness pass: actual Node loopback HTTP and modeled DOM regressions are recorded separately in the repository's `readiness-2026-10-21/` directory against the final archive. The current computer-use inventory returned no apps or browsers. Actual browser rendering, visual layout, native EventSource reconnection, polling fallback, keyboard/focus and accessibility are **unverified**. Successful asset requests, SSE protocol checks and modeled DOM cannot replace that acceptance.
++Browser evidence is versioned separately from the package. The October 21 computer-use inventory had no available apps or browsers; those modeled DOM and HTTP results remain historical evidence. The October 24 follow-up checks the actual available browser against a fresh exact installed archive; its executed cases, screenshots, browser version and remaining limitations are recorded in `readiness-2026-10-24/REPORT.md` and the browser receipt. Do not infer full browser or assistive-technology acceptance from successful asset requests or modeled DOM tests.
++
++Automation-created navigation can send `Sec-Fetch-Site: cross-site` and is correctly rejected. A direct address-bar navigation sends `none` and may load the loopback shell; do not weaken origin checks to accommodate an automation tool. The operator-token field and authorization dialog expose accessible labels. The token remains in memory, and the initial shell still requires the appropriate authorization described above.
+diff --git a/package/docs/VALIDATION.md b/package/docs/VALIDATION.md
+index a832bc1..9de35f1 100644
+--- a/package/docs/VALIDATION.md
++++ b/package/docs/VALIDATION.md
+@@ -1,17 +1,19 @@
+ # Validation and remaining decisions
+ 
+-The October 21 readiness pass runs on macOS 15.8.1 Intel x64, Node v24.21.0, npm 11.19.0 and preinstalled TypeScript 5.9.3. Node >=22 remains declared; no Node 22 binary was found in the available PATH, nvm or nodebrew/Homebrew locations. Other runtime/platform legs remain unexecuted. No third-party dependencies were added. The candidate remains private, UNLICENSED, owned by First Principle Lab LLC and protected by the rejecting publication guard.
++The October 24 follow-up runs on macOS 15.8.1 Intel x64, Node v24.21.0, npm 11.19.0 and preinstalled TypeScript 5.9.3. Node >=22 remains declared; no Node 22 binary was found in the available PATH, nvm or nodebrew/Homebrew locations. Other runtime/platform legs remain unexecuted. No third-party dependencies were added. The candidate remains private, UNLICENSED, owned by First Principle Lab LLC and protected by the rejecting publication guard.
+ 
+-The repository's `readiness-2026-10-21/` directory holds the current report, exact final archive/hash/byte inventory, command exits and counts, fresh extraction and controlled offline npm-install receipts, strict type consumers, loopback Studio evidence, composition results and bounded overhead measurements. These files are outside the packed tree so they cannot change the target being verified. Build/check/prepack run the same syntax, import, dependency and publication-safeguard validation; they do not transpile. There is no lint script. The reference generator was inspected; declarations and documentation were repaired directly rather than appending generated `any` fallbacks.
++The repository's `readiness-2026-10-24/` directory holds the current report, exact final archive/hash/byte inventory, command exits and counts, fresh extraction and controlled offline npm-install receipts, strict type consumers, loopback Studio evidence, composition results and bounded overhead measurements. These files are outside the packed tree so they cannot change the target being verified. Build/check/prepack run the same syntax, import, dependency and publication-safeguard validation; they do not transpile. There is no lint script. The reference generator was inspected; declarations and documentation were repaired directly rather than appending generated `any` fallbacks.
+ 
+-The unchanged historical archive (`b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad`, 184659 bytes) was freshly extracted and passed all 52 original tests. The hardened native suite passes 86 tests, adding deterministic coverage for Studio failure sanitization and action cancellation, health/resource replacement identity, exporter close during retry/split/compression/request work, file initialization/drain, sampling/context, safe route labels, alert/notification bounds, deferred Redis subscription cleanup and finite fleet timestamps. Existing cases preserve metric cardinality/reset, bounded queues/waiters/sinks, partial durable acknowledgements, retention, plugin teardown, synthetic cancellation/redirects and independent runtime cleanup. Exact final consumer results and any failures are recorded separately against their archive hash.
++The unchanged historical archive (`b246ee9eff0b3579f05c886f05ec485719bb1b4847c97c4eefa99dead480baad`, 184659 bytes) was freshly extracted and passed all 52 original tests. The October 21 hardened native suite passed 86 tests, adding deterministic coverage for Studio failure sanitization and action cancellation, health/resource replacement identity, exporter close during retry/split/compression/request work, file initialization/drain, sampling/context, safe route labels, alert/notification bounds, deferred Redis subscription cleanup and finite fleet timestamps. Existing cases preserve metric cardinality/reset, bounded queues/waiters/sinks, partial durable acknowledgements, retention, plugin teardown, synthetic cancellation/redirects and independent runtime cleanup. Exact final consumer results and any failures are recorded separately against their archive hash.
+ 
+-Actual task-owned 127.0.0.1 HTTP checks exercise the packaged shell, JavaScript, CSS, all existing read views, authorized intentional operator actions, origin rejection, disabled ingestion, and bounded/redacted error responses including cyclic and BigInt details. Focused modeled DOM fixtures exercise every Cancel prompt, intentional all-rules silence, resolution, input validation, visible failures, stale action cancellation, repeated mount/destroy, single-stream ownership and escaped empty/error/recovery states. Modeled DOM results do not establish browser rendering, keyboard/focus, native EventSource reconnection, polling fallback or accessibility acceptance. Current computer-use inventory returned `apps: [], browsers: []`; real-browser acceptance remains unavailable. The portable fixture/checklist remains in `examples/studio-fixture.mjs` and `docs/STUDIO.md`.
++Actual task-owned 127.0.0.1 HTTP checks exercise the packaged shell, JavaScript, CSS, all existing read views, authorized intentional operator actions, origin rejection, disabled ingestion, and bounded/redacted error responses including cyclic and BigInt details. Focused modeled DOM fixtures exercise every Cancel prompt, intentional all-rules silence, resolution, input validation, visible failures, stale action cancellation, repeated mount/destroy, single-stream ownership and escaped empty/error/recovery states. Modeled DOM results do not establish browser rendering, keyboard/focus, native EventSource reconnection, polling fallback or accessibility acceptance. That unavailable-browser inventory belongs to October 21. Chrome is available in the October 24 follow-up; actual executed browser coverage and limitations are recorded against the final archive in its report. The portable fixture/checklist remains in `examples/studio-fixture.mjs` and `docs/STUDIO.md`.
+ 
+ Strict declarations exercise the baseline consumer and all 29 manifest entries (28 executable exports plus metadata). Concrete envelope/span/tracer declarations now match runtime behavior; broad advanced extension types remain deliberate limits. Installed-consumer checks resolve package specifiers from fresh non-workspace trees, verify bytes against the archive, and reject unsupported private deep imports. Lifecycle scripts are disabled for the local offline install; build and the rejecting guard are then invoked explicitly.
+ 
+-Historical PM composition already passed for accepted `@rawnode/pm@0.1.0`, SHA-256 `0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f`, 94194 bytes. The exact archive is available read-only for a fresh final-Monitor composition rerun; see the current report for its outcome. Old `340b2fa87…` evidence is withdrawn and `f7e512c44…` is historical. The five reciprocal cases and real child IPC were originally PM-lane evidence; its 47 native/47 packed tests are not Monitor tests. Current reruns receive their own receipts. Original `evidence/`, archives and all 866 original-file hashes remain preserved, distinct from the 169 historical candidate hashes.
++Historical PM composition already passed for accepted `@rawnode/pm@0.1.0`, SHA-256 `0fa82b2c1b7d27ddd9d185781003c1547002f7c9263d8754d2e48e2bd546aa8f`, 94194 bytes. The exact archive is available read-only; fresh final-Monitor composition results are recorded in the current report. Old `340b2fa87…` evidence is withdrawn and `f7e512c44…` is historical. The five reciprocal cases and real child IPC were originally PM-lane evidence; its 47 native/47 packed tests are not Monitor tests. Current reruns receive their own receipts. Original `evidence/`, archives and all 866 original-file hashes remain preserved, distinct from the 169 historical candidate hashes.
+ 
+ The overhead fixture compares identical bounded synthetic application work with monitoring absent/present, fixed route templates, 10% trace sampling, a 512-item queue and delayed injected sink. It reports throughput, CPU, sampled allocation, RSS/heap trend, event-loop delay, drops, drain and cleanup. It is a microbenchmark on this machine, not a production soak or universal latency guarantee.
+ 
+-Unverified scopes remain actual browsers, Node 22/other OSs, production load/soak, prepared Events and Unified/Logger composition, live Redis/RawMongo/OTLP/StatsD interoperability/durability and full Foundation boot. Injected callbacks/clients can remain physically active if they ignore cancellation. Owner decisions remain license/provenance, final namespace/version, supported runtime/platform matrix, browser acceptance and optional integration scope. No publication, push, tag, deployment, daemon registration, production monitoring or sibling/application modification is authorized.
++Unverified scopes include other browsers/assistive technologies, Node 22/other OSs, production load/soak, prepared Events and Unified/Logger composition, live Redis/RawMongo/OTLP/StatsD interoperability/durability and full Foundation boot. Injected callbacks/clients can remain physically active if they ignore cancellation. Owner decisions remain license/provenance, final namespace/version, supported runtime/platform matrix, browser acceptance and optional integration scope. No publication, push, tag, deployment, daemon registration, production monitoring or sibling/application modification is authorized.
++
++October 24 adds two focused regressions for uncertain HTTP timeout replay and acknowledged split-prefix replay, plus concrete health/metrics/synthetics declaration coverage and operator-token labeling. Real Chrome inspection revealed details being erased by polling; two additional deterministic regressions cover retained inspection/filter/focus and explicit resume behavior. All four original review leads and the JSONL admission/drain repair were already present in HEAD `884a497`; the follow-up revalidates them and preserves the prior receipts. The final native/extracted/installed counts, any interim failures and exact bytes are authoritative in the external report.
+diff --git a/package/resources/assets/js/monitor/studio.js b/package/resources/assets/js/monitor/studio.js
+index 9805529..1578017 100644
+--- a/package/resources/assets/js/monitor/studio.js
++++ b/package/resources/assets/js/monitor/studio.js
+@@ -22,7 +22,7 @@ const config = Object.freeze({
+   tokenRequired: app?.dataset?.tokenRequired === 'true',
+ });
+ const prefix = String(config.prefix).replace(/\/$/, '');
+-const state = { view: location.hash.slice(1) || 'overview', token: '', data: new Map(), connected: false, timer: null, stream: null };
++const state = { view: location.hash.slice(1) || 'overview', token: '', data: new Map(), connected: false, timer: null, stream: null, inspecting: false };
+ const main = document.querySelector('#rn-main');
+ const toastNode = document.querySelector('#rn-toast');
+ const authModal = document.querySelector('#rn-auth');
+@@ -86,6 +86,12 @@ function bindAction(button, task, refresh = true) {
+   }, { signal: active.signal });
+ }
+ 
++function showInspection(selector, title, content) {
++  state.inspecting = true;
++  document.querySelector(selector).innerHTML = `<div class="rn-toolbar"><span role="status">Live refresh paused while inspecting.</span><button id="rn-resume-live">Resume live updates</button></div>${panel(title, content)}`;
++  document.querySelector('#rn-resume-live').addEventListener('click', () => render(state.view), { signal: renderAbort.signal });
++}
++
+ async function loadOverview() { const data = await api('/api/overview'); state.data.set('overview', data); return data; }
+ async function renderOverview() {
+   const d = await loadOverview();
+@@ -133,7 +139,7 @@ async function renderTraces() {
+ }
+ function traceTable(rows) { return table([{label:'Operation',render:r=>`<button class="rn-link rn-trace-open" data-trace="${escape(r.traceId)}"><strong>${escape(r.name)}</strong></button><small>${escape(r.traceId.slice(0,16))}…</small>`},{label:'Kind',render:r=>badge(r.kind,'neutral')},{label:'Status',render:r=>badge(r.status?.code||'unset',r.status?.code==='error'?'critical':'healthy')},{label:'Duration',render:r=>duration(r.durationMs)},{label:'Started',render:r=>age(Number(BigInt(r.startTimeUnixNano)/1000000n))}],rows,'No sampled spans found.'); }
+ function bindTraceRows() { document.querySelectorAll('.rn-trace-open').forEach(button => bindAction(button, (signal) => showTrace(button.dataset.trace, signal), false)); }
+-async function showTrace(id, signal) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`, { signal }); const max=Math.max(...spans.map(s=>s.durationMs||0),1); document.querySelector('#rn-trace-detail').innerHTML=panel(`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><progress class="rn-bar" aria-label="Relative span duration" max="${max}" value="${Math.max(0,span.durationMs||0)}"></progress>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
++async function showTrace(id, signal) { const spans=await api(`/api/traces/${encodeURIComponent(id)}`, { signal }); const max=Math.max(...spans.map(s=>s.durationMs||0),1); showInspection('#rn-trace-detail',`Trace ${id}`,`<div class="rn-waterfall">${spans.map((span,index)=>`<article><div><strong>${escape(span.name)}</strong><small>${escape(span.kind)} · ${duration(span.durationMs)}</small></div><progress class="rn-bar" aria-label="Relative span duration" max="${max}" value="${Math.max(0,span.durationMs||0)}"></progress>${index===0?'':`<span class="rn-parent">↳ ${escape(span.parentSpanId||'root')}</span>`}</article>`).join('')}</div>${json(spans)}`); }
+ 
+ async function renderResources() { const d=await api('/api/resources'); const latest=d.latest||{}; main.innerHTML=`${heading('Resources','Health and native metrics from RawNode modules.')}${Object.keys(latest).length?Object.entries(latest).map(([name,value])=>panel(name,`<div class="rn-resource-head">${badge(value.error?'unhealthy':value.health?.ok===false?'unhealthy':'healthy',value.error||value.health?.ok===false?'critical':'healthy')}<span>${duration(value.durationMs)}</span></div>${json(value)}`)).join(''):'<div class="rn-empty">No resource snapshots yet.</div>'}`; }
+ 
+@@ -167,7 +173,7 @@ async function renderIncidents(){const d=await api('/api/incidents?limit=250');m
+ function incidentActions(r){return `<button class="rn-incident-view" data-id="${escape(r.id)}">View</button> ${r.state==='open'?`<button class="rn-incident-ack" data-id="${escape(r.id)}">Acknowledge</button>`:''} ${!['resolved','closed'].includes(r.state)?`<button class="rn-incident-resolve" data-id="${escape(r.id)}">Resolve</button>`:''}`;}
+ function bindIncidentActions(rows) {
+   const byId = new Map(rows.map(row => [row.id, row]));
+-  document.querySelectorAll('.rn-incident-view').forEach(button => button.addEventListener('click', () => { const row = byId.get(button.dataset.id); document.querySelector('#rn-incident-detail').innerHTML = panel(row.title, `${row.runbookDefinition ? `<div class="rn-runbook"><h3>${escape(row.runbookDefinition.title)}</h3><p>${escape(row.runbookDefinition.description)}</p><ol>${row.runbookDefinition.steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>` : ''}${json(row)}`); }, { signal: renderAbort.signal }));
++  document.querySelectorAll('.rn-incident-view').forEach(button => button.addEventListener('click', () => { const row = byId.get(button.dataset.id); showInspection('#rn-incident-detail', row.title, `${row.runbookDefinition ? `<div class="rn-runbook"><h3>${escape(row.runbookDefinition.title)}</h3><p>${escape(row.runbookDefinition.description)}</p><ol>${row.runbookDefinition.steps.map(step => `<li>${escape(step)}</li>`).join('')}</ol></div>` : ''}${json(row)}`); }, { signal: renderAbort.signal }));
+   document.querySelectorAll('.rn-incident-ack').forEach(button => bindAction(button, async (signal) => {
+     await api(`/api/incidents/${encodeURIComponent(button.dataset.id)}/acknowledge`, { method: 'POST', signal, headers: { 'content-type': 'application/json' }, body: '{}' });
+     return 'Incident acknowledged.';
+@@ -182,7 +188,7 @@ function bindIncidentActions(rows) {
+ 
+ async function renderFleet(){const d=await api('/api/fleet');main.innerHTML=`${heading('Fleet','Cross-process and cross-host runtime membership.')}${panel('Topology',renderTopology(d.topology))}${panel('Instances',table([{label:'Service',render:r=>`<strong>${escape(r.service||'unknown')}</strong><small>${escape(r.instanceId)}</small>`},{label:'State',render:r=>badge(r.state||'unknown',r.health?.ok===false?'critical':'healthy')},{label:'Host / PID',render:r=>`${escape(r.host||'—')} / ${escape(r.pid||'—')}`},{label:'Region',render:r=>escape(r.region||'—')},{label:'Version',render:r=>escape(r.version||'—')},{label:'Last seen',render:r=>age(r.lastSeenAt)}],d.instances||[]))}`;}
+ async function renderDeployments(){const d=await api('/api/deployments?limit=250');main.innerHTML=`${heading('Deployments','Release markers correlated with operational changes.')}${panel('Timeline',table([{label:'Version',render:r=>`<strong>${escape(r.version||'—')}</strong><small>${escape(r.commit||r.buildId||r.id)}</small>`},{label:'Status',render:r=>badge(r.status,r.status==='failed'?'critical':r.status==='rolled_back'?'warning':'healthy')},{label:'Strategy',render:r=>escape(r.strategy||'—')},{label:'Actor',render:r=>escape(r.actor||'—')},{label:'Time',render:r=>age(r.deployedAt)}],d||[]))}`;}
+-async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;bindAction(document.querySelector('#rn-bundle'),async(signal)=>{const result=await api('/api/diagnostics/bundle',{method:'POST',signal,headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});return `Bundle created: ${result.filename}`;},false);bindAction(document.querySelector('#rn-full-diag'),async(signal)=>{const d=await api('/api/diagnostics?signals=0',{signal});document.querySelector('#rn-diagnostics-full').innerHTML=panel('Runtime diagnostics',json(d));},false);}
++async function renderDiagnostics(){const doctor=await api('/api/doctor');main.innerHTML=`${heading('Diagnostics','Self-observability, configuration verification, and support bundles.')}<div class="rn-cards compact"><article class="rn-card" data-kind="${doctor.ok?'healthy':'critical'}"><span>Doctor</span><strong>${doctor.ok?'Passed':'Failed'}</strong></article><article class="rn-card"><span>Checks</span><strong>${doctor.summary?.total||0}</strong></article><article class="rn-card" data-kind="critical"><span>Failures</span><strong>${doctor.summary?.failed||0}</strong></article><article class="rn-card" data-kind="warning"><span>Warnings</span><strong>${doctor.summary?.warnings||0}</strong></article></div><div class="rn-toolbar"><button id="rn-bundle">Create diagnostics bundle</button><button id="rn-full-diag">Load full snapshot</button></div>${panel('Doctor checks',table([{label:'Check',render:r=>`<strong>${escape(r.name)}</strong>`},{label:'Result',render:r=>badge(r.ok?'pass':r.severity,r.ok?'healthy':r.severity==='error'?'critical':'warning')},{label:'Details',render:r=>`<details><summary>Inspect</summary>${json(r.details)}</details>`}],doctor.checks||[]))}<div id="rn-diagnostics-full"></div>`;bindAction(document.querySelector('#rn-bundle'),async(signal)=>{const result=await api('/api/diagnostics/bundle',{method:'POST',signal,headers:{'content-type':'application/json'},body:JSON.stringify({reason:'studio-manual'})});return `Bundle created: ${result.filename}`;},false);bindAction(document.querySelector('#rn-full-diag'),async(signal)=>{const d=await api('/api/diagnostics?signals=0',{signal});showInspection('#rn-diagnostics-full','Runtime diagnostics',json(d));},false);}
+ 
+ const renderers={overview:renderOverview,health:renderHealth,metrics:renderMetrics,traces:renderTraces,resources:renderResources,alerts:renderAlerts,slos:renderSlos,incidents:renderIncidents,fleet:renderFleet,deployments:renderDeployments,diagnostics:renderDiagnostics};
+ async function render(view=state.view){
+@@ -190,7 +196,7 @@ async function render(view=state.view){
+   if (!Object.hasOwn(renderers, view)) view = 'overview';
+   renderAbort.abort(); renderAbort = new AbortController();
+   const active = renderAbort;
+-  state.view=view;location.hash=view;
++  state.view=view;state.inspecting=false;location.hash=view;
+   document.querySelectorAll('#rn-nav button').forEach(button=>button.classList.toggle('active',button.dataset.view===view));
+   app.setAttribute('aria-busy','true');
+   main.innerHTML='<section class="rn-loading"><div class="rn-spinner"></div><p>Loading…</p></section>';
+@@ -214,14 +220,19 @@ function connectStream(){
+   }catch{setConnected(false);}
+ }
+ function setConnected(value){state.connected=value;document.querySelector('#rn-live-dot').classList.toggle('connected',value);if(!value)document.querySelector('#rn-state').textContent='Polling';}
+-function scheduleRefresh(){clearTimeout(state._refresh);state._refresh=setTimeout(()=>render(state.view),500);}
+-function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(document.visibilityState==='visible'&&app.getAttribute('aria-busy')!=='true'&&pendingActions===0)render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
++function canAutoRefresh() {
++  if (destroyed || document.visibilityState !== 'visible' || app.getAttribute('aria-busy') === 'true' || pendingActions > 0 || state.inspecting) return false;
++  if (main.querySelectorAll('details[open]').length) return false;
++  return !Array.from(main.querySelectorAll('input, select, textarea, summary')).some(field => field === ownerDocument.activeElement || String(field.value || '') !== '');
++}
++function scheduleRefresh(){clearTimeout(state._refresh);state._refresh=setTimeout(()=>{if(canAutoRefresh())render(state.view);},500);}
++function startPolling(){clearInterval(state.timer);state.timer=setInterval(()=>{if(canAutoRefresh())render(state.view);},Math.max(1000,Number(config.pollIntervalMs)||3000));}
+ 
+ document.querySelector('#rn-nav').addEventListener('click',(event)=>{const button=event.target.closest('button[data-view]');if(button)render(button.dataset.view);},{signal:events.signal});
+ document.querySelector('#rn-refresh').addEventListener('click',()=>render(state.view),{signal:events.signal});
+ document.querySelector('#rn-auth-form').addEventListener('submit',(event)=>{event.preventDefault();state.token=tokenInput.value;authModal.hidden=true;connectStream();render(state.view);},{signal:events.signal});
+ window.addEventListener('hashchange',()=>{const view=location.hash.slice(1)||'overview';if(view!==state.view)render(view);},{signal:events.signal});
+-ownerDocument.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')render(state.view);},{signal:events.signal});
++ownerDocument.addEventListener('visibilitychange',()=>{if(canAutoRefresh())render(state.view);},{signal:events.signal});
+ const handle = Object.freeze({
+   refresh: () => render(state.view),
+   navigate: (view) => render(view),
+diff --git a/package/src/exporters/HttpJsonExporter.js b/package/src/exporters/HttpJsonExporter.js
+index 4099772..1f7dda0 100644
+--- a/package/src/exporters/HttpJsonExporter.js
++++ b/package/src/exporters/HttpJsonExporter.js
+@@ -59,7 +59,25 @@ export class HttpJsonExporter {
+       this._assertOpen(signal);
+       const chunks = partitionSignals(signals, this.maxBatchSignals, this.maxPayloadBytes);
+       if (chunks.length > 1) this.stats.splitBatches += chunks.length - 1;
+-      for (const chunk of chunks) await this._exportChunk(chunk, { ...options, signal });
++      const delivery = { acknowledgedSignals: 0 };
++      try {
++        for (const chunk of chunks) await this._exportChunk(chunk, { ...options, signal }, delivery);
++      } catch (cause) {
++        if (!delivery.acknowledgedSignals) throw cause;
++        // A caller retrying the whole export would repeat its acknowledged
++        // prefix. Keep per-operation progress separate from concurrent exports.
++        throw Object.assign(new Error(cause?.message || 'Monitor HTTP export stopped after partial acknowledgement.', { cause }), {
++          name: cause?.name || 'Error',
++          code: cause?.code || 'MONITOR_EXPORT_PARTIAL_DELIVERY',
++          statusCode: cause?.statusCode,
++          retryable: false,
++          details: {
++            ...cause?.details,
++            acknowledgedSignals: delivery.acknowledgedSignals,
++            unacknowledgedSignals: signals.length - delivery.acknowledgedSignals,
++          },
++        });
++      }
+       return true;
+     });
+     this.pending.add(operation);
+@@ -72,7 +90,7 @@ export class HttpJsonExporter {
+     signal?.throwIfAborted?.();
+   }
+ 
+-  async _exportChunk(signals, options) {
++  async _exportChunk(signals, options, delivery) {
+     this._assertOpen(options.signal);
+     let body;
+     try { body = Buffer.from(JSON.stringify(this.format(signals, options))); }
+@@ -87,8 +105,8 @@ export class HttpJsonExporter {
+       if (signals.length > 1) {
+         const middle = Math.ceil(signals.length / 2);
+         this.stats.splitBatches++;
+-        await this._exportChunk(signals.slice(0, middle), options);
+-        await this._exportChunk(signals.slice(middle), options);
++        await this._exportChunk(signals.slice(0, middle), options, delivery);
++        await this._exportChunk(signals.slice(middle), options, delivery);
+         return;
+       }
+       this.stats.oversizedSignals++;
+@@ -138,6 +156,7 @@ export class HttpJsonExporter {
+ 
+     this.stats.batches++;
+     this.stats.signals += signals.length;
++    delivery.acknowledgedSignals += signals.length;
+     this.stats.bytes += payload.length;
+     this.stats.uncompressedBytes += body.length;
+   }
+@@ -185,7 +204,9 @@ export class HttpJsonExporter {
+           finish(null, { statusCode, bytes });
+         });
+       });
+-      request.setTimeout(this.timeoutMs, () => request.destroy(Object.assign(new Error(`Monitor HTTP export exceeded ${this.timeoutMs}ms.`), { code: 'MONITOR_EXPORT_TIMEOUT', retryable: true })));
++      // A missing acknowledgement does not establish that the receiver failed
++      // to accept the payload. Do not automatically send that payload again.
++      request.setTimeout(this.timeoutMs, () => request.destroy(Object.assign(new Error(`Monitor HTTP export exceeded ${this.timeoutMs}ms.`), { code: 'MONITOR_EXPORT_TIMEOUT', retryable: false, details: { delivery: 'unknown' } })));
+       request.once('error', (error) => finish(error));
+       if (signal) {
+         abortHandler = () => {
+diff --git a/package/src/studio/MonitorStudioPage.js b/package/src/studio/MonitorStudioPage.js
+index f14edc8..0c3c6c3 100644
+--- a/package/src/studio/MonitorStudioPage.js
++++ b/package/src/studio/MonitorStudioPage.js
+@@ -14,7 +14,7 @@ export function renderMonitorStudioPage(options = {}) {
+ <aside class="rn-sidebar" aria-label="Monitor navigation"><nav id="rn-nav"><button data-view="overview" class="active">Overview</button><button data-view="health">Health</button><button data-view="metrics">Metrics</button><button data-view="traces">Traces</button><button data-view="resources">Resources</button><button data-view="alerts">Alerts</button><button data-view="slos">SLOs</button><button data-view="incidents">Incidents</button><button data-view="fleet">Fleet</button><button data-view="deployments">Deployments</button><button data-view="diagnostics">Diagnostics</button></nav><footer><span>Primitive Node.js</span><span>Zero dependencies</span></footer></aside>
+ <main id="rn-main" class="rn-main"><section class="rn-loading"><div class="rn-spinner"></div><p>Loading observability control plane…</p></section></main>
+ <div id="rn-toast" role="status" aria-live="polite"></div>
+-<div id="rn-auth" class="rn-modal" hidden><form id="rn-auth-form"><h2>Monitor authorization</h2><p>Enter the operator token configured for this environment.</p><input id="rn-token" type="password" autocomplete="current-password" required><div><button type="submit">Authorize</button></div></form></div>
++<div id="rn-auth" class="rn-modal" role="dialog" aria-labelledby="rn-auth-title" aria-describedby="rn-auth-description" hidden><form id="rn-auth-form"><h2 id="rn-auth-title">Monitor authorization</h2><p id="rn-auth-description">Enter the operator token configured for this environment.</p><label for="rn-token">Operator token</label><input id="rn-token" type="password" autocomplete="current-password" required><div><button type="submit">Authorize</button></div></form></div>
+ </div><script type="module" src="${escapeAttr(prefix)}/assets/studio.js"></script></body></html>`;
+ }
+ function escapeHtml(value) { return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char])); }
+diff --git a/package/test/exports-types.mts b/package/test/exports-types.mts
+index 20766e8..79ee585 100644
+--- a/package/test/exports-types.mts
++++ b/package/test/exports-types.mts
+@@ -33,6 +33,8 @@ import metadata from '@rawnode/monitor/package.json' with { type: 'json' };
+ const monitor = new MonitorRuntime({ config });
+ const registry = new metrics.MetricRegistry({ maxSeries: 8 });
+ registry.timer('duration_seconds').labels({ route: '/orders/:id' }).start()();
++const hasDuration: boolean = registry.has('duration_seconds');
++const metricNames: string[] = registry.names();
+ const sink = new storage.MemoryTelemetryStore({ maxItems: 4 });
+ new pipeline.SignalPipeline().addSink('memory', sink, { required: true });
+ const context = new core.MonitorContextManager();
+@@ -49,9 +51,18 @@ new cluster.FleetRegistry().heartbeat({ instanceId: 'typed' });
+ new analysis.StreamingBaseline().observe(1);
+ new security.SafeTelemetrySerializer().sanitize({ password: 'synthetic' });
+ new plugins.MonitorPluginManager().hook('typed', () => undefined);
+-new synthetics.SyntheticMonitor().register({ id: 'typed', type: 'custom', run: () => true });
++const probes = new synthetics.SyntheticMonitor();
++probes.register({ id: 'typed', type: 'custom', run: () => true });
++const removedProbe: boolean = probes.unregister('typed');
+ new exporters.CallbackExporter(() => undefined);
+ new health.HealthRegistry().register('typed', ({ signal }) => ({ ok: !signal.aborted }));
++const disposeHealth = monitor.registerHealth('typed', ({ signal, name, kind }) => ({ ok: !signal.aborted, details: { name, kind } }));
++const removedHealth: boolean = disposeHealth();
++monitor.readiness().then(report => {
++  const elapsed: number = report.durationMs;
++  const total: number = report.counts.total;
++  void [elapsed, total];
++});
+ new resources.ResourceRegistry().register('typed', { metrics: () => ({ count: 1 }) });
+ new alerts.AlertRule({ name: 'typed', evaluate: () => false });
+ new integrations.PMMonitorBridge({ registerResource() { return () => {}; } }, monitor).start();
+@@ -77,4 +88,6 @@ tracer.startSpan('invalid').end(1n);
+ new core.TelemetryEnvelope('arbitrary', {});
+ // @ts-expect-error metadata does not invent an npm executable
+ metadata.bin;
+-void [monitorVersion, service, value, activeResult, commandClasses, manager, navigation, snapshot, name];
++// @ts-expect-error runtime health registration requires a function
++monitor.registerHealth('invalid', {});
++void [monitorVersion, service, value, activeResult, commandClasses, manager, navigation, snapshot, name, hasDuration, metricNames, removedProbe, removedHealth];
+diff --git a/package/test/studio-actions.test.mjs b/package/test/studio-actions.test.mjs
+index 0cf7533..d05c0dd 100644
+--- a/package/test/studio-actions.test.mjs
++++ b/package/test/studio-actions.test.mjs
+@@ -5,11 +5,18 @@ import { mountMonitorStudio } from '../resources/assets/js/monitor/studio.js';
+ 
+ // A deliberately small DOM model; real-browser acceptance is a separate gate.
+ class Element extends EventTarget {
+-  constructor() { super(); this.dataset = {}; this.attrs = {}; this.elements = new Map(); this.hidden = true; this.disabled = false; this.textContent = ''; this.classList = { add() {}, remove() {}, toggle() {} }; }
++  constructor() { super(); this.dataset = {}; this.attrs = {}; this.elements = new Map(); this.hidden = true; this.disabled = false; this.value = ''; this.open = false; this.textContent = ''; this.classList = { add() {}, remove() {}, toggle() {} }; }
+   set innerHTML(value) { this.html = value; this.elements.clear(); }
+   get innerHTML() { return this.html || ''; }
+   querySelector(selector) { if (!this.elements.has(selector)) this.elements.set(selector, new Element()); return this.elements.get(selector); }
+   querySelectorAll(selector) {
++    if (/^[a-z, \[\]]+$/.test(selector)) {
++      const names = selector.replace('[open]', '').split(', ');
++      return [...this.innerHTML.matchAll(/<(input|select|textarea|summary|details)\b([^>]*)>/g)]
++        .filter(match => names.includes(match[1]))
++        .map((match, index) => this.querySelector(/id="([^"]+)"/.exec(match[2])?.[1] ? `#${/id="([^"]+)"/.exec(match[2])[1]}` : `${match[1]}:${index}`))
++        .filter(element => !selector.includes('[open]') || element.open);
++    }
+     const className = /^\.([\w-]+)$/.exec(selector)?.[1];
+     if (!className) return [];
+     const matches = [...this.innerHTML.matchAll(/<button\b([^>]*)>/g)].filter(match => new RegExp(`class="[^"]*\\b${className}\\b`).test(match[1]));
+@@ -41,6 +48,9 @@ function fixture(view = 'alerts') {
+     if (url.includes('/api/alerts')) return json({ data: { current: [], history: [], silences: { silences } } });
+     if (url.includes('/api/incidents')) return json({ data: { incidents: [incident] } });
+     if (url.includes('/api/health')) return json({ data: { ok: true, status: 'healthy', checks: [] } });
++    if (url.includes('/api/traces')) return json({ data: [{ traceId: 'fixture-trace', name: 'fixture span', kind: 'internal', durationMs: 1, startTimeUnixNano: '1000000', attributes: { token: '[REDACTED]' } }] });
++    if (url.includes('/api/doctor')) return json({ data: { ok: true, checks: [{ name: 'fixture check', ok: true, details: { message: 'inspectable' } }] } });
++    if (url.includes('/api/diagnostics')) return json({ data: { state: 'running', synthetic: 'retained snapshot' } });
+     throw new Error(`Unexpected fixture request ${url}`);
+   };
+   return { root, win, answers, mutations, silences, incident, fetch, prompts: () => prompts };
+@@ -99,3 +109,49 @@ test('modeled actions: navigation releases polling ownership even when an inject
+   await handle.navigate('health'); assert.equal(active.aborted, true); assert.equal(healthReads, 1);
+   await sleep(1100); assert.ok(healthReads >= 2, 'The new view continues polling after the old action is cancelled.');
+ });
++
++test('modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed', async t => {
++  t.mock.timers.enable({ apis: ['setInterval'] });
++  for (const [view, selector, target] of [
++    ['traces', '.rn-trace-open', '#rn-trace-detail'],
++    ['incidents', '.rn-incident-view', '#rn-incident-detail'],
++    ['diagnostics', '#rn-full-diag', '#rn-diagnostics-full'],
++  ]) {
++    const f = fixture(view); f.root.dataset.pollIntervalMs = 1000; let reads = 0;
++    const handle = await mount(t, f, (url, options) => { reads++; return f.fetch(url, options); });
++    const button = selector.startsWith('.') ? f.root.querySelectorAll(selector)[0] : f.root.querySelector(selector);
++    click(button); await waitFor(() => !button.disabled && f.root.querySelector(target).innerHTML.includes('Live refresh paused'));
++    const inspected = f.root.querySelector(target); const before = reads;
++    t.mock.timers.tick(10_000); f.root.ownerDocument.dispatchEvent(new Event('visibilitychange'));
++    assert.equal(reads, before, `${view} inspection must not be erased by background refresh.`);
++    assert.equal(f.root.querySelector(target), inspected);
++    click(f.root.querySelector('#rn-resume-live'));
++    await waitFor(() => reads === before + 1 && f.root.getAttribute('aria-busy') === 'false');
++    assert.notEqual(f.root.querySelector(target), inspected, 'Explicit resume clears the stale inspection.');
++    t.mock.timers.tick(1000);
++    await waitFor(() => reads === before + 2 && f.root.getAttribute('aria-busy') === 'false');
++    handle.destroy();
++  }
++});
++
++test('modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it', async t => {
++  t.mock.timers.enable({ apis: ['setInterval'] });
++  const f = fixture('traces'); f.root.dataset.pollIntervalMs = 1000; let reads = 0;
++  const handle = await mount(t, f, (url, options) => { reads++; return f.fetch(url, options); });
++  const filter = f.root.querySelector('#rn-trace-filter'); const before = reads;
++  f.root.ownerDocument.activeElement = filter;
++  t.mock.timers.tick(1000); assert.equal(reads, before, 'Typing focus survives a polling deadline.');
++  filter.value = 'fixture'; filter.dispatchEvent(new Event('input'));
++  f.root.ownerDocument.activeElement = null;
++  t.mock.timers.tick(1000); assert.equal(reads, before, 'A selected filter survives blur and polling.');
++  assert.equal(f.root.querySelector('#rn-trace-filter'), filter);
++  await handle.refresh(); assert.equal(reads, before + 1); assert.notEqual(f.root.querySelector('#rn-trace-filter'), filter);
++  await handle.navigate('diagnostics');
++  const details = f.root.querySelector('#rn-main').querySelectorAll('details')[0]; details.open = true;
++  const diagnosticReads = reads;
++  t.mock.timers.tick(1000); assert.equal(reads, diagnosticReads, 'Expanded diagnostic details remain readable.');
++  details.open = false;
++  t.mock.timers.tick(1000); await waitFor(() => reads === diagnosticReads + 1 && f.root.getAttribute('aria-busy') === 'false');
++  await handle.navigate('health'); const healthReads = reads;
++  t.mock.timers.tick(1000); await waitFor(() => reads === healthReads + 1);
++});
+diff --git a/package/types/index.d.ts b/package/types/index.d.ts
+index fcda442..662b12f 100644
+--- a/package/types/index.d.ts
++++ b/package/types/index.d.ts
+@@ -101,6 +101,8 @@ export class MetricRegistry {
+   timer(name: string, options?: Record<string, unknown>): Timer;
+   observableGauge(name: string, callback: (...args: unknown[]) => unknown, options?: Record<string, unknown>): ObservableGauge;
+   get(name: string): MetricInstrument | null;
++  has(name: string): boolean;
++  names(): string[];
+   collect(context?: unknown): Promise<unknown>;
+   snapshot(options?: Record<string, unknown>): unknown;
+   freeze(): this;
+@@ -186,6 +188,7 @@ export class SyntheticCheck {
+ export class SyntheticMonitor extends MonitorEventEmitter {
+   constructor(options?: Record<string, unknown>);
+   register(check: SyntheticCheck | Record<string, unknown>, options?: Record<string, unknown>): SyntheticCheck;
++  unregister(id: string): boolean;
+   run(id: string | SyntheticCheck, options?: Record<string, unknown>): Promise<unknown>;
+   runAll(options?: Record<string, unknown>): Promise<unknown[]>;
+   start(options?: Record<string, unknown>): this;
+@@ -243,7 +246,7 @@ export class MonitorRuntime extends MonitorEventEmitter {
+   collectMetrics(options?: Record<string, unknown>): Promise<unknown>;
+   collectResources(options?: Record<string, unknown>): Promise<unknown>;
+   registerResource(name: string, resource: unknown, options?: Record<string, unknown>): unknown;
+-  registerHealth(name: string, check: unknown, options?: Record<string, unknown>): unknown;
++  registerHealth(name: string, check: HealthCheck, options?: Record<string, unknown>): () => boolean;
+   registerAlert(rule: unknown, options?: Record<string, unknown>): unknown;
+   registerSlo(definition: unknown, options?: Record<string, unknown>): unknown;
+   registerRunbook(runbook: unknown, options?: Record<string, unknown>): unknown;
+@@ -341,7 +344,11 @@ export const EventNotificationChannel: any;
+ export const ExporterRegistry: any;
+ export const FakeMonitorClock: any;
+ export const FleetRegistry: any;
+-export interface HealthReport { ok: boolean; ready: boolean; live: boolean; status: string; timestamp: number; checks: ReadonlyArray<Record<string, unknown>>; }
++export interface HealthReport {
++  ok: boolean; ready: boolean; live: boolean; status: string; timestamp: number; durationMs: number;
++  counts: Readonly<{ total: number; healthy: number; degraded: number; unhealthy: number; skipped: number }>;
++  checks: ReadonlyArray<Record<string, unknown>>;
++}
+ export type HealthCheck = (context: {signal: AbortSignal; name: string; kind: string; [key:string]:unknown}) => unknown | Promise<unknown>;
+ export class HealthRegistry extends MonitorEventEmitter {
+  constructor(options?: Record<string, unknown>); register(name:string,check:HealthCheck,options?:Record<string,unknown>):()=>boolean;
+diff --git a/package/test/readiness-http-delivery.test.mjs b/package/test/readiness-http-delivery.test.mjs
+new file mode 100644
+index 0000000..8e5c4f0
+--- /dev/null
++++ b/package/test/readiness-http-delivery.test.mjs
+@@ -0,0 +1,61 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import http from 'node:http';
++import { once } from 'node:events';
++import { HttpJsonExporter, SignalPipeline } from '../src/index.js';
++
++async function endpoint(handler) {
++  const server = http.createServer(handler);
++  server.listen(0, '127.0.0.1');
++  await once(server, 'listening');
++  return {
++    url: `http://127.0.0.1:${server.address().port}/telemetry`,
++    async close() {
++      server.closeAllConnections();
++      await new Promise(resolve => server.close(resolve));
++    },
++  };
++}
++
++test('HTTP acknowledgement timeout reports uncertain delivery without repeating the request', { timeout: 2_000 }, async () => {
++  let requests = 0;
++  const target = await endpoint(request => { requests++; request.resume(); });
++  const exporter = new HttpJsonExporter({ url: target.url, compression: false, timeoutMs: 100, maxAttempts: 3, retryBaseMs: 1, retryMaxMs: 1 });
++  try {
++    await assert.rejects(exporter.export([{ kind: 'event', id: 'received-without-ack' }]), error => {
++      assert.equal(error.code, 'MONITOR_EXPORT_TIMEOUT');
++      assert.equal(error.retryable, false);
++      assert.equal(error.details.delivery, 'unknown');
++      return true;
++    });
++    assert.equal(requests, 1);
++    assert.equal(exporter.stats.retries, 0);
++    assert.equal(exporter.stats.signals, 0);
++  } finally { await exporter.close(); await target.close(); }
++});
++
++test('a failed split export does not make the pipeline replay its acknowledged prefix', { timeout: 2_000 }, async () => {
++  const received = [];
++  const target = await endpoint(async (request, response) => {
++    let body = '';
++    for await (const chunk of request) body += chunk;
++    const id = JSON.parse(body).signals[0].id;
++    received.push(id);
++    response.writeHead(id === 'acknowledged' ? 200 : 503).end();
++  });
++  const exporter = new HttpJsonExporter({ url: target.url, compression: false, maxBatchSignals: 1, maxAttempts: 1 });
++  const pipeline = new SignalPipeline({ deliveryAttempts: 3, retryBaseMs: 1, retryMaxMs: 1, maxInFlightBatches: 1 });
++  pipeline.addSink('http', exporter, { required: true });
++  try {
++    pipeline.admit({ kind: 'event', id: 'acknowledged' });
++    pipeline.admit({ kind: 'event', id: 'unacknowledged' });
++    await assert.rejects(pipeline.flush({ throwOnError: true }), { code: 'MONITOR_PIPELINE_FLUSH_FAILED' });
++    assert.deepEqual(received, ['acknowledged', 'unacknowledged']);
++    assert.equal(pipeline.stats.sinkRetries, 0);
++    assert.equal(exporter.stats.signals, 1);
++    const failure = pipeline.snapshot().failures[0].error;
++    assert.equal(failure.retryable, false);
++    assert.equal(failure.details.acknowledgedSignals, 1);
++    assert.equal(failure.details.unacknowledgedSignals, 1);
++  } finally { await pipeline.close({ flush: false }); await target.close(); }
++});

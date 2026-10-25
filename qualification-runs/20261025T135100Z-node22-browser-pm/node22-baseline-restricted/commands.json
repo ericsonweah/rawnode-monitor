@@ -1,0 +1,175 @@
+{
+  "startedAt": "2026-10-25T13:53:17.934Z",
+  "runtime": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "runtimeVersion": "v22.0.0",
+  "npmCli": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+  "npmVersion": "10.5.1",
+  "compiler": "/usr/local/lib/node_modules/typescript/bin/tsc",
+  "compilerVersion": "Version 5.9.3",
+  "compilerRuntime": "v22.0.0",
+  "platform": "darwin",
+  "arch": "x64",
+  "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+  "manifest": {
+    "name": "@rawnode/monitor",
+    "version": "1.0.0",
+    "engines": {
+      "node": ">=22"
+    }
+  },
+  "packageManifestSha256": "1b0a016de40ecb17b074c462b07a47e9ca44a9d166f3c8784e0d4acf44f88c4a",
+  "selectedFiles": [
+    "adversarial-pipeline-metrics.test.mjs",
+    "adversarial-plugins.test.mjs",
+    "adversarial-retention-synthetics.test.mjs",
+    "adversarial-synthetic-http.test.mjs",
+    "alert-lifecycle.test.mjs",
+    "capabilities.test.mjs",
+    "contracts-hardening.test.mjs",
+    "readiness-http-delivery.test.mjs",
+    "readiness-lifecycle.test.mjs",
+    "runtime.test.mjs",
+    "studio-actions.test.mjs",
+    "studio-boundaries.test.mjs",
+    "studio-http.test.mjs",
+    "studio-modeled.test.mjs",
+    "studio-security-regression.test.mjs"
+  ],
+  "commands": [
+    {
+      "leg": "build",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "--offline",
+        "run",
+        "build"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:53:17.936Z",
+      "milliseconds": 16891,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 0,
+      "build": {
+        "ok": true,
+        "checkedJavaScript": 112,
+        "exports": 29,
+        "node": "v22.0.0"
+      },
+      "summaryValid": true
+    },
+    {
+      "leg": "test",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "--offline",
+        "test"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:53:34.830Z",
+      "milliseconds": 2444,
+      "exit": 1,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 0,
+      "counts": {
+        "tests": 97,
+        "suites": 0,
+        "pass": 77,
+        "fail": 20,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "summaryValid": false
+    },
+    {
+      "leg": "basic",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "examples/basic.mjs"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:53:37.276Z",
+      "milliseconds": 319,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 0
+    },
+    {
+      "leg": "types",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--skipLibCheck",
+        "false",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "test/types.mts"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:53:37.596Z",
+      "milliseconds": 1898,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 0
+    },
+    {
+      "leg": "types-all",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--skipLibCheck",
+        "false",
+        "--module",
+        "nodenext",
+        "--moduleResolution",
+        "nodenext",
+        "--target",
+        "es2022",
+        "--resolveJsonModule",
+        "test/exports-types.mts"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:53:39.496Z",
+      "milliseconds": 1948,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 0
+    },
+    {
+      "leg": "guard",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "--offline",
+        "run",
+        "prepublishOnly"
+      ],
+      "cwd": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/baseline/node_modules/@rawnode/monitor",
+      "startedAt": "2026-10-25T13:53:41.445Z",
+      "milliseconds": 652,
+      "exit": 1,
+      "signal": null,
+      "timedOut": false,
+      "expectedExit": 1,
+      "summaryValid": true
+    }
+  ],
+  "ok": false,
+  "finishedAt": "2026-10-25T13:53:42.099Z"
+}

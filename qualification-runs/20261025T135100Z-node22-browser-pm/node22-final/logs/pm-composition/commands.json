@@ -1,0 +1,112 @@
+[
+  {
+    "leg": "npm-version",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+      "--version"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+    "started": "2026-10-25T14:07:07.883Z",
+    "milliseconds": 687,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "typescript-version",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/usr/local/lib/node_modules/typescript/bin/tsc",
+      "--version"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+    "started": "2026-10-25T14:07:08.573Z",
+    "milliseconds": 401,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "install-pm",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+      "install",
+      "--offline",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "--package-lock=false",
+      "--cache",
+      "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/.composition-npm-cache",
+      "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+    "started": "2026-10-25T14:07:08.975Z",
+    "milliseconds": 1230,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "resolution",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "--input-type=module",
+      "-e",
+      "import {fileURLToPath} from 'node:url'; import path from 'node:path'; const root=process.cwd(); for(const name of ['@rawnode/monitor','@rawnode/monitor/integrations','@rawnode/pm','@rawnode/pm/runtime']) { const url=import.meta.resolve(name); if(!fileURLToPath(url).startsWith(path.join(root,'node_modules')+path.sep)) throw Error('Unexpected resolution: '+url); console.log(name+' '+url); }"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed",
+    "started": "2026-10-25T14:07:10.429Z",
+    "milliseconds": 167,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "direct",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "pm-composition-direct.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/composition",
+    "started": "2026-10-25T14:07:10.597Z",
+    "milliseconds": 479,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "reciprocal",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "--test",
+      "--test-timeout=15000",
+      "pm-composition.test.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/composition",
+    "started": "2026-10-25T14:07:11.077Z",
+    "milliseconds": 2318,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "paired-types",
+    "command": [
+      "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+      "/usr/local/lib/node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "--strict",
+      "--skipLibCheck",
+      "false",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "pm-consumer.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/composition",
+    "started": "2026-10-25T14:07:13.396Z",
+    "milliseconds": 1546,
+    "exit": 0,
+    "timedOut": false
+  }
+]

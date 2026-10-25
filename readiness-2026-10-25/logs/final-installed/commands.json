@@ -1,0 +1,110 @@
+[
+  {
+    "leg": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor",
+    "started": "2026-10-25T11:37:38.235Z",
+    "milliseconds": 11209,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor",
+    "started": "2026-10-25T11:37:49.446Z",
+    "milliseconds": 2410,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0,
+    "counts": {
+      "tests": 97,
+      "suites": 0,
+      "pass": 97,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "summaryValid": true
+  },
+  {
+    "leg": "basic",
+    "command": [
+      "node",
+      "examples/basic.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor",
+    "started": "2026-10-25T11:37:51.858Z",
+    "milliseconds": 324,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "test/types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor",
+    "started": "2026-10-25T11:37:52.182Z",
+    "milliseconds": 1759,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "types-all",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "test/exports-types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor",
+    "started": "2026-10-25T11:37:53.942Z",
+    "milliseconds": 1668,
+    "exit": 0,
+    "timedOut": false,
+    "expectedExit": 0
+  },
+  {
+    "leg": "guard",
+    "command": [
+      "npm",
+      "run",
+      "prepublishOnly"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor",
+    "started": "2026-10-25T11:37:55.611Z",
+    "milliseconds": 455,
+    "exit": 1,
+    "timedOut": false,
+    "expectedExit": 1,
+    "summaryValid": true
+  }
+]

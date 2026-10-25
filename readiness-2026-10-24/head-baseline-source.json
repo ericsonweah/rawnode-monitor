@@ -1,0 +1,6 @@
+{
+  "revision": "884a4974ba14d15a21ed4014bbe004ebf95384a7",
+  "method": "git archive HEAD package; tar extraction",
+  "root": "/private/tmp/monitor-head-baseline-tOgYMm",
+  "packageRoot": "/private/tmp/monitor-head-baseline-tOgYMm/package"
+}

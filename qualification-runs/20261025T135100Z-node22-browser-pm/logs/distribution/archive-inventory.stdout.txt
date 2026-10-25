@@ -1,0 +1,1064 @@
+[
+  {
+    "path": "LICENSE",
+    "bytes": 11358,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "resources/assets/css/monitor/studio.css",
+    "bytes": 10436,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/alerts/AlertEngine.js",
+    "bytes": 11917,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/alerts/AlertRule.js",
+    "bytes": 7039,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/analysis/AnomalyDetector.js",
+    "bytes": 11222,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/pipeline/BoundedSignalQueue.js",
+    "bytes": 8033,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/CallbackExporter.js",
+    "bytes": 786,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/compatibility/CompatibilityProfile.js",
+    "bytes": 2761,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/CompositeTelemetryStore.js",
+    "bytes": 7807,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/constants.js",
+    "bytes": 1855,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/analysis/CorrelationEngine.js",
+    "bytes": 5621,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/createTelemetryStore.js",
+    "bytes": 3199,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/deployments/DeploymentRegistry.js",
+    "bytes": 2835,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/diagnostics/DiagnosticBundleBuilder.js",
+    "bytes": 2555,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/errors.js",
+    "bytes": 2481,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/EventExporter.js",
+    "bytes": 1010,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/EventMonitorBridge.js",
+    "bytes": 3317,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/ExporterRegistry.js",
+    "bytes": 3101,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/cluster/FleetRegistry.js",
+    "bytes": 4107,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/health/HealthRegistry.js",
+    "bytes": 7746,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/HttpJsonExporter.js",
+    "bytes": 12299,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/HttpMonitorMiddleware.js",
+    "bytes": 5997,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/incidents/IncidentManager.js",
+    "bytes": 7327,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/alerts/index.js",
+    "bytes": 158,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/analysis/index.js",
+    "bytes": 167,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/cluster/index.js",
+    "bytes": 170,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/console/index.js",
+    "bytes": 52,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/core/index.js",
+    "bytes": 137,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/deployments/index.js",
+    "bytes": 55,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/diagnostics/index.js",
+    "bytes": 96,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/index.js",
+    "bytes": 243,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/health/index.js",
+    "bytes": 51,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/incidents/index.js",
+    "bytes": 90,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/index.js",
+    "bytes": 1245,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/index.js",
+    "bytes": 392,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/metrics/index.js",
+    "bytes": 163,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/pipeline/index.js",
+    "bytes": 92,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/plugins/index.js",
+    "bytes": 57,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/query/index.js",
+    "bytes": 55,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/resources/index.js",
+    "bytes": 98,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/security/index.js",
+    "bytes": 145,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/slo/index.js",
+    "bytes": 84,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/index.js",
+    "bytes": 313,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/index.js",
+    "bytes": 328,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/synthetics/index.js",
+    "bytes": 90,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/system/index.js",
+    "bytes": 105,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/testing/index.js",
+    "bytes": 52,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/index.js",
+    "bytes": 217,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/InMemorySpanStore.js",
+    "bytes": 4430,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/metrics/Instruments.js",
+    "bytes": 15009,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/JsonlTelemetryStore.js",
+    "bytes": 11282,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/cluster/LeaderLease.js",
+    "bytes": 4451,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/analysis/LeakDetector.js",
+    "bytes": 8115,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/LoggerMonitorBridge.js",
+    "bytes": 1276,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/MemoryTelemetryStore.js",
+    "bytes": 4319,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/metrics/MetricHistory.js",
+    "bytes": 1359,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/metrics/MetricRegistry.js",
+    "bytes": 6257,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "config/monitor.js",
+    "bytes": 15100,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/cluster/MonitorClusterEnvelope.js",
+    "bytes": 2724,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/console/MonitorCommands.js",
+    "bytes": 12780,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/config/MonitorConfiguration.js",
+    "bytes": 27208,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/core/MonitorContextManager.js",
+    "bytes": 3237,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/diagnostics/MonitorDoctor.js",
+    "bytes": 3750,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/MonitorFetch.js",
+    "bytes": 2345,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/core/MonitorLifecycle.js",
+    "bytes": 2277,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/MonitorLogTransport.js",
+    "bytes": 1750,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/MonitorManager.js",
+    "bytes": 2131,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/plugins/MonitorPluginManager.js",
+    "bytes": 19225,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/query/MonitorQueryEngine.js",
+    "bytes": 5739,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/testing/MonitorRecorder.js",
+    "bytes": 1799,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/MonitorRuntime.js",
+    "bytes": 49241,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/provider/MonitorServiceProvider.js",
+    "bytes": 10648,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/MonitorStudioAssets.js",
+    "bytes": 1346,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/MonitorStudioAuthorizer.js",
+    "bytes": 3990,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/MonitorStudioController.js",
+    "bytes": 10787,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/MonitorStudioManager.js",
+    "bytes": 11668,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/MonitorStudioPage.js",
+    "bytes": 3146,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/MonitorStudioRateLimiter.js",
+    "bytes": 2880,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/NoopTelemetryStore.js",
+    "bytes": 481,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/alerts/NotificationRouter.js",
+    "bytes": 5457,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/OperationInstrumentor.js",
+    "bytes": 3329,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/OtlpJsonExporter.js",
+    "bytes": 4540,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/PMMonitorBridge.js",
+    "bytes": 1159,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/system/ProcessMetricsCollector.js",
+    "bytes": 10098,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/metrics/PrometheusFormatter.js",
+    "bytes": 2410,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/ProtocolMonitorBridge.js",
+    "bytes": 2223,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/RawMongoTelemetryStore.js",
+    "bytes": 6830,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/integrations/RawNodeIntegrationManager.js",
+    "bytes": 3120,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/resources/RawNodeResourceCatalog.js",
+    "bytes": 3614,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/cluster/RedisMonitorBridge.js",
+    "bytes": 4025,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/studio/registerMonitorStudioRoutes.js",
+    "bytes": 3446,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/resources/ResourceRegistry.js",
+    "bytes": 8264,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/storage/RetentionManager.js",
+    "bytes": 1131,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/incidents/RunbookRegistry.js",
+    "bytes": 1215,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/security/SafeTelemetrySerializer.js",
+    "bytes": 5799,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/Sampler.js",
+    "bytes": 1947,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/pipeline/SignalPipeline.js",
+    "bytes": 15771,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/SignalSpanProcessor.js",
+    "bytes": 760,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/alerts/SilenceManager.js",
+    "bytes": 1993,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/slo/SloDefinition.js",
+    "bytes": 3949,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/slo/SloRegistry.js",
+    "bytes": 5925,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/Span.js",
+    "bytes": 5388,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/exporters/StatsdExporter.js",
+    "bytes": 2690,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/analysis/StreamingBaseline.js",
+    "bytes": 5131,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "resources/assets/js/monitor/studio.js",
+    "bytes": 30831,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/support.js",
+    "bytes": 12748,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/synthetics/SyntheticCheck.js",
+    "bytes": 2711,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/synthetics/SyntheticMonitor.js",
+    "bytes": 22839,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/system/SystemMetricsCollector.js",
+    "bytes": 646,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/security/TelemetryAuthenticator.js",
+    "bytes": 1936,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/core/TelemetryEnvelope.js",
+    "bytes": 1968,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/security/TelemetryRedactor.js",
+    "bytes": 3480,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/TraceContext.js",
+    "bytes": 5305,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "src/tracing/Tracer.js",
+    "bytes": 5639,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/api-manifest.json",
+    "bytes": 15473,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "package.json",
+    "bytes": 3953,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/API.md",
+    "bytes": 34738,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "bytes": 3148,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/CONFIGURATION.md",
+    "bytes": 11551,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/LIFECYCLE.md",
+    "bytes": 6353,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/MIGRATION.md",
+    "bytes": 5986,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "NOTICE.md",
+    "bytes": 2343,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/PUBLICATION.md",
+    "bytes": 3678,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "README.md",
+    "bytes": 4334,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/SECURITY.md",
+    "bytes": 4472,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/STUDIO.md",
+    "bytes": 6199,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "docs/VALIDATION.md",
+    "bytes": 7213,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/adversarial-pipeline-metrics.test.mjs",
+    "bytes": 6596,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/adversarial-plugins.test.mjs",
+    "bytes": 4322,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/adversarial-retention-synthetics.test.mjs",
+    "bytes": 5986,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/adversarial-synthetic-http.test.mjs",
+    "bytes": 4282,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/alert-lifecycle.test.mjs",
+    "bytes": 6807,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "examples/basic.mjs",
+    "bytes": 621,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/capabilities.test.mjs",
+    "bytes": 4522,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "scripts/check.mjs",
+    "bytes": 1839,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/contracts-hardening.test.mjs",
+    "bytes": 8327,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "scripts/generate-reference.mjs",
+    "bytes": 8522,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/readiness-http-delivery.test.mjs",
+    "bytes": 6041,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/readiness-lifecycle.test.mjs",
+    "bytes": 11946,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "scripts/reject-publication.mjs",
+    "bytes": 152,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/runtime.test.mjs",
+    "bytes": 8673,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/studio-actions.test.mjs",
+    "bytes": 13123,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/studio-boundaries.test.mjs",
+    "bytes": 4634,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "examples/studio-fixture.mjs",
+    "bytes": 7167,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/studio-http.test.mjs",
+    "bytes": 3414,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/studio-modeled.test.mjs",
+    "bytes": 2849,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/studio-security-regression.test.mjs",
+    "bytes": 4579,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/exports-types.mts",
+    "bytes": 5524,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "test/types.mts",
+    "bytes": 1525,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/alerts.d.ts",
+    "bytes": 203,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/analysis.d.ts",
+    "bytes": 98,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/cluster.d.ts",
+    "bytes": 151,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/config.d.ts",
+    "bytes": 133,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/console.d.ts",
+    "bytes": 476,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/core.d.ts",
+    "bytes": 136,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/deployments.d.ts",
+    "bytes": 49,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/diagnostics.d.ts",
+    "bytes": 69,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/exporters.d.ts",
+    "bytes": 148,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/health.d.ts",
+    "bytes": 45,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/incidents.d.ts",
+    "bytes": 63,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/index.d.ts",
+    "bytes": 29088,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/integrations.d.ts",
+    "bytes": 281,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/metrics.d.ts",
+    "bytes": 160,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/pipeline.d.ts",
+    "bytes": 65,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/plugins.d.ts",
+    "bytes": 51,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/provider.d.ts",
+    "bytes": 518,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/query.d.ts",
+    "bytes": 49,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/resources.d.ts",
+    "bytes": 97,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/security.d.ts",
+    "bytes": 97,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/slo.d.ts",
+    "bytes": 57,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/storage.d.ts",
+    "bytes": 181,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/studio-client.d.ts",
+    "bytes": 381,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/studio.d.ts",
+    "bytes": 202,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/synthetics.d.ts",
+    "bytes": 63,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/system.d.ts",
+    "bytes": 78,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/testing.d.ts",
+    "bytes": 64,
+    "mode": 420,
+    "type": "regular"
+  },
+  {
+    "path": "types/tracing.d.ts",
+    "bytes": 305,
+    "mode": 420,
+    "type": "regular"
+  }
+]

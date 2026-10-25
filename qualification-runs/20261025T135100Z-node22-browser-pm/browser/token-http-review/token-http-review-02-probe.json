@@ -1,0 +1,360 @@
+{
+  "kind": "HTTP-only external wrapper review; no native browser result",
+  "startedAt": "2026-10-25T14:07:06.524Z",
+  "runtime": {
+    "node": "v24.21.0",
+    "executable": "/usr/local/bin/node",
+    "platform": "darwin",
+    "arch": "x64"
+  },
+  "command": [
+    "/usr/local/bin/node",
+    "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/scripts/token-wrapper-http-probe.mjs",
+    "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "token-http-review-02"
+  ],
+  "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+  "archive": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615"
+  },
+  "packageRoot": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+  "session": "token-http-review-02",
+  "fixtureScriptSha256": "919db429c3c359975b087e525867a6ab46c03ada6aac085a07a0b38a65d95ebc",
+  "probeScriptSha256": "06d489790f1096e5e81fd50b94be8a0caf4e470ee504f2be7bc0ed56fa09bbeb",
+  "cases": [
+    {
+      "name": "shell requires host session",
+      "path": "/monitor",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 92,
+      "bodySha256": "c628fbca6f323659f079cdba8bfa5b48fcc4d35c6d6b9ace99c2cc374cadf60c"
+    },
+    {
+      "name": "packaged asset requires host session",
+      "path": "/monitor/assets/studio.js",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 92,
+      "bodySha256": "c628fbca6f323659f079cdba8bfa5b48fcc4d35c6d6b9ace99c2cc374cadf60c"
+    },
+    {
+      "name": "instrumentation asset requires host session",
+      "path": "/fixture/client.js",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 31,
+      "bodySha256": "01e6b9d8fd9bd52de0e7fedf052e6c17c41db72030f373e89f9882070efc598c"
+    },
+    {
+      "name": "session rejects missing code",
+      "path": "/qualification/session",
+      "method": "POST",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 37,
+      "bodySha256": "9668b45457b97f42f99684c76f1dc3d422f27c1df492e73d4536b9079ef41f1c"
+    },
+    {
+      "name": "session rejects wrong code",
+      "path": "/qualification/session",
+      "method": "POST",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 37,
+      "bodySha256": "9668b45457b97f42f99684c76f1dc3d422f27c1df492e73d4536b9079ef41f1c"
+    },
+    {
+      "name": "exact code establishes HttpOnly same-site session",
+      "path": "/qualification/session",
+      "method": "POST",
+      "expectedStatus": 303,
+      "actualStatus": 303,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 0,
+      "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "session shell declares token-required without token literal",
+      "path": "/monitor",
+      "method": "GET",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 2461,
+      "bodySha256": "85ed6e18877ae519ff3cf6c77781390fb80e8a1f8a53b582b3ebac29565a52a6"
+    },
+    {
+      "name": "session packaged asset excludes literal credential and persistent storage",
+      "path": "/monitor/assets/studio.js",
+      "method": "GET",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 30831,
+      "bodySha256": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef"
+    },
+    {
+      "name": "valid bearer without host session is denied",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 92,
+      "bodySha256": "c628fbca6f323659f079cdba8bfa5b48fcc4d35c6d6b9ace99c2cc374cadf60c"
+    },
+    {
+      "name": "session alone cannot read API",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 113,
+      "bodySha256": "2ae0229a130218e52e05f3bd1bc15c840c8500b2c446656c378cacc7b8e4de8b"
+    },
+    {
+      "name": "wrong bearer cannot read API",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 113,
+      "bodySha256": "2ae0229a130218e52e05f3bd1bc15c840c8500b2c446656c378cacc7b8e4de8b"
+    },
+    {
+      "name": "query token cannot replace bearer",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 113,
+      "bodySha256": "2ae0229a130218e52e05f3bd1bc15c840c8500b2c446656c378cacc7b8e4de8b"
+    },
+    {
+      "name": "session and correct bearer can read API",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 4583,
+      "bodySha256": "647cf1e9de3b88d49009ec252a134906a3fa812cda5650ef7f1222b104d3ac25"
+    },
+    {
+      "name": "token session has no native SSE authorization without bearer",
+      "path": "/monitor/api/stream",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 113,
+      "bodySha256": "2ae0229a130218e52e05f3bd1bc15c840c8500b2c446656c378cacc7b8e4de8b"
+    },
+    {
+      "name": "custom session retains cross-origin read rejection",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 21,
+      "bodySha256": "2900956e74d050865b6797ce45ae11736a528c92400d495b4d7a4adb2091bc53"
+    },
+    {
+      "name": "custom session retains cross-site rejection",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 21,
+      "bodySha256": "2900956e74d050865b6797ce45ae11736a528c92400d495b4d7a4adb2091bc53"
+    },
+    {
+      "name": "custom session retains loopback Host rejection",
+      "path": "/monitor/api/overview",
+      "method": "GET",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 19,
+      "bodySha256": "bcd594298d721a9c59e5a325c56936603699912a129698a7bea12b680f4f1591"
+    },
+    {
+      "name": "custom session retains mutation CSRF rejection",
+      "path": "/monitor/api/incidents/fixture-incident/resolve",
+      "method": "POST",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 19,
+      "bodySha256": "625e24a618244ef8621c6304199d6e619e5caf0085fdc88e77880a92678c2f4c"
+    },
+    {
+      "name": "denied CSRF mutation preserves synthetic server state",
+      "outcome": "PASS",
+      "before": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      }
+    },
+    {
+      "name": "owned session can select empty fixture mode",
+      "path": "/fixture/mode",
+      "method": "POST",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 2,
+      "bodySha256": "2689367b205c16ce32ed4200942b8b8b1e262dfc70d9bc9fbc77c49699a4f1df"
+    },
+    {
+      "name": "empty fixture mode must not bypass bearer authorization",
+      "path": "/monitor/api/traces",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "FAIL",
+      "bodyBytes": 21,
+      "bodySha256": "45b93ccefd22e5ec4796dc8d5173e3060566fec357528dfe20b3bd814d9bc430"
+    },
+    {
+      "name": "restore seeded fixture mode",
+      "path": "/fixture/mode",
+      "method": "POST",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 2,
+      "bodySha256": "2689367b205c16ce32ed4200942b8b8b1e262dfc70d9bc9fbc77c49699a4f1df"
+    },
+    {
+      "name": "owned instrumentation can arm synthetic failure",
+      "path": "/qualification/fail-next",
+      "method": "POST",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "condition": true,
+      "outcome": "PASS",
+      "bodyBytes": 5,
+      "bodySha256": "b65bdb2a7d8428e0a286f416741a3946f1275391503108958afeb596423ed75a"
+    },
+    {
+      "name": "synthetic failure must not precede bearer authorization",
+      "path": "/monitor/api/incidents/fixture-incident/resolve",
+      "method": "POST",
+      "expectedStatus": 401,
+      "actualStatus": 503,
+      "condition": true,
+      "outcome": "FAIL",
+      "bodyBytes": 76,
+      "bodySha256": "9470f63cd4cf3c08b69d7d41e477f1895cd530e5ae37fcbae092f8c20b1bd846"
+    }
+  ],
+  "cleanup": {
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "listenerClosed": true,
+    "listenerProbeCode": "ECONNREFUSED",
+    "closedReceipt": {
+      "at": "2026-10-25T14:07:06.941Z",
+      "session": "token-http-review-02",
+      "kind": "closed",
+      "reason": "stdin",
+      "server": {
+        "mutations": 1,
+        "clients": 0,
+        "signalListeners": 0,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "listening": false
+    }
+  },
+  "fixture": {
+    "session": "token-http-review-02",
+    "mode": "token",
+    "url": "http://127.0.0.1:60014/monitor",
+    "controlUrl": "http://127.0.0.1:60014/qualification/control",
+    "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "pid": 80172,
+    "node": "v24.21.0",
+    "execPath": "/usr/local/bin/node",
+    "files": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    "baseline": {
+      "mutations": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    "ttlMs": 900000
+  },
+  "logReview": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/browser/token-http-review/token-http-review-02.jsonl",
+    "bytes": 5721,
+    "sha256": "d324e7c777089afaca6c1c6483b96c6d5bc90a18a98e1c51f406031eca4bbe99",
+    "rawBearerValuePresent": false,
+    "rawSessionCookiePresent": false,
+    "queryTokenValuePresent": false,
+    "scope": "HTTP headers/queries from this probe; no native browser, native prompt, storage observation or browser-event payload acceptance is claimed."
+  },
+  "stderr": "",
+  "finishedAt": "2026-10-25T14:07:06.956Z",
+  "outcome": "FAIL"
+}

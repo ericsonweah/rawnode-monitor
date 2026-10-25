@@ -1,0 +1,313 @@
+[
+  {
+    "name": "node-path",
+    "command": [
+      "which",
+      "node"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 106,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:13.734Z"
+  },
+  {
+    "name": "node-version",
+    "command": [
+      "node",
+      "--version"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 115,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:13.844Z"
+  },
+  {
+    "name": "npm-path",
+    "command": [
+      "which",
+      "npm"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 92,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:13.961Z"
+  },
+  {
+    "name": "npm-version",
+    "command": [
+      "npm",
+      "--version"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 622,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:14.055Z"
+  },
+  {
+    "name": "tsc-path",
+    "command": [
+      "which",
+      "tsc"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 72,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:14.679Z"
+  },
+  {
+    "name": "tsc-version",
+    "command": [
+      "tsc",
+      "--version"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 427,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:14.753Z"
+  },
+  {
+    "name": "python3-path",
+    "command": [
+      "which",
+      "python3"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 67,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:15.182Z"
+  },
+  {
+    "name": "python3-version",
+    "command": [
+      "python3",
+      "--version"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 91,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:15.251Z"
+  },
+  {
+    "name": "pack",
+    "command": [
+      "npm",
+      "pack",
+      "--offline",
+      "--json",
+      "--pack-destination",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 16408,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:15.343Z"
+  },
+  {
+    "name": "pack-repeat",
+    "command": [
+      "npm",
+      "pack",
+      "--offline",
+      "--json",
+      "--pack-destination",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/repeat"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 16091,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:31.757Z"
+  },
+  {
+    "name": "archive-inventory",
+    "command": [
+      "python3",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/scripts/archive-inventory.py",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz"
+    ],
+    "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 167,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:47.851Z"
+  },
+  {
+    "name": "extract",
+    "command": [
+      "tar",
+      "-xzf",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+      "--strip-components=1",
+      "-C",
+      "/private/tmp/rawnode-monitor-qualification-INTlq3/extracted/node_modules/@rawnode/monitor"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 114,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:48.022Z"
+  },
+  {
+    "name": "install",
+    "command": [
+      "npm",
+      "install",
+      "--offline",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "--package-lock=false",
+      "--save-exact",
+      "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 1181,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:48.137Z"
+  },
+  {
+    "name": "extracted-imports",
+    "command": [
+      "node",
+      "imports.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/extracted",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 1276,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:49.597Z"
+  },
+  {
+    "name": "extracted-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--skipLibCheck",
+      "false",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/extracted",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 3192,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:50.874Z"
+  },
+  {
+    "name": "extracted-exports-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--skipLibCheck",
+      "false",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "exports-types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/extracted",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 2087,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:54.067Z"
+  },
+  {
+    "name": "installed-imports",
+    "command": [
+      "node",
+      "imports.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 353,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:56.155Z"
+  },
+  {
+    "name": "installed-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--skipLibCheck",
+      "false",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 2422,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:56.510Z"
+  },
+  {
+    "name": "installed-exports-types.mts",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--skipLibCheck",
+      "false",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "--resolveJsonModule",
+      "exports-types.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "exit": 0,
+    "expected": 0,
+    "milliseconds": 3221,
+    "timedOut": false,
+    "started": "2026-10-25T13:59:58.934Z"
+  }
+]

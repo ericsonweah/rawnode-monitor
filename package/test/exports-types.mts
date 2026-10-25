@@ -33,6 +33,8 @@ import metadata from '@rawnode/monitor/package.json' with { type: 'json' };
 const monitor = new MonitorRuntime({ config });
 const registry = new metrics.MetricRegistry({ maxSeries: 8 });
 registry.timer('duration_seconds').labels({ route: '/orders/:id' }).start()();
+const hasDuration: boolean = registry.has('duration_seconds');
+const metricNames: string[] = registry.names();
 const sink = new storage.MemoryTelemetryStore({ maxItems: 4 });
 new pipeline.SignalPipeline().addSink('memory', sink, { required: true });
 const context = new core.MonitorContextManager();
@@ -49,9 +51,18 @@ new cluster.FleetRegistry().heartbeat({ instanceId: 'typed' });
 new analysis.StreamingBaseline().observe(1);
 new security.SafeTelemetrySerializer().sanitize({ password: 'synthetic' });
 new plugins.MonitorPluginManager().hook('typed', () => undefined);
-new synthetics.SyntheticMonitor().register({ id: 'typed', type: 'custom', run: () => true });
+const probes = new synthetics.SyntheticMonitor();
+probes.register({ id: 'typed', type: 'custom', run: () => true });
+const removedProbe: boolean = probes.unregister('typed');
 new exporters.CallbackExporter(() => undefined);
 new health.HealthRegistry().register('typed', ({ signal }) => ({ ok: !signal.aborted }));
+const disposeHealth = monitor.registerHealth('typed', ({ signal, name, kind }) => ({ ok: !signal.aborted, details: { name, kind } }));
+const removedHealth: boolean = disposeHealth();
+monitor.readiness().then(report => {
+  const elapsed: number = report.durationMs;
+  const total: number = report.counts.total;
+  void [elapsed, total];
+});
 new resources.ResourceRegistry().register('typed', { metrics: () => ({ count: 1 }) });
 new alerts.AlertRule({ name: 'typed', evaluate: () => false });
 new integrations.PMMonitorBridge({ registerResource() { return () => {}; } }, monitor).start();
@@ -77,4 +88,6 @@ tracer.startSpan('invalid').end(1n);
 new core.TelemetryEnvelope('arbitrary', {});
 // @ts-expect-error metadata does not invent an npm executable
 metadata.bin;
-void [monitorVersion, service, value, activeResult, commandClasses, manager, navigation, snapshot, name];
+// @ts-expect-error runtime health registration requires a function
+monitor.registerHealth('invalid', {});
+void [monitorVersion, service, value, activeResult, commandClasses, manager, navigation, snapshot, name, hasDuration, metricNames, removedProbe, removedHealth];

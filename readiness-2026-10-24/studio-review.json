@@ -1,0 +1,66 @@
+{
+  "reviewedHead": "884a497",
+  "runtime": "Node v24.21.0",
+  "leadA": {
+    "disposition": "already addressed",
+    "evidence": "MonitorStudioController._failure sanitizes errorRecord without a stack through the runtime serializer/redactor; read, mutation, ingestion and thrown authorizer errors use the boundary. HTTP regressions cover recognized bearer tokens, secret-key details, cyclic/BigInt/oversized values, bounded serializable output and safe HTTP status/code."
+  },
+  "leadB": {
+    "disposition": "already addressed",
+    "evidence": "Silence rule/duration/reason and incident resolution prompts check null before mutation. bindAction owns an abort signal, prevents duplicate submits, surfaces failures and releases pending ownership on navigation/destroy even if injected fetch ignores cancellation. Modeled regressions cover cancellation, explicit empty all-rules ID, valid and invalid durations, intentional actions and stale completion. Actual browser results belong to the separate browser record."
+  },
+  "newChange": "Added an explicit Operator token label and accessible dialog title/description to the authorization overlay. Actual Chrome inspection of an intermediate archive then reproduced trace detail disappearing on the next poll. Opening trace, incident or full-diagnostics details now pauses automatic refresh with a visible Resume live updates control. Manual refresh/navigation clears the inspection. Polling, SSE-triggered refresh and visibility return also defer while filters have values, main form controls/summary have focus or native details are open. No public API signature or declaration change.",
+  "runs": [
+    {
+      "cwd": "package",
+      "command": "node --test test/studio-actions.test.mjs test/studio-security-regression.test.mjs test/studio-modeled.test.mjs test/studio-http.test.mjs",
+      "sandbox": "restricted",
+      "exit": 1,
+      "tests": 10,
+      "pass": 6,
+      "fail": 4,
+      "cancelled": 0,
+      "skipped": 0,
+      "reason": "All four HTTP cases failed on task-owned listener creation with listen EPERM 127.0.0.1; six modeled cases passed."
+    },
+    {
+      "cwd": "package",
+      "command": "node --test test/studio-actions.test.mjs test/studio-security-regression.test.mjs test/studio-modeled.test.mjs test/studio-http.test.mjs",
+      "sandbox": "approved loopback escalation",
+      "exit": 0,
+      "tests": 10,
+      "pass": 10,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 1528.18737,
+      "timing": "Before the markup-only label/dialog change. Final native/artifact runs verify final content."
+    },
+    {
+      "cwd": "package",
+      "command": "node --check src/studio/MonitorStudioPage.js",
+      "exit": 0,
+      "timing": "After label/dialog markup change."
+    },
+    {
+      "cwd": ".",
+      "command": "node --check package/resources/assets/js/monitor/studio.js",
+      "exit": 0,
+      "timing": "After inspection retention repair."
+    },
+    {
+      "cwd": ".",
+      "command": "node --test package/test/studio-actions.test.mjs package/test/studio-modeled.test.mjs",
+      "exit": 0,
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 1387.833658,
+      "timing": "After inspection retention repair; two new deterministic mocked-clock cases verify all three inspectors, manual resume, filters, focus, details and continuing poll ownership. Final actual browser validation is separate."
+    }
+  ]
+}

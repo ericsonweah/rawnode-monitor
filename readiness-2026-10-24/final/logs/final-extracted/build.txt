@@ -1,0 +1,5 @@
+
+> @rawnode/monitor@1.0.0 build
+> node scripts/check.mjs
+
+{"ok":true,"checkedJavaScript":112,"exports":29,"node":"v24.21.0"}

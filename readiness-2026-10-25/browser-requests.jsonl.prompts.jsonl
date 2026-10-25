@@ -1,0 +1,4 @@
+{"receivedAt":"2026-10-25T11:37:53.943Z","sequence":1,"message":"Rule ID to silence (empty means all rules):","result":null}
+{"receivedAt":"2026-10-25T11:38:04.796Z","sequence":2,"message":"Rule ID to silence (empty means all rules):","result":"fixture-alert"}
+{"receivedAt":"2026-10-25T11:38:07.627Z","sequence":3,"message":"Silence duration in minutes:","result":"60"}
+{"receivedAt":"2026-10-25T11:38:09.260Z","sequence":4,"message":"Reason:","result":"Operator maintenance"}

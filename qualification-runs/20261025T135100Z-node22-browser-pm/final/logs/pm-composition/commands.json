@@ -1,0 +1,108 @@
+[
+  {
+    "leg": "npm-version",
+    "command": [
+      "npm",
+      "--version"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "started": "2026-10-25T14:05:12.290Z",
+    "milliseconds": 210,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "typescript-version",
+    "command": [
+      "tsc",
+      "--version"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "started": "2026-10-25T14:05:12.502Z",
+    "milliseconds": 158,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "install-pm",
+    "command": [
+      "npm",
+      "install",
+      "--offline",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "--package-lock=false",
+      "--cache",
+      "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/.composition-npm-cache",
+      "/Users/ericsonweah/Documents/Codex/2026-10-02/task-3/artifacts/rawnode-pm-0.1.0.tgz"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "started": "2026-10-25T14:05:12.662Z",
+    "milliseconds": 923,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "resolution",
+    "command": [
+      "/usr/local/bin/node",
+      "--input-type=module",
+      "-e",
+      "import {fileURLToPath} from 'node:url'; import path from 'node:path'; const root=process.cwd(); for(const name of ['@rawnode/monitor','@rawnode/monitor/integrations','@rawnode/pm','@rawnode/pm/runtime']) { const url=import.meta.resolve(name); if(!fileURLToPath(url).startsWith(path.join(root,'node_modules')+path.sep)) throw Error('Unexpected resolution: '+url); console.log(name+' '+url); }"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed",
+    "started": "2026-10-25T14:05:13.781Z",
+    "milliseconds": 93,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "direct",
+    "command": [
+      "/usr/local/bin/node",
+      "pm-composition-direct.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/composition",
+    "started": "2026-10-25T14:05:13.875Z",
+    "milliseconds": 516,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "reciprocal",
+    "command": [
+      "/usr/local/bin/node",
+      "--test",
+      "--test-timeout=15000",
+      "pm-composition.test.mjs"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/composition",
+    "started": "2026-10-25T14:05:14.393Z",
+    "milliseconds": 1078,
+    "exit": 0,
+    "timedOut": false
+  },
+  {
+    "leg": "paired-types",
+    "command": [
+      "tsc",
+      "--noEmit",
+      "--strict",
+      "--skipLibCheck",
+      "false",
+      "--module",
+      "nodenext",
+      "--moduleResolution",
+      "nodenext",
+      "--target",
+      "es2022",
+      "pm-consumer.mts"
+    ],
+    "cwd": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/composition",
+    "started": "2026-10-25T14:05:15.472Z",
+    "milliseconds": 1346,
+    "exit": 0,
+    "timedOut": false
+  }
+]

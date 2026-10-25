@@ -1,0 +1,98 @@
+{
+  "generatedAt": "2026-10-25T11:33:48.833950+00:00",
+  "scope": "Independent lifecycle review of focused leads C/D, adjacent JSONL admission/drain, and pre-existing HTTP delivery changes. Existing dirty work was retained; no historical receipt or AGENTS.md changed.",
+  "runtime": "Node v24.21.0",
+  "leads": {
+    "C": {
+      "disposition": "already addressed in HEAD, freshly verified",
+      "evidence": "Health register deletes name cache and disposer checks record identity; final cache insertion retains record identity guard. Three tests cover metadata/critical replacement, ordinary readiness, old/new disposers, unregister and delayed old callback."
+    },
+    "D": {
+      "disposition": "already addressed in HEAD, freshly verified; adjacent defects confirmed and repaired",
+      "evidence": "Admitted exports are tracked before yielding; close aborts active requests and retries, all compression/split/request continuations check lifecycle, closes agent and waits admitted exports. Six tests cover standalone and runtime-owned shutdown plus ordinary pre-close retries."
+    },
+    "JSONL": {
+      "disposition": "already addressed in HEAD, freshly verified",
+      "evidence": "writeMany registers full operation before initialization; close closes admission synchronously and drains pendingWrites across kinds. Two tests cover deferred initialization, flush, repeated close, late admission rejection and persisted accepted records."
+    }
+  },
+  "newDefects": [
+    {
+      "issue": "Truncated acknowledgement automatically repeats accepted telemetry",
+      "reproduction": "Loopback receiver reads full request then sends partial response body with longer content-length and closes. Before fix error.retryable was true; after fix false with details.delivery unknown and one received request.",
+      "fix": "Response aborted/error paths use uncertainty wrapper preserving error code and disabling automatic replay."
+    },
+    {
+      "issue": "Connection reset after full payload send automatically repeats accepted telemetry",
+      "reproduction": "Loopback receiver reads full request then destroys socket before sending response. Before fix retryable undefined permits retries; after fix ECONNRESET retained, retryable false, details.delivery unknown, one received request.",
+      "fix": "Transport error after ClientRequest.writableFinished is treated as unknown delivery."
+    },
+    {
+      "issue": "Socket inactivity timeout allows unbounded elapsed request with trickling response",
+      "reproduction": "Loopback response sends bytes every 20ms for 400ms with exporter timeoutMs 100. Before fix export completed successfully after 417.5ms; after fix rejects MONITOR_EXPORT_TIMEOUT after 102.0ms, before planned response completion.",
+      "fix": "Owned per-attempt elapsed deadline replaces socket inactivity timer; clears at every settlement. Covers socket queue wait and response duration."
+    }
+  ],
+  "commands": [
+    {
+      "command": "node --test --test-timeout=20000 test/readiness-lifecycle.test.mjs test/readiness-http-delivery.test.mjs",
+      "cwd": "package",
+      "phase": "initial restricted sandbox",
+      "exit": 1,
+      "tests": 13,
+      "pass": 5,
+      "fail": 8,
+      "cancelled": 0,
+      "skipped": 0,
+      "failure": "All 8 network tests failed listen EPERM 127.0.0.1; no assertion failures in non-network checks. Retried with required escalation."
+    },
+    {
+      "command": "node --test --test-timeout=20000 test/readiness-lifecycle.test.mjs test/readiness-http-delivery.test.mjs",
+      "cwd": "package",
+      "phase": "authorized loopback baseline",
+      "exit": 0,
+      "tests": 13,
+      "pass": 13,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    {
+      "command": "node --test --test-timeout=20000 test/readiness-http-delivery.test.mjs > ../readiness-2026-10-25/logs/lifecycle/before-fix.txt 2>&1",
+      "cwd": "package",
+      "phase": "new regressions before repair",
+      "exit": 1,
+      "tests": 5,
+      "pass": 2,
+      "fail": 3,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": "logs/lifecycle/before-fix.txt"
+    },
+    {
+      "command": "node --test --test-timeout=20000 test/readiness-lifecycle.test.mjs test/readiness-http-delivery.test.mjs > ../readiness-2026-10-25/logs/lifecycle/after-fix.txt 2>&1",
+      "cwd": "package",
+      "phase": "new regressions after repair",
+      "exit": 0,
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": "logs/lifecycle/after-fix.txt"
+    }
+  ],
+  "compatibility": "Public exports and signatures unchanged. timeoutMs now bounds each request attempt, including socket queue wait and trickling response; it does not bound aggregate serialization/compression/chunks/retries. Complete explicit 503/429 responses retain ordinary bounded retry semantics. Uncertain transport acknowledgements do not automatically replay; this can reduce automatic recovery and avoids silently duplicating accepted telemetry. No claim of remote durable persistence or undo on close.",
+  "limits": [
+    "No live exporters or production destinations were used.",
+    "Injected callback or filesystem work may remain physically active if non-cooperative; these tests concern owned continuations and task-owned loopback connections.",
+    "No exact-final-artifact result is implied by this native source receipt; parent task performs fresh distribution gates."
+  ],
+  "sourceSha256": {
+    "package/src/health/HealthRegistry.js": "fd118aa589e1c8b5f0b23280c50e26f62204fd17f20e223dec75eb929e2b88c9",
+    "package/src/exporters/HttpJsonExporter.js": "0d29a80c3bd7e6f0345b94a6f14656de48770ccff13a530b72634ef2e427faf0",
+    "package/src/storage/JsonlTelemetryStore.js": "c42f78edaee4705fe06d79f49b15c3bd61444a6c60888121c6e3a2a82fbf5b76",
+    "package/test/readiness-lifecycle.test.mjs": "9f410fdf0afb8d53ac7c6809ba61ab1b94a169d15c22daeaa256772f2c0a4c5e",
+    "package/test/readiness-http-delivery.test.mjs": "d0b9feb15ab1939d009b1db266cf8d8443805d34df59b91adf9ed6b1d4c84279"
+  }
+}

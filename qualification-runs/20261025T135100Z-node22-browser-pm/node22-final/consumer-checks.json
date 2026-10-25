@@ -1,0 +1,221 @@
+{
+  "node": "v22.0.0",
+  "execPath": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+  "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+  "results": [
+    {
+      "name": "source",
+      "commandReceipt": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-source-after/commands.json",
+      "allSourceFilesMatchFinalArtifact": true,
+      "result": {
+        "startedAt": "2026-10-25T13:58:27.227Z",
+        "runtime": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "runtimeVersion": "v22.0.0",
+        "npmCli": "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+        "npmVersion": "10.5.1",
+        "compiler": "/usr/local/lib/node_modules/typescript/bin/tsc",
+        "compilerVersion": "Version 5.9.3",
+        "compilerRuntime": "v22.0.0",
+        "platform": "darwin",
+        "arch": "x64",
+        "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+        "manifest": {
+          "name": "@rawnode/monitor",
+          "version": "1.0.0",
+          "engines": {
+            "node": ">=22"
+          }
+        },
+        "packageManifestSha256": "f40b53fdfcdc1a12682669d3b40fa014ac76eb229469a898b4d35fe77b131018",
+        "selectedFiles": [
+          "adversarial-pipeline-metrics.test.mjs",
+          "adversarial-plugins.test.mjs",
+          "adversarial-retention-synthetics.test.mjs",
+          "adversarial-synthetic-http.test.mjs",
+          "alert-lifecycle.test.mjs",
+          "capabilities.test.mjs",
+          "contracts-hardening.test.mjs",
+          "readiness-http-delivery.test.mjs",
+          "readiness-lifecycle.test.mjs",
+          "runtime.test.mjs",
+          "studio-actions.test.mjs",
+          "studio-boundaries.test.mjs",
+          "studio-http.test.mjs",
+          "studio-modeled.test.mjs",
+          "studio-security-regression.test.mjs"
+        ],
+        "commands": [
+          {
+            "leg": "build",
+            "command": [
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+              "--offline",
+              "run",
+              "build"
+            ],
+            "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+            "startedAt": "2026-10-25T13:58:27.230Z",
+            "milliseconds": 33192,
+            "exit": 0,
+            "signal": null,
+            "timedOut": false,
+            "expectedExit": 0,
+            "build": {
+              "ok": true,
+              "checkedJavaScript": 112,
+              "exports": 29,
+              "node": "v22.0.0"
+            },
+            "summaryValid": true
+          },
+          {
+            "leg": "test",
+            "command": [
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+              "--offline",
+              "test"
+            ],
+            "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+            "startedAt": "2026-10-25T13:59:00.428Z",
+            "milliseconds": 3184,
+            "exit": 0,
+            "signal": null,
+            "timedOut": false,
+            "expectedExit": 0,
+            "counts": {
+              "tests": 97,
+              "suites": 0,
+              "pass": 97,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "summaryValid": true
+          },
+          {
+            "leg": "basic",
+            "command": [
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+              "examples/basic.mjs"
+            ],
+            "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+            "startedAt": "2026-10-25T13:59:03.615Z",
+            "milliseconds": 1254,
+            "exit": 0,
+            "signal": null,
+            "timedOut": false,
+            "expectedExit": 0
+          },
+          {
+            "leg": "types",
+            "command": [
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+              "/usr/local/lib/node_modules/typescript/bin/tsc",
+              "--noEmit",
+              "--strict",
+              "--skipLibCheck",
+              "false",
+              "--module",
+              "nodenext",
+              "--moduleResolution",
+              "nodenext",
+              "--target",
+              "es2022",
+              "test/types.mts"
+            ],
+            "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+            "startedAt": "2026-10-25T13:59:04.870Z",
+            "milliseconds": 5655,
+            "exit": 0,
+            "signal": null,
+            "timedOut": false,
+            "expectedExit": 0
+          },
+          {
+            "leg": "types-all",
+            "command": [
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+              "/usr/local/lib/node_modules/typescript/bin/tsc",
+              "--noEmit",
+              "--strict",
+              "--skipLibCheck",
+              "false",
+              "--module",
+              "nodenext",
+              "--moduleResolution",
+              "nodenext",
+              "--target",
+              "es2022",
+              "--resolveJsonModule",
+              "test/exports-types.mts"
+            ],
+            "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+            "startedAt": "2026-10-25T13:59:10.526Z",
+            "milliseconds": 8493,
+            "exit": 0,
+            "signal": null,
+            "timedOut": false,
+            "expectedExit": 0
+          },
+          {
+            "leg": "guard",
+            "command": [
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+              "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/lib/node_modules/npm/bin/npm-cli.js",
+              "--offline",
+              "run",
+              "prepublishOnly"
+            ],
+            "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/package",
+            "startedAt": "2026-10-25T13:59:19.020Z",
+            "milliseconds": 1270,
+            "exit": 1,
+            "signal": null,
+            "timedOut": false,
+            "expectedExit": 1,
+            "summaryValid": true
+          }
+        ],
+        "ok": true,
+        "finishedAt": "2026-10-25T13:59:20.291Z"
+      }
+    },
+    {
+      "name": "extracted",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/scripts/runtime-checks.mjs",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/extracted/node_modules/@rawnode/monitor",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/logs/extracted"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:05:13.531Z",
+      "milliseconds": 34131,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "commandReceipt": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/logs/extracted/commands.json"
+    },
+    {
+      "name": "installed",
+      "command": [
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/scripts/runtime-checks.mjs",
+        "/private/tmp/rawnode-monitor-node22-20261025T135100Z-uWarSj/node-v22.0.0-darwin-x64/bin/node",
+        "/private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor",
+        "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/logs/installed"
+      ],
+      "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+      "startedAt": "2026-10-25T14:05:47.679Z",
+      "milliseconds": 28719,
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "commandReceipt": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/node22-final/logs/installed/commands.json"
+    }
+  ]
+}

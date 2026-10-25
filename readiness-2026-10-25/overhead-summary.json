@@ -1,0 +1,95 @@
+{
+  "sha256": "69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7",
+  "settings": {
+    "operations": 20000,
+    "labels": {
+      "route": "/fixture/:id",
+      "method": "GET"
+    },
+    "sampleRate": 0.1,
+    "parentBased": false,
+    "sinkDelayMs": 2,
+    "batchSize": 128,
+    "maxItems": 512,
+    "maxInFlightBatches": 1,
+    "overflow": "drop-oldest",
+    "gc": "explicit --expose-gc between legs",
+    "allocation": "V8 sampled allocation at 32768-byte interval, including collected objects; estimate includes harness overhead and perturbs timing"
+  },
+  "groups": {
+    "disabled": {
+      "trials": 3,
+      "operations": 20000,
+      "medianThroughput": 874771.0177514585,
+      "medianWorkloadMs": 22.863126000000193,
+      "medianCpuUserMs": 32.577,
+      "medianCpuSystemMs": 0.875,
+      "medianSampledAllocationBytes": 1180248,
+      "medianHeapUsedChangeBytes": -48072,
+      "rssInitialRange": [
+        113696768,
+        126377984,
+        157171712
+      ],
+      "rssAfterCleanupRange": [
+        115986432,
+        126500864,
+        157192192
+      ],
+      "medianP99EventLoopMs": 5.689343,
+      "medianDrainAndCloseMs": 0.0005260000000362197,
+      "acceptedBySink": [
+        0,
+        0,
+        0
+      ],
+      "cleanup": [
+        null,
+        null,
+        null
+      ]
+    },
+    "enabled": {
+      "trials": 3,
+      "operations": 20000,
+      "medianThroughput": 27356.15427949111,
+      "medianWorkloadMs": 731.0969150000001,
+      "medianCpuUserMs": 815.564,
+      "medianCpuSystemMs": 18.986,
+      "medianSampledAllocationBytes": 289641336,
+      "medianHeapUsedChangeBytes": 1893600,
+      "rssInitialRange": [
+        116076544,
+        126676992,
+        157216768
+      ],
+      "rssAfterCleanupRange": [
+        126349312,
+        157167616,
+        164241408
+      ],
+      "medianP99EventLoopMs": 10.067967,
+      "medianDrainAndCloseMs": 5.298541999999998,
+      "acceptedBySink": [
+        3269,
+        3230,
+        3265
+      ],
+      "cleanup": [
+        {
+          "closed": true,
+          "ownedTimers": 0
+        },
+        {
+          "closed": true,
+          "ownedTimers": 0
+        },
+        {
+          "closed": true,
+          "ownedTimers": 0
+        }
+      ]
+    }
+  },
+  "scope": "bounded synthetic microbenchmark; no universal latency or production-load claim"
+}

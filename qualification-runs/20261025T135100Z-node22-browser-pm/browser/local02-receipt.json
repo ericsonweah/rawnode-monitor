@@ -1,0 +1,268 @@
+{
+  "session": "final-local-02",
+  "status": "PASS",
+  "scope": "Selected session subcases only, not a full Studio acceptance pass",
+  "analyzedAt": "2026-10-25T14:28:29.364Z",
+  "artifact": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "files": 177
+  },
+  "input": {
+    "session": "final-local-02",
+    "mode": "local",
+    "url": "http://127.0.0.1:61942/monitor",
+    "controlUrl": "http://127.0.0.1:61942/qualification/control",
+    "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "pid": 96415,
+    "node": "v24.21.0",
+    "execPath": "/usr/local/bin/node",
+    "files": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    "baseline": {
+      "mutations": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    "ttlMs": 900000
+  },
+  "log": {
+    "path": "final-local-02.jsonl",
+    "sha256": "313a1e68594187571a4b1421312ad89f469608f642c1231da81221d3265733e6",
+    "lines": 59,
+    "startedAt": "2026-10-25T14:16:14.016Z",
+    "finishedAt": "2026-10-25T14:19:36.147Z"
+  },
+  "harness": {
+    "path": "scripts/native-browser-fixture-v3.mjs",
+    "sha256": "1f7efb71c45439f23e69d2cbd8cf36e8b8f4318e257d52322194ad5fda9d55d4",
+    "packagedRuntimeEdited": false
+  },
+  "environment": {
+    "observedDate": "2026-10-25",
+    "method": "Independent read-only /usr/libexec/PlistBuddy metadata queries; no browser process launch",
+    "Safari": {
+      "plist": "/Applications/Safari.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "27.0",
+      "CFBundleVersion": "20625.1.29.18.28",
+      "queryExit": 0
+    },
+    "Chrome": {
+      "plist": "/Applications/Google Chrome.app/Contents/Info.plist",
+      "CFBundleShortVersionString": "155.0.8059.85",
+      "queryExit": 0
+    },
+    "os": {
+      "name": "macOS",
+      "version": "15.8.1",
+      "build": "24H32",
+      "architecture": "x86_64",
+      "source": "../runtime/platform.json"
+    },
+    "nativeControlMechanism": "cua native application accessibility/keyboard controls; coordinates failed in some retained attempts",
+    "standaloneScreenshots": "Native API screenshots were visually reviewed in the conversation; no standalone screenshot files were available. Authored notes are distinct from raw JSONL."
+  },
+  "subcases": [
+    {
+      "id": "cancel-rule",
+      "status": "PASS",
+      "evidenceType": "delegated native prompt and independent server request/state receipts",
+      "lines": [
+        11,
+        13,
+        15
+      ],
+      "promptResults": [
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "cleanCase": true
+    },
+    {
+      "id": "cancel-duration",
+      "status": "PASS",
+      "evidenceType": "delegated native prompt and independent server request/state receipts",
+      "lines": [
+        17,
+        19,
+        21,
+        23
+      ],
+      "promptResults": [
+        "",
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "cleanCase": true
+    },
+    {
+      "id": "cancel-reason",
+      "status": "PASS",
+      "evidenceType": "delegated native prompt and independent server request/state receipts",
+      "lines": [
+        25,
+        27,
+        29,
+        31,
+        33
+      ],
+      "promptResults": [
+        "",
+        "60",
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "cleanCase": true
+    },
+    {
+      "id": "cancel-resolution",
+      "status": "PASS",
+      "evidenceType": "delegated native prompt and independent server request/state receipts",
+      "lines": [
+        35,
+        40,
+        42
+      ],
+      "promptResults": [
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "cleanCase": true
+    },
+    {
+      "id": "trace-detail-redaction",
+      "status": "PASS",
+      "lines": [
+        46,
+        48
+      ],
+      "scope": "Actual native browser requested and rendered the trace details, span fields and redacted token. Keyboard triggering is reported by the parent native transcript, separately from raw JSONL."
+    },
+    {
+      "id": "trace-retained-observation",
+      "status": "PASS",
+      "lines": [
+        48,
+        50
+      ],
+      "milliseconds": 4827,
+      "scope": "Identical paused details in two observations; not a proof of visible polling deadlines because visibility was not captured."
+    },
+    {
+      "id": "trace-resume-presentation",
+      "status": "PASS",
+      "lines": [
+        50,
+        51,
+        53
+      ],
+      "scope": "Resume produced a fresh traces read and a new list presentation without the paused detail content."
+    },
+    {
+      "id": "native-unmount-stream-release",
+      "status": "PASS",
+      "lines": [
+        57
+      ],
+      "scope": "No exposed mounted handle and zero stream clients after native unmount."
+    },
+    {
+      "id": "fixture-close",
+      "status": "PASS",
+      "lines": [
+        58,
+        59
+      ],
+      "reason": "stdin",
+      "listening": false,
+      "server": {
+        "mutations": 0,
+        "clients": 0,
+        "signalListeners": 0,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "exitCode": 0,
+      "exitEvidence": "Parent execution result; server close independently captured in raw JSONL."
+    }
+  ],
+  "mutations": [],
+  "limitations": [
+    "No earlier failure or partial receipt is overwritten.",
+    "Native screenshots were reviewed in the conversation; no standalone screenshot export is claimed.",
+    "This is local tokenless mode; token/session mode has separate evidence."
+  ]
+}

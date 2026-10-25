@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "node": "v22.0.0",
+  "entries": 29,
+  "executable": 28,
+  "rootNames": 189,
+  "domFreeStudioClient": true,
+  "privateDeepImportRejected": true,
+  "rows": [
+    {
+      "entry": ".",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/index.js",
+      "symbols": 189
+    },
+    {
+      "entry": "./metrics",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/metrics/index.js",
+      "symbols": 10
+    },
+    {
+      "entry": "./pipeline",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/pipeline/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./studio",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/studio/index.js",
+      "symbols": 7
+    },
+    {
+      "entry": "./tracing",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/tracing/index.js",
+      "symbols": 17
+    },
+    {
+      "entry": "./cluster",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/cluster/index.js",
+      "symbols": 6
+    },
+    {
+      "entry": "./core",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/core/index.js",
+      "symbols": 5
+    },
+    {
+      "entry": "./analysis",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/analysis/index.js",
+      "symbols": 4
+    },
+    {
+      "entry": "./security",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/security/index.js",
+      "symbols": 3
+    },
+    {
+      "entry": "./plugins",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/plugins/index.js",
+      "symbols": 1
+    },
+    {
+      "entry": "./synthetics",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/synthetics/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./exporters",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/exporters/index.js",
+      "symbols": 7
+    },
+    {
+      "entry": "./health",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/health/index.js",
+      "symbols": 1
+    },
+    {
+      "entry": "./resources",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/resources/index.js",
+      "symbols": 3
+    },
+    {
+      "entry": "./storage",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/storage/index.js",
+      "symbols": 7
+    },
+    {
+      "entry": "./alerts",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/alerts/index.js",
+      "symbols": 9
+    },
+    {
+      "entry": "./integrations",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/integrations/index.js",
+      "symbols": 11
+    },
+    {
+      "entry": "./testing",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/testing/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./system",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/system/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./diagnostics",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/diagnostics/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./slo",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/slo/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./query",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/query/index.js",
+      "symbols": 1
+    },
+    {
+      "entry": "./incidents",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/incidents/index.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./deployments",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/deployments/index.js",
+      "symbols": 1
+    },
+    {
+      "entry": "./console",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/console/index.js",
+      "symbols": 19
+    },
+    {
+      "entry": "./provider",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/src/provider/MonitorServiceProvider.js",
+      "symbols": 2
+    },
+    {
+      "entry": "./config",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/config/monitor.js",
+      "symbols": 1
+    },
+    {
+      "entry": "./studio/client",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/resources/assets/js/monitor/studio.js",
+      "symbols": 1
+    },
+    {
+      "entry": "./package.json",
+      "resolved": "file:///private/tmp/rawnode-monitor-node22-consumers-IWhRdaxjYZ0C/installed/node_modules/@rawnode/monitor/package.json",
+      "symbols": 1
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "recordedAt": "2026-10-25T11:44:46.597Z",
+  "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-25/artifacts/rawnode-monitor-1.0.0.tgz",
+  "sha256": "69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7",
+  "bytes": 209613,
+  "fixture": "/private/tmp/rawnode-monitor-readiness-jN8PEE/installed/node_modules/@rawnode/monitor/examples/studio-fixture.mjs",
+  "scope": "Actual native Chrome/Safari UI through cua_repl, exact offline-installed package. External wrapper preserves native prompt returns and original authorization/CSP; only synthetic fixture controls/metadata are added.",
+  "status": "partial; full real-browser acceptance remains unverified",
+  "availability": {
+    "nativeApps": [
+      "Google Chrome",
+      "Safari"
+    ],
+    "browserConnectors": [],
+    "chrome": {
+      "version": "155.0.8059.85",
+      "source": "installed bundle plist",
+      "reducedUserAgent": "155.0.0.0"
+    },
+    "safari": {
+      "version": "27.0",
+      "build": "20625.1.29.18.28",
+      "source": "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app/Contents/Info.plist"
+    }
+  },
+  "verifiedObservations": [
+    "Safari rendered packaged Overview and Alerts, including synthetic service/rule markup as literal text, live healthy state, firing alert and Create silence.",
+    "Safari first rule-ID prompt was explicitly cancelled. Native prompt instrumentation returned null, the alert remained firing with no silence listed, and no operator mutation was logged before the next prompt sequence.",
+    "Chrome initially exposed a blank native view; selecting the task window later exposed the rendered packaged Overview with healthy state and synthetic identity.",
+    "After deliberate fixture shutdown Chrome showed Polling, Unable to load overview, Failed to fetch and Retry. This is only an observed failure state, not a recovery/reconnection test."
+  ],
+  "firstCancel": {
+    "prompt": {
+      "receivedAt": "2026-10-25T11:37:53.943Z",
+      "sequence": 1,
+      "message": "Rule ID to silence (empty means all rules):",
+      "result": null
+    },
+    "mutationCountBeforeNextPrompt": 0
+  },
+  "ambiguousDialogSequence": {
+    "prompts": [
+      {
+        "receivedAt": "2026-10-25T11:38:04.796Z",
+        "sequence": 2,
+        "message": "Rule ID to silence (empty means all rules):",
+        "result": "fixture-alert"
+      },
+      {
+        "receivedAt": "2026-10-25T11:38:07.627Z",
+        "sequence": 3,
+        "message": "Silence duration in minutes:",
+        "result": "60"
+      },
+      {
+        "receivedAt": "2026-10-25T11:38:09.260Z",
+        "sequence": 4,
+        "message": "Reason:",
+        "result": "Operator maintenance"
+      }
+    ],
+    "operatorMutations": [
+      {
+        "at": "2026-10-25T11:38:09.261Z",
+        "method": "POST",
+        "path": "/monitor/api/silences",
+        "headers": {
+          "host": "127.0.0.1:51393",
+          "origin": "http://127.0.0.1:51393",
+          "sec-fetch-site": "same-origin",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-dest": "empty",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Safari/605.1.15"
+        }
+      }
+    ],
+    "disposition": "Not a passing duration/reason Cancel or intentional-success test. Native control reported user-changed surface while subsequent prompt instrumentation recorded default acceptances and one synthetic silence POST."
+  },
+  "blockers": [
+    "Native automation repeatedly reported user-changed Chrome/Safari surfaces; re-querying Chrome selected another ongoing local validation window. The task window was selected through the Window menu without editing other work, but it did not stay reliably selected through subsequent actions.",
+    "Safari native-dialog cancellation attempt became ambiguous; subsequent state/getApp calls failed with timeoutReached. Chrome also returned initially blank/stale accessibility and screenshot state.",
+    "A fresh fixture with interactive stdin and guarded task-window selection was attempted; native control again reported user-changed surface before dependable further acceptance. No browser-security setting was weakened."
+  ],
+  "notVerifiedFresh": [
+    "All eleven navigation views, trace details and redaction, retained inspection/filter/focus across polling",
+    "Duration/reason/incident-resolution native Cancel, intentional operator actions/removal, validation and mutation error feedback",
+    "Loading/empty/recovery, rapid pending navigation/actions, repeated mount/destroy, one polling/stream owner, native SSE reconnection and polling fallback",
+    "Narrow layout, keyboard/focus, accessible status/labels, console/CSP audit and assistive technologies"
+  ],
+  "separateEvidence": {
+    "automated": "97-test final native/extracted/installed suites include modeled DOM/action/security regressions; HTTP/SSE 33 checks and HMAC/token 19 checks are separate protocol results.",
+    "historical": "readiness-2026-10-24/final/browser.json and studio-inspection.jpg remain unchanged observations for archive218b62b5…. Their broader Chrome observations are not relabeled as fresh final-archive acceptance.",
+    "files": [
+      "browser-requests.jsonl",
+      "browser-requests.jsonl.prompts.jsonl",
+      "scripts/studio-browser-fixture.mjs"
+    ],
+    "screenshots": "Native screenshots/accessibility states were inspected in the tool transcript. No new successful acceptance screenshot was saved; the prior dated inspection screenshot remains historical."
+  },
+  "cleanup": {
+    "firstFixture": "Original non-TTY exec session could not receive close because stdin was closed. Verified lsof listener51393 and ps command identified only task-created PID39319; authorized SIGTERM exited143. Subsequent lsof found no listener.",
+    "retryFixture": "Interactive session23756 received close on stdin and exited0; port52995 has no listener. Native control failed before navigation, so no retry request log was created.",
+    "browserWindows": "Task-created Monitor windows/DevTools may remain open because native control could not reliably retain the selected window. No other window was edited or closed. Both fixture servers are stopped.",
+    "productionProcessesSignalled": false
+  }
+}

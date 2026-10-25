@@ -1,0 +1,1032 @@
+{
+  "session": "final-local-01",
+  "status": "BLOCKED",
+  "scope": "Partially completed native Safari local-mode acceptance; mandatory trace/pending-operation/other interaction dimensions remain incomplete. A controller targeting failure is retained separately from product behavior.",
+  "analyzedAt": "2026-10-25T14:17:46.296Z",
+  "log": {
+    "path": "final-local-01.jsonl",
+    "sha256": "cdf670e0eaeeceef3218ec0ae3d49b4fca58e435da343b786ef2528d708f388a",
+    "bytes": 84100,
+    "lines": 190,
+    "firstAt": "2026-10-25T14:05:13.022Z",
+    "lastAt": "2026-10-25T14:16:12.765Z"
+  },
+  "input": {
+    "path": "final-local-01-input.json",
+    "sha256": "59386780cecade0e46010365cc97df6b5b620139f952527f6af9843069e32cb4",
+    "session": "final-local-01",
+    "mode": "local",
+    "url": "http://127.0.0.1:59601/monitor",
+    "controlUrl": "http://127.0.0.1:59601/qualification/control",
+    "root": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "pid": 76882,
+    "node": "v24.21.0",
+    "execPath": "/usr/local/bin/node",
+    "files": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    },
+    "baseline": {
+      "mutations": 0,
+      "clients": 0,
+      "signalListeners": 1,
+      "silences": 0,
+      "alertState": "firing",
+      "incidentState": "open"
+    },
+    "ttlMs": 900000
+  },
+  "artifact": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "bytes": 214938,
+    "files": 177,
+    "installedRootMatchesDistribution": true,
+    "servedInputFileHashesMatchArchive": {
+      "examples/studio-fixture.mjs": "0cbbd07acfc6cef3e05496f1b4464562a69dab10169ae34c986d706cf9dacf1c",
+      "resources/assets/js/monitor/studio.js": "6ae72a074501f4a682565986831e9e8965d90a77092a4f85d44378ab18b9ffef",
+      "resources/assets/css/monitor/studio.css": "952632a4910aa0b821da0cfcc5c1b864b073bdb3a6eceb5811e32784e4a277f3",
+      "src/studio/MonitorStudioPage.js": "f965de250a99137cd0a914ed52e75bf56d88364ffabaabde16669c23f3bd14bf"
+    }
+  },
+  "externalHarness": {
+    "path": "scripts/native-browser-fixture-v1.mjs",
+    "sha256": "919db429c3c359975b087e525867a6ab46c03ada6aac085a07a0b38a65d95ebc",
+    "delegatesNativePromptUnchanged": true,
+    "suppliedPromptAnswers": false,
+    "instrumentationChanges": [
+      "unique title",
+      "no-store response headers",
+      "appended fixture-only controls and observations",
+      "bounded independent server mutation/state receipts"
+    ],
+    "packagedRuntimeEdited": false
+  },
+  "browser": {
+    "userAgents": [
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Safari/605.1.15"
+    ],
+    "mode": "native Safari session per parent transcript; private/profile internals not independently captured in JSONL",
+    "appBuildIndependentlyCaptured": false
+  },
+  "nativeObservationNote": {
+    "path": "local01-native-observations.md",
+    "sha256": "ea0a63aa606d48ed8698c41209047410439c0a0f266598725917bb1d65b8669f",
+    "type": "authored from root agent native transcript report; not raw browser output"
+  },
+  "subcases": [
+    {
+      "id": "local01-cancel-rule",
+      "status": "PASS",
+      "requirement": "Real native Cancel causes no corresponding operator mutation",
+      "evidenceType": "delegated native prompt result plus independent server requests/state",
+      "lines": [
+        10,
+        13,
+        15
+      ],
+      "promptResults": [
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      }
+    },
+    {
+      "id": "local01-cancel-duration",
+      "status": "PASS",
+      "requirement": "Real native Cancel causes no corresponding operator mutation",
+      "evidenceType": "delegated native prompt result plus independent server requests/state",
+      "lines": [
+        17,
+        19,
+        21,
+        23
+      ],
+      "promptResults": [
+        "fixture-alert",
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      }
+    },
+    {
+      "id": "local01-cancel-reason",
+      "status": "PASS",
+      "requirement": "Real native Cancel causes no corresponding operator mutation",
+      "evidenceType": "delegated native prompt result plus independent server requests/state",
+      "lines": [
+        25,
+        27,
+        29,
+        31,
+        33
+      ],
+      "promptResults": [
+        "fixture-alert",
+        "60",
+        null
+      ],
+      "mutationRequests": 0,
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      }
+    },
+    {
+      "id": "resolution-native-cancel",
+      "status": "PASS",
+      "requirement": "Cancel resolution itself leaves the current synthetic incident unchanged",
+      "lines": [
+        41,
+        43
+      ],
+      "resolutionRequests": 0,
+      "stateAtPrompt": {
+        "mutations": 1,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "acknowledged"
+      },
+      "stateAfterCancel": {
+        "mutations": 1,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "acknowledged"
+      },
+      "qualification": "Passed only after a separately recorded accidental acknowledgement; not a case-wide zero-mutation result."
+    },
+    {
+      "id": "resolution-case-targeting",
+      "status": "FAIL",
+      "layer": "native controller action targeting",
+      "productDefectEstablished": false,
+      "lines": [
+        35,
+        38,
+        43
+      ],
+      "before": {
+        "mutations": 0,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "open"
+      },
+      "after": {
+        "mutations": 1,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "acknowledged"
+      },
+      "reason": "The case intent was resolution cancellation, but a synthetic acknowledge POST completed first. That mutation remains preserved in this receipt."
+    },
+    {
+      "id": "eleven-main-views",
+      "status": "PASS",
+      "requirement": "Render each required main view",
+      "views": [
+        {
+          "view": "overview",
+          "status": "PASS",
+          "observationLines": [
+            48,
+            121,
+            127,
+            130
+          ],
+          "sample": "Overview / Live operational state across this RawNode runtime."
+        },
+        {
+          "view": "health",
+          "status": "PASS",
+          "observationLines": [
+            53,
+            184
+          ],
+          "sample": "Health / Readiness, liveness, and dependency checks."
+        },
+        {
+          "view": "metrics",
+          "status": "PASS",
+          "observationLines": [
+            58
+          ],
+          "sample": "Metrics / 28 instruments · 12 active series"
+        },
+        {
+          "view": "traces",
+          "status": "PASS",
+          "observationLines": [
+            98,
+            100,
+            102,
+            109
+          ],
+          "sample": "Traces / Sampled distributed operations and latency waterfalls."
+        },
+        {
+          "view": "resources",
+          "status": "PASS",
+          "observationLines": [
+            63
+          ],
+          "sample": "Resources / Health and native metrics from RawNode modules."
+        },
+        {
+          "view": "alerts",
+          "status": "PASS",
+          "observationLines": [
+            15,
+            23,
+            33,
+            152,
+            161,
+            174
+          ],
+          "sample": "Alerts / Rule state, transitions, silences, and operator actions."
+        },
+        {
+          "view": "slos",
+          "status": "PASS",
+          "observationLines": [
+            68
+          ],
+          "sample": "Service Level Objectives / Compliance, error budgets, and burn rates."
+        },
+        {
+          "view": "incidents",
+          "status": "PASS",
+          "observationLines": [
+            43
+          ],
+          "sample": "Incidents / Correlated operational timelines and runbooks."
+        },
+        {
+          "view": "fleet",
+          "status": "PASS",
+          "observationLines": [
+            73
+          ],
+          "sample": "Fleet / Cross-process and cross-host runtime membership."
+        },
+        {
+          "view": "deployments",
+          "status": "PASS",
+          "observationLines": [
+            80
+          ],
+          "sample": "Deployments / Release markers correlated with operational changes."
+        },
+        {
+          "view": "diagnostics",
+          "status": "PASS",
+          "observationLines": [
+            85,
+            92
+          ],
+          "sample": "Diagnostics / Self-observability, configuration verification, and support bundles."
+        }
+      ],
+      "limit": "Rendering and snapshots only; not full acceptance of every control."
+    },
+    {
+      "id": "diagnostic-full-inspection",
+      "status": "PASS",
+      "lines": [
+        90,
+        92
+      ],
+      "evidence": "The requested full diagnostic snapshot and paused-inspection banner were observed.",
+      "limit": "One recorded post-load snapshot; this is not a repeated deadline/poll preservation proof."
+    },
+    {
+      "id": "diagnostic-resume-request",
+      "status": "PASS",
+      "lines": [
+        93
+      ],
+      "evidenceType": "server request correlated with authored native Resume-click note",
+      "nativeNote": "local01-native-observations.md",
+      "limit": "Resumed presentation was not captured."
+    },
+    {
+      "id": "diagnostic-resume-presentation",
+      "status": "BLOCKED",
+      "reason": "No subsequent diagnostics observation proves the full snapshot cleared and live presentation resumed before navigation."
+    },
+    {
+      "id": "native-trace-detail",
+      "status": "BLOCKED",
+      "lines": [
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104
+      ],
+      "detailRequests": 0,
+      "nativeNote": "local01-native-observations.md",
+      "reason": "Native table-cell targeting and Return did not open details; coordinate control returned noWindowsAvailable. No detail HTTP request or detail presentation was observed.",
+      "productDefectEstablished": false
+    },
+    {
+      "id": "local01-empty",
+      "status": "PASS",
+      "lines": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110
+      ],
+      "renderedText": "No sampled spans found.",
+      "recordedErrors": [],
+      "observedImageElements": 0
+    },
+    {
+      "id": "local01-error",
+      "status": "PASS",
+      "lines": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116
+      ],
+      "renderedText": "Fixture unavailable <script>alert(1)</script>",
+      "recordedErrors": [],
+      "observedImageElements": 0
+    },
+    {
+      "id": "local01-recovery",
+      "status": "PASS",
+      "lines": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ],
+      "renderedText": "Live operational state across this RawNode runtime.",
+      "recordedErrors": [],
+      "observedImageElements": 0
+    },
+    {
+      "id": "native-tokenless-sse-reconnection",
+      "status": "PASS",
+      "lines": [
+        125,
+        127,
+        128,
+        130
+      ],
+      "evidence": "The packaged fixture disconnects the existing server stream; browser reports disconnected with zero clients, then a fresh stream request and connected with one client. Packaged client uses native window.EventSource; this fixture does not manually reopen it.",
+      "authMode": "tokenless loopback local mode",
+      "limit": "This does not qualify native EventSource with bearer-only authentication."
+    },
+    {
+      "id": "cycle-twenty-completion",
+      "status": "PASS",
+      "evidenceType": "authored native transcript observation of packaged completion text",
+      "nativeNote": "local01-native-observations.md",
+      "text": "20 mount cycles complete",
+      "supportingRequestLines": [
+        133,
+        136,
+        137,
+        138
+      ],
+      "exactIterationEventsRecorded": false
+    },
+    {
+      "id": "cycle-stream-client-ownership",
+      "status": "PASS",
+      "lines": [
+        140
+      ],
+      "after": {
+        "mutations": 1,
+        "clients": 1,
+        "signalListeners": 1,
+        "silences": 0,
+        "alertState": "firing",
+        "incidentState": "acknowledged"
+      },
+      "scope": "One server stream client and baseline signal listener count after the completed cycle action; not an exact browser polling-timer count."
+    },
+    {
+      "id": "polling-timer-cardinality",
+      "status": "BLOCKED",
+      "reason": "snapshot.polling is a boolean, not a timer count. Request timestamps and unchanged screenshots do not establish exactly one timer."
+    },
+    {
+      "id": "deliberate-empty-rule-all-rules-silence",
+      "status": "PASS",
+      "lines": [
+        143,
+        145,
+        147,
+        149,
+        152
+      ],
+      "promptResults": [
+        "",
+        "2.5",
+        "Synthetic qualification"
+      ],
+      "appliedSilences": 1,
+      "scope": "Deliberately submitted empty rule differs from null Cancel; native UI shows All and one server silence exists.",
+      "limit": "Exact stored ruleIds/duration were not recorded by this external browser log."
+    },
+    {
+      "id": "invalid-zero-duration-rejection",
+      "status": "PASS",
+      "lines": [
+        155,
+        157,
+        159,
+        161
+      ],
+      "mutationRequests": 0,
+      "scope": "Rejected zero duration, no reason prompt, no operator mutation, unchanged synthetic state."
+    },
+    {
+      "id": "invalid-duration-visible-feedback",
+      "status": "PASS",
+      "evidenceType": "authored native transcript observation, not v1 mainText JSON",
+      "nativeNote": "local01-native-observations.md",
+      "text": "Silence duration must be a positive number of minutes (whole milliseconds)."
+    },
+    {
+      "id": "forced-mutation-failure-state",
+      "status": "PASS",
+      "lines": [
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175
+      ],
+      "statusCode": 503,
+      "operatorRequestCountIncrements": 1,
+      "appliedStateChange": false,
+      "reason": "The external fixture fails the next deliberate synthetic mutation before delegating it."
+    },
+    {
+      "id": "forced-mutation-failure-visible-feedback",
+      "status": "PASS",
+      "evidenceType": "authored native transcript observation, not v1 mainText JSON",
+      "nativeNote": "local01-native-observations.md",
+      "text": "Synthetic failure <script>unsafe</script>"
+    },
+    {
+      "id": "delayed-navigation-health-rendered",
+      "status": "PASS",
+      "lines": [
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185
+      ],
+      "scope": "Health rendered under a delayed fixture."
+    },
+    {
+      "id": "navigation-during-pending-response-race",
+      "status": "BLOCKED",
+      "reason": "The native control sequence was slower than the 500 ms delay; no controlled overlapping response/cancellation boundary was captured."
+    },
+    {
+      "id": "native-unmount-stream-release",
+      "status": "PASS",
+      "lines": [
+        188
+      ],
+      "state": {
+        "mutations": 3,
+        "clients": 0,
+        "signalListeners": 1,
+        "silences": 1,
+        "alertState": "firing",
+        "incidentState": "acknowledged"
+      },
+      "scope": "Destroyed client snapshot and zero server stream clients; no exact browser listener/timer census."
+    },
+    {
+      "id": "fixture-close",
+      "status": "PASS",
+      "lines": [
+        189,
+        190
+      ],
+      "closed": {
+        "at": "2026-10-25T14:16:12.765Z",
+        "session": "final-local-01",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 3,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 1,
+          "alertState": "firing",
+          "incidentState": "acknowledged"
+        },
+        "listening": false,
+        "line": 190
+      },
+      "processExit": {
+        "code": 0,
+        "evidenceType": "parent execution result reported in authored note"
+      }
+    },
+    {
+      "id": "captured-client-errors",
+      "status": "PASS",
+      "observationCount": 27,
+      "scope": "No captured window error/unhandled rejection/CSP events after instrumentation; not a full console or network audit."
+    },
+    {
+      "id": "synthetic-html-rendering",
+      "status": "PASS",
+      "scope": "Captured app image-element count remained zero while synthetic HTML appeared literally in main text and native failure feedback.",
+      "universalEscapingClaim": false
+    },
+    {
+      "id": "narrow-mobile-layout-keyboard-focus",
+      "status": "BLOCKED",
+      "observedWidths": [
+        800,
+        1066
+      ],
+      "reason": "Only observed desktop/800px widths are in this log; no complete narrow/mobile or keyboard/focus acceptance sequence."
+    },
+    {
+      "id": "token-authenticated-polling-mode",
+      "status": "UNRUN",
+      "reason": "This closed session is tokenless local mode; token/session authorization needs its separate identified session."
+    }
+  ],
+  "caseIndex": [
+    {
+      "id": "not-selected",
+      "firstLine": 2,
+      "lastLine": 9,
+      "intentLines": [],
+      "promptLines": [],
+      "observationLines": [],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-cancel-rule",
+      "firstLine": 10,
+      "lastLine": 16,
+      "intentLines": [
+        10
+      ],
+      "promptLines": [
+        13
+      ],
+      "observationLines": [
+        15
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-cancel-duration",
+      "firstLine": 17,
+      "lastLine": 24,
+      "intentLines": [
+        17
+      ],
+      "promptLines": [
+        19,
+        21
+      ],
+      "observationLines": [
+        23
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-cancel-reason",
+      "firstLine": 25,
+      "lastLine": 34,
+      "intentLines": [
+        25
+      ],
+      "promptLines": [
+        27,
+        29,
+        31
+      ],
+      "observationLines": [
+        33
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-cancel-resolution",
+      "firstLine": 35,
+      "lastLine": 44,
+      "intentLines": [
+        35
+      ],
+      "promptLines": [
+        41
+      ],
+      "observationLines": [
+        43
+      ],
+      "mutationLines": [
+        38
+      ]
+    },
+    {
+      "id": "local01-view-overview",
+      "firstLine": 45,
+      "lastLine": 49,
+      "intentLines": [
+        45
+      ],
+      "promptLines": [],
+      "observationLines": [
+        48
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-health",
+      "firstLine": 50,
+      "lastLine": 54,
+      "intentLines": [
+        50
+      ],
+      "promptLines": [],
+      "observationLines": [
+        53
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-metrics",
+      "firstLine": 55,
+      "lastLine": 59,
+      "intentLines": [
+        55
+      ],
+      "promptLines": [],
+      "observationLines": [
+        58
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-resources",
+      "firstLine": 60,
+      "lastLine": 64,
+      "intentLines": [
+        60
+      ],
+      "promptLines": [],
+      "observationLines": [
+        63
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-slos",
+      "firstLine": 65,
+      "lastLine": 69,
+      "intentLines": [
+        65
+      ],
+      "promptLines": [],
+      "observationLines": [
+        68
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-fleet",
+      "firstLine": 70,
+      "lastLine": 74,
+      "intentLines": [
+        70
+      ],
+      "promptLines": [],
+      "observationLines": [
+        73
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-deployments",
+      "firstLine": 75,
+      "lastLine": 81,
+      "intentLines": [
+        75
+      ],
+      "promptLines": [],
+      "observationLines": [
+        80
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-diagnostics",
+      "firstLine": 82,
+      "lastLine": 88,
+      "intentLines": [
+        82
+      ],
+      "promptLines": [],
+      "observationLines": [
+        85
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-diagnostic-inspection",
+      "firstLine": 89,
+      "lastLine": 94,
+      "intentLines": [
+        89
+      ],
+      "promptLines": [],
+      "observationLines": [
+        92
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-view-traces",
+      "firstLine": 95,
+      "lastLine": 104,
+      "intentLines": [
+        95
+      ],
+      "promptLines": [],
+      "observationLines": [
+        98,
+        100,
+        102
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-empty",
+      "firstLine": 105,
+      "lastLine": 110,
+      "intentLines": [
+        105
+      ],
+      "promptLines": [],
+      "observationLines": [
+        109
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-error",
+      "firstLine": 111,
+      "lastLine": 116,
+      "intentLines": [
+        111
+      ],
+      "promptLines": [],
+      "observationLines": [
+        115
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-recovery",
+      "firstLine": 117,
+      "lastLine": 123,
+      "intentLines": [
+        117
+      ],
+      "promptLines": [],
+      "observationLines": [
+        121
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-sse-reconnect",
+      "firstLine": 124,
+      "lastLine": 131,
+      "intentLines": [
+        124
+      ],
+      "promptLines": [],
+      "observationLines": [
+        127,
+        130
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-cycle20",
+      "firstLine": 132,
+      "lastLine": 139,
+      "intentLines": [
+        132
+      ],
+      "promptLines": [],
+      "observationLines": [
+        135
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-all-rules",
+      "firstLine": 140,
+      "lastLine": 154,
+      "intentLines": [
+        140
+      ],
+      "promptLines": [
+        143,
+        145,
+        147
+      ],
+      "observationLines": [
+        152
+      ],
+      "mutationLines": [
+        149
+      ]
+    },
+    {
+      "id": "local01-invalid-duration",
+      "firstLine": 155,
+      "lastLine": 162,
+      "intentLines": [
+        155
+      ],
+      "promptLines": [
+        157,
+        159
+      ],
+      "observationLines": [
+        161
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-mutation-failure",
+      "firstLine": 163,
+      "lastLine": 175,
+      "intentLines": [
+        163
+      ],
+      "promptLines": [
+        166,
+        168,
+        170
+      ],
+      "observationLines": [
+        174
+      ],
+      "mutationLines": [
+        172
+      ]
+    },
+    {
+      "id": "local01-delay-navigation",
+      "firstLine": 176,
+      "lastLine": 185,
+      "intentLines": [
+        176
+      ],
+      "promptLines": [],
+      "observationLines": [
+        184
+      ],
+      "mutationLines": []
+    },
+    {
+      "id": "local01-destroy",
+      "firstLine": 186,
+      "lastLine": 188,
+      "intentLines": [
+        186
+      ],
+      "promptLines": [],
+      "observationLines": [
+        188
+      ],
+      "mutationLines": []
+    }
+  ],
+  "totals": {
+    "subcaseStatuses": {
+      "PASS": 23,
+      "FAIL": 1,
+      "BLOCKED": 5,
+      "UNRUN": 1
+    },
+    "operatorMutationRequests": 3,
+    "appliedSyntheticMutations": [
+      {
+        "line": 38,
+        "path": "/monitor/api/incidents/fixture-incident/acknowledge",
+        "status": 200
+      },
+      {
+        "line": 149,
+        "path": "/monitor/api/silences",
+        "status": 200
+      }
+    ],
+    "forcedRejectedMutations": [
+      {
+        "line": 172,
+        "path": "/monitor/api/silences",
+        "status": 503
+      }
+    ],
+    "mainViewsObserved": 11
+  },
+  "limitations": [
+    "One local session; repeated Cancel acceptance belongs to subsequent separately identified sessions.",
+    "Static screenshots or polling booleans do not prove polling progress/cardinality.",
+    "Diagnostic full snapshot text in raw JSONL contains task-local configuration; this receipt intentionally retains only bounded excerpts and hashes.",
+    "No inference of external-service, production, cross-browser, accessibility-audit, or release authorization."
+  ]
+}

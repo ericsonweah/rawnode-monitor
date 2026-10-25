@@ -1,0 +1,24 @@
+✔ modeled actions: cancelling each silence prompt or incident resolution sends no mutation (75.916261ms)
+✔ modeled actions: deliberate all-rules silence and incident resolution work; invalid duration is visible (13.420625ms)
+✔ modeled actions: failed mutations are visible and pending navigation/unmount suppress stale feedback (9.70033ms)
+✔ modeled actions: navigation releases polling ownership even when an injected mutation never settles (1102.213779ms)
+✔ modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed (27.231631ms)
+✔ modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it (4.635669ms)
+✔ Studio rate limiter bounds client keys for rejected and accepted admissions (2.239578ms)
+✔ Studio non-JSON route failures use the same bounded redaction before response admission (24.429645ms)
+✔ Studio stream capacity and close reject with a safe response and preserve owned client cleanup (6.597204ms)
+✔ actual loopback HTTP serves packaged Studio and all read views safely (160.069545ms)
+✔ actual loopback HTTP fixture exposes synthetic operator state and preserves mutation authorization (39.696874ms)
+✔ modeled DOM: repeated mount/unmount owns one stream and cancels pending requests (1205.986826ms)
+✔ modeled DOM: empty, escaped error, recovery and stale response cancellation (7.782889ms)
+✔ actual HTTP: Studio read and mutation errors reuse bounded redaction for secret, cyclic, BigInt and oversized details (118.348998ms)
+✔ actual HTTP: ingestion failures and custom authorizer exceptions cross the same safe error boundary (35.03307ms)
+✔ actual HTTP: Prometheus and stream admission failures preserve safe status and redacted JSON (21.868552ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1352.871966

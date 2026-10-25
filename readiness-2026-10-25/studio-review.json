@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-25",
+  "node": "v24.21.0",
+  "scope": "Independent Studio source, regression and security review; actual browser acceptance is recorded separately by the root agent.",
+  "instructions": "Read AGENTS.md and root assignment; neither AGENTS.md nor prior readiness/evidence/provenance files were modified.",
+  "leadA": {
+    "disposition": "already-addressed; adjacent uncovered routes repaired",
+    "existingBehavior": "_get, _mutate, ingestion and authorizer errors already reuse sanitizeTelemetry(errorRecord(error, { stack: false })); invalid HTTP status falls back to 500 and oversized records keep a safe separately sanitized code.",
+    "coverage": "Authorized actual-loopback read/mutation exceptions with bearer messages, secret-keyed, cyclic, BigInt and oversized details; ingestion and custom-authorizer exceptions; bounded JSON and no stack disclosure.",
+    "newFinding": "Page rendering, asset reads, Prometheus generation and stream admission propagated errors to the host without the controller's bounded error response. Stream capacity/closed errors also bypassed the response boundary.",
+    "repair": "Route those pre-header failures through the existing _failure method. Once headers have been sent, rethrow to the response's transport owner rather than attempt a second JSON response.",
+    "newCoverage": "Synthetic controller errors across page/asset/Prometheus/stream, safe 503 stream capacity/closed responses and client listener cleanup, no second response after headers, plus actual-loopback Prometheus/stream redaction with cyclic and BigInt details."
+  },
+  "leadB": {
+    "disposition": "already-addressed",
+    "coverage": "Cancel each silence prompt independently and incident resolution: no mutation, no changed state. Deliberate empty rule ID preserves all-rules silence. Finite positive duration, intentional actions, visible failure, duplicate submission guard, delayed/non-cooperative action navigation and unmount, retained detail inspection/filter/focus, explicit resume, repeated mount/destroy and single stream ownership all pass focused fixtures.",
+    "modelLimit": "Modeled DOM fixtures do not establish actual browser behavior; the root agent performs that separate gate."
+  },
+  "additionalFinding": {
+    "disposition": "confirmed-and-repaired",
+    "problem": "MonitorStudioRateLimiter inserted rejected new-client buckets without applying maxKeys. With capacity 1 and mutation cost 5, distinct rejected clients exceeded the configured two-key cap.",
+    "repair": "Apply existing oldest-key eviction to the rejection path as well as the accepted path.",
+    "coverage": "Twenty rejected distinct clients remain at or below maxKeys 2; rejection counters and eviction counts are correct; accepted admission, subsequent denial and ordinary refill remain available."
+  },
+  "commands": [
+    {
+      "command": "node --test --test-timeout=20000 test/studio-actions.test.mjs test/studio-modeled.test.mjs test/studio-security-regression.test.mjs test/studio-http.test.mjs",
+      "cwd": "package",
+      "phase": "initial sandbox run",
+      "exitCode": 1,
+      "tests": 12,
+      "pass": 8,
+      "fail": 4,
+      "cancelled": 0,
+      "skipped": 0,
+      "reason": "All four loopback tests were denied listen EPERM 127.0.0.1 by the sandbox; this was an environment failure."
+    },
+    {
+      "command": "node --test --test-timeout=20000 test/studio-actions.test.mjs test/studio-modeled.test.mjs test/studio-security-regression.test.mjs test/studio-http.test.mjs",
+      "cwd": "package",
+      "phase": "approved loopback baseline",
+      "exitCode": 0,
+      "tests": 12,
+      "pass": 12,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    {
+      "command": "node --test --test-timeout=20000 test/studio-boundaries.test.mjs",
+      "cwd": "package",
+      "phase": "new regression before repair",
+      "exitCode": 1,
+      "tests": 3,
+      "pass": 0,
+      "fail": 3,
+      "cancelled": 0,
+      "skipped": 0,
+      "failures": ["Rejected clients obey the same key bound as accepted clients assertion", "Uncaught synthetic route error with bearer message and details", "Uncaught MONITOR_STREAM_UNAVAILABLE at stream capacity"]
+    },
+    {
+      "command": "node --test --test-timeout=20000 package/test/studio-actions.test.mjs package/test/studio-modeled.test.mjs package/test/studio-boundaries.test.mjs package/test/studio-security-regression.test.mjs package/test/studio-http.test.mjs",
+      "cwd": "repository root",
+      "phase": "final focused suite with approved loopback execution",
+      "exitCode": 0,
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": "readiness-2026-10-25/logs/studio-review.txt"
+    }
+  ],
+  "filesChangedByThisReview": [
+    "package/src/studio/MonitorStudioController.js",
+    "package/src/studio/MonitorStudioRateLimiter.js",
+    "package/test/studio-boundaries.test.mjs",
+    "package/test/studio-security-regression.test.mjs"
+  ],
+  "compatibility": "No export/declaration changes. Successful responses and operator actions are unchanged. Pre-header exceptional responses are now safe JSON instead of host-dependent uncaught failures. The configured client-key bound now applies equally to rejected and accepted traffic.",
+  "unchangedBoundaries": "Existing socket/Host/origin/custom-authorizer checks, disabled remote ingestion default, memory-only token/polling policy, SSE ownership/queue limits, package release guards and existing dirty client/UI changes are preserved.",
+  "limitations": "Custom capabilities and host transport handlers remain trusted application code. Pattern/key redaction is not universal secret detection. No browser assertion or production integration claim is made by this focused review; exact final archive verification is owned by the root agent."
+}

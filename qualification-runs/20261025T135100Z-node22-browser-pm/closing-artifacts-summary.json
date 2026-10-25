@@ -1,0 +1,106 @@
+{
+  "createdAt": "2026-10-25T14:40:55.990Z",
+  "manifest": {
+    "path": "closing-artifacts.json",
+    "bytes": 86246,
+    "sha256": "f165bec8b76dc74f1996d93be4b1be458a9b111470d0e7fe468a51bfdcb7b862"
+  },
+  "archive": {
+    "path": "final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "bytes": 214938,
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615",
+    "mode": 420,
+    "name": "@rawnode/monitor",
+    "version": "1.0.0",
+    "packedFiles": 177
+  },
+  "keyDeliverables": [
+    {
+      "path": "REPORT.md",
+      "bytes": 25303,
+      "sha256": "9f0890570bbe1b015bfb80751cd5bd6ff8e69c6c22c6f657888f725313548d75",
+      "mode": 420
+    },
+    {
+      "path": "GATE_MATRIX.md",
+      "bytes": 35371,
+      "sha256": "f18ada6daa6b3e9634b7395d49f8ae5de05d5db4c73720467f671c1891381c60",
+      "mode": 420
+    },
+    {
+      "path": "BROWSER_RECEIPT.json",
+      "bytes": 36158,
+      "sha256": "340f830dad10f02b0935b37bbc792488d4256b9900c3ced5ff305d3cc1535b7a",
+      "mode": 384
+    },
+    {
+      "path": "BROWSER_HANDOFF.md",
+      "bytes": 6834,
+      "sha256": "cd2251bdb84411eb8887c89eee0b12a25c6e5a5fba4d25f5fdfd4cc1e9018fc8",
+      "mode": 420
+    },
+    {
+      "path": "post-browser-verification.json",
+      "bytes": 12957,
+      "sha256": "ba44dd100d4147a2ec8363c39195c889bb0fb6becb69311ea4f9f1f2732ede02",
+      "mode": 420
+    },
+    {
+      "path": "NODE22_QUALIFICATION.md",
+      "bytes": 10945,
+      "sha256": "8e751ab7713454368e909514e3c182c091a505fc1468db7b6e43e708f4ee8fcd",
+      "mode": 420
+    },
+    {
+      "path": "OWNER_DECISIONS.md",
+      "bytes": 4403,
+      "sha256": "9539348c756eb6a2ec31ec24ade7527eb4441d6ec82b0e324d844b4ba9a89262",
+      "mode": 420
+    },
+    {
+      "path": "SERVICE_SCOPE.md",
+      "bytes": 20398,
+      "sha256": "cbff79c7383adecdea22020238f83c3631d75cbe8c907887b091963a11e73797",
+      "mode": 420
+    },
+    {
+      "path": "OPERATOR_DECISIONS.md",
+      "bytes": 13083,
+      "sha256": "51fb742a9927c80e7aecbb3b40b73d8c5945355432dbcc887b55f4cfbedc3f87",
+      "mode": 420
+    },
+    {
+      "path": "changes-from-oct25.patch",
+      "bytes": 34225,
+      "sha256": "8bb02ece8f404bd8f4f3f336a994f4cd39aa945848aeced4f1cf97ad6779ba0d",
+      "mode": 420
+    },
+    {
+      "path": "final/distribution.json",
+      "bytes": 93039,
+      "sha256": "9740ed2883296d6ef89209403a85bae3df527c5ba4738ac2b8f2ef0249254361",
+      "mode": 420
+    },
+    {
+      "path": "final/final-verification.json",
+      "bytes": 6373,
+      "sha256": "5179be97a9bfb6eb81ae06e7f739e12788b9e6d159703578b43f8b0d1fe7ecf9",
+      "mode": 420
+    },
+    {
+      "path": "node22-final/qualification.json",
+      "bytes": 8960,
+      "sha256": "9d66f2758a80d3eb3f8bef7c051f7b71801365c8db09bace377b5c406bca6246",
+      "mode": 420
+    }
+  ],
+  "filesInventoried": 429,
+  "totalBytes": 4958137,
+  "localMarkdownLinks": {
+    "documents": 15,
+    "checkedLinks": 219,
+    "missing": [],
+    "scope": "Local target existence; external availability and heading anchors not asserted"
+  },
+  "note": "Use report and gate matrix for actual qualification status. A complete artifact inventory does not convert an incomplete browser or unrun service gate into a pass. Publication authorization remains NOT GRANTED."
+}

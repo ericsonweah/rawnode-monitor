@@ -1,0 +1,74 @@
+{
+  "archive": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/readiness-2026-10-24/final/artifacts/rawnode-monitor-1.0.0.tgz",
+  "sha256": "218b62b5fc0d99040b34761a975606bce397bcf26c2d59c3202300280ea70e31",
+  "bytes": 206728,
+  "scope": "Actual Chrome UI using exact offline-installed package and its exported createStudioFixture. External task wrapper adds inspection/status/polling controls and, in a later attempt, delegates/logs native prompt returns unchanged. No package/security overrides.",
+  "browser": {
+    "name": "Google Chrome",
+    "observedUserAgentVersion": "155.0.0.0",
+    "fullBuild": "Unverified: local plist lookup unavailable; chrome://version denied by browser URL policy. No policy bypass attempted.",
+    "os": "macOS 15.8.1 Intel x64"
+  },
+  "viewsPassed": [
+    "overview",
+    "health",
+    "metrics",
+    "traces",
+    "resources",
+    "alerts",
+    "slos",
+    "incidents",
+    "fleet",
+    "deployments",
+    "diagnostics"
+  ],
+  "verified": [
+    "Actual packaged HTML/JS/CSS render. Synthetic HTML-like identity/span/incident strings appear as text; no injected images (DOM img count0).",
+    "Trace detail includes token [REDACTED] and native progressbar; retained across multiple polling intervals after fix, with visible pause and Resume live updates. Resume removes inspection.",
+    "Incident inspector shows synthetic runbook and redacted metadata. Full diagnostics inspector displays pause/resume.",
+    "Filter value and focused control survive polling. Tab moves from Filter span names searchbox to Filter trace outcomes select; visible focus styling inspected.",
+    "Empty traces displays No sampled spans found. Simulated503 shows escaped script-like error text and Retry. Recover returns overview.",
+    "500ms delayed reads with rapid Health/Metrics/Incidents navigation leave the latest Incidents view.",
+    "Pending incident acknowledgement followed by navigation and pending read followed by unmount produce no mutation request in the observed run; unmounted requests stay56, clients0, client destroyed true across later inspection.",
+    "20 mount cycles result in clients1, signalListeners1, polling true. Runtime listener remains owned by Studio until fixture close.",
+    "Native EventSource server disconnect reconnects without an explicit Mount; observed clients1/connected true afterward and new stream request recorded.",
+    "Injected unavailable EventSource uses real native fetch polling: clients0, streaming false, polling true; requests advance129 to132.",
+    "390x844 responsive viewport has documentWidth390/mainWidth390, horizontally scrollable navigation, readable cards and visible focus. Override reset.",
+    "Captured error/warning console log query returned [] after exercised views; expected503/error-mode network requests are separately intentional."
+  ],
+  "operatorActions": {
+    "automatedFinalPackage": "All prompt cancellation/intentional action/validation/stale ownership behavioral regressions pass in all three90-test suites.",
+    "actualBrowser": "Partial. Intermediate dabc4824 fixture recorded mutationRequests0/silences0/open incident after native cancellation attempts. Final fixture successfully created synthetic all-rules silences, but native dialog control produced unexpected acceptances while trying to cancel; these are not counted as successful Cancel tests.",
+    "finalNativeCancellation": "Unverified. Browser controller retained a stale active-prompt state after native dismissal: getJsDialog reported prompt, dismiss returned No dialog is showing, and subsequent page/close operations were blocked. Native accessibility snapshots also lagged render state. A fresh fixture with unchanged native prompt-return instrumentation was prepared, but control remained unreliable. No product defect inferred from ambiguous UI input.",
+    "remaining": [
+      "Independently cancel each silence dialog and incident-resolution dialog in the final archive with stable native control; require zero mutation delta.",
+      "Complete intentional silence/removal/incident resolution and mutation-failure feedback in the browser. Automated fixtures cover these behaviors; real-browser acceptance is not claimed."
+    ]
+  },
+  "limitations": [
+    "One Chrome session only; full browser build not available beyond observed user-agent version.",
+    "No screen-reader/assistive-technology audit or Safari/Firefox/Edge run.",
+    "Token-required shell/proxy behavior verified by HTTP tests, not a real authenticated proxy deployment.",
+    "A momentary native View click during responsive resizing produced no inspector; retry from stable desktop view passed.",
+    "No browser network-interceptor trace; task-owned server request metadata plus captured console output and visible UI were inspected."
+  ],
+  "tooling": [
+    "Cross-site automation navigation correctly rejected with403; native address-bar navigation used Sec-Fetch-Site none. Guards unchanged.",
+    "Transient CDP Page.getFrameTree timeouts required native reload before successful UI verification.",
+    "Browser URL policy blocked chrome://version; recorded reduced User-Agent version instead, without bypass."
+  ],
+  "evidence": [
+    "browser-requests.jsonl",
+    "browser-actions-requests.jsonl",
+    "studio-inspection.jpg",
+    "../browser-intermediate.json",
+    "../scripts/studio-browser-fixture.mjs"
+  ],
+  "screenshot": {
+    "path": "studio-inspection.jpg",
+    "bytes": 4287,
+    "sha256": "af378df9e18e22290774a84e799d085cc958043e3cfaad597e39dbd6211a95a7",
+    "description": "Actual final-archive Chrome screenshot crop of retained inspection pause/resume; full desktop/narrow screenshots also inspected in tool transcript."
+  },
+  "cleanup": "All task-owned Studio servers were sent close on stdin. Main and prompt-diagnostic fixtures returned process exit0. Temporary viewport override reset. No existing user browser tabs changed."
+}

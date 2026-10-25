@@ -1,0 +1,56 @@
+{
+  "count": 7,
+  "includedInTotal": 97,
+  "counting": "Seven added October 25 cases are part of the 97-case suite, not additional. Repeated consumer/runtime executions do not create distinct cases.",
+  "cases": [
+    {
+      "file": "test/readiness-http-delivery.test.mjs",
+      "line": 63,
+      "name": "a truncated HTTP acknowledgement reports uncertainty without replaying accepted telemetry",
+      "sha256": "d0b9feb15ab1939d009b1db266cf8d8443805d34df59b91adf9ed6b1d4c84279",
+      "unchangedFromOct25": true
+    },
+    {
+      "file": "test/readiness-http-delivery.test.mjs",
+      "line": 84,
+      "name": "a reset after sending the HTTP payload is not evidence that delivery failed",
+      "sha256": "d0b9feb15ab1939d009b1db266cf8d8443805d34df59b91adf9ed6b1d4c84279",
+      "unchangedFromOct25": true
+    },
+    {
+      "file": "test/readiness-http-delivery.test.mjs",
+      "line": 104,
+      "name": "HTTP timeout bounds the whole request even while acknowledgement bytes keep arriving",
+      "sha256": "d0b9feb15ab1939d009b1db266cf8d8443805d34df59b91adf9ed6b1d4c84279",
+      "unchangedFromOct25": true
+    },
+    {
+      "file": "test/studio-boundaries.test.mjs",
+      "line": 17,
+      "name": "Studio rate limiter bounds client keys for rejected and accepted admissions",
+      "sha256": "329c215ec47a19f0d712d8c1e45b00afcbd5300035e2ab5a43fd1cb06a44f1c9",
+      "unchangedFromOct25": true
+    },
+    {
+      "file": "test/studio-boundaries.test.mjs",
+      "line": 33,
+      "name": "Studio non-JSON route failures use the same bounded redaction before response admission",
+      "sha256": "329c215ec47a19f0d712d8c1e45b00afcbd5300035e2ab5a43fd1cb06a44f1c9",
+      "unchangedFromOct25": true
+    },
+    {
+      "file": "test/studio-boundaries.test.mjs",
+      "line": 64,
+      "name": "Studio stream capacity and close reject with a safe response and preserve owned client cleanup",
+      "sha256": "329c215ec47a19f0d712d8c1e45b00afcbd5300035e2ab5a43fd1cb06a44f1c9",
+      "unchangedFromOct25": true
+    },
+    {
+      "file": "test/studio-security-regression.test.mjs",
+      "line": 53,
+      "name": "actual HTTP: Prometheus and stream admission failures preserve safe status and redacted JSON",
+      "sha256": "e3bb27e91b036e1abc5305be644d6b7ce0c862fd08e238c3e79cdb4ba98933c6",
+      "unchangedFromOct25": true
+    }
+  ]
+}

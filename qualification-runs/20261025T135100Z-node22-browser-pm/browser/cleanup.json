@@ -1,0 +1,174 @@
+{
+  "at": "2026-10-25T14:35:58.998Z",
+  "node": "v24.21.0",
+  "execPath": "/usr/local/bin/node",
+  "results": [
+    {
+      "session": "diagnostic-01",
+      "pid": 62797,
+      "port": 58376,
+      "closedAt": "2026-10-25T14:01:56.850Z",
+      "closed": {
+        "at": "2026-10-25T14:01:56.850Z",
+        "session": "diagnostic-01",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 0,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 0,
+          "alertState": "firing",
+          "incidentState": "open"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    },
+    {
+      "session": "diagnostic-safari-02",
+      "pid": 71964,
+      "port": 58923,
+      "closedAt": "2026-10-25T14:05:11.360Z",
+      "closed": {
+        "at": "2026-10-25T14:05:11.360Z",
+        "session": "diagnostic-safari-02",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 0,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 0,
+          "alertState": "firing",
+          "incidentState": "open"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    },
+    {
+      "session": "final-local-01",
+      "pid": 76882,
+      "port": 59601,
+      "closedAt": "2026-10-25T14:16:12.765Z",
+      "closed": {
+        "at": "2026-10-25T14:16:12.765Z",
+        "session": "final-local-01",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 3,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 1,
+          "alertState": "firing",
+          "incidentState": "acknowledged"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    },
+    {
+      "session": "final-local-02",
+      "pid": 96415,
+      "port": 61942,
+      "closedAt": "2026-10-25T14:19:36.147Z",
+      "closed": {
+        "at": "2026-10-25T14:19:36.147Z",
+        "session": "final-local-02",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 0,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 0,
+          "alertState": "firing",
+          "incidentState": "open"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    },
+    {
+      "session": "final-local-03",
+      "pid": 98923,
+      "port": 62049,
+      "closedAt": "2026-10-25T14:23:17.790Z",
+      "closed": {
+        "at": "2026-10-25T14:23:17.790Z",
+        "session": "final-local-03",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 1,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 0,
+          "alertState": "firing",
+          "incidentState": "resolved"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    },
+    {
+      "session": "final-local-04",
+      "pid": 99566,
+      "port": 62198,
+      "closedAt": "2026-10-25T14:34:43.001Z",
+      "closed": {
+        "at": "2026-10-25T14:34:43.001Z",
+        "session": "final-local-04",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 0,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 0,
+          "alertState": "firing",
+          "incidentState": "open"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    },
+    {
+      "session": "final-token-05",
+      "pid": 257,
+      "port": 62270,
+      "closedAt": "2026-10-25T14:34:02.700Z",
+      "closed": {
+        "at": "2026-10-25T14:34:02.700Z",
+        "session": "final-token-05",
+        "kind": "closed",
+        "reason": "stdin",
+        "server": {
+          "mutations": 0,
+          "clients": 0,
+          "signalListeners": 0,
+          "silences": 0,
+          "alertState": "firing",
+          "incidentState": "open"
+        },
+        "listening": false
+      },
+      "connection": "ECONNREFUSED"
+    }
+  ],
+  "portsRefused": true,
+  "processExits": {
+    "source": "Parent exec write_stdin tool outputs; all seven supported close commands returned exit_code 0",
+    "code": 0,
+    "signalsSent": false
+  },
+  "browserWindows": {
+    "status": "operator-confirmed",
+    "scope": "Named task windows only; unrelated browser windows/processes were borrowed and left alone",
+    "statement": "Named task windows are closed",
+    "independentControllerConfirmation": false,
+    "reason": "Native Safari controller timed out after close and after one kernel reconnect; application-only inventory did not include windows"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "source": {
+    "revision": "884a4974ba14d15a21ed4014bbe004ebf95384a7",
+    "method": "git archive HEAD package; tar extraction",
+    "root": "/private/tmp/monitor-head-baseline-tOgYMm",
+    "packageRoot": "/private/tmp/monitor-head-baseline-tOgYMm/package"
+  },
+  "node": "v24.21.0",
+  "npm": "11.19.0",
+  "typescript": "Version 5.9.3",
+  "baseline": {
+    "commands": "logs/head-baseline/commands.json",
+    "sandbox": {
+      "tests": 86,
+      "passed": 74,
+      "failed": 12,
+      "cancelled": 0,
+      "skipped": 0,
+      "reason": "Task-owned loopback listen denied with EPERM"
+    },
+    "loopbackCommands": "logs/head-baseline-loopback/commands.json",
+    "loopback": {
+      "tests": 86,
+      "passed": 86,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "build": {
+      "checkedJavaScript": 112,
+      "exports": 29,
+      "exit": 0
+    },
+    "basic": 0,
+    "types": 0,
+    "typesAll": 0,
+    "publicationGuard": {
+      "exit": 1,
+      "expected": true
+    }
+  },
+  "independentExporterReview": {
+    "reviewedFile": "package/src/exporters/HttpJsonExporter.js",
+    "sha256": "243f19ba5ec6512887d8534fe62c2d22ecb603018677de249c1fea9e17b82599",
+    "blockingConcerns": [],
+    "findings": [
+      "Per-export acknowledgement state avoids concurrent exports sharing a progress counter.",
+      "Recursive and outer chunk splits propagate the same progress record; partial failures become nonretryable for default pipeline policy.",
+      "HTTP acknowledgement timeout is nonretryable with delivery unknown, without claiming remote rollback.",
+      "Existing response-aborted and socket-error retry policy remains; this is not exactly-once delivery."
+    ],
+    "reviewedTests": [
+      "HTTP acknowledgement timeout reports uncertain delivery without repeating the request",
+      "a failed split export does not make the pipeline replay its acknowledged prefix"
+    ]
+  }
+}

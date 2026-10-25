@@ -1296,3 +1296,9 @@ Errors derive from MonitorError where defined and carry `code`, `status`, `retry
 ## Readiness behavior corrections
 
 Trace ratio sampling compares a 52-bit trace-ID suffix to a matching 52-bit bound; a configured 0.5 no longer admits every suffix. Async context `bind(callback, context)` preserves the requested context across awaits. Malformed percent-encoded baggage keys are ignored. HTTP middleware uses `route: unmatched` when no template/resolver is available, avoiding request-specific series. Health/resource registration replacement, alert/notification callbacks, direct exporter shutdown and admitted file writes follow the ownership rules in LIFECYCLE.md. Concrete `TelemetryEnvelope`, `Tracer` and `Span.end({endTimeUnixNano})` declarations match runtime behavior. Broad advanced extension types remain available.
+
+## October 24 declaration and delivery corrections
+
+`MonitorRuntime.registerHealth(name, check, options)` types the `HealthCheck` callback and returns its registration-bound disposer. `HealthReport` includes the runtime duration and status counts. `MetricRegistry.has()/names()` and `SyntheticMonitor.unregister()` are declared. These expose existing runtime methods without adding exports.
+
+HTTP timeout errors set `retryable:false` and `details.delivery` to `unknown`. Split failures preserve the cause code (or use `MONITOR_EXPORT_PARTIAL_DELIVERY`) and report `details.acknowledgedSignals` / `details.unacknowledgedSignals`; whole-export retry is disabled after an acknowledged prefix. See LIFECYCLE.md for remote-delivery uncertainty.

@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-25T11:45:19.319Z",
+  "sha256": "69e756daa6d127ca919acef8f430998a35bf1217cb2491d20b11dd77a1e908f7",
+  "bytes": 209613,
+  "packedFiles": 177,
+  "suites": {
+    "native": {
+      "tests": 97,
+      "pass": 97,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "extracted": {
+      "tests": 97,
+      "pass": 97,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "installed": {
+      "tests": 97,
+      "pass": 97,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "builds": {
+    "native": {
+      "ok": true,
+      "checkedJavaScript": 112,
+      "exports": 29,
+      "node": "v24.21.0"
+    },
+    "extracted": {
+      "ok": true,
+      "checkedJavaScript": 112,
+      "exports": 29,
+      "node": "v24.21.0"
+    },
+    "installed": {
+      "ok": true,
+      "checkedJavaScript": 112,
+      "exports": 29,
+      "node": "v24.21.0"
+    }
+  },
+  "imports": {
+    "extracted": {
+      "entries": 29,
+      "executable": 28,
+      "rootNames": 189,
+      "domFreeStudioClient": true,
+      "privateDeepImportRejected": true
+    },
+    "installed": {
+      "entries": 29,
+      "executable": 28,
+      "rootNames": 189,
+      "domFreeStudioClient": true,
+      "privateDeepImportRejected": true
+    }
+  },
+  "originalFileHashesUnchanged": 866,
+  "historicalCandidateFileHashesMatched": 169,
+  "immutableFilesUnchanged": 1416,
+  "packageCheckoutFreshExtractionPriorExtractionInstallationMatch": true,
+  "privateUnlicensedOwnershipDependenciesEngineAndGuardPreserved": true,
+  "pmReciprocal": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "realChildIpc": true
+  },
+  "pairedStrictTypes": true,
+  "studioHttpSseChecks": 33,
+  "ingestionAndTokenSecurityChecks": 19,
+  "overheadHashMatches": true,
+  "realBrowser": "Separately recorded browser acceptance evidence; HTTP/SSE receipts above do not establish browser acceptance",
+  "scope": "This audit checks final artifact/source/consumer identity and saved command receipts. It does not rerun the suites or extend their tested platform/service scope."
+}

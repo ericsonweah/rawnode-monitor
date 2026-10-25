@@ -5,11 +5,18 @@ import { mountMonitorStudio } from '../resources/assets/js/monitor/studio.js';
 
 // A deliberately small DOM model; real-browser acceptance is a separate gate.
 class Element extends EventTarget {
-  constructor() { super(); this.dataset = {}; this.attrs = {}; this.elements = new Map(); this.hidden = true; this.disabled = false; this.textContent = ''; this.classList = { add() {}, remove() {}, toggle() {} }; }
+  constructor() { super(); this.dataset = {}; this.attrs = {}; this.elements = new Map(); this.hidden = true; this.disabled = false; this.value = ''; this.open = false; this.textContent = ''; this.classList = { add() {}, remove() {}, toggle() {} }; }
   set innerHTML(value) { this.html = value; this.elements.clear(); }
   get innerHTML() { return this.html || ''; }
   querySelector(selector) { if (!this.elements.has(selector)) this.elements.set(selector, new Element()); return this.elements.get(selector); }
   querySelectorAll(selector) {
+    if (/^[a-z, \[\]]+$/.test(selector)) {
+      const names = selector.replace('[open]', '').split(', ');
+      return [...this.innerHTML.matchAll(/<(input|select|textarea|summary|details)\b([^>]*)>/g)]
+        .filter(match => names.includes(match[1]))
+        .map((match, index) => this.querySelector(/id="([^"]+)"/.exec(match[2])?.[1] ? `#${/id="([^"]+)"/.exec(match[2])[1]}` : `${match[1]}:${index}`))
+        .filter(element => !selector.includes('[open]') || element.open);
+    }
     const className = /^\.([\w-]+)$/.exec(selector)?.[1];
     if (!className) return [];
     const matches = [...this.innerHTML.matchAll(/<button\b([^>]*)>/g)].filter(match => new RegExp(`class="[^"]*\\b${className}\\b`).test(match[1]));
@@ -41,12 +48,24 @@ function fixture(view = 'alerts') {
     if (url.includes('/api/alerts')) return json({ data: { current: [], history: [], silences: { silences } } });
     if (url.includes('/api/incidents')) return json({ data: { incidents: [incident] } });
     if (url.includes('/api/health')) return json({ data: { ok: true, status: 'healthy', checks: [] } });
+    if (url.includes('/api/traces')) return json({ data: [{ traceId: 'fixture-trace', name: 'fixture span', kind: 'internal', durationMs: 1, startTimeUnixNano: '1000000', attributes: { token: '[REDACTED]' } }] });
+    if (url.includes('/api/doctor')) return json({ data: { ok: true, checks: [{ name: 'fixture check', ok: true, details: { message: 'inspectable' } }] } });
+    if (url.includes('/api/diagnostics')) return json({ data: { state: 'running', synthetic: 'retained snapshot' } });
     throw new Error(`Unexpected fixture request ${url}`);
   };
   return { root, win, answers, mutations, silences, incident, fetch, prompts: () => prompts };
 }
 async function mount(t, f, fetch = f.fetch) { const handle = mountMonitorStudio(f.root, { fetch, EventSource: Stream }); t.after(() => handle.destroy()); await handle.navigate(f.win.location.hash.replace(/^#/, '')); return handle; }
 const click = element => element.dispatchEvent(new Event('click'));
+function mockIntervals(t) {
+  const nativeClearInterval = globalThis.clearInterval;
+  t.mock.timers.enable({ apis: ['setInterval'] });
+  const mockedClearInterval = globalThis.clearInterval;
+  // Node 22.0.0's experimental mock rejects nullish handles; native/browser
+  // clearInterval treats them as a no-op. Preserve that contract in this model.
+  globalThis.clearInterval = timer => { if (timer != null) return mockedClearInterval(timer); };
+  t.after(() => { t.mock.timers.reset(); globalThis.clearInterval = nativeClearInterval; });
+}
 
 test('modeled actions: cancelling each silence prompt or incident resolution sends no mutation', async t => {
   const f = fixture(); const handle = await mount(t, f);
@@ -98,4 +117,50 @@ test('modeled actions: navigation releases polling ownership even when an inject
   const handle = await mount(t, f, fetch); click(f.root.querySelectorAll('.rn-incident-ack')[0]); await waitFor(() => admitted);
   await handle.navigate('health'); assert.equal(active.aborted, true); assert.equal(healthReads, 1);
   await sleep(1100); assert.ok(healthReads >= 2, 'The new view continues polling after the old action is cancelled.');
+});
+
+test('modeled inspection: trace, incident and diagnostics details survive polling until explicitly resumed', async t => {
+  mockIntervals(t);
+  for (const [view, selector, target] of [
+    ['traces', '.rn-trace-open', '#rn-trace-detail'],
+    ['incidents', '.rn-incident-view', '#rn-incident-detail'],
+    ['diagnostics', '#rn-full-diag', '#rn-diagnostics-full'],
+  ]) {
+    const f = fixture(view); f.root.dataset.pollIntervalMs = 1000; let reads = 0;
+    const handle = await mount(t, f, (url, options) => { reads++; return f.fetch(url, options); });
+    const button = selector.startsWith('.') ? f.root.querySelectorAll(selector)[0] : f.root.querySelector(selector);
+    click(button); await waitFor(() => !button.disabled && f.root.querySelector(target).innerHTML.includes('Live refresh paused'));
+    const inspected = f.root.querySelector(target); const before = reads;
+    t.mock.timers.tick(10_000); f.root.ownerDocument.dispatchEvent(new Event('visibilitychange'));
+    assert.equal(reads, before, `${view} inspection must not be erased by background refresh.`);
+    assert.equal(f.root.querySelector(target), inspected);
+    click(f.root.querySelector('#rn-resume-live'));
+    await waitFor(() => reads === before + 1 && f.root.getAttribute('aria-busy') === 'false');
+    assert.notEqual(f.root.querySelector(target), inspected, 'Explicit resume clears the stale inspection.');
+    t.mock.timers.tick(1000);
+    await waitFor(() => reads === before + 2 && f.root.getAttribute('aria-busy') === 'false');
+    handle.destroy();
+  }
+});
+
+test('modeled inspection: filters, focus and expanded details defer automatic refresh; manual refresh and navigation resume it', async t => {
+  mockIntervals(t);
+  const f = fixture('traces'); f.root.dataset.pollIntervalMs = 1000; let reads = 0;
+  const handle = await mount(t, f, (url, options) => { reads++; return f.fetch(url, options); });
+  const filter = f.root.querySelector('#rn-trace-filter'); const before = reads;
+  f.root.ownerDocument.activeElement = filter;
+  t.mock.timers.tick(1000); assert.equal(reads, before, 'Typing focus survives a polling deadline.');
+  filter.value = 'fixture'; filter.dispatchEvent(new Event('input'));
+  f.root.ownerDocument.activeElement = null;
+  t.mock.timers.tick(1000); assert.equal(reads, before, 'A selected filter survives blur and polling.');
+  assert.equal(f.root.querySelector('#rn-trace-filter'), filter);
+  await handle.refresh(); assert.equal(reads, before + 1); assert.notEqual(f.root.querySelector('#rn-trace-filter'), filter);
+  await handle.navigate('diagnostics');
+  const details = f.root.querySelector('#rn-main').querySelectorAll('details')[0]; details.open = true;
+  const diagnosticReads = reads;
+  t.mock.timers.tick(1000); assert.equal(reads, diagnosticReads, 'Expanded diagnostic details remain readable.');
+  details.open = false;
+  t.mock.timers.tick(1000); await waitFor(() => reads === diagnosticReads + 1 && f.root.getAttribute('aria-busy') === 'false');
+  await handle.navigate('health'); const healthReads = reads;
+  t.mock.timers.tick(1000); await waitFor(() => reads === healthReads + 1);
 });

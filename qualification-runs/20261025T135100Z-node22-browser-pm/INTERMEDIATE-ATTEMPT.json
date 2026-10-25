@@ -1,0 +1,7 @@
+{
+  "status": "SUPERSEDED",
+  "reason": "The legal-only initial archive was built before Node22.0.0 exposed two test-runner MockTimers compatibility failures. It is preserved as an intermediate attempt, not the final nomination.",
+  "sha256": "dca28f380bd64355aa4f3b3fffc2c6ce3593cfe1b5c88ce8affce3ff7232061a",
+  "finalEvidence": "final/",
+  "executed": "Offline pack/repeat/extraction/install/imports/strict types and strengthened PM composition passed on Node24.21.0. Full Monitor suite and browser acceptance were not executed on this intermediate."
+}

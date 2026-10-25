@@ -1,0 +1,49 @@
+{
+  "kind": "HTTP-only external wrapper review; no native browser result",
+  "startedAt": "2026-10-25T14:06:19.863Z",
+  "runtime": {
+    "node": "v24.21.0",
+    "executable": "/usr/local/bin/node",
+    "platform": "darwin",
+    "arch": "x64"
+  },
+  "command": [
+    "/usr/local/bin/node",
+    "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/scripts/token-wrapper-http-probe.mjs",
+    "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+    "token-http-review-01"
+  ],
+  "cwd": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex",
+  "archive": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/final/artifacts/rawnode-monitor-1.0.0.tgz",
+    "sha256": "a749983cc32e7ed9df10088dbe671fc4c6a3d47ed9a22da8a9d48d1e789c2615"
+  },
+  "packageRoot": "/private/tmp/rawnode-monitor-qualification-INTlq3/installed/node_modules/@rawnode/monitor",
+  "session": "token-http-review-01",
+  "fixtureScriptSha256": "919db429c3c359975b087e525867a6ab46c03ada6aac085a07a0b38a65d95ebc",
+  "probeScriptSha256": "06d489790f1096e5e81fd50b94be8a0caf4e470ee504f2be7bc0ed56fa09bbeb",
+  "cases": [],
+  "cleanup": {
+    "exit": {
+      "code": 1,
+      "signal": null
+    },
+    "closedReceipt": null
+  },
+  "error": {
+    "name": "Error",
+    "message": "Fixture exited before readiness: 1"
+  },
+  "logReview": {
+    "path": "/Users/ericsonweah/Sites/projects/javascript/node/rawnode/primitive-modules/npm-candidates/monitor/rawnode-monitor-standalone-candidate-codex/qualification-runs/20261025T135100Z-node22-browser-pm/browser/token-http-review/token-http-review-01.jsonl",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rawBearerValuePresent": false,
+    "rawSessionCookiePresent": false,
+    "queryTokenValuePresent": false,
+    "scope": "HTTP headers/queries from this probe; no native browser, native prompt, storage observation or browser-event payload acceptance is claimed."
+  },
+  "stderr": "node:net:2306\n      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);\n                    ^\n\nError: listen EPERM: operation not permitted 127.0.0.1\n    at Server.setupListenHandle [as _listen2] (node:net:2306:21)\n    at listenInCluster (node:net:2437:12)\n    at node:net:2666:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EPERM',\n  errno: -1,\n  syscall: 'listen',\n  address: '127.0.0.1'\n}\n\nNode.js v24.21.0\n",
+  "finishedAt": "2026-10-25T14:06:20.293Z",
+  "outcome": "FAIL"
+}

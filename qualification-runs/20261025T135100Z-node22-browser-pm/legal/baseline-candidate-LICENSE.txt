@@ -1,0 +1,4 @@
+Publication license unresolved. This private candidate grants no new license.
+RawNode is owned by First Principle Lab LLC.
+The source root package.json declares ISC, but its LICENSE file is empty.
+See NOTICE.md and the preserved source inventory before making a release decision.
